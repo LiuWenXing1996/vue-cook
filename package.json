@@ -1,0 +1,45 @@
+{
+  "name": "vue-cook",
+  "version": "0.0.1",
+  "files": [
+    "dist"
+  ],
+  "main": "./dist/vue-cook.umd.js",
+  "module": "./dist/vue-cook.es.js",
+  "scripts": {
+    "dev": "vite --force",
+    "build": "vue-tsc --noEmit && vite build",
+    "docs:dev": "vitepress dev docs",
+    "docs:build": "vitepress build docs",
+    "docs:serve": "vitepress serve docs",
+    "tree":"node scripts/tree.js"
+  },
+  "dependencies": {
+    "vue": "^3.2.6"
+  },
+  "devDependencies": {
+    "@antv/x6": "^1.25.5",
+    "@sicons/fluent": "^0.11.0",
+    "@types/splitpanes": "^2.2.1",
+    "@types/uuid": "^8.3.0",
+    "@types/winbox": "^0.2.1",
+    "@vicons/antd": "^0.11.0",
+    "@vicons/fluent": "^0.11.0",
+    "@vicons/ionicons5": "^0.11.0",
+    "@vitejs/plugin-vue": "^1.2.3",
+    "@vue/compiler-sfc": "^3.0.5",
+    "less": "^4.1.1",
+    "lodash": "^4.17.21",
+    "naive-ui": "^2.16.2",
+    "splitpanes": "^3.0.6",
+    "tree-cli": "^0.6.7",
+    "typescript": "^4.3.2",
+    "uuid": "^8.3.2",
+    "vfonts": "^0.1.0",
+    "vite": "^2.5.1",
+    "vitepress": "^0.17.0",
+    "vue-tsc": "^0.0.24",
+    "vue-winbox": "^0.0.3",
+    "winbox": "^0.2.0"
+  }
+}
