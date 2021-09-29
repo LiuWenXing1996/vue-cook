@@ -1,10 +1,8 @@
 <template>
-  <ProjectPanel :config="config"></ProjectPanel>
+  <router-view></router-view>
 </template>
 
 <script lang="ts" setup>
-import { ProjectPanel, useProjectConfig } from "$/index"
-const config = useProjectConfig()
 </script>
 
 <style>
@@ -16,3 +14,4 @@ html,
   margin: 0;
 }
 </style>
+

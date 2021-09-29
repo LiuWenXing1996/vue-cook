@@ -1,11 +1,12 @@
 import { defineConfig, UserConfigExport } from 'vite'
 import vue from '@vitejs/plugin-vue'
+import svgReactiveLoader from "vite-plugin-vue-svg-reactive-loader"
 import path from "path"
 
 
 export default defineConfig(({ command, mode }) => {
   const commonConfig: UserConfigExport = {
-    plugins: [vue()],
+    plugins: [vue(), svgReactiveLoader()],
     resolve: {
       alias: {
         "@": path.resolve(__dirname, 'src'),

@@ -1,8 +1,8 @@
 import { toRefs } from 'vue';
-import useProjectConfig from './useProjectConfig';
+import useCookEditorConfig from './useCookEditorConfig';
 
 export default function useRootComponentConfig() {
-    const projectConfig = useProjectConfig()
-    const { rootComponentConfig } = toRefs(projectConfig)
+    const cookEditorConfig = useCookEditorConfig()
+    const { rootComponentConfig } = toRefs(cookEditorConfig)
     return rootComponentConfig
 }

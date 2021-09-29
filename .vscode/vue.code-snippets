@@ -24,7 +24,7 @@
 			"<script setup lang=\"ts\">",
 			"    ",
 			"</script>",
-			"<style lang=\"less\">",
+			"<style lang=\"less\" scoped>",
 			"</style>",
 		],
 		"description": "vue3 setup ts less"

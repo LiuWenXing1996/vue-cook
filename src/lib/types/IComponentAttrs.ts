@@ -1,6 +1,6 @@
 import { CSSProperties } from "vue";
 import IComponentConfig from "./IComponentConfig";
-import ICompositionConfig from "./ICompositionConfig";
+import IFuctionConfig from "./IFuctionConfig";
 
 export default interface IComponentAttrs {
     render?: {
@@ -11,5 +11,5 @@ export default interface IComponentAttrs {
     class?: string[],
     props?: Record<string, any>,
     slots?: Record<string, IComponentConfig[]>,
-    emits?: Record<string, ICompositionConfig[]>,
+    emits?: Record<string, IFuctionConfig[]>,
 }

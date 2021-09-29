@@ -15,31 +15,30 @@
     "tree":"node scripts/tree.js"
   },
   "dependencies": {
-    "vue": "^3.2.6"
+    "vue": "^3.2.6",
+    "vue-router": "^4.0.11"
   },
   "devDependencies": {
-    "@antv/x6": "^1.25.5",
     "@sicons/fluent": "^0.11.0",
+    "@types/node": "^16.9.1",
     "@types/splitpanes": "^2.2.1",
-    "@types/uuid": "^8.3.0",
-    "@types/winbox": "^0.2.1",
+    "@types/uuid": "^8.3.1",
     "@vicons/antd": "^0.11.0",
     "@vicons/fluent": "^0.11.0",
     "@vicons/ionicons5": "^0.11.0",
-    "@vitejs/plugin-vue": "^1.2.3",
-    "@vue/compiler-sfc": "^3.0.5",
+    "@vitejs/plugin-vue": "^1.6.1",
+    "@vue/compiler-sfc": "^3.2.6",
+    "@vueuse/core": "^6.5.3",
     "less": "^4.1.1",
-    "lodash": "^4.17.21",
-    "naive-ui": "^2.16.2",
+    "lodash-es": "^4.17.21",
+    "naive-ui": "^2.18.2",
     "splitpanes": "^3.0.6",
     "tree-cli": "^0.6.7",
     "typescript": "^4.3.2",
     "uuid": "^8.3.2",
-    "vfonts": "^0.1.0",
-    "vite": "^2.5.1",
+    "vite": "^2.5.4",
     "vitepress": "^0.17.0",
-    "vue-tsc": "^0.0.24",
-    "vue-winbox": "^0.0.3",
-    "winbox": "^0.2.0"
+    "vite-plugin-vue-svg-reactive-loader": "^0.0.3",
+    "vue-tsc": "^0.2.2"
   }
 }

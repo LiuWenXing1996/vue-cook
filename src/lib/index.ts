@@ -1,9 +1,9 @@
-
-
-export { default as ProjectPanel } from "./components/ProjectPanel.vue"
+export { default as CookEditor } from "./components/cook-editor/CookEditor.vue"
+export { default as CookPlayer } from "./components/cook-player/CookPlayer.vue"
+export { default as useCookEditorConfig } from "./hooks/useCookEditorConfig"
+export { default as makeComponentConfigDefault } from './utils/makeComponentConfigDefault';
 export { default as defineComponentMaker } from "./utils/defineComponentMaker"
-export { default as useComponentMaker } from "./hooks/useComponentMaker"
-export { default as useComponentMakerList } from "./hooks/useComponentMakerList"
-export { default as useProjectConfig } from "./hooks/useProjectConfig"
-export { default as getComponentConfigDefault } from "./utils/getComponentConfigDefault"
-export { default as intsall } from "$/install"
+export { default as defineCookInstallFunc } from "./utils/defineCookInstallFunc"
+export { default as installPkg } from "./utils/installPkg"
+export { default as defineEditor } from "./utils/defineEditor"
+export { default as defineCookConfig } from "./utils/defineCookConfig"

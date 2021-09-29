@@ -1,11 +1,7 @@
-import { CSSProperties } from "vue";
 import IComponentAttrs from "./IComponentAttrs";
-import ICompositionConfig from './ICompositionConfig';
+import IResourceConfig from "./IResourceConfig";
 
-export default interface IComponentConfig {
-    uid: string,
-    makerName: string,
-    makerPackage: string,
+export default interface IComponentConfig extends IResourceConfig {
     attrs?: IComponentAttrs
 }
 
