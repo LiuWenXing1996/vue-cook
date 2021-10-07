@@ -1,22 +1,21 @@
 <template>
     <div class="cook-editor">
-        <telport-box :lock="lockTelport"></telport-box>
         <splitpanes>
             <pane min-size="15" size="20">
-                <draggable-tabs :list="getPaneData('left')"></draggable-tabs>
+                <page-tree :page-list="config.pages"></page-tree>
             </pane>
             <pane min-size="15" size="60">
                 <splitpanes :horizontal="true">
                     <pane min-size="15" size="80">
-                        <draggable-tabs :list="getPaneData('center')"></draggable-tabs>
+                        <page-cook-panel :page-list="config.pages"></page-cook-panel>
                     </pane>
                     <pane min-size="15" size="20">
-                        <draggable-tabs :list="getPaneData('bottom')"></draggable-tabs>
+                        <resource-panel></resource-panel>
                     </pane>
                 </splitpanes>
             </pane>
             <pane min-size="15" size="20">
-                <draggable-tabs :list="getPaneData('right')"></draggable-tabs>
+                <editor-panel></editor-panel>
             </pane>
         </splitpanes>
     </div>
@@ -24,14 +23,13 @@
 <script setup lang="ts">
 import { Splitpanes, Pane } from 'splitpanes'
 import 'splitpanes/dist/splitpanes.css'
-import { computed, onMounted, onUnmounted, ref, toRefs } from 'vue';
+import ResourcePanel from "./components/ResourcePanel.vue"
+import PageCookPanel from "./components/page-cook-panel/PageCookPanel.vue"
+import EditorPanel from "./components/EditorPanel.vue"
+import PageTree from "./components/PageTree.vue"
+import { onMounted, onUnmounted, toRefs } from 'vue';
 import ICookConfig from '$/types/ICookConfig';
 import { VueCookEditroTag } from '$/utils/const';
-import IPanelConfig from '@/lib/types/IPanelConfig'
-import TelportBox from './components/draggable-tabs/TelportBox.vue'
-import DraggableTabs from './components/draggable-tabs/DraggableTabs.vue'
-import makePanelConfigDefault from '@/lib/utils/makePanelConfigDefault';
-import { PageComponentTreeMaker } from '@/lib/built-in-resources/panels';
 
 const props = defineProps({
     config: {
@@ -40,9 +38,7 @@ const props = defineProps({
     }
 })
 const { config } = toRefs(props)
-const lockTelport = ref(true)
 onMounted(() => {
-    lockTelport.value = false
     // @ts-ignore
     window[VueCookEditroTag] = true
 })
@@ -50,49 +46,6 @@ onUnmounted(() => {
     // @ts-ignore
     delete window[VueCookEditroTag]
 })
-
-type SplitPaneName = "left" | "center" | "right" | "bottom"
-interface ISplitPaneConfig {
-    name: SplitPaneName,
-    list: IPanelConfig[]
-}
-const splitPaneConfigList = ref<ISplitPaneConfig[]>([
-    {
-        name: "left",
-        list: [
-            makePanelConfigDefault(PageComponentTreeMaker),
-            makePanelConfigDefault(PageComponentTreeMaker),
-        ]
-    },
-    {
-        name: "center",
-        list: [
-            makePanelConfigDefault(PageComponentTreeMaker),
-            makePanelConfigDefault(PageComponentTreeMaker),
-        ]
-    },
-    {
-        name: "right",
-        list: [
-            makePanelConfigDefault(PageComponentTreeMaker),
-            makePanelConfigDefault(PageComponentTreeMaker),
-        ]
-    },
-    {
-        name: "bottom",
-        list: [
-            makePanelConfigDefault(PageComponentTreeMaker),
-            makePanelConfigDefault(PageComponentTreeMaker),
-        ]
-    }
-])
-
-const getPaneData = (name: SplitPaneName) => {
-    const found = splitPaneConfigList.value.find(e => e.name === name);
-    return found?.list || []
-}
-
-
 </script>
 <style lang="less" scoped>
 .cook-editor {

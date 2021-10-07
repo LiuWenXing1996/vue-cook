@@ -1,8 +1,7 @@
+import { IComponentRect } from "../components/cook-player/utils/getComponentRect";
+import IComponentConfig from "./IComponentConfig";
+
 export default interface IComponentOverlay {
-    top: number,
-    bottom: number,
-    left: number,
-    right: number,
-    width: number,
-    height: number
+    config: IComponentConfig,
+    rect: IComponentRect
 }

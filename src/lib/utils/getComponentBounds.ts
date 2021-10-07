@@ -54,7 +54,6 @@ function getTextRect(node: Node) {
 }
 
 
-
 function getFragmentRect(vnode: VNode) {
     const rect = createRect()
     if (!vnode.children) return rect

@@ -6,6 +6,7 @@
         v-on="config?.attrs?.emits"
         :class="[config?.attrs?.class]"
         :style="config?.attrs?.style"
+        :uid="config.uid"
     >
         <template v-for="(slot,name) in config?.attrs?.slots" v-slot:[name]>
             <component-render :config="_config" v-for="_config in slot"></component-render>
@@ -14,10 +15,11 @@
     <span v-else>{{ config.makerPackage }} - {{ config.makerName }}没有找到</span>
 </template>
 <script setup lang="ts">
-import { getCurrentInstance, toRefs } from "vue";
+import { getCurrentInstance, toRefs, onMounted, onUnmounted } from "vue";
 import useComponentMaker from "$/hooks/useComponentMaker";
 import type IComponentConfig from "$/types/IComponentConfig";
-import { componentInstanceMap } from "./exportData"
+import { componentInstanceMap, componentConfigMap } from "./exportData"
+import getComponentElements from "./utils/getComponentElements";
 
 const props = defineProps(
     {
@@ -29,7 +31,19 @@ const props = defineProps(
 )
 const { config } = toRefs(props)
 const maker = useComponentMaker(config.value.makerName, config.value.makerPackage)
-const internalInstance = getCurrentInstance()
-componentInstanceMap.set(config.value, internalInstance)
+onMounted(() => {
+    const internalInstance = getCurrentInstance()
+    console.log(maker.value)
+    if (internalInstance) {
+        const elements = getComponentElements(internalInstance)
+        elements.forEach(el => {
+            componentConfigMap.set(el, config.value)
+        })
+        componentInstanceMap.set(config.value, internalInstance)
+    }
+})
+onUnmounted(() => {
+
+})
 
 </script>

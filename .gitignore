@@ -106,3 +106,4 @@ dist
 # Local files
 .history/
 .local/
+.DS_Store

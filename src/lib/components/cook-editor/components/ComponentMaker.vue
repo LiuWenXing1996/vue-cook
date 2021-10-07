@@ -7,16 +7,24 @@
         :data-package="maker.package"
         :data-label="maker.label"
     >
-        <n-icon size="50" :depth="5">
-            <ComponentIcon></ComponentIcon>
-        </n-icon>
+        <div class="icon-wrapper">
+            <n-icon size="25" :depth="5">
+                <!-- icon 调小，然后将名字和包名显示到图标的下面，类似于文件管理器的那种 -->
+                <ComponentIcon></ComponentIcon>
+            </n-icon>
+        </div>
+        <div class="maker-detail">
+            <div class="maker-name">{{ maker.name }}</div>
+            <div class="maker-pkg">{{ maker.package }}</div>
+        </div>
     </div>
 </template>
 <script lang="ts" setup>
 import { toRefs } from "vue"
 import type IComponentMaker from "$/types/IComponentMaker"
 import ComponentIcon from "$/svgs/component.svg"
-import { NIcon } from "naive-ui"
+import { NIcon, NTooltip } from "naive-ui"
+import useComponentPickerEnable from "@/lib/hooks/useComponentPickerEnable"
 
 const props = defineProps({
     maker: {
@@ -26,6 +34,7 @@ const props = defineProps({
 })
 
 const { maker } = toRefs(props)
+const componentPickerEnable = useComponentPickerEnable()
 
 const handleDragStart = (e: DragEvent) => {
     if (!(e.target instanceof HTMLDivElement)) {
@@ -33,34 +42,31 @@ const handleDragStart = (e: DragEvent) => {
     }
     e?.dataTransfer?.setData('name', maker.value.name)
     e?.dataTransfer?.setData('package', maker.value.package)
+    componentPickerEnable.value = true
 }
 
 </script>
 <style lang="less" scoped>
 .component-maker {
-    position: relative;
-    width: 100px;
-    height: 100px;
-    border: solid 3px #ebeef5;
+    width: 200px;
     display: flex;
     align-items: center;
-    justify-content: center;
-    padding: 0px 5px;
-    box-sizing: border-box;
+    border: #efeff5 1px solid;
+    border-radius: 2px;
+    padding: 5px;
     &:hover {
         border-color: #409eff;
         cursor: move;
     }
-    &::before {
-        content: attr(data-label);
-        position: absolute;
-        top: -3px;
-        left: -3px;
-        background-color: #409eff;
-        color: white;
-        padding: 4px 8px;
-        font-size: 12px;
-        z-index: 1;
+
+    .maker-detail {
+        display: flex;
+        margin-left: 10px;
+        flex-grow: 1;
+        flex-direction: column;
+        .maker-pkg {
+            color: #a0a0a0;
+        }
     }
 }
 </style>

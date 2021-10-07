@@ -5,17 +5,78 @@
             <n-layout :native-scrollbar="false" style="height: 100%;">
                 <template v-if="conmponentConfigSelected">
                     <template v-if="editorConfigs.length > 0">
-                        <n-collapse>
-                            <n-collapse-item
-                                :title="editorConfig.name"
-                                v-for="editorConfig in editorConfigs"
-                            >
-                                <editor-render
-                                    :config="editorConfig"
-                                    :resource-config="conmponentConfigSelected"
-                                ></editor-render>
-                            </n-collapse-item>
-                        </n-collapse>
+                        <n-form
+                            label-placement="left"
+                            :label-width="100"
+                            label-align="right"
+                            size="small"
+                            :model="formValue"
+                        >
+                            <n-collapse display-directive="show">
+                                <n-collapse-item title="基础信息">
+                                    <n-form-item label="名字:">
+                                        <n-input v-model:value="conmponentConfigSelected.name" />
+                                    </n-form-item>
+                                    <n-form-item label="唯一ID:">
+                                        <div>{{ conmponentConfigSelected.uid }}</div>
+                                    </n-form-item>
+                                    <n-form-item label="制造器:">
+                                        <div>{{ conmponentConfigSelected.makerName }} - {{ conmponentConfigSelected.makerPackage }}</div>
+                                    </n-form-item>
+                                </n-collapse-item>
+                                <n-collapse-item title="样式类">
+                                    <n-dynamic-input
+                                        v-model:value="renderClassList"
+                                        #="{ value }"
+                                        :on-create="onCreate"
+                                    >
+                                        <n-select
+                                            v-model:value="value.value"
+                                            :options="options"
+                                            filterable
+                                            tag
+                                            placeholder="请选择或输入样式类名"
+                                        />
+                                    </n-dynamic-input>
+                                </n-collapse-item>
+                                <n-collapse-item title="内联样式">
+                                    <n-dynamic-input
+                                        v-model:value="renderStyle"
+                                        #="{ value }"
+                                        :on-create="onStyleCreate"
+                                    >
+                                        <n-select
+                                            v-model:value="value.cssName"
+                                            :options="value.cssNameOptions"
+                                            filterable
+                                            tag
+                                            placeholder="请选择或输入css变量名"
+                                            @update:value="value.onCssNameUpdate"
+                                        />
+                                        <div
+                                            style="height: 34px; line-height: 34px; margin: 0 8px;"
+                                        >=</div>
+                                        <n-select
+                                            v-model:value="value.cssValue"
+                                            :options="value.cssValueOptions"
+                                            filterable
+                                            tag
+                                            placeholder="请选择或输入css变量值"
+                                        />
+                                    </n-dynamic-input>
+                                </n-collapse-item>
+                                <n-collapse-item title="属性">
+                                    <n-dynamic-input
+                                        preset="pair"
+                                        v-model:value="cmptProps"
+                                        key-placeholder="props变量名"
+                                        value-placeholder="props变量值"
+                                    />
+                                </n-collapse-item>
+                                <n-collapse-item title="事件"></n-collapse-item>
+                                <n-collapse-item title="插槽"></n-collapse-item>
+                            </n-collapse>
+                        </n-form>
                     </template>
                     <div v-else>没有找到可用的编辑器</div>
                 </template>
@@ -26,12 +87,14 @@
 </template>
 <script setup lang="ts">
 import useComponentSelected from "$/hooks/useComponentSelected";
-import { NCollapse, NCollapseItem, NLayout } from "naive-ui"
-import { computed } from "vue";
+import { NCollapse, NCollapseItem, NLayout, NForm, NFormItem, NInput, NDynamicInput, NSelect } from "naive-ui"
+import { computed, ref, watch, CSSProperties } from "vue";
 import useComponentMaker from "$/hooks/useComponentMaker";
 import EditorRender from "./editor-render/EditorRender.vue";
 import IEditorConfig from "$/types/IEditorConfig";
 import IComponentConfig from "$/types/IComponentConfig";
+import * as CSS from '$/utils/css';
+import camelCase from "camelcase"
 
 const conmponentConfigSelected = useComponentSelected()
 defineProps({
@@ -39,7 +102,7 @@ defineProps({
         type: String
     }
 })
-
+const formValue = ref()
 const editorConfigs = computed(() => {
     const defaultEditorConfigs: IEditorConfig[] = [
         {
@@ -89,7 +152,103 @@ const editorConfigs = computed(() => {
         ...dynamicEditorConfigs,
     ]
 })
-</script>Ï
+const options = ref(
+    [
+        {
+            label: 'Drive My Car',
+            value: 'song1'
+        },
+        {
+            label: 'Norwegian Wood',
+            value: 'song2'
+        },
+    ])
+const renderClassList = ref(conmponentConfigSelected.value?.attrs?.render?.class)
+watch(renderClassList, () => {
+    const componentConfigValue = conmponentConfigSelected.value
+    if (componentConfigValue) {
+        componentConfigValue.attrs = componentConfigValue.attrs || {}
+        componentConfigValue.attrs.render = componentConfigValue.attrs.render || {}
+        componentConfigValue.attrs.render.class = renderClassList.value
+    }
+
+})
+const onCreate = () => {
+    return {
+        value: null
+    }
+}
+
+interface StyleItem {
+    cssName: string | null,
+    cssValue: string | null,
+    cssNameOptions: Array<{
+        label: string,
+        value: string,
+    }>,
+    cssValueOptions: Array<{
+        label: string,
+        value: string,
+    }>,
+    onCssNameUpdate: (value: string) => void
+}
+
+const onStyleCreate = () => {
+    const item: StyleItem = {
+        cssName: null,
+        cssValue: null,
+        cssNameOptions: Object.keys(CSS).map(key => {
+            key = camelCase(key)
+            return {
+                label: key,
+                value: key
+            }
+        }),
+        cssValueOptions: [],
+        onCssNameUpdate: (value: string) => {
+            const cssNamekey = camelCase(value, { pascalCase: true })
+            // @ts-ignore
+            item.cssValueOptions = Object.keys(CSS[cssNamekey] || {}).map(key => {
+                key = camelCase(key)
+                return {
+                    label: key,
+                    value: key
+                }
+            })
+        }
+    }
+    return item
+}
+
+
+
+
+const renderStyle = ref(Object.entries(conmponentConfigSelected.value?.attrs?.render?.style || {}).map(e => ({ key: e[0], value: e[1] })))
+watch(renderStyle, () => {
+    const componentConfigValue = conmponentConfigSelected.value
+    if (componentConfigValue) {
+        componentConfigValue.attrs = componentConfigValue.attrs || {}
+        componentConfigValue.attrs.render = componentConfigValue.attrs.render || {}
+        let styleObj: Record<string, string | number> = {};
+        renderStyle.value.forEach(e => {
+            styleObj[e.key] = e.value
+        })
+        componentConfigValue.attrs.render.style = styleObj
+    }
+})
+const cmptProps = ref(Object.entries(conmponentConfigSelected.value?.attrs?.props || {}).map(e => ({ key: e[0], value: e[1] })))
+watch(cmptProps, () => {
+    const componentConfigValue = conmponentConfigSelected.value
+    if (componentConfigValue) {
+        componentConfigValue.attrs = componentConfigValue.attrs || {}
+        let propsObj: Record<string, string | number> = {};
+        cmptProps.value.forEach(e => {
+            propsObj[e.key] = e.value
+        })
+        componentConfigValue.attrs.props = propsObj
+    }
+})
+</script>
 <style lang="less" scoped>
 .component-editor {
     height: 100%;

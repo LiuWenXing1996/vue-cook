@@ -7,3 +7,5 @@ declare module '*.vue' {
   const component: DefineComponent<{}, {}, any>
   export default component
 }
+
+let monaco: typeof import("monaco-editor");

@@ -1,32 +1,41 @@
 <template>
     <div class="page-tree">
         <div class="title">
-            <div class="name">页面树</div>
-            <n-input placeholder="搜索" size="small" round>
+            <div class="name">页面</div>
+            <div class="actions">
+                <n-space>
+                    <n-tooltip trigger="hover">
+                        <template #trigger>
+                            <n-icon @click="addPage">
+                                <add-circle-outline></add-circle-outline>
+                            </n-icon>
+                        </template>
+                        新增页面
+                    </n-tooltip>
+                </n-space>
+            </div>
+        </div>
+        <div class="content">
+            <n-input v-model:value="pattern" placeholder="搜索" size="small" round clearable>
                 <template #prefix>
                     <n-icon>
-                        <search-outline />
+                        <search-icon />
                     </n-icon>
                 </template>
             </n-input>
-            <n-button round size="tiny" @click="addPage">
-                <template #icon>
-                    <n-icon>
-                        <add-circle-outline></add-circle-outline>
-                    </n-icon>
-                </template>
-                页面
-            </n-button>
-        </div>
-        <div class="content">
-            <n-tree :data="treeData" block-line v-model:selected-keys="selectedKeys"></n-tree>
+            <n-tree
+                :data="treeData"
+                block-line
+                v-model:selected-keys="selectedKeys"
+                :pattern="pattern"
+            ></n-tree>
         </div>
     </div>
 </template>
 <script setup lang="ts">
 import { computed, ref, toRefs, watch } from "vue";
-import { NTree, NTag, NButton, NIcon, NInput } from "naive-ui"
-import { AddCircleOutline, SearchOutline } from "@vicons/ionicons5"
+import { NTree, NTag, NIcon, NInput, NTooltip, NSpace } from "naive-ui"
+import { AddCircleOutline, Search as SearchIcon } from "@vicons/ionicons5"
 import type { TreeOption } from "naive-ui"
 import type IComponentConfig from "$/types/IComponentConfig";
 import { h } from "vue";
@@ -43,9 +52,9 @@ const props = defineProps({
     }
 })
 
-//TODO:搜索功能
 const { pageList } = toRefs(props)
 const selectedKeys = ref<string[]>([])
+const pattern = ref("")
 
 watch(selectedKeys, () => {
     const [uid] = selectedKeys.value
@@ -54,8 +63,7 @@ watch(selectedKeys, () => {
     if (foundPage) {
         if (!pageEditingList.value.find(pageEditing => pageEditing.page.uid === uid)) {
             pageEditingList.value.push({
-                page: foundPage,
-                showOverlay: false
+                page: foundPage
             })
         }
     }
@@ -148,10 +156,19 @@ const addPage = () => {
         padding: 6px 10px;
         justify-content: space-between;
         border-bottom: 1px solid rgb(239, 239, 245);
+        .actions {
+            :deep(.n-icon):hover {
+                cursor: pointer;
+                color: rgb(24, 160, 88);
+            }
+        }
     }
     .content {
         flex-grow: 1;
         padding: 10px;
+        :deep(.n-input) {
+            margin-bottom: 10px;
+        }
     }
 }
 </style>

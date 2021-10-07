@@ -2,7 +2,7 @@
     <div class="page-cook-panel">
         <template v-if="pageEditingList.length <= 0">
             <div class="title">
-                <div>页面编辑</div>
+                <div>无页面</div>
             </div>
             <div class="content">
                 <n-empty description="没有正在编辑的页面"></n-empty>
@@ -21,59 +21,61 @@
                 <n-tab-pane
                     :name="pageEditing.page.uid"
                     :tab="pageEditing.page.name"
+                    display-directive="show"
                     v-for="pageEditing in pageEditingList"
                 >
-                    <page-cook :page-editing="pageEditing"></page-cook>
+                    <page-cook :page-editing="pageEditing" :enable-picker="enablePicker"></page-cook>
                 </n-tab-pane>
                 <template #prefix>
                     <div></div>
                 </template>
                 <template #suffix>
                     <div class="actions">
-                        <n-button round size="tiny">
-                            <template #icon>
-                                <n-icon>
-                                    <arrow-undo-outline></arrow-undo-outline>
-                                </n-icon>
-                            </template>
-                            撤销
-                        </n-button>
-                        <n-button round size="tiny">
-                            <template #icon>
-                                <n-icon>
-                                    <arrow-redo-outline></arrow-redo-outline>
-                                </n-icon>
-                            </template>
-                            恢复
-                        </n-button>
-                        <n-button round size="tiny">
-                            <template #icon>
-                                <n-icon>
-                                    <locate-outline></locate-outline>
-                                </n-icon>
-                            </template>
-                            选择
-                        </n-button>
-                        <!-- <n-switch size="small" v-model:value="showOverlay">
-                            <template #checked>编辑</template>
-                            <template #unchecked>编辑</template>
-                        </n-switch>-->
-                        <n-button round size="tiny" @click="delPage(currenPageUid)">
-                            <template #icon>
-                                <n-icon>
-                                    <trash-outline></trash-outline>
-                                </n-icon>
-                            </template>
-                            删除
-                        </n-button>
-                        <n-button round size="tiny">
-                            <template #icon>
-                                <n-icon>
-                                    <eye-outline></eye-outline>
-                                </n-icon>
-                            </template>
-                            预览
-                        </n-button>
+                        <n-space>
+                            <n-tooltip trigger="hover">
+                                <template #trigger>
+                                    <n-icon>
+                                        <arrow-undo-outline></arrow-undo-outline>
+                                    </n-icon>
+                                </template>
+                                撤销
+                            </n-tooltip>
+                            <n-tooltip trigger="hover">
+                                <template #trigger>
+                                    <n-icon>
+                                        <arrow-redo-outline></arrow-redo-outline>
+                                    </n-icon>
+                                </template>
+                                恢复
+                            </n-tooltip>
+                            <n-tooltip trigger="hover">
+                                <template #trigger>
+                                    <n-icon
+                                        @click="enablePicker = !enablePicker"
+                                        :class="{ actived: enablePicker }"
+                                    >
+                                        <locate-outline></locate-outline>
+                                    </n-icon>
+                                </template>
+                                在页面上选择组件
+                            </n-tooltip>
+                            <n-tooltip trigger="hover">
+                                <template #trigger>
+                                    <n-icon @click="delPage">
+                                        <trash-outline></trash-outline>
+                                    </n-icon>
+                                </template>
+                                删除当前页面
+                            </n-tooltip>
+                            <n-tooltip trigger="hover">
+                                <template #trigger>
+                                    <n-icon @click="preview">
+                                        <eye-outline></eye-outline>
+                                    </n-icon>
+                                </template>
+                                打开一个新窗口预览当前页面
+                            </n-tooltip>
+                        </n-space>
                     </div>
                 </template>
             </n-tabs>
@@ -81,12 +83,13 @@
     </div>
 </template>
 <script setup lang="ts">
-import { NButton, NTabPane, NEmpty, NTabs, NSwitch, NIcon } from "naive-ui"
+import { NTabPane, NEmpty, NTabs, NIcon, NTooltip, NSpace } from "naive-ui"
 import { LocateOutline, ArrowUndoOutline, ArrowRedoOutline, TrashOutline, EyeOutline } from "@vicons/ionicons5"
 import IPage from "$/types/IPage";
 import { computed, ref, toRefs, watch } from "vue";
 import usePageEditingList from "$/hooks/usePageEditingList";
 import PageCook from "./PageCook.vue"
+import useComponentPickerEnable from "@/lib/hooks/useComponentPickerEnable";
 
 const props = defineProps({
     pageList: {
@@ -95,16 +98,10 @@ const props = defineProps({
     }
 })
 const currenPageUid = ref<string>()
-const showOverlay = ref<boolean>(false)
+const enablePicker = useComponentPickerEnable()
+
 const pageEditingList = usePageEditingList()
-watch(showOverlay, () => {
-    const currentPageEditing = pageEditingList.value.find(pageEditing => {
-        return pageEditing.page.uid === currenPageUid.value
-    })
-    if (currentPageEditing) {
-        currentPageEditing.showOverlay = showOverlay.value
-    }
-})
+
 
 watch(pageEditingList, () => {
     if (pageEditingList.value.length > 0) {
@@ -127,13 +124,24 @@ const handleClose = (name: string) => {
     pageEditingList.value.splice(nameIndex, 1)
 }
 
+const preview = () => {
+    const pageFound = pageList.value.find(page => page.uid === currenPageUid.value)
+    if (pageFound) {
+        const path = pageFound.path;
+        window.open(path)
+    }
+}
+
 const { pageList } = toRefs(props)
 
-const delPage = (uid?: string) => {
-    var index = pageList.value.findIndex(page => page.uid === uid)
+const delPage = () => {
+    var index = pageList.value.findIndex(page => page.uid === currenPageUid.value)
     if (index > -1) {
         pageList.value.splice(index, 1);
     }
+    const nameIndex = pageEditingList.value.findIndex(pageEditing => pageEditing.page.uid === currenPageUid.value)
+    if (!~nameIndex) return
+    pageEditingList.value.splice(nameIndex, 1)
 }
 
 </script>
@@ -152,12 +160,14 @@ const delPage = (uid?: string) => {
     }
     :deep(.n-tabs-nav) {
         .actions {
-            display: flex;
-            .n-button {
-                margin-right: 10px;
-                &:last-child {
-                    margin-left: 0;
-                }
+            padding-right: 10px;
+
+            .n-icon:hover {
+                cursor: pointer;
+                color: rgb(24, 160, 88);
+            }
+            .n-icon.actived {
+                color: rgb(24, 160, 88);
             }
         }
     }

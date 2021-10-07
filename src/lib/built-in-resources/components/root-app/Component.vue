@@ -1,6 +1,5 @@
 <template>
     <div class="root-app">
-        ffskfhskjhfk
         <slot></slot>
     </div>
 </template>

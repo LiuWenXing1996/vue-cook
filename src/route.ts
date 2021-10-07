@@ -1,6 +1,6 @@
 import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router'
-import { CookEditor, CookPlayer } from "$/index"
-import useCookConfig from './useCookConfig';
+import { CookEditor, CookPlayer, useCookConfig, DraggaleTabs, DraggableSplitTabs } from "$/index"
+
 
 const cookConfig = useCookConfig()
 const dynamicRoutes: RouteRecordRaw[] = cookConfig.value.pages.map(page => {
@@ -15,11 +15,19 @@ const dynamicRoutes: RouteRecordRaw[] = cookConfig.value.pages.map(page => {
 
 const routes: RouteRecordRaw[] = [
     {
-        path: '/cook',
+        path: '/',
         component: CookEditor,
         props: {
             config: cookConfig
         }
+    },
+    {
+        path: '/draggable-tabs',
+        component: DraggaleTabs,
+    },
+    {
+        path: '/draggable-split-tabs',
+        component: DraggableSplitTabs,
     },
     ...dynamicRoutes
 ]

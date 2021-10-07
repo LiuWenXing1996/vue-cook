@@ -2,15 +2,15 @@
     <div
         class="component-overlay"
         :class="[{ selected: selected }]"
-        :data-name="config.makerName"
+        :data-name="overlay.config.makerName"
         :draggable="true"
-        :data-uid="config.uid"
-        @click="handleClick(config, selected, $event)"
-        @dragstart="handleDragStart(config, $event)"
+        :data-uid="overlay.config.uid"
+        @click="handleClick(overlay.config, selected, $event)"
+        @dragstart="handleDragStart(overlay.config, $event)"
     >
         <div
             class="component-slot"
-            v-for="(slot,key) in config.attrs?.slots"
+            v-for="(slot,key) in overlay.config.attrs?.slots"
             @drop="handleDrop(slot, $event)"
             @dragover="handleDragOver($event)"
         >{{ key }}</div>
@@ -28,30 +28,26 @@ import useComponentSelected from "@/lib/hooks/useComponentSelected";
 
 const props = defineProps(
     {
-        config: {
-            type: Object as () => IComponentConfig,
-            required: true
-        },
         overlay: {
             type: Object as () => IComponentOverlay,
             required: true
         }
     }
 )
-const { config, overlay } = toRefs(props)
+const { overlay } = toRefs(props)
 const toPx = (n: number) => `${n}px`
-const width = computed(() => toPx(overlay.value.width))
-const height = computed(() => toPx(overlay.value.height))
-const left = computed(() => toPx(overlay.value.left))
-const top = computed(() => toPx(overlay.value.top))
+const width = computed(() => toPx(overlay.value.rect.width))
+const height = computed(() => toPx(overlay.value.rect.height))
+const left = computed(() => toPx(overlay.value.rect.left))
+const top = computed(() => toPx(overlay.value.rect.top))
 const componentSelected = useComponentSelected()
-const selected = computed(() => componentSelected.value?.uid === config.value.uid) // WHY为什么必须要用UID来判断，直接判断对象相等不可以呢？
+const selected = computed(() => componentSelected.value?.uid === overlay.value.config.uid) // WHY为什么必须要用UID来判断，直接判断对象相等不可以呢？
 
 </script>
 <style lang="less" scoped>
 .component-overlay {
-    position: fixed;
-    z-index: 9999999999;
+    position: absolute;
+    z-index: 3;
     width: v-bind(width);
     height: v-bind(height);
     left: v-bind(left);
@@ -61,7 +57,7 @@ const selected = computed(() => componentSelected.value?.uid === config.value.ui
     align-items: center;
     justify-content: center;
     box-sizing: border-box;
-    
+
     &:hover {
         border-color: #409eff;
         cursor: move;

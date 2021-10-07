@@ -1,5 +1,12 @@
 <template>
-    <div>{{ text }}</div>
+    <div>
+        {{ text }}
+        <div>dsdsd</div>
+    </div>
+    <div>
+        {{ text }}
+        <div>dsdsd</div>
+    </div>
     <!-- <slot></slot> -->
 </template>
 <script setup lang="ts">
