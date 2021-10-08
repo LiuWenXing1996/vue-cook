@@ -1,5 +1,6 @@
 <template>
     <div class="page-tree">
+        <!-- TODO:将其转到内置面板资源里 -->
         <div class="title">
             <div class="name">页面</div>
             <div class="actions">

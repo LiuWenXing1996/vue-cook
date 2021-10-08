@@ -22,7 +22,7 @@
                             class="move"
                             draggable="true"
                             :data-uid="l.uid"
-                            :data-luid="uid"
+                            :data-luid="luid"
                             @drop="handleDrop($event)"
                             @dragover="handleDragOver($event)"
                             @dragstart="handleDragStart($event)"
@@ -49,9 +49,9 @@ const props = defineProps({
     }
 })
 const { list } = toRefs(props)
-const uid = uuidv4();
+const luid = uuidv4();
 onMounted(() => {
-    useListGroup().value[uid] = list.value
+    useListGroup().value[luid] = list.value
 })
 const currentUid = ref<string>()
 watch(list, () => {
@@ -66,7 +66,8 @@ watch(list, () => {
         currentUid.value = undefined
     }
 }, {
-    deep: true
+    deep: true,
+    immediate: true
 })
 
 const handleDragStart = (e: DragEvent) => {
@@ -85,12 +86,10 @@ const handleClose = (name: string) => {
     list.value.splice(nameIndex, 1)
 }
 
-
-
 const handleDragOver = (e: DragEvent) => {
     e.preventDefault();
     if (e?.dataTransfer?.dropEffect) {
-        e.dataTransfer.dropEffect = 'copy'
+        e.dataTransfer.dropEffect = 'move'
     }
 }
 const handleDrop = (e: DragEvent) => {
@@ -99,31 +98,35 @@ const handleDrop = (e: DragEvent) => {
     if (!(e.target instanceof HTMLDivElement)) {
         return;
     }
-    //TODO:不同的拖拽来源会有不同的处理方式
     const uid = e.dataTransfer?.getData('uid')
     const luid = e.dataTransfer?.getData('luid')
-    const targetUid = e?.target?.dataset?.uid
-    if (uid && luid && targetUid) {
+    if (uid && luid) {
         const fromList = useListGroup().value[luid]
         if (fromList) {
             const found = fromList.find(e => e.uid === uid)
             const index = fromList.findIndex(e => e.uid === uid)
-            const targetIndex = list.value.findIndex(e => e.uid === targetUid)
-            if (index > -1 && found && targetIndex > -1) {
+            if (index > -1 && found) {
                 useTempTelportList().value.push(found)
                 fromList.splice(index, 1)
-                list.value.splice(targetIndex, 0, found)
-                currentUid.value = uid
-                // setTimeout(() => {
-                //     found.telId = uid
-                // }, 1000)
+                const targetUid = e?.target?.dataset?.uid
+
+                if (targetUid) {
+                    // tab===> tabs
+                    const targetIndex = list.value.findIndex(e => e.uid === targetUid)
+                    list.value.splice(targetIndex, 0, found)
+                } else {
+                    // tab===> 空tabs
+                    list.value.push(found)
+                }
                 nextTick(() => {
+                    currentUid.value = uid
                     const index = useTempTelportList().value.findIndex(e => e.uid === found.uid)
                     if (index > -1) {
                         useTempTelportList().value.splice(index, 1)
                     }
                 })
             }
+
         }
     }
 }

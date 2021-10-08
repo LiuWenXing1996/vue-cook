@@ -1,32 +1,25 @@
-# ddddd
- maker 是一个通用的概念，他创造config
+---
+home: true
+heroImage: /logo.svg
+heroAlt: Logo image
+heroText: VueCook
+tagline: 基于vue的低代码平台辅助工具
+actionText: 开始使用
+actionLink: /guide/
+features:
+  - title: DOM渲染结构一致
+    details: 组件配置在渲染成DOM时没有添加任何的包裹div
+  - title: 多页面同时编辑
+    details: 支持同时编辑多个页面
+  - title: 自由布局的交互面板
+    details: 支持将交互面板水平或垂直排列，支持交互面板的自由拖拽
+  - title: 自定义组件
+    details: 支持将现有vue组件低代码化
+  - title: 自定义逻辑
+    details: 支持将现有功能逻辑低代码化
+  - title: 自定义交互面板
+    details: 支持自定义的交互面板，如自定义编辑器
+footer: MIT Licensed | Copyright © 2021-present LiuWenXing and @VueCook contributors
+---
 
- 一个低代码平台需要提供`界面编排`和`逻辑编排`，
- 对于vue-cook来说，用`组件`将程序数据表达成界面，控制组件间的结合来达到编排界面的能力，它的本质是将传入的数据进行分类，如分成style、class、props等，然后使用vue的动态 component来控制组件的渲染。
- 用`组合`来控制程序数据流转，控制组合之间的结合来达到编排逻辑的能力，他的本质描述了一个函数的出入参，然后使用一个解析函数将这个配置逐个调用
- 用`检查器`用来扩展编排功能，他的本质是一个对config进行操作的交互窗口。
- 他们在vue-cook中统称为`资源`。
- vue-cook内置了一些开箱即用的资源。
 
-
- EditorUi应该要重新回来了
-
- defineLogic
- defineComponent
- defineEditor   ==>
-
- // 组件和组合
-
-1. 内置检查器
-    1. 组件基础编辑器
-   2. 组合基础编辑器
-   3. 组合操作台
-   4. 组件树
-2. 内置组件
-   1. 空插槽
-   2. 默认根组件
-3. 内置组合
-   1. 获取组件配置
-   2. 修改组件配置
-   3. 获取组合配置
-   4. 修改组合配置

@@ -3,9 +3,8 @@ import { defineComponentMaker, defineEditor } from '$/index'
 import Component from "./Component.vue";
 import { pkgName } from '../../const-value';
 export default defineComponentMaker({
-    name: "button",
+    name: "按钮",
     package: pkgName,
-    label: '按钮',
     props: {
         'text': defineEditor({
             type: "string",

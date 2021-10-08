@@ -11,7 +11,7 @@ export default function makePanelConfigDefault(maker: IPanelMaker): IPanelConfig
         name: maker.name,
         makerName: maker.name,
         makerPackage: maker.package,
-        title: "sssss"
+        title: uid
     };
     return config
 }

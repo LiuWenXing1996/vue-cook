@@ -1,5 +1,10 @@
 import IComponentMaker from "$/types/IComponentMaker";
 
-export default function defineComponentMaker(maker: IComponentMaker): IComponentMaker {
-    return maker
+interface IComponentMakerOptions extends Omit<IComponentMaker, "type"> {
+    type?: IComponentMaker["type"]
+}
+
+export default function defineComponentMaker(maker: IComponentMakerOptions): IComponentMaker {
+    maker.type = "component"
+    return maker as IComponentMaker
 }

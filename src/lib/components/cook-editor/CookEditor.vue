@@ -2,6 +2,7 @@
     <div class="cook-editor">
         <telport-box :lock="lockTelport"></telport-box>
         <splitpanes>
+            <!-- TODO：保持四个面板不变，然后开发分栏功能 -->
             <pane min-size="15" size="20">
                 <draggable-tabs :list="getPaneData('left')"></draggable-tabs>
             </pane>
@@ -31,7 +32,7 @@ import IPanelConfig from '@/lib/types/IPanelConfig'
 import TelportBox from './components/draggable-tabs/TelportBox.vue'
 import DraggableTabs from './components/draggable-tabs/DraggableTabs.vue'
 import makePanelConfigDefault from '@/lib/utils/makePanelConfigDefault';
-import { PageComponentTreeMaker } from '@/lib/built-in-resources/panels';
+import { PageComponentTreeMaker, ResourcePanelMaker } from '@/lib/built-in-resources/panels';
 
 const props = defineProps({
     config: {
@@ -81,8 +82,7 @@ const splitPaneConfigList = ref<ISplitPaneConfig[]>([
     {
         name: "bottom",
         list: [
-            makePanelConfigDefault(PageComponentTreeMaker),
-            makePanelConfigDefault(PageComponentTreeMaker),
+            makePanelConfigDefault(ResourcePanelMaker)
         ]
     }
 ])

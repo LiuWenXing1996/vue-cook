@@ -1,5 +1,6 @@
 <template>
     <div class="component-editor">
+        <!-- TODO:将其转到内置面板资源里 -->
         <div class="title">编辑器 {{ afterCook }}</div>
         <div class="content">
             <n-layout :native-scrollbar="false" style="height: 100%;">
@@ -14,6 +15,7 @@
                         >
                             <n-collapse display-directive="show">
                                 <n-collapse-item title="基础信息">
+                                    <!-- TODO:支持页面路径和名称的编辑,并且编辑完路径后,要刷新下页面 -->
                                     <n-form-item label="名字:">
                                         <n-input v-model:value="conmponentConfigSelected.name" />
                                     </n-form-item>
@@ -72,9 +74,14 @@
                                         key-placeholder="props变量名"
                                         value-placeholder="props变量值"
                                     />
+                                    <!-- TODO：仅仅支持选择不同的属性值和选择属性值的输入方式 ---属性值----类型（基础类型，数值，字符串。。。。）-----不同的输入框 -->
                                 </n-collapse-item>
-                                <n-collapse-item title="事件"></n-collapse-item>
-                                <n-collapse-item title="插槽"></n-collapse-item>
+                                <n-collapse-item title="事件">
+                                    <!-- TODO：支持逻辑资源的拖拽添加或者下拉栏添加 -->
+                                </n-collapse-item>
+                                <n-collapse-item title="插槽">
+                                    <!-- TODO：支持已有组件的拖拽修改或者直接拖拽组件到其位置,进行添加 -->
+                                </n-collapse-item>
                             </n-collapse>
                         </n-form>
                     </template>
@@ -93,7 +100,7 @@ import useComponentMaker from "$/hooks/useComponentMaker";
 import EditorRender from "./editor-render/EditorRender.vue";
 import IEditorConfig from "$/types/IEditorConfig";
 import IComponentConfig from "$/types/IComponentConfig";
-import * as CSS from '$/utils/css';
+import * as CSS from '$/utils/css'; // TODO:css选择建议去掉
 import camelCase from "camelcase"
 
 const conmponentConfigSelected = useComponentSelected()
