@@ -3,8 +3,7 @@
         <div :id="VueCookTelportTempId"></div>
         <template v-for="l in allList" :key="l.uid">
             <teleport :to="getTargetId(l)">
-                {{ l.uid }}fffff
-                <n-input></n-input>
+                <component :is="l"></component>
             </teleport>
         </template>
     </div>
