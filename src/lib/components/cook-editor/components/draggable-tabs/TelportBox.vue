@@ -3,7 +3,7 @@
         <div :id="VueCookTelportTempId"></div>
         <template v-for="l in allList" :key="l.uid">
             <teleport :to="getTargetId(l)">
-                <component :is="l"></component>
+                <tab-render :config="l"></tab-render>
             </teleport>
         </template>
     </div>
@@ -16,6 +16,7 @@ import useListGroup from "./useListGroup";
 import { NInput } from "naive-ui"
 import useTempTelportList from "./useTempTelportList";
 import makeDomId from "./makeDomId";
+import TabRender from "./TabRender.vue"
 
 defineProps({
     lock: {

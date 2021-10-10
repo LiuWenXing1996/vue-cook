@@ -1,8 +1,10 @@
 <template>
-    <input />
+    <div></div>
 </template>
-<script lang="ts" setup>
+<script setup lang="ts">
+defineProps({
+
+})
 </script>
 <style lang="less" scoped>
-
 </style>

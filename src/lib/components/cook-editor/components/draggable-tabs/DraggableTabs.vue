@@ -1,6 +1,7 @@
 <template>
     <div class="draggable-tabs">
         <template v-if="list.length <= 0">
+            <!-- TODO：被拖拽over的时候，更改下样式 -->
             <div class="title" @drop="handleDrop($event)" @dragover="handleDragOver($event)">
                 <div>无面板</div>
             </div>
@@ -15,6 +16,8 @@
                 closable
                 v-model:value="currentUid"
                 @close="handleClose"
+                :style="{ height: '100%', display: 'flex', flexDirection: ' column' }"
+                :pane-style="{ flexGrow: 1, padding: 0 }"
             >
                 <n-tab-pane :name="l.uid" v-for="l in list" display-directive="show">
                     <template #tab>
@@ -26,9 +29,9 @@
                             @drop="handleDrop($event)"
                             @dragover="handleDragOver($event)"
                             @dragstart="handleDragStart($event)"
-                        >{{ l.title }}</div>
+                        >{{ useTitle(l) }}</div>
                     </template>
-                    <div :id="makeDomId(l)"></div>
+                    <div :id="makeDomId(l)" style="height: 100%;width: 100%;"></div>
                 </n-tab-pane>
             </n-tabs>
         </template>
@@ -42,6 +45,7 @@ import useListGroup from "./useListGroup";
 import { v4 as uuidv4 } from 'uuid';
 import useTempTelportList from "./useTempTelportList";
 import makeDomId from "./makeDomId"
+import usePanelMaker from "@/lib/hooks/usePanelMaker";
 const props = defineProps({
     list: {
         type: Object as () => IPanelConfig[],
@@ -55,6 +59,18 @@ onMounted(() => {
 })
 const currentUid = ref<string>()
 watch(list, () => {
+    list.value.map(e => {
+        useTempTelportList().value.push(e)
+
+    })
+    nextTick(() => {
+        list.value.map(e => {
+            const index = useTempTelportList().value.findIndex(t => t.uid === e.uid)
+            if (index > -1) {
+                useTempTelportList().value.splice(index, 1)
+            }
+        })
+    })
     if (list.value.length > 0) {
         if (!currentUid.value) {
             currentUid.value = list.value[0].uid
@@ -69,6 +85,11 @@ watch(list, () => {
     deep: true,
     immediate: true
 })
+
+const useTitle = (l: IPanelConfig) => {
+    const maker = usePanelMaker(l.makerName, l.makerPackage).value
+    return maker?.makeTitle?.(l) || l.title
+}
 
 const handleDragStart = (e: DragEvent) => {
     if (!(e.target instanceof HTMLDivElement)) {
@@ -106,7 +127,7 @@ const handleDrop = (e: DragEvent) => {
             const found = fromList.find(e => e.uid === uid)
             const index = fromList.findIndex(e => e.uid === uid)
             if (index > -1 && found) {
-                useTempTelportList().value.push(found)
+                // useTempTelportList().value.push(found)
                 fromList.splice(index, 1)
                 const targetUid = e?.target?.dataset?.uid
 
@@ -118,15 +139,11 @@ const handleDrop = (e: DragEvent) => {
                     // tab===> 空tabs
                     list.value.push(found)
                 }
+                // currentUid.value = uid
                 nextTick(() => {
                     currentUid.value = uid
-                    const index = useTempTelportList().value.findIndex(e => e.uid === found.uid)
-                    if (index > -1) {
-                        useTempTelportList().value.splice(index, 1)
-                    }
                 })
             }
-
         }
     }
 }

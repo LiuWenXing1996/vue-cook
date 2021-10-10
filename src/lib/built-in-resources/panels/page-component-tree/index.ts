@@ -1,10 +1,10 @@
 import { markRaw } from 'vue';
-import Component from "./Component.vue";
+import Component from "./PageComponentTree.vue";
 import pkg from "@/../package.json"
 import definePanelMaker from '@/lib/utils/definePanelMaker';
 export default definePanelMaker({
-    name: "page-component-tree",
+    name: "页面组件树",
     package: pkg.name,
-    label: '主应用',
-    makePanel: () => markRaw(Component)
+    splitPaneName: "left",
+    makePanel: () => markRaw(Component),
 })

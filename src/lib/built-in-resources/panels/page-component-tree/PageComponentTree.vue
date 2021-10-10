@@ -1,6 +1,6 @@
 <template>
     <div class="page-tree">
-        <!-- TODO:将其转到内置面板资源里 -->
+        <!-- TODO:修改样式,将内部的title去掉,将增加页面按钮 移到搜索按钮的左侧-->
         <div class="title">
             <div class="name">页面</div>
             <div class="actions">
@@ -27,8 +27,9 @@
             <n-tree
                 :data="treeData"
                 block-line
-                v-model:selected-keys="selectedKeys"
                 :pattern="pattern"
+                :selectable="false"
+                :render-label="renderLabel"
             ></n-tree>
         </div>
     </div>
@@ -43,19 +44,16 @@ import { h } from "vue";
 import IPage from "$/types/IPage";
 import { v4 as uuidv4 } from 'uuid';
 import { RootAppMaker } from "$/built-in-resources";
-import { makeComponentConfigDefault } from "$/index";
+import { makeComponentConfigDefault, useCookConfig } from "$/index";
 import usePageEditingList from "$/hooks/usePageEditingList";
 
-const props = defineProps({
-    pageList: {
-        type: Object as () => IPage[],
-        required: true
-    }
+const pageList = computed(() => {
+    return useCookConfig().value.pages
 })
-
-const { pageList } = toRefs(props)
 const selectedKeys = ref<string[]>([])
 const pattern = ref("")
+
+
 
 watch(selectedKeys, () => {
     const [uid] = selectedKeys.value
@@ -70,10 +68,37 @@ watch(selectedKeys, () => {
     }
 })
 
+const renderLabel = ({ option }: { option: TreeOption }) => {
+    return h(
+        'div',
+        {
+            onClick: () => {
+                if (option.type === "page") {
+                    const uid = option.key
+                    const pageEditingList = usePageEditingList()
+                    const foundPage = pageList.value.find(page => page.uid === uid);
+                    if (foundPage) {
+                        if (!pageEditingList.value.find(pageEditing => pageEditing.page.uid === uid)) {
+                            pageEditingList.value.push({
+                                page: foundPage
+                            })
+                        }
+                    }
+                }
+                if (option.type === "component") {
+                    // TODO:选中组件
+                }
+            }
+        },
+        option.label
+    )
+}
+
 function componentToTreeNode(config: IComponentConfig, parentSlotName?: string): TreeOption {
     const treeNode: TreeOption = {
         key: config.uid,
         label: config.name,
+        type: "component",
         prefix: () => {
             return h(
                 NTag,
@@ -111,6 +136,7 @@ function pageToTreeNode(page: IPage): TreeOption {
         key: page.uid,
         label: page.name,
         children: [componentTreeNode],
+        type: "page",
         prefix: () => {
             return h(
                 NTag,

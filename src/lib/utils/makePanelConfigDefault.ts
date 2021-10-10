@@ -11,7 +11,10 @@ export default function makePanelConfigDefault(maker: IPanelMaker): IPanelConfig
         name: maker.name,
         makerName: maker.name,
         makerPackage: maker.package,
-        title: uid
+        title: maker.name
     };
+    if (maker.makeTitle) {
+        config.title = maker.makeTitle(config);
+    }
     return config
 }

@@ -33,7 +33,6 @@ const { config } = toRefs(props)
 const maker = useComponentMaker(config.value.makerName, config.value.makerPackage)
 onMounted(() => {
     const internalInstance = getCurrentInstance()
-    console.log(maker.value)
     if (internalInstance) {
         const elements = getComponentElements(internalInstance)
         elements.forEach(el => {

@@ -1,9 +1,8 @@
 import { Component } from "vue";
-import IComponentAttrs from "./IComponentAttrs";
 import IComponentConfig from "./IComponentConfig";
 import IEditor from "./IEditor";
 import IEditorType from "./IEditorType";
-import IResourceMaker, { IResourceMakerType } from './IResourceMaker';
+import IResourceMaker from './IResourceMaker';
 
 export default interface IComponentMaker extends IResourceMaker {
     makeComponent: (config: IComponentConfig) => Component,

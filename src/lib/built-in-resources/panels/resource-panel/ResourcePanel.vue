@@ -1,38 +1,21 @@
 <template>
     <div class="resource-panel">
-        <!-- TODO:将其转到内置面板资源里 -->
-        <div class="title">资源</div>
-        <div class="content">
-            <n-layout :native-scrollbar="false" style="height: 100%;">
-                <n-space>
-                    <component-maker v-for="maker in makerList" :maker="maker"></component-maker>
-                </n-space>
-            </n-layout>
-        </div>
+        <n-layout :native-scrollbar="false" style="height: 100%;">
+            <n-space>
+                <resuorce-maker v-for="maker in makerList" :maker="maker"></resuorce-maker>
+            </n-space>
+        </n-layout>
     </div>
 </template>
 <script setup lang="ts">
-import useComponentMakerList from "$/hooks/useComponentMakerList";
-import ComponentMaker from "./ComponentMaker.vue";
+import useResourceMakerList from "$/hooks/useResourceMakerList";
+import ResuorceMaker from "./ResuorceMaker.vue";
 import { NSpace, NLayout } from "naive-ui"
-const makerList = useComponentMakerList();
+const makerList = useResourceMakerList();
 </script>
 <style lang="less" scoped>
 .resource-panel {
     height: 100%;
-    display: flex;
-    flex-direction: column;
-    .title {
-        display: flex;
-        align-items: center;
-        justify-content: left;
-        padding: 6px 10px;
-        justify-content: space-between;
-        border-bottom: 1px solid rgb(239, 239, 245);
-    }
-    .content {
-        flex-grow: 1;
-        padding: 10px;
-    }
+    padding: 10px;
 }
 </style>

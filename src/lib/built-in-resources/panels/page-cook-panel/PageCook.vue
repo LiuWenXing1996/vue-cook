@@ -9,12 +9,8 @@
 </template>
 <script setup lang="ts">
 import IPageEditing from "@/lib/types/IPageEditing";
-import getCookPlayerExportDataFromWindow from "@/lib/utils/getCookPlayerExportDataFromWindow";
 import { ref, toRefs } from "vue";
-import ComponentOverlay from "../component-overlay/ComponentOverlay.vue";
-import ComponentPicker from "../component-picker/ComponentPicker.vue";
-import IComponentOverlay from "@/lib/types/IComponentOverlay";
-import IComponentConfig from "@/lib/types/IComponentConfig";
+import ComponentPicker from "./ComponentPicker.vue";
 
 const props = defineProps({
     pageEditing: {

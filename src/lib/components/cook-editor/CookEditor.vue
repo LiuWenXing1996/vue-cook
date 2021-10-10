@@ -32,7 +32,9 @@ import IPanelConfig from '@/lib/types/IPanelConfig'
 import TelportBox from './components/draggable-tabs/TelportBox.vue'
 import DraggableTabs from './components/draggable-tabs/DraggableTabs.vue'
 import makePanelConfigDefault from '@/lib/utils/makePanelConfigDefault';
-import { PageComponentTreeMaker, ResourcePanelMaker } from '@/lib/built-in-resources/panels';
+import { PageComponentTreeMaker, ResourcePanelMaker, EditorPanelMaker, PageCookPanelMaker } from '@/lib/built-in-resources';
+import ISplitPaneConfig, { SplitPaneName } from '@/lib/types/ISplitPaneConfig';
+import useSplitPaneConfigList from '@/lib/hooks/useSplitPaneConfigList';
 
 const props = defineProps({
     config: {
@@ -51,32 +53,23 @@ onUnmounted(() => {
     // @ts-ignore
     delete window[VueCookEditroTag]
 })
-
-type SplitPaneName = "left" | "center" | "right" | "bottom"
-interface ISplitPaneConfig {
-    name: SplitPaneName,
-    list: IPanelConfig[]
-}
-const splitPaneConfigList = ref<ISplitPaneConfig[]>([
+const defaultSplitPanelConfigList: ISplitPaneConfig[] = [
     {
         name: "left",
         list: [
-            makePanelConfigDefault(PageComponentTreeMaker),
             makePanelConfigDefault(PageComponentTreeMaker),
         ]
     },
     {
         name: "center",
         list: [
-            makePanelConfigDefault(PageComponentTreeMaker),
-            makePanelConfigDefault(PageComponentTreeMaker),
+            // makePanelConfigDefault(PageCookPanelMaker)
         ]
     },
     {
         name: "right",
         list: [
-            makePanelConfigDefault(PageComponentTreeMaker),
-            makePanelConfigDefault(PageComponentTreeMaker),
+            makePanelConfigDefault(EditorPanelMaker),
         ]
     },
     {
@@ -85,7 +78,9 @@ const splitPaneConfigList = ref<ISplitPaneConfig[]>([
             makePanelConfigDefault(ResourcePanelMaker)
         ]
     }
-])
+];
+const splitPaneConfigList = useSplitPaneConfigList();
+splitPaneConfigList.value.push(...defaultSplitPanelConfigList)
 
 const getPaneData = (name: SplitPaneName) => {
     const found = splitPaneConfigList.value.find(e => e.name === name);

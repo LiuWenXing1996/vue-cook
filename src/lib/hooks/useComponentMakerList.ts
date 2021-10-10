@@ -1,13 +1,11 @@
-import { ref } from 'vue';
-import IComponentMaker from '../types/IComponentMaker';
-import * as  makers from "$/built-in-resources/components"
 
-const buildInMakers = Object.entries(makers).map(e => e[1])
-
-const makerList = ref<IComponentMaker[]>([
-    ...buildInMakers
-]);
+import { computed } from 'vue';
+import useResourceMakerList from './useResourceMakerList';
+import IComponentMaker from './../types/IComponentMaker';
 
 export default function useComponentMakerList() {
-    return makerList
+    return computed(() => {
+        const allList = useResourceMakerList().value
+        return allList.filter(e => e.type === "component") as IComponentMaker[]
+    })
 }

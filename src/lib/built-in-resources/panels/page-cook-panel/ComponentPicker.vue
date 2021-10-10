@@ -11,16 +11,14 @@
     </div>
 </template>
 <script setup lang="ts">
-import IComponentConfig from "@/lib/types/IComponentConfig"
 import IComponentOverlay from "@/lib/types/IComponentOverlay"
 import getCookPlayerExportDataFromWindow from "@/lib/utils/getCookPlayerExportDataFromWindow"
 import { computed, ref, toRefs } from "vue"
-import ComponentOverlay from "../component-overlay/ComponentOverlay.vue"
+import ComponentOverlay from "./component-overlay/ComponentOverlay.vue"
 
 const props = defineProps({
     iframeRef: {
-        type: Object as () => HTMLIFrameElement | undefined,
-        required: true
+        type: Object as () => HTMLIFrameElement,
     },
     enablePicker: {
         type: Boolean,
@@ -30,10 +28,10 @@ const props = defineProps({
 const { iframeRef, enablePicker } = toRefs(props)
 const handleMouseMove = (e: MouseEvent) => {
     if (enablePicker.value) {
-        const rect = iframeRef.value?.getBoundingClientRect()
+        const rect = iframeRef?.value?.getBoundingClientRect()
         if (rect) {
-            const el = iframeRef.value?.contentWindow?.document.elementFromPoint(e.x - rect.x, e.y - rect.y)
-            const exportData = getCookPlayerExportDataFromWindow(iframeRef.value?.contentWindow || undefined)
+            const el = iframeRef?.value?.contentWindow?.document.elementFromPoint(e.x - rect.x, e.y - rect.y)
+            const exportData = getCookPlayerExportDataFromWindow(iframeRef?.value?.contentWindow || undefined)
             if (exportData && rect && el) {
                 const componentOverlay = exportData.getComponetnOverlayFromElement(el)
                 overlay.value = componentOverlay
@@ -47,10 +45,10 @@ const handleMouseLeave = () => {
 }
 const handleDragOver = (e: DragEvent) => {
     e.preventDefault()
-    const rect = iframeRef.value?.getBoundingClientRect()
+    const rect = iframeRef?.value?.getBoundingClientRect()
     if (rect) {
-        const el = iframeRef.value?.contentWindow?.document.elementFromPoint(e.x - rect.x, e.y - rect.y)
-        const exportData = getCookPlayerExportDataFromWindow(iframeRef.value?.contentWindow || undefined)
+        const el = iframeRef?.value?.contentWindow?.document.elementFromPoint(e.x - rect.x, e.y - rect.y)
+        const exportData = getCookPlayerExportDataFromWindow(iframeRef?.value?.contentWindow || undefined)
         if (exportData && rect && el) {
             const componentOverlay = exportData.getComponetnOverlayFromElement(el)
             overlay.value = componentOverlay

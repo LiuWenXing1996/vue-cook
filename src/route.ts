@@ -8,7 +8,8 @@ const dynamicRoutes: RouteRecordRaw[] = cookConfig.value.pages.map(page => {
         path: page.path,
         component: CookPlayer,
         props: {
-            config: page.component
+            config: page.component,
+            path: page.path
         }
     }
 })

@@ -1,16 +1,19 @@
 <template>
-    <div></div>
+    <component :is="maker?.makePanel(config)"></component>
 </template>
 <script setup lang="ts">
+import usePanelMaker from '@/lib/hooks/usePanelMaker';
 import IPanelConfig from '@/lib/types/IPanelConfig';
+import { toRefs } from 'vue';
 
-defineProps({
+const props = defineProps({
     config: {
         type: Object as () => IPanelConfig,
-        reuiqred: true
+        required: true
     }
 })
-const maker = useComponentMaker(config.value.makerName, config.value.makerPackage)
+const { config } = toRefs(props)
+const maker = usePanelMaker(config.value.makerName, config.value.makerPackage)
 </script>
 <style lang="less" scoped>
 </style>

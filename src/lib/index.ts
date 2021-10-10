@@ -1,3 +1,7 @@
+import autoAddMakers from "./utils/auto-add-makers";
+
+autoAddMakers();
+
 export { default as CookEditor } from "./components/cook-editor/CookEditor.vue"
 export { default as CookPlayer } from "./components/cook-player/CookPlayer.vue"
 export { default as DraggaleTabs } from "./components/draggable-tabs/DraggaleTabs.vue"
