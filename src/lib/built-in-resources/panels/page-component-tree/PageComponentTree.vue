@@ -1,22 +1,6 @@
 <template>
-    <div class="page-tree">
-        <!-- TODO:修改样式,将内部的title去掉,将增加页面按钮 移到搜索按钮的左侧-->
-        <div class="title">
-            <div class="name">页面</div>
-            <div class="actions">
-                <n-space>
-                    <n-tooltip trigger="hover">
-                        <template #trigger>
-                            <n-icon @click="addPage">
-                                <add-circle-outline></add-circle-outline>
-                            </n-icon>
-                        </template>
-                        新增页面
-                    </n-tooltip>
-                </n-space>
-            </div>
-        </div>
-        <div class="content">
+    <div class="page-component-tree">
+        <div class="actions">
             <n-input v-model:value="pattern" placeholder="搜索" size="small" round clearable>
                 <template #prefix>
                     <n-icon>
@@ -24,14 +8,22 @@
                     </n-icon>
                 </template>
             </n-input>
-            <n-tree
-                :data="treeData"
-                block-line
-                :pattern="pattern"
-                :selectable="false"
-                :render-label="renderLabel"
-            ></n-tree>
+            <n-tooltip trigger="hover">
+                <template #trigger>
+                    <n-icon @click="addPage">
+                        <add-circle-outline></add-circle-outline>
+                    </n-icon>
+                </template>
+                新增页面
+            </n-tooltip>
         </div>
+        <n-tree
+            :data="treeData"
+            block-line
+            :pattern="pattern"
+            :selectable="false"
+            :render-label="renderLabel"
+        ></n-tree>
     </div>
 </template>
 <script setup lang="ts">
@@ -172,29 +164,15 @@ const addPage = () => {
 }
 </script>
 <style lang="less" scoped>
-.page-tree {
+.page-component-tree {
     height: 100%;
-    display: flex;
-    flex-direction: column;
-    .title {
+
+    .actions {
         display: flex;
-        align-items: center;
-        justify-content: left;
-        padding: 6px 10px;
-        justify-content: space-between;
-        border-bottom: 1px solid rgb(239, 239, 245);
-        .actions {
-            :deep(.n-icon):hover {
-                cursor: pointer;
-                color: rgb(24, 160, 88);
-            }
-        }
-    }
-    .content {
-        flex-grow: 1;
         padding: 10px;
-        :deep(.n-input) {
-            margin-bottom: 10px;
+        align-items: center;
+        :deep(.n-icon) {
+            margin-left: 10px;
         }
     }
 }

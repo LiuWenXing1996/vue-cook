@@ -29,6 +29,7 @@
                                     #="{ value }"
                                     :on-create="onCreate"
                                 >
+                                    // TODO:直接变成输入样式类名即可
                                     <n-select
                                         v-model:value="value.value"
                                         :options="options"
@@ -95,7 +96,7 @@ import IEditorConfig from "$/types/IEditorConfig";
 import IComponentConfig from "$/types/IComponentConfig";
 import * as CSS from '$/utils/css'; // TODO:css选择建议去掉
 import camelCase from "camelcase"
-
+// TODO:检查下为甚更改了数据,但是cook player 没有收到更改
 const conmponentConfigSelected = useComponentSelected()
 defineProps({
     afterCook: {

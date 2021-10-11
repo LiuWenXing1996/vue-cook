@@ -12,6 +12,8 @@ import useResourceMakerList from "$/hooks/useResourceMakerList";
 import ResuorceMaker from "./ResuorceMaker.vue";
 import { NSpace, NLayout } from "naive-ui"
 const makerList = useResourceMakerList();
+//TODO:面板筛选和搜索功能
+//TODO:查看下滚动条为啥用不了了
 </script>
 <style lang="less" scoped>
 .resource-panel {

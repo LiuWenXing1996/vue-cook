@@ -1,8 +1,14 @@
 <template>
     <div class="draggable-tabs">
         <template v-if="list.length <= 0">
-            <!-- TODO：被拖拽over的时候，更改下样式 -->
-            <div class="title" @drop="handleDrop($event)" @dragover="handleDragOver($event)">
+            <div
+                class="title"
+                @drop="handleDrop($event)"
+                @dragover="handleDragOver($event)"
+                @dragenter="handleDragEnter($event)"
+                @dragleave="handleDragLeave($event)"
+                :data-tabs-title="true"
+            >
                 <div>无面板</div>
             </div>
             <div class="content">
@@ -29,6 +35,8 @@
                             @drop="handleDrop($event)"
                             @dragover="handleDragOver($event)"
                             @dragstart="handleDragStart($event)"
+                            @dragenter="handleDragEnter($event)"
+                            @dragleave="handleDragLeave($event)"
                         >{{ useTitle(l) }}</div>
                     </template>
                     <div :id="makeDomId(l)" style="height: 100%;width: 100%;"></div>
@@ -46,6 +54,9 @@ import { v4 as uuidv4 } from 'uuid';
 import useTempTelportList from "./useTempTelportList";
 import makeDomId from "./makeDomId"
 import usePanelMaker from "@/lib/hooks/usePanelMaker";
+import handleDragEnter from "./utils/handleDragEnter";
+import handleDragLeave from "./utils/handleDragLeave";
+import handleDragStart from "./utils/handleDragStart";
 const props = defineProps({
     list: {
         type: Object as () => IPanelConfig[],
@@ -91,22 +102,13 @@ const useTitle = (l: IPanelConfig) => {
     return maker?.makeTitle?.(l) || l.title
 }
 
-const handleDragStart = (e: DragEvent) => {
-    if (!(e.target instanceof HTMLDivElement)) {
-        return;
-    }
-    if (e?.target?.dataset?.uid && e?.target?.dataset?.luid) {
-        e?.dataTransfer?.setData('uid', e?.target?.dataset?.uid)
-        e?.dataTransfer?.setData('luid', e?.target?.dataset?.luid)
-    }
-}
 
 const handleClose = (name: string) => {
     const nameIndex = list.value.findIndex(e => e.uid === name)
     if (!~nameIndex) return
     list.value.splice(nameIndex, 1)
 }
-
+// TODO:整理下setup里的逻辑,尽量抽出来
 const handleDragOver = (e: DragEvent) => {
     e.preventDefault();
     if (e?.dataTransfer?.dropEffect) {
@@ -161,6 +163,9 @@ const handleDrop = (e: DragEvent) => {
         padding: 6px 10px;
         justify-content: space-between;
         border-bottom: 1px solid rgb(239, 239, 245);
+        &.dragenter {
+            background-color: rgb(239, 239, 245);
+        }
     }
     :deep(.n-tabs-nav) {
         .actions {
@@ -181,9 +186,14 @@ const handleDrop = (e: DragEvent) => {
     }
 }
 .move {
+    margin: -6px -28px -6px -10px;
+    padding: 6px 28px 6px 10px;
     &:hover {
         cursor: move;
         color: rgb(24, 160, 88);
+    }
+    &.dragenter {
+        background-color: rgb(239, 239, 245);
     }
 }
 </style>

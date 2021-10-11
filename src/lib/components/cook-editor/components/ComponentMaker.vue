@@ -5,13 +5,12 @@
         @dragstart="handleDragStart"
         :data-name="maker.name"
         :data-package="maker.package"
+        :data-label="maker.label"
     >
         <div class="icon-wrapper">
-            <n-icon size="25" :depth="3">
-                <ComponentIcon v-if="maker.type === 'component'"></ComponentIcon>
-                <LogicIcon v-if="maker.type === 'logic'"></LogicIcon>
-                <MixinIcon v-if="maker.type === 'mixin'"></MixinIcon>
-                <PanelIcon v-if="maker.type === 'panel'"></PanelIcon>
+            <n-icon size="25" :depth="5">
+                <!-- icon 调小，然后将名字和包名显示到图标的下面，类似于文件管理器的那种 -->
+                <ComponentIcon></ComponentIcon>
             </n-icon>
         </div>
         <div class="maker-detail">
@@ -22,21 +21,18 @@
 </template>
 <script lang="ts" setup>
 import { toRefs } from "vue"
+import type IComponentMaker from "$/types/IComponentMaker"
 import ComponentIcon from "$/svgs/component.svg"
-import LogicIcon from "$/svgs/logic.svg"
-import MixinIcon from "$/svgs/mixin.svg"
-import PanelIcon from "$/svgs/panel.svg"
-import { NIcon } from "naive-ui"
+import { NIcon, NTooltip } from "naive-ui"
 import useComponentPickerEnable from "@/lib/hooks/useComponentPickerEnable"
-import IResourceMaker from "@/lib/types/IResourceMaker"
 
 const props = defineProps({
     maker: {
-        type: Object as () => IResourceMaker,
+        type: Object as () => IComponentMaker,
         required: true
     }
 })
-// TODO:面板maker 点击可以打开
+
 const { maker } = toRefs(props)
 const componentPickerEnable = useComponentPickerEnable()
 

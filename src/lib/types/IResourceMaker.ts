@@ -5,6 +5,5 @@ export type IResourceMakerType = "component" | "logic" | "panel" | "mixin"
 export default interface IResourceMaker {
     name: string,
     package: string,
-    tips?: string,
     type: IResourceMakerType
 }

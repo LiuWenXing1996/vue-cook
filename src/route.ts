@@ -2,7 +2,7 @@ import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router'
 import { CookEditor, CookPlayer, useCookConfig, DraggaleTabs, DraggableSplitTabs } from "$/index"
 
 
-const cookConfig = useCookConfig()
+const cookConfig = useCookConfig() //TODO:此地方开启一个可以穿入参数的选项，可以穿入自定义的cook config 数据
 const dynamicRoutes: RouteRecordRaw[] = cookConfig.value.pages.map(page => {
     return {
         path: page.path,
