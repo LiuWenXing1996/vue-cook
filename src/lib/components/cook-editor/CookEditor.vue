@@ -1,26 +1,28 @@
 <template>
-    <div class="cook-editor">
-        <telport-box :lock="lockTelport"></telport-box>
-        <splitpanes>
-            <!-- TODO：保持四个面板不变，然后开发分栏功能 -->
-            <pane min-size="15" size="20">
-                <draggable-tabs :list="getPaneData('left')"></draggable-tabs>
-            </pane>
-            <pane min-size="15" size="60">
-                <splitpanes :horizontal="true">
-                    <pane min-size="15" size="80">
-                        <draggable-tabs :list="getPaneData('center')"></draggable-tabs>
-                    </pane>
-                    <pane min-size="15" size="20">
-                        <draggable-tabs :list="getPaneData('bottom')"></draggable-tabs>
-                    </pane>
-                </splitpanes>
-            </pane>
-            <pane min-size="15" size="20">
-                <draggable-tabs :list="getPaneData('right')"></draggable-tabs>
-            </pane>
-        </splitpanes>
-    </div>
+    <n-config-provider :locale="zhCN" :date-locale="dateZhCN" style="height: 100%;">
+        <div class="cook-editor">
+            <telport-box :lock="lockTelport"></telport-box>
+            <splitpanes>
+                <!-- TODO：保持四个面板不变，然后开发分栏功能 -->
+                <pane min-size="15" size="20">
+                    <draggable-tabs :list="getPaneData('left')"></draggable-tabs>
+                </pane>
+                <pane min-size="15" size="60">
+                    <splitpanes :horizontal="true">
+                        <pane min-size="15" size="80">
+                            <draggable-tabs :list="getPaneData('center')"></draggable-tabs>
+                        </pane>
+                        <pane min-size="15" size="20">
+                            <draggable-tabs :list="getPaneData('bottom')"></draggable-tabs>
+                        </pane>
+                    </splitpanes>
+                </pane>
+                <pane min-size="15" size="20">
+                    <draggable-tabs :list="getPaneData('right')"></draggable-tabs>
+                </pane>
+            </splitpanes>
+        </div>
+    </n-config-provider>
 </template>
 <script setup lang="ts">
 import { Splitpanes, Pane } from 'splitpanes'
@@ -35,6 +37,7 @@ import makePanelConfigDefault from '@/lib/utils/makePanelConfigDefault';
 import { PageComponentTreeMaker, ResourcePanelMaker, EditorPanelMaker, PageCookPanelMaker } from '@/lib/built-in-resources';
 import ISplitPaneConfig, { SplitPaneName } from '@/lib/types/ISplitPaneConfig';
 import useSplitPaneConfigList from '@/lib/hooks/useSplitPaneConfigList';
+import { NConfigProvider, zhCN, dateZhCN } from "naive-ui"
 
 const props = defineProps({
     config: {

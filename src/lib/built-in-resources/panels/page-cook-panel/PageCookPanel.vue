@@ -71,6 +71,7 @@ const props = defineProps({
 })
 const { pageEditing } = toRefs(props)
 const enablePicker = useComponentPickerEnable()
+// TODO:每个panel有自己的picker enable
 const cookConfig = useCookConfig()
 
 const preview = () => {

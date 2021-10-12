@@ -23,7 +23,7 @@
                 v-model:value="currentUid"
                 @close="handleClose"
                 :style="{ height: '100%', display: 'flex', flexDirection: ' column' }"
-                :pane-style="{ flexGrow: 1, padding: 0 }"
+                :pane-style="{ flexGrow: 1, padding: 0, overflow: 'hidden' }"
             >
                 <n-tab-pane :name="l.uid" v-for="l in list" display-directive="show">
                     <template #tab>

@@ -38,6 +38,8 @@ import { v4 as uuidv4 } from 'uuid';
 import { RootAppMaker } from "$/built-in-resources";
 import { makeComponentConfigDefault, useCookConfig } from "$/index";
 import usePageEditingList from "$/hooks/usePageEditingList";
+import useComponentConfig from "@/lib/hooks/useComponentConfig";
+import useComponentSelected from "@/lib/hooks/useComponentSelected";
 
 const pageList = computed(() => {
     return useCookConfig().value.pages
@@ -78,7 +80,15 @@ const renderLabel = ({ option }: { option: TreeOption }) => {
                     }
                 }
                 if (option.type === "component") {
-                    // TODO:选中组件
+                    const uid = option.key
+                    if (uid) {
+                        const _uid = uid as string;
+                        const config = useComponentConfig(_uid)
+                        if (config.value) {
+                            useComponentSelected().value = config.value
+                        }
+                    }
+
                 }
             }
         },

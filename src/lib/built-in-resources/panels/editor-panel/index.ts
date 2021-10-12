@@ -5,5 +5,6 @@ import definePanelMaker from '@/lib/utils/definePanelMaker';
 export default definePanelMaker({
     name: "基础编辑器",
     package: pkg.name,
+    splitPaneName: "right",
     makePanel: () => markRaw(Component),
 })

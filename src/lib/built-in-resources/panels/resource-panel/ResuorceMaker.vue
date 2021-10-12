@@ -1,8 +1,10 @@
 <template>
     <div
         class="component-maker"
-        draggable="true"
+        :class="[maker.type]"
+        :draggable="draggable"
         @dragstart="handleDragStart"
+        @click="handelClick"
         :data-name="maker.name"
         :data-package="maker.package"
     >
@@ -10,7 +12,6 @@
             <n-icon size="25" :depth="3">
                 <ComponentIcon v-if="maker.type === 'component'"></ComponentIcon>
                 <LogicIcon v-if="maker.type === 'logic'"></LogicIcon>
-                <MixinIcon v-if="maker.type === 'mixin'"></MixinIcon>
                 <PanelIcon v-if="maker.type === 'panel'"></PanelIcon>
             </n-icon>
         </div>
@@ -21,14 +22,16 @@
     </div>
 </template>
 <script lang="ts" setup>
-import { toRefs } from "vue"
+import { computed, toRefs } from "vue"
 import ComponentIcon from "$/svgs/component.svg"
 import LogicIcon from "$/svgs/logic.svg"
-import MixinIcon from "$/svgs/mixin.svg"
 import PanelIcon from "$/svgs/panel.svg"
 import { NIcon } from "naive-ui"
 import useComponentPickerEnable from "@/lib/hooks/useComponentPickerEnable"
 import IResourceMaker from "@/lib/types/IResourceMaker"
+import makePanelConfigDefault from "@/lib/utils/makePanelConfigDefault"
+import IPanelMaker from "@/lib/types/IPanelMaker"
+import useSplitPaneConfigList from "@/lib/hooks/useSplitPaneConfigList"
 
 const props = defineProps({
     maker: {
@@ -36,10 +39,12 @@ const props = defineProps({
         required: true
     }
 })
-// TODO:面板maker 点击可以打开
+
 const { maker } = toRefs(props)
 const componentPickerEnable = useComponentPickerEnable()
-
+const draggable = computed(() => {
+    return maker.value.type === "component" || maker.value.type === "logic"
+})
 const handleDragStart = (e: DragEvent) => {
     if (!(e.target instanceof HTMLDivElement)) {
         return;
@@ -47,6 +52,17 @@ const handleDragStart = (e: DragEvent) => {
     e?.dataTransfer?.setData('name', maker.value.name)
     e?.dataTransfer?.setData('package', maker.value.package)
     componentPickerEnable.value = true
+}
+const handelClick = () => {
+    if (maker.value.type === "panel") {
+        const _maker = maker.value as IPanelMaker
+        const config = makePanelConfigDefault(_maker)
+        const splitPaneName = _maker.splitPaneName;
+        const splitPane = useSplitPaneConfigList().value.find(e => e.name === splitPaneName)
+        if (splitPane) {
+            splitPane.list.push(config)
+        }
+    }
 }
 
 </script>
@@ -61,6 +77,9 @@ const handleDragStart = (e: DragEvent) => {
     &:hover {
         border-color: #409eff;
         cursor: move;
+    }
+    &.panel:hover {
+        cursor: pointer;
     }
 
     .maker-detail {
