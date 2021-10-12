@@ -9,7 +9,7 @@ actionLink: /guide/
 features:
   - title: 💎 DOM渲染结构一致
     details: 将组件配置渲染成DOM时没有添加任何的包裹div
-  - title: 🗐 多页面同时编辑
+  - title: 📝 多页面同时编辑
     details: 支持同时编辑多个页面
   - title: ♾️ 自由布局的交互面板
     details: 支持将交互面板水平或垂直排列，支持交互面板的自由拖拽
