@@ -3,9 +3,12 @@ import useComponentDragged from '$/hooks/useComponentDragged';
 import useComponentMaker from '$/hooks/useComponentMaker';
 import makeComponentConfigDefault from '@/lib/utils/makeComponentConfigDefault';
 const componentDragged = useComponentDragged();
-const handleDrop = (parentSlot: IComponentConfig[], e: DragEvent) => {
+const handleDrop = (slotName: string, componentConfig: IComponentConfig | undefined, e: DragEvent) => {
     e.preventDefault()
     e.stopPropagation()
+    if (!componentConfig) {
+        return
+    }
     if (componentDragged.value) {
 
     } else {
@@ -19,7 +22,10 @@ const handleDrop = (parentSlot: IComponentConfig[], e: DragEvent) => {
             return;
         }
         const childComponentConfig = makeComponentConfigDefault(maker.value);
-        parentSlot.push(childComponentConfig)
+        componentConfig.attrs = componentConfig.attrs || {}
+        componentConfig.attrs.slots = componentConfig.attrs.slots || {}
+        componentConfig.attrs.slots[slotName] = componentConfig.attrs.slots[slotName] || []
+        componentConfig.attrs.slots[slotName].push(childComponentConfig)
     }
 }
 

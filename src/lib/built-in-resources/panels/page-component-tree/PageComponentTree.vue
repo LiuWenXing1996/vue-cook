@@ -54,10 +54,8 @@ watch(selectedKeys, () => {
     const pageEditingList = usePageEditingList()
     const foundPage = pageList.value.find(page => page.uid === uid);
     if (foundPage) {
-        if (!pageEditingList.value.find(pageEditing => pageEditing.page.uid === uid)) {
-            pageEditingList.value.push({
-                page: foundPage
-            })
+        if (!pageEditingList.value.find(pageEditing => pageEditing.uid === uid)) {
+            pageEditingList.value.push(foundPage)
         }
     }
 })
@@ -72,10 +70,8 @@ const renderLabel = ({ option }: { option: TreeOption }) => {
                     const pageEditingList = usePageEditingList()
                     const foundPage = pageList.value.find(page => page.uid === uid);
                     if (foundPage) {
-                        if (!pageEditingList.value.find(pageEditing => pageEditing.page.uid === uid)) {
-                            pageEditingList.value.push({
-                                page: foundPage
-                            })
+                        if (!pageEditingList.value.find(pageEditing => pageEditing.uid === uid)) {
+                            pageEditingList.value.push(foundPage)
                         }
                     }
                 }

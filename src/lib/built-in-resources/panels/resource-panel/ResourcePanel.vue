@@ -1,36 +1,49 @@
 <template>
     <div class="resource-panel">
-        <n-layout :native-scrollbar="false" style="height: 100%;">
-            <div class="actions">
-                <div class="action-item">
-                    <div class="action-item-label">关键字：</div>
-                    <n-input v-model:value="pattern" placeholder="搜索" round clearable size="small">
-                        <template #prefix>
-                            <n-icon>
-                                <search-icon />
-                            </n-icon>
-                        </template>
-                    </n-input>
+        <n-scrollbar x-scrollable>
+            <div style="padding: 10px;">
+                <div class="actions">
+                    <div class="action-item">
+                        <div class="action-item-label">关键字：</div>
+                        <n-input
+                            v-model:value="pattern"
+                            placeholder="搜索"
+                            round
+                            clearable
+                            size="small"
+                        >
+                            <template #prefix>
+                                <n-icon>
+                                    <search-icon />
+                                </n-icon>
+                            </template>
+                        </n-input>
+                    </div>
+                    <div class="action-item">
+                        <div class="action-item-label">类型：</div>
+                        <n-select
+                            v-model:value="types"
+                            multiple
+                            :options="typeOptions"
+                            size="small"
+                        />
+                    </div>
+                    <div class="action-item">
+                        <div class="action-item-label">包名：</div>
+                        <n-select v-model:value="pkgs" multiple :options="pkgOptions" size="small" />
+                    </div>
                 </div>
-                <div class="action-item">
-                    <div class="action-item-label">类型：</div>
-                    <n-select v-model:value="types" multiple :options="typeOptions" size="small" />
-                </div>
-                <div class="action-item">
-                    <div class="action-item-label">包名：</div>
-                    <n-select v-model:value="pkgs" multiple :options="pkgOptions" size="small" />
-                </div>
+                <n-space>
+                    <resuorce-maker v-for="maker in result" :maker="maker"></resuorce-maker>
+                </n-space>
             </div>
-            <n-space>
-                <resuorce-maker v-for="maker in result" :maker="maker"></resuorce-maker>
-            </n-space>
-        </n-layout>
+        </n-scrollbar>
     </div>
 </template>
 <script setup lang="ts">
 import useResourceMakerList from "$/hooks/useResourceMakerList";
 import ResuorceMaker from "./ResuorceMaker.vue";
-import { NSpace, NLayout, NInput, NIcon, NSelect, NForm, NFormItem } from "naive-ui"
+import { NSpace, NLayout, NInput, NIcon, NSelect, NForm, NFormItem, NScrollbar } from "naive-ui"
 import { Search as SearchIcon } from "@vicons/ionicons5"
 import { computed, ref } from "vue";
 import { uniq } from "lodash-es"
@@ -75,7 +88,6 @@ const pkgOptions = computed(() => {
 </script>
 <style lang="less" scoped>
 .resource-panel {
-    padding: 10px;
     height: 100%;
     .actions {
         display: flex;

@@ -1,15 +1,11 @@
-import IComponentMaker from "./IComponentMaker";
-import IFunctionMaker from "./IFunctionMaker";
-import IMixinMaker from "./IMixinMaker";
+import IResourceMaker from "./IResourceMaker";
 
 export default interface ICookInstallFunc {
     ({
-        componentMakerList,
-        // functionMakerList,
-        // mixinMakerList,
+        resourceMakerList,
+        options
     }: {
-        componentMakerList: IComponentMaker[],
-        // functionMakerList: IFunctionMaker[],
-        // mixinMakerList: IMixinMaker[],
+        resourceMakerList: IResourceMaker[],
+        options?: any
     }): void
 }

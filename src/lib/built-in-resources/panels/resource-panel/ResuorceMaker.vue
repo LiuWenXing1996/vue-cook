@@ -75,7 +75,7 @@ const handelClick = () => {
     border-radius: 2px;
     padding: 5px;
     &:hover {
-        border-color: #409eff;
+        border-color: #18a058;
         cursor: move;
     }
     &.panel:hover {

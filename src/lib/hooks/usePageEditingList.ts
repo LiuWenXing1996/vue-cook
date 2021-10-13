@@ -1,7 +1,7 @@
 import { ref } from "vue";
-import IPageEditing from './../types/IPageEditing';
+import IPage from "../types/IPage";
 
-const list = ref<IPageEditing[]>([])
+const list = ref<IPage[]>([])
 
 export default function usePageEditingList() {
     return list

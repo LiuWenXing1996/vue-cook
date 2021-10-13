@@ -21,7 +21,6 @@ function createEmptyRect() {
     }
     return rect
 }
-
 export default function getComponentRect(instance: ComponentInternalInstance) {
     let rect = createEmptyRect();
     if (isFragment(instance)) {
@@ -54,10 +53,10 @@ function getVNodeArrayRect(vNodeArray: VNodeArrayChildren) {
         const childVnode = vNodeArray[i]
         if (isVNode(childVnode)) {
             const childRect = getVNodeRect(childVnode)
-            mergeRects(rect, childRect)
+            rect = mergeRects(rect, childRect)
         } else if (Array.isArray(childVnode)) {
             const childRect = getVNodeArrayRect(childVnode)
-            mergeRects(rect, childRect)
+            rect = mergeRects(rect, childRect)
         }
     }
     return rect
@@ -79,18 +78,22 @@ function getFragmentRect(vNode: VNode) {
     return rect
 }
 
-function mergeRects(a: IComponentRect, b: IComponentRect) {
-    if (!a.top || b.top < a.top) {
-        a.top = b.top
+function isEmptyRect(r: IComponentRect) {
+    return r.top === 0 && r.bottom === 0 && r.left === 0 && r.right === 0
+}
+
+function mergeRects(a: IComponentRect, b: IComponentRect): IComponentRect {
+    if (isEmptyRect(b)) {
+        return a
     }
-    if (!a.bottom || b.bottom > a.bottom) {
-        a.bottom = b.bottom
+    if (isEmptyRect(a)) {
+        return b
     }
-    if (!a.left || b.left < a.left) {
-        a.left = b.left
-    }
-    if (!a.right || b.right > a.right) {
-        a.right = b.right
-    }
-    return a
+    let rect = createEmptyRect();
+    rect.top = Math.min(a.top, b.top);
+    rect.bottom = Math.max(a.bottom, b.bottom);
+    rect.left = Math.min(a.left, b.left);
+    rect.right = Math.max(a.right, b.right);
+
+    return rect
 }

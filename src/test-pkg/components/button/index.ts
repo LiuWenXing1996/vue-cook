@@ -14,6 +14,6 @@ export default defineComponentMaker({
             default: "sss"
         })
     },
-    // slots: ["default"],
+    slots: ["default"],
     makeComponent: () => markRaw(Component)
 })

@@ -1,15 +1,16 @@
 import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router'
-import { CookEditor, CookPlayer, useCookConfig, DraggaleTabs, DraggableSplitTabs } from "$/index"
-
+import { CookEditor, CookPlayer, useCookConfig, DraggaleTabs, DraggableSplitTabs, usePage } from "$/index"
 
 const cookConfig = useCookConfig() //TODO:此地方开启一个可以穿入参数的选项，可以穿入自定义的cook config 数据
+
+// TODO:player和editor的相互传参还是有问题
 const dynamicRoutes: RouteRecordRaw[] = cookConfig.value.pages.map(page => {
+    const _page = usePage(page.path) // 此处使用usePage来保持page的响应性
     return {
         path: page.path,
         component: CookPlayer,
         props: {
-            config: page.component,
-            path: page.path
+            page: _page
         }
     }
 })
@@ -33,11 +34,9 @@ const routes: RouteRecordRaw[] = [
     ...dynamicRoutes
 ]
 
-
 const router = createRouter({
-    // 4. 内部提供了 history 模式的实现。为了简单起见，我们在这里使用 hash 模式。
     history: createWebHistory(),
-    routes, // `routes: routes` 的缩写
+    routes,
 })
 
 export default router

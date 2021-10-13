@@ -5,10 +5,10 @@ import definePanelMaker from '@/lib/utils/definePanelMaker';
 import usePageEditingList from "$/hooks/usePageEditingList";
 import useSplitPaneConfigList from '@/lib/hooks/useSplitPaneConfigList';
 import IPanelConfig from '@/lib/types/IPanelConfig';
-import IPageEditing from '@/lib/types/IPageEditing';
 import makePanelConfigDefault from '@/lib/utils/makePanelConfigDefault';
+import IPage from '@/lib/types/IPage';
 
-const data: Array<{ config: IPanelConfig, page: IPageEditing }> = []
+const data: Array<{ config: IPanelConfig, page: IPage }> = []
 
 const maker = definePanelMaker({
     name: "页面编辑器",
@@ -17,7 +17,7 @@ const maker = definePanelMaker({
     makeTitle: (config) => {
         const page = data.find(e => e.config.uid === config.uid)?.page
         if (page) {
-            return page.page.name
+            return page.name
         } else {
             return "没有正在编辑的页面"
         }
@@ -41,10 +41,10 @@ watch(usePageEditingList(), () => {
     const splitPaneConfig = useSplitPaneConfigList().value;
     const pageEditingList = usePageEditingList().value;
     const needOpenList = pageEditingList.filter(e => {
-        return !data.find(d => d.page.page.uid === e.page.uid)
+        return !data.find(d => d.page.uid === e.uid)
     })
     const needCloseList = data.filter(e => {
-        return pageEditingList.find(p => p.page.uid !== e.page.page.uid)
+        return pageEditingList.find(p => p.uid !== e.page.uid)
     })
     // open
     const splitPane = splitPaneConfig.find(e => e.name === maker.splitPaneName)
@@ -91,7 +91,7 @@ watch(useSplitPaneConfigList(), () => {
         }
         {
             const index = pageEditingList.findIndex(l => {
-                return l.page.uid === e.page.page.uid
+                return l.uid === e.page.uid
             })
             if (index > -1) {
                 pageEditingList.splice(index, 1)

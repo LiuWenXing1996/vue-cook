@@ -1,8 +1,9 @@
 import ICookInstallFunc from "../types/ICookInstallFunc"
-import useComponentMakerList from "../hooks/useComponentMakerList"
+import useResourceMakerList from "../hooks/useResourceMakerList"
 
-export default function installPkg({ cookInstall }: { cookInstall: ICookInstallFunc }) {
+export default function installPkg({ cookInstall }: { cookInstall: ICookInstallFunc }, options?: any) {
     cookInstall({
-        componentMakerList: useComponentMakerList().value,
+        resourceMakerList: useResourceMakerList().value,
+        options
     })
 }

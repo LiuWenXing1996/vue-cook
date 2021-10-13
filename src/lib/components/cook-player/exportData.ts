@@ -22,7 +22,7 @@ const getComponentOverlayFromElement = (element: Element) => {
         if (componentInstance) {
             const rect = getComponentRect(componentInstance)
             const overlay: IComponentOverlay = {
-                config: componentConfig,
+                configUid: componentConfig.uid,
                 rect: rect
             }
             return overlay
