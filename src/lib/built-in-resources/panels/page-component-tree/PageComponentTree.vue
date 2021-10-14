@@ -8,14 +8,14 @@
                     </n-icon>
                 </template>
             </n-input>
-            <n-tooltip trigger="hover">
+            <n-popover trigger="hover">
                 <template #trigger>
                     <n-icon @click="addPage">
                         <add-circle-outline></add-circle-outline>
                     </n-icon>
                 </template>
                 新增页面
-            </n-tooltip>
+            </n-popover>
         </div>
         <n-tree
             :data="treeData"
@@ -28,7 +28,7 @@
 </template>
 <script setup lang="ts">
 import { computed, ref, toRefs, watch } from "vue";
-import { NTree, NTag, NIcon, NInput, NTooltip, NSpace } from "naive-ui"
+import { NTree, NTag, NIcon, NInput, NPopover, NSpace } from "naive-ui"
 import { AddCircleOutline, Search as SearchIcon } from "@vicons/ionicons5"
 import type { TreeOption } from "naive-ui"
 import type IComponentConfig from "$/types/IComponentConfig";

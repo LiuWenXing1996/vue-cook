@@ -392,6 +392,11 @@
   resolved "https://registry.yarnpkg.com/@vicons/ionicons5/-/ionicons5-0.11.0.tgz#54185bfa572a09df70094db1954f28bfbf1363ed"
   integrity sha512-4IWamqtXUsuCdlW6NQc2xyoJ+PUXGMwzSrppQbdVCYg0pjYld89jOfLOIkuTWq8o2XUa+Q1/78jzWBtXMTojNg==
 
+"@vicons/material@^0.11.0":
+  version "0.11.0"
+  resolved "https://registry.nlark.com/@vicons/material/download/@vicons/material-0.11.0.tgz#2c209121f3ff6a46450f4968397df6c3008df8d1"
+  integrity sha1-LCCRIfP/akZFD0loOX32wwCN+NE=
+
 "@vitejs/plugin-vue@^1.4.0":
   version "1.9.3"
   resolved "https://registry.npmmirror.com/@vitejs/plugin-vue/download/@vitejs/plugin-vue-1.9.3.tgz?cache=0&sync_timestamp=1633433458406&other_urls=https%3A%2F%2Fregistry.npmmirror.com%2F%40vitejs%2Fplugin-vue%2Fdownload%2F%40vitejs%2Fplugin-vue-1.9.3.tgz#93d61893ce6c723d0209af0483ec8b91a2cd811f"

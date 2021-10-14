@@ -7,3 +7,5 @@ installPkg(TestPkg)
 createApp(App)
     .use(router)
     .mount('#app')
+
+    // TODO:整理package.json里的包

@@ -1,75 +1,6 @@
 <template>
     <div class="page-cook-panel">
         <template v-if="pageEditing">
-            <div class="actions">
-                <div class="action-item">
-                    <div class="action-item-label">操作：</div>
-                    <!-- TODO：操作栏移到右边 -->
-                    <div>
-                        <n-space>
-                            <n-tooltip trigger="hover">
-                                <template #trigger>
-                                    <n-icon>
-                                        <arrow-undo-outline></arrow-undo-outline>
-                                    </n-icon>
-                                </template>
-                                撤销
-                            </n-tooltip>
-                            <n-tooltip trigger="hover">
-                                <template #trigger>
-                                    <n-icon>
-                                        <arrow-redo-outline></arrow-redo-outline>
-                                    </n-icon>
-                                </template>
-                                恢复
-                            </n-tooltip>
-                            <n-tooltip trigger="hover">
-                                <template #trigger>
-                                    <n-icon
-                                        @click="enablePicker = !enablePicker"
-                                        :class="{ actived: enablePicker }"
-                                    >
-                                        <locate-outline></locate-outline>
-                                    </n-icon>
-                                </template>
-                                在页面上选择组件
-                            </n-tooltip>
-                            <n-tooltip trigger="hover">
-                                <template #trigger>
-                                    <n-icon @click="delPage">
-                                        <trash-outline></trash-outline>
-                                    </n-icon>
-                                </template>
-                                删除当前页面
-                            </n-tooltip>
-                            <n-tooltip trigger="hover">
-                                <template #trigger>
-                                    <n-icon @click="preview">
-                                        <eye-outline></eye-outline>
-                                    </n-icon>
-                                </template>
-                                打开一个新窗口预览当前页面
-                            </n-tooltip>
-                        </n-space>
-                    </div>
-                </div>
-                <div class="action-item">
-                    <div class="action-item-label">尺寸：</div>
-                    <div style="width: 240px;display: flex;align-items: center;">
-                        <n-input-number v-model:value="size.width" size="small" />
-                        <div style="margin: 0 10px;">X</div>
-                        <n-input-number v-model:value="size.height" size="small" />
-                    </div>
-                </div>
-                <div class="action-item">
-                    <div class="action-item-label">比例：</div>
-                    <div style="width: 130px;">
-                        <n-input-number v-model:value="size.scale" size="small">
-                            <template #suffix>%</template>
-                        </n-input-number>
-                    </div>
-                </div>
-            </div>
             <div class="page-cook-contaienr">
                 <div class="page-cook-wrapper">
                     <page-cook
@@ -79,6 +10,88 @@
                     ></page-cook>
                 </div>
             </div>
+            <div class="actions">
+                <n-space vertical>
+                    <n-popover trigger="hover" placement="left">
+                        <template #trigger>
+                            <n-icon>
+                                <arrow-undo-outline></arrow-undo-outline>
+                            </n-icon>
+                        </template>
+                        撤销
+                    </n-popover>
+                    <n-popover trigger="hover" placement="left">
+                        <template #trigger>
+                            <n-icon>
+                                <arrow-redo-outline></arrow-redo-outline>
+                            </n-icon>
+                        </template>
+                        恢复
+                    </n-popover>
+                    <n-popover trigger="hover" placement="left">
+                        <template #trigger>
+                            <n-icon
+                                @click="enablePicker = !enablePicker"
+                                :class="{ actived: enablePicker }"
+                            >
+                                <locate-outline></locate-outline>
+                            </n-icon>
+                        </template>
+                        在页面上选择组件
+                    </n-popover>
+                    <n-popover trigger="hover" placement="left">
+                        <template #trigger>
+                            <n-icon @click="delPage">
+                                <trash-outline></trash-outline>
+                            </n-icon>
+                        </template>
+                        删除当前页面
+                    </n-popover>
+                    <n-popover trigger="hover" placement="left">
+                        <template #trigger>
+                            <n-icon @click="preview">
+                                <eye-outline></eye-outline>
+                            </n-icon>
+                        </template>
+                        打开一个新窗口预览当前页面
+                    </n-popover>
+                    <n-popover trigger="hover" placement="left">
+                        <template #trigger>
+                            <n-icon>
+                                <desktop-windows-round></desktop-windows-round>
+                            </n-icon>
+                        </template>
+                        <n-space vertical>
+                            <n-space align="center" style="width: 200px;">
+                                <label>宽度：</label>
+                                <n-input-number v-model:value="size.width" size="small">
+                                    <template #suffix>px</template>
+                                </n-input-number>
+                            </n-space>
+                            <n-space align="center" style="width: 200px;">
+                                <label>高度：</label>
+                                <n-input-number v-model:value="size.height" size="small">
+                                    <template #suffix>px</template>
+                                </n-input-number>
+                            </n-space>
+                            <n-space align="center" style="width: 200px;">
+                                <label>比例：</label>
+                                <n-input-number v-model:value="size.scale" size="small">
+                                    <template #suffix>%</template>
+                                </n-input-number>
+                            </n-space>
+                        </n-space>
+                    </n-popover>
+                    <n-popover trigger="hover" placement="left">
+                        <template #trigger>
+                            <n-icon>
+                                <information-circle-outline></information-circle-outline>
+                            </n-icon>
+                        </template>
+                        <div style="width: 240px;display: flex;align-items: center;">信息</div>
+                    </n-popover>
+                </n-space>
+            </div>
         </template>
         <template v-else>
             <n-empty description="没有正在编辑的页面"></n-empty>
@@ -86,8 +99,9 @@
     </div>
 </template>
 <script setup lang="ts">
-import { NTag, NEmpty, NIcon, NTooltip, NSpace, NInputNumber, NLayout, NScrollbar } from "naive-ui"
-import { LocateOutline, ArrowUndoOutline, ArrowRedoOutline, TrashOutline, EyeOutline } from "@vicons/ionicons5"
+import { NTag, NEmpty, NIcon, NPopover, NSpace, NInputNumber, NLayout, NScrollbar } from "naive-ui"
+import { LocateOutline, ArrowUndoOutline, ArrowRedoOutline, TrashOutline, EyeOutline, InformationCircleOutline } from "@vicons/ionicons5"
+import { DesktopWindowsRound } from "@vicons/material"
 import { computed, ref, toRefs } from "vue";
 import PageCook from "./PageCook.vue"
 import useComponentPickerEnable from "@/lib/hooks/useComponentPickerEnable";
@@ -95,6 +109,7 @@ import IPage from "@/lib/types/IPage";
 import { useCookConfig } from "@/lib";
 import IPageCookPanelSize from "@/lib/types/IPageCookPanelSize";
 // TODO:使用n scorll-bar 会出现问题，滚动条选不到
+// TODO:修复侧边栏的样式
 const props = defineProps({
     pageEditing: {
         type: Object as () => IPage,
@@ -102,7 +117,6 @@ const props = defineProps({
 })
 const { pageEditing } = toRefs(props)
 const enablePicker = useComponentPickerEnable()
-// TODO:每个panel有自己的picker enable
 const cookConfig = useCookConfig()
 const size = ref<IPageCookPanelSize>({
     width: 1920,
@@ -131,12 +145,13 @@ const delPage = () => {
     height: 100%;
     position: relative;
     display: flex;
-    flex-direction: column;
     .actions {
         display: flex;
         padding: 10px;
         padding-bottom: 0;
         align-items: center;
+        flex-direction: column;
+        background-color: rgb(239, 239, 245);
         .action-item {
             display: flex;
             align-items: center;
@@ -162,6 +177,16 @@ const delPage = () => {
             height: 100%;
             overflow: auto;
         }
+    }
+}
+</style>
+<style lang="less">
+.page-cook-panel-actions-size {
+    width: 140px;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    .item {
     }
 }
 </style>
