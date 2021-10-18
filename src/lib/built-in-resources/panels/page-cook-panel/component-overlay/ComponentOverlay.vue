@@ -1,6 +1,7 @@
 <template>
     <template v-if="componentConfig">
-        <n-tooltip trigger="manual" :show="showPopover" placement="left">
+        <!-- TODO：n-popover 位置尝试自动计算下 -->
+        <n-popover trigger="manual" :show="showPopover" placement="left">
             <template #trigger>
                 <div
                     class="component-overlay"
@@ -44,7 +45,7 @@
                     </div>
                 </div>
             </div>
-        </n-tooltip>
+        </n-popover>
     </template>
     <template v-else>id为{{ overlay.configUid }}的组件没有找到</template>
 </template>
@@ -59,8 +60,9 @@ import handleDragOver from "./handleDragOver";
 import useComponentSelected from "@/lib/hooks/useComponentSelected";
 import useComponentConfig from "@/lib/hooks/useComponentConfig";
 import IPageCookPanelSize from "@/lib/types/IPageCookPanelSize";
-import { NTooltip, NTag } from "naive-ui"
+import { NPopover, NTag } from "naive-ui"
 import useComponentMaker from "@/lib/hooks/useComponentMaker";
+// TODO:overlay选中显示时带有对准线和宽高
 const props = defineProps(
     {
         overlay: {

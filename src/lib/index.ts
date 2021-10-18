@@ -1,6 +1,7 @@
 import autoAddMakers from "./utils/auto-add-makers";
 
 autoAddMakers();
+//TODO:增加黑色主题和主题色定义功能？
 
 export { default as CookEditor } from "./components/cook-editor/CookEditor.vue"
 export { default as CookPlayer } from "./components/cook-player/CookPlayer.vue"

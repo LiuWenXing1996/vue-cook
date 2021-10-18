@@ -1,9 +1,18 @@
 <template>
     <div class="page-cook-panel">
         <template v-if="pageEditing">
+            <div class="page-cook-contaienr" >
+                <div class="page-cook-wrapper">
+                    <page-cook
+                        :page-editing="pageEditing"
+                        :enable-picker="enablePicker"
+                        :size="size"
+                    ></page-cook>
+                </div>
+            </div>
             <div class="actions">
-                <n-space align="center">
-                    <n-popover trigger="hover" placement="bottom">
+                <n-space vertical>
+                    <n-popover trigger="hover" placement="left">
                         <template #trigger>
                             <n-icon>
                                 <arrow-undo-outline></arrow-undo-outline>
@@ -11,7 +20,7 @@
                         </template>
                         撤销
                     </n-popover>
-                    <n-popover trigger="hover" placement="bottom">
+                    <n-popover trigger="hover" placement="left">
                         <template #trigger>
                             <n-icon>
                                 <arrow-redo-outline></arrow-redo-outline>
@@ -19,7 +28,7 @@
                         </template>
                         恢复
                     </n-popover>
-                    <n-popover trigger="hover" placement="bottom">
+                    <n-popover trigger="hover" placement="left">
                         <template #trigger>
                             <n-icon
                                 @click="enablePicker = !enablePicker"
@@ -30,7 +39,7 @@
                         </template>
                         在页面上选择组件
                     </n-popover>
-                    <n-popover trigger="hover" placement="bottom">
+                    <n-popover trigger="hover" placement="left">
                         <template #trigger>
                             <n-icon @click="delPage">
                                 <trash-outline></trash-outline>
@@ -38,7 +47,7 @@
                         </template>
                         删除当前页面
                     </n-popover>
-                    <n-popover trigger="hover" placement="bottom">
+                    <n-popover trigger="hover" placement="left">
                         <template #trigger>
                             <n-icon @click="preview">
                                 <eye-outline></eye-outline>
@@ -46,7 +55,7 @@
                         </template>
                         打开一个新窗口预览当前页面
                     </n-popover>
-                    <n-popover trigger="hover" placement="bottom">
+                    <n-popover trigger="hover" placement="left">
                         <template #trigger>
                             <n-icon>
                                 <page-size-icon></page-size-icon>
@@ -73,28 +82,15 @@
                             </n-space>
                         </n-space>
                     </n-popover>
-                    <n-popover trigger="hover" placement="bottom">
+                    <n-popover trigger="hover" placement="left">
                         <template #trigger>
                             <n-icon>
                                 <url-icon></url-icon>
                             </n-icon>
                         </template>
-                        <div style="width: 240px;display: flex;align-items: center;">
-                            url:
-                            <n-input v-model:value="pageEditing.path"></n-input>
-                        </div>
+                        <div style="width: 240px;display: flex;align-items: center;">信息</div>
                     </n-popover>
                 </n-space>
-            </div>
-            <div class="page-cook-contaienr">
-                <div class="pager-ruler-box"></div>
-                <div class="page-ruler-horizontal">
-                    <ruler-horizontal></ruler-horizontal>
-                </div>
-                <div class="page-ruler-vertical">
-                    <ruler-vertical></ruler-vertical>
-                </div>
-                <!-- TODO：实现一个可以自由拖拽的面板 -->
             </div>
         </template>
         <template v-else>
@@ -103,21 +99,19 @@
     </div>
 </template>
 <script setup lang="ts">
-import { NTag, NEmpty, NIcon, NPopover, NSpace, NInputNumber, NLayout, NScrollbar, NInput } from "naive-ui"
+import { NTag, NEmpty, NIcon, NPopover, NSpace, NInputNumber, NLayout, NScrollbar } from "naive-ui"
 import { LocateOutline, ArrowUndoOutline, ArrowRedoOutline, TrashOutline, EyeOutline, InformationCircleOutline } from "@vicons/ionicons5"
 import PageSizeIcon from "$/svgs/page-size.svg"
 import UrlIcon from "$/svgs/url.svg"
-import { computed, nextTick, onMounted, ref, toRefs } from "vue";
+import { computed, onMounted, ref, toRefs } from "vue";
 import PageCook from "./PageCook.vue"
 import useComponentPickerEnable from "@/lib/hooks/useComponentPickerEnable";
 import IPage from "@/lib/types/IPage";
 import { useCookConfig } from "@/lib";
 import IPageCookPanelSize from "@/lib/types/IPageCookPanelSize";
 import Ruler from "@scena/ruler";
-import RulerHorizontal from "./RulerHorizontal.vue"
-import RulerVertical from "./RulerVertical.vue"
 // TODO:使用n scorll-bar 会出现问题，滚动条选不到
-// TODO:修复顶部工具栏的样式
+// TODO:修复侧边栏的样式
 const props = defineProps({
     pageEditing: {
         type: Object as () => IPage,
@@ -125,47 +119,18 @@ const props = defineProps({
 })
 const { pageEditing } = toRefs(props)
 const enablePicker = useComponentPickerEnable()
-const rulerHDiv = ref<HTMLDivElement>()
-const rulerVDiv = ref<HTMLDivElement>()
+const rulerDiv = ref<HTMLDivElement>()
 const cookConfig = useCookConfig()
 const size = ref<IPageCookPanelSize>({
     width: 1920,
     height: 1080,
     scale: 100
 })
-let hRuler: Ruler | null = null
-let vRuler: Ruler | null = null
-
-const rulerRender = () => {
-    if (rulerHDiv.value) {
-        if (!hRuler) {
-            hRuler = new Ruler(rulerHDiv.value, {
-                type: "horizontal",
-            });
-        }
-
-    }
-    if (rulerHDiv.value && rulerVDiv.value) {
-        hRuler = new Ruler(rulerHDiv.value, {
-            type: "horizontal",
-        });
-    }
-    if (rulerVDiv.value) {
-        vRuler = new Ruler(rulerVDiv.value, {
-            type: "vertical"
-        });
-    }
-}
 
 onMounted(() => {
-    if (rulerHDiv.value) {
-        hRuler = new Ruler(rulerHDiv.value, {
+    if (rulerDiv.value) {
+        const ruler = new Ruler(rulerDiv.value, {
             type: "horizontal",
-        });
-    }
-    if (rulerVDiv.value) {
-        vRuler = new Ruler(rulerVDiv.value, {
-            type: "vertical"
         });
     }
 })
@@ -191,10 +156,21 @@ const delPage = () => {
     height: 100%;
     position: relative;
     display: flex;
-    flex-direction: column;
     .actions {
-        padding: 3px;
-        width: 100%;
+        display: flex;
+        padding: 10px;
+        padding-bottom: 0;
+        align-items: center;
+        flex-direction: column;
+        background-color: rgb(239, 239, 245);
+        .action-item {
+            display: flex;
+            align-items: center;
+            margin-right: 20px;
+            .action-item-label {
+                margin-right: 10px;
+            }
+        }
         .n-icon:hover {
             cursor: pointer;
             color: rgb(24, 160, 88);
@@ -206,36 +182,11 @@ const delPage = () => {
     .page-cook-contaienr {
         flex-grow: 1;
         overflow: hidden;
-        position: relative;
         // margin: 10px;
         .page-cook-wrapper {
             width: 100%;
             height: 100%;
             overflow: auto;
-        }
-        .pager-ruler-box {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 30px;
-            height: 30px;
-            background: #efeff5;
-            box-sizing: border-box;
-            z-index: 21;
-        }
-        .page-ruler-horizontal {
-            position: absolute;
-            top: 0;
-            left: 30px;
-            width: calc(100% - 30px);
-            height: 30px;
-        }
-        .page-ruler-vertical {
-            position: absolute;
-            left: 0;
-            top: 30px;
-            width: 30px;
-            height: calc(100% - 30px);
         }
     }
 }
