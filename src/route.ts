@@ -3,6 +3,7 @@ import { CookEditor, CookPlayer, useCookConfig, DraggaleTabs, DraggableSplitTabs
 
 const cookConfig = useCookConfig() //TODO:此地方开启一个可以穿入参数的选项，可以穿入自定义的cook config 数据
 
+// TODO:所有的数据让player和editor直接读取storerage里的，而不是通过props传参？
 // TODO:player和editor的相互传参还是有问题
 const dynamicRoutes: RouteRecordRaw[] = cookConfig.value.pages.map(page => {
     const _page = usePage(page.path) // 此处使用usePage来保持page的响应性

@@ -87,13 +87,9 @@
                 </n-space>
             </div>
             <div class="page-cook-contaienr">
-                <div class="pager-ruler-box"></div>
-                <div class="page-ruler-horizontal">
-                    <ruler-horizontal></ruler-horizontal>
-                </div>
-                <div class="page-ruler-vertical">
-                    <ruler-vertical></ruler-vertical>
-                </div>
+                <ruler-box :size="size">
+                    <div style="height:1000px;width:1000px;background-color:red"></div>
+                </ruler-box>
                 <!-- TODO：实现一个可以自由拖拽的面板 -->
             </div>
         </template>
@@ -113,9 +109,7 @@ import useComponentPickerEnable from "@/lib/hooks/useComponentPickerEnable";
 import IPage from "@/lib/types/IPage";
 import { useCookConfig } from "@/lib";
 import IPageCookPanelSize from "@/lib/types/IPageCookPanelSize";
-import Ruler from "@scena/ruler";
-import RulerHorizontal from "./RulerHorizontal.vue"
-import RulerVertical from "./RulerVertical.vue"
+import RulerBox from "./ruler-box/RulerBox.vue"
 // TODO:使用n scorll-bar 会出现问题，滚动条选不到
 // TODO:修复顶部工具栏的样式
 const props = defineProps({
@@ -132,42 +126,6 @@ const size = ref<IPageCookPanelSize>({
     width: 1920,
     height: 1080,
     scale: 100
-})
-let hRuler: Ruler | null = null
-let vRuler: Ruler | null = null
-
-const rulerRender = () => {
-    if (rulerHDiv.value) {
-        if (!hRuler) {
-            hRuler = new Ruler(rulerHDiv.value, {
-                type: "horizontal",
-            });
-        }
-
-    }
-    if (rulerHDiv.value && rulerVDiv.value) {
-        hRuler = new Ruler(rulerHDiv.value, {
-            type: "horizontal",
-        });
-    }
-    if (rulerVDiv.value) {
-        vRuler = new Ruler(rulerVDiv.value, {
-            type: "vertical"
-        });
-    }
-}
-
-onMounted(() => {
-    if (rulerHDiv.value) {
-        hRuler = new Ruler(rulerHDiv.value, {
-            type: "horizontal",
-        });
-    }
-    if (rulerVDiv.value) {
-        vRuler = new Ruler(rulerVDiv.value, {
-            type: "vertical"
-        });
-    }
 })
 
 const preview = () => {
@@ -212,30 +170,6 @@ const delPage = () => {
             width: 100%;
             height: 100%;
             overflow: auto;
-        }
-        .pager-ruler-box {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 30px;
-            height: 30px;
-            background: #efeff5;
-            box-sizing: border-box;
-            z-index: 21;
-        }
-        .page-ruler-horizontal {
-            position: absolute;
-            top: 0;
-            left: 30px;
-            width: calc(100% - 30px);
-            height: 30px;
-        }
-        .page-ruler-vertical {
-            position: absolute;
-            left: 0;
-            top: 30px;
-            width: 30px;
-            height: calc(100% - 30px);
         }
     }
 }
