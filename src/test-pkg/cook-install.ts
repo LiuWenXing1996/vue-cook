@@ -1,7 +1,10 @@
 import { defineCookInstallFunc } from "@/lib";
-import * as componentMakes from "./components"
+import * as componentMakers from "./components"
+import * as logicMakers from "./logic"
 
 export default defineCookInstallFunc(({ resourceMakerList }) => {
-    const needInstallcomponentMakerList = Object.entries(componentMakes).map(e => e[1])
+    const needInstallcomponentMakerList = Object.entries(componentMakers).map(e => e[1])
     resourceMakerList.push(...needInstallcomponentMakerList)
+    const needInstallLogicMakerList = Object.entries(logicMakers).map(e => e[1])
+    resourceMakerList.push(...needInstallLogicMakerList)
 })

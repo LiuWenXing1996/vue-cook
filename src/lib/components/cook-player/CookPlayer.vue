@@ -5,7 +5,7 @@
 import IComponentConfig from "$/types/IComponentConfig";
 import ComponentRender from "./ComponentRender.vue"
 import { toRefs } from "vue";
-import exportData from "./exportData";
+import exportData from "./utils/exportData";
 import { VueCookEditroTag } from "@/lib/utils/const";
 import IPage from "@/lib/types/IPage";
 const props = defineProps(

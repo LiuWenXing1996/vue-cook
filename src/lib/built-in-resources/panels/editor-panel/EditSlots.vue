@@ -1,0 +1,123 @@
+<template>
+    <n-form-item :label="slotOption.label" v-for="slotOption in slotOptions">
+        <div class="slot-editor">
+            <div class="slot-add-bar">拖拽组件到此处添加</div>
+            <n-data-table :columns="columns" :data="getData(slotOption.value)" size="small" />
+        </div>
+    </n-form-item>
+</template>
+<script setup lang="ts">
+import useComponentMaker from '@/lib/hooks/useComponentMaker';
+import useComponentSelected from '@/lib/hooks/useComponentSelected';
+import { h, ref, watch } from 'vue';
+import { NFormItem, NDataTable } from "naive-ui"
+import IComponentConfig from '@/lib/types/IComponentConfig';
+import SlotActions from "./SlotActions.vue"
+
+interface ISlotOption {
+    label: string,
+    value: IComponentConfig[]
+}
+const slotOptions = ref<ISlotOption[]>([])
+const config = useComponentSelected()
+const columns = ref([
+    {
+        title: '名称',
+        key: 'name',
+    },
+    {
+        title: '操作',
+        key: 'actions',
+        render(rowData: any, rowIndex: number) {
+            return h(
+                SlotActions,
+                {
+                    config: rowData.value,
+                    onDel: () => {
+                        alert(JSON.stringify(rowData.value))
+                    },
+                    onLocation: () => {
+                        alert(JSON.stringify(rowData.value))
+                    },
+                    onUp: () => {
+                        alert(JSON.stringify(rowData.value))
+                    },
+                    onDown: () => {
+                        alert(JSON.stringify(rowData.value))
+                    }
+                }
+            )
+        }
+    }
+])
+// TODO:相关actions的事件处理
+const getData = (slotValue: IComponentConfig[]) => {
+    return slotValue.map(e => {
+        return {
+            key: e.uid,
+            name: e.name,
+            value: e
+        }
+    })
+}
+
+const data = ref([])
+
+const updateSlotOptions = () => {
+    const configValue = config.value;
+    if (!configValue) {
+        slotOptions.value = [];
+        return;
+    };
+    const maker = useComponentMaker(config.value?.makerName, config.value?.makerPackage).value
+    if (!maker) {
+        slotOptions.value = [];
+        return;
+    }
+    const _slotOptions = maker?.slots || []
+    const _optionsWithValue = _slotOptions.map(e => {
+        let value = config.value?.slots?.[e] || []
+        return {
+            label: e,
+            value: value
+        }
+    })
+    slotOptions.value = _optionsWithValue
+}
+
+watch(config, () => {
+    updateSlotOptions()
+}, {
+    immediate: true
+})
+
+watch(slotOptions, () => {
+    const configValue = config.value;
+    if (!configValue) {
+        return;
+    };
+    slotOptions.value.map(e => {
+        configValue.slots = configValue?.slots || {}
+        configValue.slots[e.label] = e.value
+    })
+}, {
+    deep: true
+})
+
+</script>
+<style lang="less" scoped>
+.slot-editor {
+    width: 100%;
+    .slot-add-bar {
+        width: 100%;
+        padding: 2px 9px;
+        box-sizing: border-box;
+        background-color: #efeff5;
+        border-radius: 20px;
+        border: 1px solid rgb(224, 224, 230);
+        font-weight: bolder;
+        font-size: 12px;
+        margin-bottom: 10px;
+    }
+}
+</style>

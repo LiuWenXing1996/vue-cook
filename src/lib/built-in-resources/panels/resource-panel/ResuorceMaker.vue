@@ -5,6 +5,7 @@
         :draggable="draggable"
         @dragstart="handleDragStart"
         @click="handelClick"
+        :data-type="maker.type"
         :data-name="maker.name"
         :data-package="maker.package"
     >
@@ -32,6 +33,7 @@ import IResourceMaker from "@/lib/types/IResourceMaker"
 import makePanelConfigDefault from "@/lib/utils/makePanelConfigDefault"
 import IPanelMaker from "@/lib/types/IPanelMaker"
 import useSplitPaneConfigList from "@/lib/hooks/useSplitPaneConfigList"
+import { VueCookLogicMakerDraggerTag } from "$/utils/const"
 
 const props = defineProps({
     maker: {
@@ -51,6 +53,10 @@ const handleDragStart = (e: DragEvent) => {
     }
     e?.dataTransfer?.setData('name', maker.value.name)
     e?.dataTransfer?.setData('package', maker.value.package)
+    e?.dataTransfer?.setData('type', maker.value.type)
+    if (maker.value.type === "logic") {
+        e?.dataTransfer?.setData(VueCookLogicMakerDraggerTag, VueCookLogicMakerDraggerTag)
+    }
     componentPickerEnable.value = true
 }
 const handelClick = () => {

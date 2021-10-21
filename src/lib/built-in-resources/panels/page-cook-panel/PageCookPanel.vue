@@ -53,44 +53,68 @@
                             </n-icon>
                         </template>
                         <n-space vertical>
-                            <n-space align="center" style="width: 200px;">
+                            <n-space align="center" justify="space-around" style="width: 200px;">
                                 <label>宽度：</label>
-                                <n-input-number v-model:value="size.width" size="small">
-                                    <template #suffix>px</template>
-                                </n-input-number>
+                                <div style="width: 130px;">
+                                    <n-input-number v-model:value="size.width" size="small">
+                                        <template #suffix>px</template>
+                                    </n-input-number>
+                                </div>
                             </n-space>
-                            <n-space align="center" style="width: 200px;">
+                            <n-space align="center" justify="space-around" style="width: 200px;">
                                 <label>高度：</label>
-                                <n-input-number v-model:value="size.height" size="small">
-                                    <template #suffix>px</template>
-                                </n-input-number>
+                                <div style="width: 130px;">
+                                    <n-input-number v-model:value="size.height" size="small">
+                                        <template #suffix>px</template>
+                                    </n-input-number>
+                                </div>
                             </n-space>
-                            <n-space align="center" style="width: 200px;">
+                            <n-space align="center" justify="space-around" style="width: 200px;">
                                 <label>比例：</label>
-                                <n-input-number v-model:value="size.scale" size="small">
-                                    <template #suffix>%</template>
-                                </n-input-number>
+                                <div style="width: 130px;">
+                                    <n-input-number v-model:value="size.scale" size="small">
+                                        <template #suffix>%</template>
+                                    </n-input-number>
+                                </div>
                             </n-space>
                         </n-space>
                     </n-popover>
                     <n-popover trigger="hover" placement="bottom">
                         <template #trigger>
                             <n-icon>
-                                <url-icon></url-icon>
+                                <information-circle></information-circle>
                             </n-icon>
                         </template>
-                        <div style="width: 240px;display: flex;align-items: center;">
-                            url:
-                            <n-input v-model:value="pageEditing.path"></n-input>
-                        </div>
+                        <n-space vertical>
+                            <n-space align="center" justify="space-around" style="width: 200px;">
+                                <label>名称：</label>
+                                <div style="width: 130px;">
+                                    <n-input v-model:value="pageEditing.name" size="small"></n-input>
+                                </div>
+                            </n-space>
+                            <n-space align="center" justify="space-around" style="width: 200px;">
+                                <label>地址：</label>
+                                <!-- TODO:地址修改后重新刷新页面 -->
+                                <div style="width: 130px;">
+                                    <n-input
+                                        v-model:value="pageEditing.path"
+                                        size="small"
+                                        type="textarea"
+                                    ></n-input>
+                                </div>
+                            </n-space>
+                        </n-space>
                     </n-popover>
                 </n-space>
             </div>
             <div class="page-cook-contaienr">
                 <ruler-box :size="size">
-                    <div style="height:1000px;width:1000px;background-color:red"></div>
+                    <page-cook
+                        :page-editing="pageEditing"
+                        :enable-picker="enablePicker"
+                        :size="size"
+                    ></page-cook>
                 </ruler-box>
-                <!-- TODO：实现一个可以自由拖拽的面板 -->
             </div>
         </template>
         <template v-else>
@@ -100,7 +124,7 @@
 </template>
 <script setup lang="ts">
 import { NTag, NEmpty, NIcon, NPopover, NSpace, NInputNumber, NLayout, NScrollbar, NInput } from "naive-ui"
-import { LocateOutline, ArrowUndoOutline, ArrowRedoOutline, TrashOutline, EyeOutline, InformationCircleOutline } from "@vicons/ionicons5"
+import { LocateOutline, ArrowUndoOutline, ArrowRedoOutline, TrashOutline, EyeOutline, InformationCircle } from "@vicons/ionicons5"
 import PageSizeIcon from "$/svgs/page-size.svg"
 import UrlIcon from "$/svgs/url.svg"
 import { computed, nextTick, onMounted, ref, toRefs } from "vue";
@@ -110,7 +134,6 @@ import IPage from "@/lib/types/IPage";
 import { useCookConfig } from "@/lib";
 import IPageCookPanelSize from "@/lib/types/IPageCookPanelSize";
 import RulerBox from "./ruler-box/RulerBox.vue"
-// TODO:使用n scorll-bar 会出现问题，滚动条选不到
 // TODO:修复顶部工具栏的样式
 const props = defineProps({
     pageEditing: {

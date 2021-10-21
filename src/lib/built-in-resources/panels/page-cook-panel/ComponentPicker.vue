@@ -39,6 +39,7 @@ const handleMouseMove = (e: MouseEvent) => {
             const exportData = getCookPlayerExportDataFromWindow(iframeRef?.value?.contentWindow || undefined)
             if (exportData && rect && el) {
                 const componentOverlay = exportData.getComponetnOverlayFromElement(el)
+                // if(!overlay.value)
                 overlay.value = componentOverlay
             }
         }

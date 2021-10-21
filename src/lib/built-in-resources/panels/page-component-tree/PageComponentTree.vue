@@ -111,9 +111,9 @@ function componentToTreeNode(config: IComponentConfig, parentSlotName?: string):
             )
         }
     }
-    if (config.attrs?.slots) {
+    if (config?.slots) {
         const treeNodeChildren: TreeOption[] = []
-        const slots = config.attrs?.slots
+        const slots = config?.slots
         for (const key in slots) {
             if (Object.prototype.hasOwnProperty.call(slots, key)) {
                 const componentConfigs = slots[key];

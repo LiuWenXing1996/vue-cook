@@ -1,7 +1,9 @@
-import IComponentAttrs from "./IComponentAttrs";
+import ILogicConfig from "./ILogicConfig";
 import IResourceConfig from "./IResourceConfig";
 
 export default interface IComponentConfig extends IResourceConfig {
-    attrs?: IComponentAttrs
+    props?: Record<string, string>,
+    slots?: Record<string, IComponentConfig[]>,
+    emits?: Record<string, ILogicConfig[]>,
 }
 

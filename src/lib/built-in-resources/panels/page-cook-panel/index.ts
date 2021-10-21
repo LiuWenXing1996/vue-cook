@@ -37,6 +37,7 @@ const maker = definePanelMaker({
     },
 })
 
+// TODO:这个监听操作有问题
 watch(usePageEditingList(), () => {
     const splitPaneConfig = useSplitPaneConfigList().value;
     const pageEditingList = usePageEditingList().value;

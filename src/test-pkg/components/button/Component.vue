@@ -1,8 +1,5 @@
 <template>
-    <div class="test">
-        {{ text }}
-        <div>dsdsd</div>
-    </div>
+    <button>{{ text }}</button>
     <!-- <slot></slot> -->
 </template>
 <script setup lang="ts">
@@ -13,12 +10,4 @@ defineProps({
 })
 </script>
 <style lang="less">
-.test {
-    // // position: fixed;
-    // left: 200px;
-    // top: 300px;
-    height: 100px;
-    width: 100px;
-    background-color: aquamarine;
-}
 </style>

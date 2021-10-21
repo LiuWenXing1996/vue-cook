@@ -1,6 +1,5 @@
 <template>
     <template v-if="componentConfig">
-        <!-- TODO：n-popover 位置尝试自动计算下 -->
         <n-popover trigger="manual" :show="showPopover" placement="left">
             <template #trigger>
                 <div
@@ -23,22 +22,31 @@
             </template>
             <div class="component-overlay-tips">
                 <div class="overlay-tips-item">
-                    <div class="overlay-tips-item-label">名称：</div>
+                    <div class="overlay-tips-item-label">名称</div>
                     <div class="overlay-tips-item-content">{{ componentConfig.name }}</div>
                 </div>
                 <div class="overlay-tips-item">
-                    <div class="overlay-tips-item-label">uid：</div>
+                    <div class="overlay-tips-item-label">uid</div>
                     <div class="overlay-tips-item-content">{{ componentConfig.uid }}</div>
                 </div>
                 <div class="overlay-tips-item">
-                    <div class="overlay-tips-item-label">插槽：</div>
+                    <div class="overlay-tips-item-label">宽度</div>
+                    <div class="overlay-tips-item-content">{{ width }}</div>
+                </div>
+                <div class="overlay-tips-item">
+                    <div class="overlay-tips-item-label">高度</div>
+                    <div class="overlay-tips-item-content">{{ height }}</div>
+                </div>
+                <div class="overlay-tips-item">
+                    <div class="overlay-tips-item-label">插槽</div>
+                    <!-- TODO：是否有插槽算的有问题 -->
                     <div class="overlay-tips-item-content">
                         <template v-if="hasSlot">
                             <n-tag
                                 type="success"
                                 size="small"
                                 round
-                                v-for="(slot,key) in componentConfig.attrs?.slots"
+                                v-for="(slot,key) in componentConfig?.slots"
                             >{{ key }}</n-tag>
                         </template>
                         <template v-else>无</template>
@@ -51,7 +59,6 @@
 </template>
 <script setup lang="ts">
 import { computed, nextTick, ref, toRefs, watch } from "vue";
-import IComponentConfig from "$/types/IComponentConfig";
 import IComponentOverlay from "$/types/IComponentOverlay";
 import handleClick from "./handleClick";
 import handleDragStart from "./handleDragStart";
@@ -62,7 +69,6 @@ import useComponentConfig from "@/lib/hooks/useComponentConfig";
 import IPageCookPanelSize from "@/lib/types/IPageCookPanelSize";
 import { NPopover, NTag } from "naive-ui"
 import useComponentMaker from "@/lib/hooks/useComponentMaker";
-// TODO:overlay选中显示时带有对准线和宽高
 const props = defineProps(
     {
         overlay: {
@@ -147,16 +153,18 @@ const selected = computed(() => componentSelected.value?.uid === overlay.value.c
     .overlay-tips-item {
         display: flex;
         margin-bottom: 3px;
+        justify-content: space-between;
         &::last-child {
             margin-bottom: 0;
         }
         .overlay-tips-item-label {
-            width: 50px;
-            text-align: right;
+            max-width: 50px;
+            margin-right: 10px;
         }
         .overlay-tips-item-content {
             display: flex;
             max-width: 120px;
+            word-break: break-all;
         }
     }
 }

@@ -22,10 +22,9 @@ const handleDrop = (slotName: string, componentConfig: IComponentConfig | undefi
             return;
         }
         const childComponentConfig = makeComponentConfigDefault(maker.value);
-        componentConfig.attrs = componentConfig.attrs || {}
-        componentConfig.attrs.slots = componentConfig.attrs.slots || {}
-        componentConfig.attrs.slots[slotName] = componentConfig.attrs.slots[slotName] || []
-        componentConfig.attrs.slots[slotName].push(childComponentConfig)
+        componentConfig.slots = componentConfig.slots || {}
+        componentConfig.slots[slotName] = componentConfig.slots[slotName] || []
+        componentConfig.slots[slotName].push(childComponentConfig)
     }
 }
 

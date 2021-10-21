@@ -1,6 +1,5 @@
 <template>
     <div class="page-cook">
-        <div class="page-cook-bg"></div>
         <iframe :src="pageEditing.path" ref="iframeRef"></iframe>
         <component-picker :iframe-ref="iframeRef" :enable-picker="enablePicker" :size="size"></component-picker>
     </div>
@@ -52,15 +51,6 @@ const scaleString = computed(() => {
         z-index: 2;
         transform: v-bind(scaleString);
         transform-origin: top left;
-    }
-    .page-cook-bg {
-        position: absolute;
-        width: 100%;
-        height: 100%;
-        left: 0;
-        top: 0;
-        background-color: #ebeef55c;
-        z-index: 1;
     }
 }
 </style>

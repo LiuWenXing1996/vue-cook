@@ -162,6 +162,13 @@
   resolved "https://registry.nlark.com/@css-render/vue3-ssr/download/@css-render/vue3-ssr-0.15.6.tgz#4edc294bda7e6ca215f6c7ec9e2c8385645069c3"
   integrity sha1-TtwpS9p+bKIV9sfsniyDhWRQacM=
 
+"@daybrush/drag@^0.19.3":
+  version "0.19.3"
+  resolved "https://registry.npm.taobao.org/@daybrush/drag/download/@daybrush/drag-0.19.3.tgz#5abd24dd7b2e8eb924542d39bba2140db9d84bde"
+  integrity sha1-Wr0k3XsujrkkVC05u6IUDbnYS94=
+  dependencies:
+    "@daybrush/utils" "^1.0.0"
+
 "@daybrush/utils@^1.0.0", "@daybrush/utils@^1.4.0":
   version "1.6.0"
   resolved "https://registry.nlark.com/@daybrush/utils/download/@daybrush/utils-1.6.0.tgz#0dfd2c360764f63380df4ec0d44e176c69f7bbc3"

@@ -2,24 +2,23 @@
     <component
         v-if="maker"
         :is="maker.makeComponent(config)"
-        v-bind="config?.attrs?.props"
-        v-on="config?.attrs?.emits"
-        :class="[config?.attrs?.class]"
-        :style="config?.attrs?.style"
+        v-bind="config?.props"
+        v-on="emits"
         :uid="config.uid"
     >
-        <template v-for="(slot,name) in config?.attrs?.slots" v-slot:[name]>
+        <template v-for="(slot,name) in config?.slots" v-slot:[name]>
             <component-render :config="_config" v-for="_config in slot"></component-render>
         </template>
     </component>
     <span v-else>{{ config.makerPackage }} - {{ config.makerName }}没有找到</span>
 </template>
 <script setup lang="ts">
-import { getCurrentInstance, toRefs, onMounted, onUnmounted } from "vue";
+import { getCurrentInstance, toRefs, onMounted, onUnmounted, computed } from "vue";
 import useComponentMaker from "$/hooks/useComponentMaker";
 import type IComponentConfig from "$/types/IComponentConfig";
-import { componentInstanceMap, componentConfigMap } from "./exportData"
+import { componentInstanceMap, componentConfigMap } from "./utils/exportData"
 import getComponentElements from "./utils/getComponentElements";
+import logicCompiler from "@/lib/utils/logic-compiler";
 
 const props = defineProps(
     {
@@ -31,6 +30,25 @@ const props = defineProps(
 )
 const { config } = toRefs(props)
 const maker = useComponentMaker(config.value.makerName, config.value.makerPackage)
+const emits = computed(() => {
+    const res: Record<string, Function> = {}
+    const _emits = config.value.emits || {}
+    for (const key in _emits) {
+        if (Object.prototype.hasOwnProperty.call(_emits, key)) {
+            const logidConfigList = _emits[key];
+            res[key] = (payload: any) => {
+                logidConfigList.map((logicConfig) => {
+                    try {
+                        logicCompiler(logicConfig, payload)
+                    } catch (error) {
+                        console.error(error)
+                    }
+                })
+            }
+        }
+    }
+    return res
+})
 onMounted(() => {
     const internalInstance = getCurrentInstance()
     if (internalInstance) {

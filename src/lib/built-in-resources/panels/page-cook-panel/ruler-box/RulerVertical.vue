@@ -1,48 +1,64 @@
 <template>
-    <div ref="rulerDiv" class="ruler" @wheel="handleWheel"></div>
+    <div ref="rulerDiv" class="ruler"></div>
 </template>
 <script setup lang="ts">
-import { onMounted, onUnmounted, ref, toRefs } from 'vue';
+import { onMounted, onUnmounted, ref, toRefs, watch } from 'vue';
 import Ruler from "@scena/ruler";
-import createRenderLoop from '@/lib/utils/createRenderLoop';
-import useScroll from './useScroll';
+import Dragger, { drag } from "@daybrush/drag";
+import useRulerDivHeight from './utils/useRulerDivHeight';
+import getRulerUnit from "./utils/getRulerUnit"
 
-
-let ruler: Ruler | null = null
+const props = defineProps({
+    scale: {
+        type: Number,
+        required: true
+    },
+    scroll: {
+        type: Number,
+        required: true
+    }
+})
+const emits = defineEmits(["update:scroll"])
+const { scale, scroll } = toRefs(props)
 const rulerDiv = ref<HTMLDivElement>()
-let oldHeight = 0
+const height = useRulerDivHeight(rulerDiv)
+let ruler: Ruler | null = null
+let dragger: Dragger | null = null;
 
-let stopFunc: VoidFunction | null = null
+watch(scroll, () => {
+    ruler?.scroll(scroll.value)
+})
+watch(height, () => {
+    ruler?.resize()
+})
+watch(scale, () => {
+    if (ruler) {
+        // @ts-ignore
+        ruler.zoom = scale.value / 100
+        // @ts-ignore
+        ruler.unit = getRulerUnit(scale.value / 100)
+    }
+})
 
-const render = () => {
+onMounted(() => {
     if (rulerDiv.value) {
         if (!ruler) {
             ruler = new Ruler(rulerDiv.value, {
                 type: "vertical",
                 backgroundColor: "#ffffff",
-                textColor: "#000000"
+                textColor: "#000000",
+                unit: getRulerUnit(scale.value / 100),
+                zoom: scale.value / 100 
             });
         }
-        const newHeight = rulerDiv.value.clientHeight
-        if (oldHeight !== newHeight) {
-            ruler.resize()
-            oldHeight = newHeight
+        if (!dragger) {
+            dragger = drag(rulerDiv.value, {
+                drag: ({ deltaY }) => {
+                    emits("update:scroll", scroll.value - deltaY)
+                },
+            });
         }
     }
-}
-
-let scroll = useScroll();
-
-const handleWheel = (e: WheelEvent) => {
-    scroll.value.y -= e.deltaY
-    ruler?.scroll(scroll.value.y)
-}
-
-onMounted(() => {
-    stopFunc = createRenderLoop(render)
-})
-onUnmounted(() => {
-    stopFunc && stopFunc()
 })
 </script>
 <style lang="less" scoped>

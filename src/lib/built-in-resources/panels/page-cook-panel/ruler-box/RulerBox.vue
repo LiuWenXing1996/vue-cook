@@ -2,10 +2,10 @@
     <div class="ruler-box">
         <div class="ruler-outer-box"></div>
         <div class="ruler-horizontal-wrapper">
-            <ruler-horizontal></ruler-horizontal>
+            <ruler-horizontal :scale="size.scale" v-model:scroll="scroll.x"></ruler-horizontal>
         </div>
         <div class="ruler-vertical-wrapper">
-            <ruler-vertical></ruler-vertical>
+            <ruler-vertical :scale="size.scale" v-model:scroll="scroll.y"></ruler-vertical>
         </div>
         <div class="ruler-inner-box">
             <div class="ruler-inner-box-content">
@@ -19,8 +19,6 @@ import IPageCookPanelSize from '@/lib/types/IPageCookPanelSize';
 import { computed, ref, toRefs } from 'vue';
 import RulerHorizontal from "./RulerHorizontal.vue"
 import RulerVertical from "./RulerVertical.vue"
-import useScroll from './useScroll';
-//TODO:两个直尺滚动的幅度有问题
 const props = defineProps({
     size: {
         type: Object as () => IPageCookPanelSize,
@@ -28,10 +26,13 @@ const props = defineProps({
     }
 })
 const { size } = toRefs(props)
-const scroll = useScroll();
+const scroll = ref({
+    x: 0,
+    y: 0
+})
 const toPx = (n: number) => `${n}px`
-const leftPx = computed(() => toPx(scroll.value.x));
-const topPx = computed(() => toPx(scroll.value.y));
+const leftPx = computed(() => toPx(-scroll.value.x * size.value.scale / 100));
+const topPx = computed(() => toPx(-scroll.value.y * size.value.scale / 100));
 
 </script>
 <style lang="less" scoped>

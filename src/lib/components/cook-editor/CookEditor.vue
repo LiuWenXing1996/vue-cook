@@ -31,8 +31,8 @@ import { computed, onMounted, onUnmounted, ref, toRefs } from 'vue';
 import ICookConfig from '$/types/ICookConfig';
 import { VueCookEditroTag } from '$/utils/const';
 import IPanelConfig from '@/lib/types/IPanelConfig'
-import TelportBox from './components/draggable-tabs/TelportBox.vue'
-import DraggableTabs from './components/draggable-tabs/DraggableTabs.vue'
+import TelportBox from './TelportBox.vue'
+import DraggableTabs from './DraggableTabs.vue'
 import makePanelConfigDefault from '@/lib/utils/makePanelConfigDefault';
 import { PageComponentTreeMaker, ResourcePanelMaker, EditorPanelMaker, PageCookPanelMaker } from '@/lib/built-in-resources';
 import ISplitPaneConfig, { SplitPaneName } from '@/lib/types/ISplitPaneConfig';

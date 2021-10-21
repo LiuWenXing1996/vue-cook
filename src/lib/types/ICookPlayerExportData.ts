@@ -6,4 +6,5 @@ export default interface ICookPlayerExportData {
     path: string,
     componentConfig: IComponentConfig,
     getComponetnOverlayFromElement: (element: Element) => IComponentOverlay | undefined
+    getComponetnOverlayFromComponentConfigUid: (uid: string) => IComponentOverlay | undefined
 }
