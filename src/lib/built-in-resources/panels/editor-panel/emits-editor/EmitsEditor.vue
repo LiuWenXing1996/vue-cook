@@ -2,13 +2,9 @@
     <template v-if="emitOptions.length > 0">
         <n-form-item :label="emitOption.label" v-for="emitOption in emitOptions">
             <div class="emit-editor">
-                <div
-                    class="emit-add-bar"
-                    @dragover="handleDragOver($event)"
-                    @drop="handleDrop($event, emitOption.label, config)"
-                    @dragenter="handleDragEnter($event)"
-                    @dragleave="handleDragLeave($event)"
-                >拖拽逻辑到此处添加</div>
+                <div class="emit-add-bar">
+                    <emit-dragger :component-config="config" :emit-name="emitOption.label">拖拽逻辑到此处添加</emit-dragger>
+                </div>
                 <n-data-table :columns="columns" :data="getData(emitOption.value)" size="small" />
             </div>
         </n-form-item>
@@ -22,10 +18,7 @@ import ILogicConfig from '@/lib/types/ILogicConfig';
 import { h, ref, watch } from 'vue';
 import { NFormItem, NDataTable } from "naive-ui"
 import EmitLogicAction from "./EmitLogicAction.vue"
-import handleDragOver from "./handleDragOver"
-import handleDrop from "./handleDrop"
-import handleDragEnter from "./handleDragEnter"
-import handleDragLeave from "./handleDragLeave"
+import EmitDragger from "$/components/emit-dragger/EmitDragger.vue"
 
 interface IEmitOption {
     label: string,
@@ -122,18 +115,20 @@ watch(emitOptions, () => {
     width: 100%;
     .emit-add-bar {
         width: 100%;
-        padding: 2px 9px;
-        box-sizing: border-box;
-        background-color: #efeff5;
-        border-radius: 20px;
-        border: 1px solid rgb(224, 224, 230);
-        font-weight: bolder;
-        font-size: 12px;
         margin-bottom: 10px;
-        &.dragenter {
-            background-color: rgba(24, 160, 88, 0.1);
-            color: rgb(24, 160, 88);
-            border: 1px solid rgba(24, 160, 88, 0.3);
+        :deep(.emit-dragger) {
+            padding: 2px 9px;
+            box-sizing: border-box;
+            background-color: #efeff5;
+            border-radius: 20px;
+            border: 1px solid rgb(224, 224, 230);
+            font-weight: bolder;
+            font-size: 12px;
+            &.dragenter {
+                background-color: rgba(24, 160, 88, 0.1);
+                color: rgb(24, 160, 88);
+                border: 1px solid rgba(24, 160, 88, 0.3);
+            }
         }
     }
 }

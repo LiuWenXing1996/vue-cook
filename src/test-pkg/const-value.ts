@@ -1,1 +1,1 @@
-export const pkgName = "test-pkg"
+export const pkgName = "test-pkg-11111111fasdfs11111fsdfsd1111111fsdfsfsdf3333333fsaf"

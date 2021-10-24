@@ -1,12 +1,14 @@
 <template>
-    <n-form-item :label="propOption.label" v-for="propOption in propOptions">
-        <n-input v-model:value="propOption.value" />
-    </n-form-item>
+    <template v-if="propOptions.length > 0">
+        <n-form-item :label="propOption.label" v-for="propOption in propOptions">
+            <n-input v-model:value="propOption.value" />
+        </n-form-item>
+    </template>
+    <template v-else>无</template>
 </template>
 <script setup lang="ts">
 import useComponentMaker from '@/lib/hooks/useComponentMaker';
 import useComponentSelected from '@/lib/hooks/useComponentSelected';
-import ILogicConfig from '@/lib/types/ILogicConfig';
 import { ref, watch } from 'vue';
 import { NFormItem, NInput } from "naive-ui"
 

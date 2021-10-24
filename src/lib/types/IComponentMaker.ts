@@ -8,5 +8,6 @@ export default interface IComponentMaker extends IResourceMaker {
     slots?: string[],
     props?: string[],
     emits?: string[],
+    // TODO:增加一个extra字段专门用来设置额外配置
     //TODO:每个key都加个tips?
 }

@@ -1,11 +1,9 @@
 import IComponentConfig from '$/types/IComponentConfig';
-import useComponentMaker from '$/hooks/useComponentMaker';
-import makeComponentConfigDefault from '@/lib/utils/makeComponentConfigDefault';
 import useLogicMaker from '$/hooks/useLogicMaker';
 import makeLogicConfigDefault from '@/lib/utils/makeLogicConfigDefault';
 import getMakerDataFromDragEvent from '@/lib/utils/getMakerDataFromDragEvent';
 
-const handleDrop = (e: DragEvent, emitName: string, componentConfig: IComponentConfig | undefined,) => {
+const handleDrop = (emitName: string, componentConfig: IComponentConfig | undefined, e: DragEvent,) => {
 
     if (!componentConfig) {
         return

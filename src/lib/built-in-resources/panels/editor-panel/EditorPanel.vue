@@ -1,47 +1,51 @@
 <template>
-    <div class="editor-panel">
-        <template v-if="config">
-            <n-form
-                label-placement="left"
-                :label-width="70"
-                label-align="right"
-                size="small"
-                :model="formValue"
-            >
-                <n-divider title-placement="left">基础信息</n-divider>
-                <n-form-item label="名字">
-                    <n-input v-model:value="config.name" />
-                </n-form-item>
-                <n-form-item label="唯一ID">
-                    <div>
-                        {{ config.uid }}
-                        <n-icon @mousemove="handleMouseMove" @mouseleave="handleMouseLeave">
-                            <location-outline></location-outline>
-                        </n-icon>
-                    </div>
-                </n-form-item>
-                <n-form-item label="制造器">
-                    <div>{{ config.makerName }} - {{ config.makerPackage }}</div>
-                </n-form-item>
-                <n-divider title-placement="left">属性</n-divider>
-                <edit-props></edit-props>
-                <n-divider title-placement="left">事件</n-divider>
-                <emits-editor></emits-editor>
-                <n-divider title-placement="left">插槽</n-divider>
-                <edit-slots></edit-slots>
-            </n-form>
-        </template>
-        <div v-else>请选择组件</div>
-    </div>
+    <n-scrollbar style="height: 100%;">
+        <div class="editor-panel">
+            <template v-if="config">
+                <n-form
+                    label-placement="left"
+                    :label-width="70"
+                    label-align="right"
+                    size="small"
+                    :model="formValue"
+                >
+                    <n-divider title-placement="left">基础信息</n-divider>
+                    <n-form-item label="名字">
+                        <n-input v-model:value="config.name" />
+                    </n-form-item>
+                    <n-form-item label="唯一ID">
+                        <div>
+                            {{ config.uid }}
+                            <n-icon @mousemove="handleMouseMove" @mouseleave="handleMouseLeave">
+                                <location-outline></location-outline>
+                            </n-icon>
+                        </div>
+                    </n-form-item>
+                    <n-form-item label="maker">
+                        <div class="round-name-tag">{{ config.makerName }}</div>
+                        <div style="padding: 0 2px;">-</div>
+                        <div class="round-pkg-tag">{{ config.makerPackage }}</div>
+                    </n-form-item>
+                    <n-divider title-placement="left">属性</n-divider>
+                    <props-editor></props-editor>
+                    <n-divider title-placement="left">事件</n-divider>
+                    <emits-editor></emits-editor>
+                    <n-divider title-placement="left">插槽</n-divider>
+                    <slots-editor></slots-editor>
+                </n-form>
+            </template>
+            <div v-else>请选择组件</div>
+        </div>
+    </n-scrollbar>
 </template>
 <script setup lang="ts">
 import useComponentSelected from "$/hooks/useComponentSelected";
-import { NCollapse, NCollapseItem, NLayout, NForm, NFormItem, NInput, NDynamicInput, NSelect, NDivider, NIcon } from "naive-ui"
-import { computed, ref, watch, CSSProperties } from "vue";
+import { NScrollbar, NForm, NFormItem, NInput, NDivider, NIcon, NTag } from "naive-ui"
+import { ref } from "vue";
 import { LocationOutline } from "@vicons/ionicons5";
 import EmitsEditor from "./emits-editor/EmitsEditor.vue"
-import EditProps from "./EditProps.vue"
-import EditSlots from "./EditSlots.vue"
+import SlotsEditor from "./slots-editor/SlotsEditor.vue"
+import PropsEditor from "./PropsEditor.vue"
 
 
 const config = useComponentSelected()
@@ -58,7 +62,6 @@ const handleMouseMove = (e: MouseEvent) => {
 </script>
 <style lang="less" scoped>
 .editor-panel {
-    height: 100%;
     padding: 10px;
     :deep(.n-divider) {
         margin-top: 2px;
@@ -80,6 +83,23 @@ const handleMouseMove = (e: MouseEvent) => {
             font-weight: bolder;
             font-size: 12px;
         }
+    }
+    .round-name-tag,
+    .round-pkg-tag {
+        background-color: rgba(24, 160, 88, 0.1);
+        border: 1px solid rgba(24, 160, 88, 0.3);
+        color: #18a058;
+        border-radius: 10px;
+        padding: 0 5px;
+        font-size: 12px;
+        box-sizing: border-box;
+    }
+    .round-name-tag {
+        flex-shrink: 0;
+    }
+    .round-pkg-tag {
+        flex-shrink: 1;
+        word-break: break-all;
     }
 }
 </style>

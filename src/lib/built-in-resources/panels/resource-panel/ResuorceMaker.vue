@@ -33,7 +33,7 @@ import IResourceMaker from "@/lib/types/IResourceMaker"
 import makePanelConfigDefault from "@/lib/utils/makePanelConfigDefault"
 import IPanelMaker from "@/lib/types/IPanelMaker"
 import useSplitPaneConfigList from "@/lib/hooks/useSplitPaneConfigList"
-import { VueCookLogicMakerDraggerTag } from "$/utils/const"
+import { VueCookLogicMakerDraggerTag, VueCookComponentMakerDraggerTag } from "$/utils/const"
 
 const props = defineProps({
     maker: {
@@ -56,6 +56,9 @@ const handleDragStart = (e: DragEvent) => {
     e?.dataTransfer?.setData('type', maker.value.type)
     if (maker.value.type === "logic") {
         e?.dataTransfer?.setData(VueCookLogicMakerDraggerTag, VueCookLogicMakerDraggerTag)
+    }
+    if (maker.value.type === "component") {
+        e?.dataTransfer?.setData(VueCookComponentMakerDraggerTag, VueCookComponentMakerDraggerTag)
     }
     componentPickerEnable.value = true
 }

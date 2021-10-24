@@ -50,7 +50,6 @@ const handleMouseLeave = () => {
     overlay.value = undefined;
 }
 const handleDragOver = (e: DragEvent) => {
-    e.preventDefault()
     const rect = iframeRef?.value?.getBoundingClientRect()
     if (rect) {
         const el = iframeRef?.value?.contentWindow?.document.elementFromPoint((e.x - rect.x) / size.value.scale * 100, (e.y - rect.y) / size.value.scale * 100)

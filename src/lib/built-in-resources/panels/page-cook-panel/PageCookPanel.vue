@@ -134,7 +134,6 @@ import IPage from "@/lib/types/IPage";
 import { useCookConfig } from "@/lib";
 import IPageCookPanelSize from "@/lib/types/IPageCookPanelSize";
 import RulerBox from "./ruler-box/RulerBox.vue"
-// TODO:修复顶部工具栏的样式
 const props = defineProps({
     pageEditing: {
         type: Object as () => IPage,

@@ -14,7 +14,7 @@
                     <locate-outline></locate-outline>
                 </n-icon>
             </template>
-            定位
+            编辑
         </n-popover>
         <n-popover trigger="hover" placement="bottom">
             <template #trigger>

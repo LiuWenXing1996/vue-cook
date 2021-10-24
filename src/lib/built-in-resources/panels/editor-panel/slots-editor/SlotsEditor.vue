@@ -1,18 +1,24 @@
 <template>
-    <n-form-item :label="slotOption.label" v-for="slotOption in slotOptions">
-        <div class="slot-editor">
-            <div class="slot-add-bar">拖拽组件到此处添加</div>
-            <n-data-table :columns="columns" :data="getData(slotOption.value)" size="small" />
-        </div>
-    </n-form-item>
+    <template v-if="slotOptions.length > 0">
+        <n-form-item :label="slotOption.label" v-for="slotOption in slotOptions">
+            <div class="slot-editor">
+                <div class="slot-add-bar">
+                    <slot-dragger :component-config="config" :slot-name="slotOption.label">拖拽组件到此处添加</slot-dragger>
+                </div>
+                <n-data-table :columns="columns" :data="getData(slotOption.value)" size="small" />
+            </div>
+        </n-form-item>
+    </template>
+    <template v-else>无</template>
 </template>
 <script setup lang="ts">
 import useComponentMaker from '@/lib/hooks/useComponentMaker';
 import useComponentSelected from '@/lib/hooks/useComponentSelected';
+import IComponentConfig from '@/lib/types/IComponentConfig';
 import { h, ref, watch } from 'vue';
 import { NFormItem, NDataTable } from "naive-ui"
-import IComponentConfig from '@/lib/types/IComponentConfig';
-import SlotActions from "./SlotActions.vue"
+import SlotLogicAction from "./SlotLogicAction.vue"
+import SlotDragger from "$/components/slot-dragger/SlotDragger.vue"
 
 interface ISlotOption {
     label: string,
@@ -20,6 +26,7 @@ interface ISlotOption {
 }
 const slotOptions = ref<ISlotOption[]>([])
 const config = useComponentSelected()
+
 const columns = ref([
     {
         title: '名称',
@@ -30,7 +37,7 @@ const columns = ref([
         key: 'actions',
         render(rowData: any, rowIndex: number) {
             return h(
-                SlotActions,
+                SlotLogicAction,
                 {
                     config: rowData.value,
                     onDel: () => {
@@ -50,7 +57,7 @@ const columns = ref([
         }
     }
 ])
-// TODO:相关actions的事件处理
+
 const getData = (slotValue: IComponentConfig[]) => {
     return slotValue.map(e => {
         return {
@@ -60,8 +67,6 @@ const getData = (slotValue: IComponentConfig[]) => {
         }
     })
 }
-
-const data = ref([])
 
 const updateSlotOptions = () => {
     const configValue = config.value;
@@ -110,14 +115,21 @@ watch(slotOptions, () => {
     width: 100%;
     .slot-add-bar {
         width: 100%;
-        padding: 2px 9px;
-        box-sizing: border-box;
-        background-color: #efeff5;
-        border-radius: 20px;
-        border: 1px solid rgb(224, 224, 230);
-        font-weight: bolder;
-        font-size: 12px;
         margin-bottom: 10px;
+        :deep(.slot-dragger) {
+            padding: 2px 9px;
+            box-sizing: border-box;
+            background-color: #efeff5;
+            border-radius: 20px;
+            border: 1px solid rgb(224, 224, 230);
+            font-weight: bolder;
+            font-size: 12px;
+            &.dragenter {
+                background-color: rgba(24, 160, 88, 0.1);
+                color: rgb(24, 160, 88);
+                border: 1px solid rgba(24, 160, 88, 0.3);
+            }
+        }
     }
 }
 </style>
