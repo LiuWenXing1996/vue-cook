@@ -5,7 +5,11 @@
                 <div class="emit-add-bar">
                     <emit-dragger :component-config="config" :emit-name="emitOption.label">拖拽逻辑到此处添加</emit-dragger>
                 </div>
-                <n-data-table :columns="columns" :data="getData(emitOption.value)" size="small" />
+                <n-data-table
+                    :columns="columns"
+                    :data="getData(emitOption.value, emitOption.label)"
+                    size="small"
+                />
             </div>
         </n-form-item>
     </template>
@@ -24,6 +28,12 @@ interface IEmitOption {
     label: string,
     value: ILogicConfig[]
 }
+interface IRawData {
+    key: string,
+    name: string,
+    emitName: string,
+    value: ILogicConfig
+}
 const emitOptions = ref<IEmitOption[]>([])
 const config = useComponentSelected()
 
@@ -35,22 +45,38 @@ const columns = ref([
     {
         title: '操作',
         key: 'actions',
-        render(rowData: any, rowIndex: number) {
+        render(rowData: IRawData, rowIndex: number) {
             return h(
                 EmitLogicAction,
                 {
                     config: rowData.value,
                     onDel: () => {
-                        alert(JSON.stringify(rowData.value))
-                    },
-                    onLocation: () => {
-                        alert(JSON.stringify(rowData.value))
+                        const emit = config.value?.emits?.[rowData.emitName];
+                        if (emit) {
+                            emit.splice(rowIndex, 1)
+                        }
                     },
                     onUp: () => {
-                        alert(JSON.stringify(rowData.value))
+                        const emit = config.value?.emits?.[rowData.emitName];
+                        if (emit) {
+                            if (rowIndex <= 0) {
+                                return
+                            }
+                            const temp = emit[rowIndex];
+                            emit[rowIndex] = emit[rowIndex - 1]
+                            emit[rowIndex - 1] = temp
+                        }
                     },
                     onDown: () => {
-                        alert(JSON.stringify(rowData.value))
+                        const emit = config.value?.emits?.[rowData.emitName];
+                        if (emit) {
+                            if (rowIndex >= emit.length - 1) {
+                                return
+                            }
+                            const temp = emit[rowIndex];
+                            emit[rowIndex] = emit[rowIndex + 1]
+                            emit[rowIndex + 1] = temp
+                        }
                     }
                 }
             )
@@ -58,11 +84,12 @@ const columns = ref([
     }
 ])
 
-const getData = (emitValue: ILogicConfig[]) => {
+const getData = (emitValue: ILogicConfig[], emitName: string) => {
     return emitValue.map(e => {
         return {
             key: e.uid,
             name: e.name,
+            emitName: emitName,
             value: e
         }
     })

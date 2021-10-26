@@ -30,10 +30,9 @@ const getComponentOverlayFromElement = (element: Element) => {
     }
 }
 const getComponentConfigFromUid = (uid: string) => {
-    componentInstanceMap.forEach((value, key) => {
-
-    })
-
+    const configList = [...componentInstanceMap.keys()]
+    const configFound = configList.find(e => e.uid === uid)
+    return configFound
 }
 const getComponentConfigFromElement = (element: Element) => {
     let currentEl: Element | null = element;
@@ -49,7 +48,18 @@ const getComponentConfigFromElement = (element: Element) => {
 }
 
 const getComponetnOverlayFromComponentConfigUid = (uid: string) => {
-
+    const componentConfig = getComponentConfigFromUid(uid)
+    if (componentConfig) {
+        const componentInstance = componentInstanceMap.get(componentConfig)
+        if (componentInstance) {
+            const rect = getComponentRect(componentInstance)
+            const overlay: IComponentOverlay = {
+                configUid: componentConfig.uid,
+                rect: rect
+            }
+            return overlay
+        }
+    }
 }
 
 export default function exportData(config: IComponentConfig, path: string) {
@@ -60,8 +70,7 @@ export default function exportData(config: IComponentConfig, path: string) {
             return getComponentOverlayFromElement(element)
         },
         getComponetnOverlayFromComponentConfigUid: (uid) => {
-            // TODO:根据uid获取组件的overlay
-            return undefined
+            return getComponetnOverlayFromComponentConfigUid(uid)
         }
     }
 

@@ -10,11 +10,11 @@
         </n-popover>
         <n-popover trigger="hover" placement="bottom">
             <template #trigger>
-                <n-icon @click="emits('location')">
-                    <locate-outline></locate-outline>
+                <n-icon>
+                    <edit32-regular></edit32-regular>
                 </n-icon>
             </template>
-            编辑
+            <emit-params-edit :logic-config="config"></emit-params-edit>
         </n-popover>
         <n-popover trigger="hover" placement="bottom">
             <template #trigger>
@@ -32,30 +32,31 @@
             </template>
             上移
         </n-popover>
-        <n-popover trigger="hover" placement="bottom">
+        <n-popover trigger="hover" placement="left">
             <template #trigger>
                 <n-icon>
                     <information-circle></information-circle>
                 </n-icon>
             </template>
-            信息
+            <emit-info-tips :logic-config="config"></emit-info-tips>
         </n-popover>
     </n-space>
 </template>
 <script setup lang="ts">
-import IComponentConfig from "@/lib/types/IComponentConfig";
-import { LocateOutline, ArrowUndoOutline, ArrowRedoOutline, TrashOutline, EyeOutline, InformationCircle } from "@vicons/ionicons5"
-import { ArrowUp48Regular, ArrowDown48Regular } from "@vicons/fluent"
-import { NTag, NEmpty, NIcon, NPopover, NSpace, NInputNumber, NLayout, NScrollbar, NInput } from "naive-ui"
+import { TrashOutline, InformationCircle } from "@vicons/ionicons5"
+import { ArrowUp48Regular, ArrowDown48Regular, Edit32Regular } from "@vicons/fluent"
+import EmitInfoTips from "./EmitInfoTips.vue"
+import EmitParamsEdit from "./EmitParamsEdit.vue"
+import { NIcon, NPopover, NSpace } from "naive-ui"
+import ILogicConfig from "@/lib/types/ILogicConfig";
 defineProps({
     config: {
-        type: Object as () => IComponentConfig,
+        type: Object as () => ILogicConfig,
         required: true
     }
 })
 
-const emits = defineEmits(["del", "location", "up", "down"])
-// TODO:组件信息显示
+const emits = defineEmits(["del", "up", "down"])
 </script>
 <style lang="less" scoped>
 .n-icon:hover {

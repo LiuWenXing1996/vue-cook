@@ -27,21 +27,18 @@
 <script setup lang="ts">
 import { Splitpanes, Pane } from 'splitpanes'
 import 'splitpanes/dist/splitpanes.css'
-import { computed, onMounted, onUnmounted, ref, toRefs } from 'vue';
-import ICookConfig from '$/types/ICookConfig';
+import { onMounted, onUnmounted, ref, toRefs } from 'vue';
+import ICookEditorConfig from '$/types/ICookEditorConfig';
 import { VueCookEditroTag } from '$/utils/const';
-import IPanelConfig from '@/lib/types/IPanelConfig'
 import TelportBox from './TelportBox.vue'
 import DraggableTabs from './DraggableTabs.vue'
-import makePanelConfigDefault from '@/lib/utils/makePanelConfigDefault';
-import { PageComponentTreeMaker, ResourcePanelMaker, EditorPanelMaker, PageCookPanelMaker } from '@/lib/built-in-resources';
-import ISplitPaneConfig, { SplitPaneName } from '@/lib/types/ISplitPaneConfig';
+import { SplitPaneName } from '@/lib/types/ISplitPaneConfig';
 import useSplitPaneConfigList from '@/lib/hooks/useSplitPaneConfigList';
 import { NConfigProvider, zhCN, dateZhCN } from "naive-ui"
 
 const props = defineProps({
     config: {
-        type: Object as () => ICookConfig,
+        type: Object as () => ICookEditorConfig,
         required: true
     }
 })
@@ -56,40 +53,13 @@ onUnmounted(() => {
     // @ts-ignore
     delete window[VueCookEditroTag]
 })
-const defaultSplitPanelConfigList: ISplitPaneConfig[] = [
-    {
-        name: "left",
-        list: [
-            makePanelConfigDefault(PageComponentTreeMaker),
-        ]
-    },
-    {
-        name: "center",
-        list: [
-            // makePanelConfigDefault(PageCookPanelMaker)
-        ]
-    },
-    {
-        name: "right",
-        list: [
-            makePanelConfigDefault(EditorPanelMaker),
-        ]
-    },
-    {
-        name: "bottom",
-        list: [
-            makePanelConfigDefault(ResourcePanelMaker)
-        ]
-    }
-];
-const splitPaneConfigList = useSplitPaneConfigList();
-splitPaneConfigList.value.push(...defaultSplitPanelConfigList)
+
+const splitPaneConfigList = useSplitPaneConfigList(config);
 
 const getPaneData = (name: SplitPaneName) => {
     const found = splitPaneConfigList.value.find(e => e.name === name);
     return found?.list || []
 }
-
 
 </script>
 <style lang="less" scoped>

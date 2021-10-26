@@ -46,16 +46,20 @@ import { LocationOutline } from "@vicons/ionicons5";
 import EmitsEditor from "./emits-editor/EmitsEditor.vue"
 import SlotsEditor from "./slots-editor/SlotsEditor.vue"
 import PropsEditor from "./PropsEditor.vue"
+import useComponentFocused from "@/lib/hooks/useComponentFocused";
 
 
 const config = useComponentSelected()
 const formValue = ref()
 
 const handleMouseLeave = () => {
+    const componentFocused = useComponentFocused();
+    componentFocused.value = undefined
 }
 
 const handleMouseMove = (e: MouseEvent) => {
-    // 鼠标悬停定位组件
+    const componentFocused = useComponentFocused();
+    componentFocused.value = config.value
 }
 
 

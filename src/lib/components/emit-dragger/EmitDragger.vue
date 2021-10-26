@@ -15,6 +15,7 @@ import handleDrop from "./handleDrop";
 import handleDragOver from "./handleDragOver";
 import handleDragEnter from "./handleDragEnter"
 import handleDragLeave from "./handleDragLeave"
+// TODO改成logic dragger?
 defineProps({
     emitName: {
         type: String,

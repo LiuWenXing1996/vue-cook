@@ -3,5 +3,6 @@ export default interface IResourceConfig {
     name: string,
     makerName: string,
     makerPackage: string,
+    extra?: Record<string, string>
 }
 

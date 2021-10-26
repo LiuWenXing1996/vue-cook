@@ -14,8 +14,9 @@
 import IComponentOverlay from "@/lib/types/IComponentOverlay"
 import IPageCookPanelSize from "@/lib/types/IPageCookPanelSize"
 import getCookPlayerExportDataFromWindow from "@/lib/utils/getCookPlayerExportDataFromWindow"
-import { computed, ref, toRefs } from "vue"
+import { computed, ref, toRefs, watch } from "vue"
 import ComponentOverlay from "./component-overlay/ComponentOverlay.vue"
+import useComponentFocused from "@/lib/hooks/useComponentFocused"
 
 const props = defineProps({
     iframeRef: {
@@ -31,6 +32,22 @@ const props = defineProps({
     }
 })
 const { iframeRef, enablePicker, size } = toRefs(props)
+const componentFocused = useComponentFocused();
+watch(componentFocused, () => {
+    if (componentFocused.value) {
+        const rect = iframeRef?.value?.getBoundingClientRect()
+        if (rect) {
+            const exportData = getCookPlayerExportDataFromWindow(iframeRef?.value?.contentWindow || undefined)
+            if (exportData && rect) {
+                const componentOverlay = exportData.getComponetnOverlayFromComponentConfigUid(componentFocused.value.uid)
+                // if(!overlay.value)
+                overlay.value = componentOverlay
+            }
+        }
+    } else {
+        overlay.value = undefined
+    }
+})
 const handleMouseMove = (e: MouseEvent) => {
     if (enablePicker.value) {
         const rect = iframeRef?.value?.getBoundingClientRect()

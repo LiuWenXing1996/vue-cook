@@ -1,8 +1,7 @@
-import { ref } from "vue";
-import ISplitPaneConfig from "../types/ISplitPaneConfig";
+import { toRefs } from "@vueuse/shared";
+import { Ref } from "vue";
+import ICookEditorConfig from './../types/ICookEditorConfig';
 
-const list = ref<ISplitPaneConfig[]>([])
-
-export default function useSplitPaneConfigList() {
-    return list
+export default function useSplitPaneConfigList(cookEditorConfig: Ref<ICookEditorConfig>) {
+    return toRefs(cookEditorConfig).splines
 }

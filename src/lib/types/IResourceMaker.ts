@@ -1,6 +1,6 @@
 export type IResourceMakerType = "component" | "logic" | "panel"
 export default interface IResourceMaker {
-    name: string,
-    package: string,
-    type: IResourceMakerType
+    readonly name: string,
+    readonly package: string,
+    readonly type: IResourceMakerType
 }

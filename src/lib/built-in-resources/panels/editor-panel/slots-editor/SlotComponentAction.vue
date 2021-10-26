@@ -10,11 +10,19 @@
         </n-popover>
         <n-popover trigger="hover">
             <template #trigger>
-                <n-icon @click="emits('location')">
+                <n-icon @mousemove="handleMouseMove" @mouseleave="handleMouseLeave">
                     <locate-outline></locate-outline>
                 </n-icon>
             </template>
             定位
+        </n-popover>
+        <n-popover trigger="hover">
+            <template #trigger>
+                <n-icon @click="emits('select')">
+                    <select-outlined></select-outlined>
+                </n-icon>
+            </template>
+            选择
         </n-popover>
         <n-popover trigger="hover">
             <template #trigger>
@@ -44,18 +52,35 @@
 </template>
 <script setup lang="ts">
 import IComponentConfig from "@/lib/types/IComponentConfig";
-import { LocateOutline, ArrowUndoOutline, ArrowRedoOutline, TrashOutline, EyeOutline, InformationCircle } from "@vicons/ionicons5"
+import { LocateOutline, TrashOutline, InformationCircle } from "@vicons/ionicons5"
 import { ArrowUp48Regular, ArrowDown48Regular } from "@vicons/fluent"
-import { NTag, NEmpty, NIcon, NPopover, NSpace, NInputNumber, NLayout, NScrollbar, NInput } from "naive-ui"
+import { SelectOutlined } from "@vicons/antd"
+import { NIcon, NPopover, NSpace, } from "naive-ui"
 import ComponentInfoTips from "./ComponentInfoTips.vue"
-defineProps({
+import useComponentFocused from "@/lib/hooks/useComponentFocused";
+import { toRefs } from "vue";
+
+const props = defineProps({
     config: {
         type: Object as () => IComponentConfig,
         required: true
+    },
+    slotName: {
+        type: String,
+        required: true
     }
 })
+const { config } = toRefs(props)
+const handleMouseLeave = () => {
+    const componentFocused = useComponentFocused();
+    componentFocused.value = undefined
+}
 
-const emits = defineEmits(["del", "location", "up", "down"])
+const handleMouseMove = (e: MouseEvent) => {
+    const componentFocused = useComponentFocused();
+    componentFocused.value = config.value
+}
+const emits = defineEmits(["del", "location", "up", "down", "select"])
 </script>
 <style lang="less" scoped>
 .n-icon:hover {

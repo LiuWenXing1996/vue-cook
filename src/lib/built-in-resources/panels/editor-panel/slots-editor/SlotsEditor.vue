@@ -5,7 +5,11 @@
                 <div class="slot-add-bar">
                     <slot-dragger :component-config="config" :slot-name="slotOption.label">拖拽组件到此处添加</slot-dragger>
                 </div>
-                <n-data-table :columns="columns" :data="getData(slotOption.value)" size="small" />
+                <n-data-table
+                    :columns="columns"
+                    :data="getData(slotOption.value, slotOption.label)"
+                    size="small"
+                />
             </div>
         </n-form-item>
     </template>
@@ -17,12 +21,19 @@ import useComponentSelected from '@/lib/hooks/useComponentSelected';
 import IComponentConfig from '@/lib/types/IComponentConfig';
 import { h, ref, watch } from 'vue';
 import { NFormItem, NDataTable } from "naive-ui"
-import SlotLogicAction from "./SlotLogicAction.vue"
+import SlotComponentAction from "./SlotComponentAction.vue"
 import SlotDragger from "$/components/slot-dragger/SlotDragger.vue"
 
 interface ISlotOption {
     label: string,
     value: IComponentConfig[]
+}
+
+interface IRowData {
+    key: string,
+    name: string,
+    slotName: string,
+    value: IComponentConfig
 }
 const slotOptions = ref<ISlotOption[]>([])
 const config = useComponentSelected()
@@ -35,22 +46,42 @@ const columns = ref([
     {
         title: '操作',
         key: 'actions',
-        render(rowData: any, rowIndex: number) {
+        render(rowData: IRowData, rowIndex: number) {
             return h(
-                SlotLogicAction,
+                SlotComponentAction,
                 {
                     config: rowData.value,
+                    slotName: rowData.slotName,
                     onDel: () => {
-                        alert(JSON.stringify(rowData.value))
+                        const slot = config.value?.slots?.[rowData.slotName];
+                        if (slot) {
+                            slot.splice(rowIndex, 1)
+                        }
                     },
-                    onLocation: () => {
-                        alert(JSON.stringify(rowData.value))
+                    onSelect: () => {
+                        config.value = rowData.value
                     },
                     onUp: () => {
-                        alert(JSON.stringify(rowData.value))
+                        const slot = config.value?.slots?.[rowData.slotName];
+                        if (slot) {
+                            if (rowIndex <= 0) {
+                                return
+                            }
+                            const temp = slot[rowIndex];
+                            slot[rowIndex] = slot[rowIndex - 1]
+                            slot[rowIndex - 1] = temp
+                        }
                     },
                     onDown: () => {
-                        alert(JSON.stringify(rowData.value))
+                        const slot = config.value?.slots?.[rowData.slotName];
+                        if (slot) {
+                            if (rowIndex >= slot.length - 1) {
+                                return
+                            }
+                            const temp = slot[rowIndex];
+                            slot[rowIndex] = slot[rowIndex + 1]
+                            slot[rowIndex + 1] = temp
+                        }
                     }
                 }
             )
@@ -58,11 +89,12 @@ const columns = ref([
     }
 ])
 
-const getData = (slotValue: IComponentConfig[]) => {
+const getData = (slotValue: IComponentConfig[], slotName: string): IRowData[] => {
     return slotValue.map(e => {
         return {
             key: e.uid,
             name: e.name,
+            slotName: slotName,
             value: e
         }
     })

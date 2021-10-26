@@ -1683,13 +1683,6 @@ markdown-it-emoji@^2.0.0:
   resolved "https://registry.npm.taobao.org/markdown-it-emoji/download/markdown-it-emoji-2.0.0.tgz#3164ad4c009efd946e98274f7562ad611089a231"
   integrity sha1-MWStTACe/ZRumCdPdWKtYRCJojE=
 
-markdown-it-prism@^2.2.1:
-  version "2.2.1"
-  resolved "https://registry.nlark.com/markdown-it-prism/download/markdown-it-prism-2.2.1.tgz#9335ae5084c270f461f5008e8f219f5e3b49175b"
-  integrity sha1-kzWuUITCcPRh9QCOjyGfXjtJF1s=
-  dependencies:
-    prismjs "1.25.0"
-
 markdown-it-table-of-contents@^0.5.2:
   version "0.5.2"
   resolved "https://registry.npm.taobao.org/markdown-it-table-of-contents/download/markdown-it-table-of-contents-0.5.2.tgz#2f941d386c277887910f2c7a8a16f5a17acb829c"
@@ -1793,6 +1786,11 @@ minimist@^1.2.5:
   version "1.2.5"
   resolved "https://registry.npm.taobao.org/minimist/download/minimist-1.2.5.tgz#67d66014b66a6a8aaa0c083c5fd58df4e4e97602"
   integrity sha1-Z9ZgFLZqaoqqDAg8X9WN9OTpdgI=
+
+mitt@^3.0.0:
+  version "3.0.0"
+  resolved "https://registry.nlark.com/mitt/download/mitt-3.0.0.tgz?cache=0&sync_timestamp=1624481394885&other_urls=https%3A%2F%2Fregistry.nlark.com%2Fmitt%2Fdownload%2Fmitt-3.0.0.tgz#69ef9bd5c80ff6f57473e8d89326d01c414be0bd"
+  integrity sha1-ae+b1cgP9vV0c+jYkybQHEFL4L0=
 
 monaco-editor@^0.28.1:
   version "0.28.1"
@@ -2032,7 +2030,7 @@ pretty-format@^26.0.0, pretty-format@^26.6.2:
     ansi-styles "^4.0.0"
     react-is "^17.0.1"
 
-prismjs@1.25.0, prismjs@^1.23.0:
+prismjs@^1.23.0:
   version "1.25.0"
   resolved "https://registry.nlark.com/prismjs/download/prismjs-1.25.0.tgz#6f822df1bdad965734b310b315a23315cf999756"
   integrity sha1-b4It8b2tllc0sxCzFaIzFc+Zl1Y=

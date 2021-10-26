@@ -1,6 +1,6 @@
 <template>
     <div class="page-cook">
-        <iframe :src="pageEditing.path" ref="iframeRef"></iframe>
+        <iframe :src="path" ref="iframeRef"></iframe>
         <component-picker :iframe-ref="iframeRef" :enable-picker="enablePicker" :size="size"></component-picker>
     </div>
 </template>
@@ -24,8 +24,10 @@ const props = defineProps({
         required: true
     }
 })
+
 const { pageEditing, size } = toRefs(props)
 const iframeRef = ref<HTMLIFrameElement>()
+const path = ref(pageEditing.value.path)
 const toPx = (n: number) => `${n}px`
 const widthPx = computed(() => toPx(size.value.width * size.value.scale / 100))
 const heightPx = computed(() => toPx(size.value.height * size.value.scale / 100))
@@ -33,6 +35,17 @@ const iframeWidthPx = computed(() => toPx(size.value.width))
 const iframeHeightPx = computed(() => toPx(size.value.height))
 const scaleString = computed(() => {
     return `scale(${size.value.scale / 100})`
+})
+
+export interface IPageCookExpose {
+    refresh: (url: string) => void
+}
+
+defineExpose({
+    refresh: (url: string) => {
+        path.value = url
+        iframeRef.value?.contentWindow?.location.reload()
+    }
 })
 </script>
 <style lang="less" scoped>

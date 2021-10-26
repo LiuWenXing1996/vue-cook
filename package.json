@@ -15,7 +15,6 @@
     "tree": "node scripts/tree.js"
   },
   "dependencies": {
-    "markdown-it-prism": "^2.2.1",
     "vue": "^3.2.6",
     "vue-router": "^4.0.11"
   },
@@ -38,6 +37,7 @@
     "kebab-case": "^1.0.1",
     "less": "^4.1.1",
     "lodash-es": "^4.17.21",
+    "mitt": "^3.0.0",
     "monaco-editor": "^0.28.1",
     "naive-ui": "^2.19.7",
     "splitpanes": "^3.0.6",

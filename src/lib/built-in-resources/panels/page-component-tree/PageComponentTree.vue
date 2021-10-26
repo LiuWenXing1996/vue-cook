@@ -40,14 +40,13 @@ import { makeComponentConfigDefault, useCookConfig } from "$/index";
 import usePageEditingList from "$/hooks/usePageEditingList";
 import useComponentConfig from "@/lib/hooks/useComponentConfig";
 import useComponentSelected from "@/lib/hooks/useComponentSelected";
+import useComponentFocused from "@/lib/hooks/useComponentFocused";
 
 const pageList = computed(() => {
     return useCookConfig().value.pages
 })
 const selectedKeys = ref<string[]>([])
 const pattern = ref("")
-
-
 
 watch(selectedKeys, () => {
     const [uid] = selectedKeys.value
@@ -65,6 +64,7 @@ const renderLabel = ({ option }: { option: TreeOption }) => {
         'div',
         {
             onClick: () => {
+
                 if (option.type === "page") {
                     const uid = option.key
                     const pageEditingList = usePageEditingList()
@@ -86,6 +86,21 @@ const renderLabel = ({ option }: { option: TreeOption }) => {
                     }
 
                 }
+            },
+            onMousemove: () => {
+                if (option.type === "component") {
+                    const uid = option.key
+                    if (uid) {
+                        const _uid = uid as string;
+                        const config = useComponentConfig(_uid)
+                        const componentFocused = useComponentFocused();
+                        componentFocused.value = config.value
+                    }
+                }
+            },
+            onMouseleave: () => {
+                const componentFocused = useComponentFocused();
+                componentFocused.value = undefined
             }
         },
         option.label
