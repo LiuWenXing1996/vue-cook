@@ -5,8 +5,6 @@ import IMakerMethods from './IMakerMethods';
 import IPanel from "./IPanel";
 import ICookEditorConfig from '@/lib/types/ICookEditorConfig';
 
-export default interface IPanelMaker<T extends IPanelConfig = IPanelConfig> extends IResourceMaker<T, IPanel> {
-    defaultSplitPaneName: SplitPaneName,
-    watchCookEditorConfig?: (config: ICookEditorConfig) => void,
-    make: (config: T, cookEditorConfig: ICookEditorConfig) => IPanel,
+export default interface IPanelMaker<T extends IPanelConfig = IPanelConfig> extends IResourceMaker<T, ICookEditorConfig,IPanel> {
+    defaultSplitPaneName: SplitPaneName
 }

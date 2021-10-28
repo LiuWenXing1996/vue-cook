@@ -1,8 +1,6 @@
-import { IMessageBus } from "../utils/createMessageBus";
+import ICookConfig from "./ICookConfig";
 import IPage from "./IPage";
-import IResourceMaker from "./IResourceMaker";
 
-export default interface ICookPlayerConfig {
+export default interface ICookPlayerConfig extends ICookConfig {
     page: IPage
-    makerList: IResourceMaker[]
 }

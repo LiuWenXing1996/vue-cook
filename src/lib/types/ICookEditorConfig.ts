@@ -1,14 +1,11 @@
-import { IMessageBus } from "../utils/createMessageBus";
+import ICookConfig from "./ICookConfig";
 import IPage from "./IPage";
-import IResourceMaker from "./IResourceMaker";
 import ISplitPaneConfig from "./ISplitPaneConfig";
 
-export default interface ICookEditorConfig {
+export default interface ICookEditorConfig extends ICookConfig<ICookEditorConfig> {
     pages: IPage[],
     splines: ISplitPaneConfig[],
-    makerList: IResourceMaker[],
-    pageEditingUidList: [],
-    componentSelectedUid: undefined | {
+    componentSelected: undefined | {
         componentUid: string,
         pageUid: string
     }

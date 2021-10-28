@@ -1,11 +1,21 @@
 import { defineComponent, h, markRaw, watch } from 'vue';
 import Component from "./PageCookPanel.vue";
-import { name as pkgName } from "@/../package.json"
 import definePanelMaker from '@/lib/utils/definePanelMaker';
 import IPanelConfig from '@/lib/types/IPanelConfig';
-import IMakerMethods from '@/lib/types/IMakerMethods';
-import ICookEditorConfig from '@/lib/types/ICookEditorConfig';
+import { pkgName } from '@/lib/utils/const';
 
+declare global {
+    interface IVueCookMessageBusEventMap {
+        "vue-cook:page-editor-maker:open-page": {
+            pageUid: string,
+        },
+        "vue-cook:page-editor-maker:highlight-component": {
+            pageUid: string,
+            componentUid: string,
+        },
+        "vue-cook:page-editor-maker:unHighlight-component": undefined
+    }
+}
 interface IPageEditorConfig extends IPanelConfig {
     extra: {
         pageName: string,
@@ -14,7 +24,7 @@ interface IPageEditorConfig extends IPanelConfig {
 }
 
 const maker = definePanelMaker<IPageEditorConfig>({
-    name: "页面编辑器",
+    name: "page-editor-maker",
     pkg: pkgName,
     defaultSplitPaneName: "center",
     make: (config) => {
@@ -31,10 +41,13 @@ const maker = definePanelMaker<IPageEditorConfig>({
                 }
             })
         }
+    },
+    install(cookEditorConfig) {
+        cookEditorConfig.messageBus.reciveMessage("vue-cook:page-editor-maker:open-page", (type, message, cookEditorConfig) => {
+            //TODO:使用新版的事件机制处理来打开数据
+        })
     }
 })
-
-export type IPageEditorMaker = typeof maker
 
 export default maker
 

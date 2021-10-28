@@ -1,31 +1,26 @@
-export interface IMessageTag {
-    makerName: string,
-    makerpkg: string,
-    type: string
-}
-export type IMessageHandler = (tag: IMessageTag, message: unknown) => void
+import ICookConfig from "../types/ICookConfig"
 
-export interface IMessageBus {
-    reciveMessage: (tag: IMessageTag, handler: IMessageHandler) => void
-    sendMessage: (tag: IMessageTag, message: unknown) => void
+declare global {
+    interface IVueCookMessageBusEventMap {
+    }
 }
 
-export function getUniqTag(tag: IMessageTag) {
-    return `${tag.makerpkg}-${tag.makerName}-${tag.type}`
+export interface IMessageBus<T extends ICookConfig = ICookConfig> {
+    reciveMessage<key extends keyof IVueCookMessageBusEventMap>(type: key, handler: (type: key, message: IVueCookMessageBusEventMap[key], cookConfig: T) => void): void
+    sendMessage<key extends keyof IVueCookMessageBusEventMap>(type: key, message: IVueCookMessageBusEventMap[key]): void
 }
 
-export default function createMessageBus(): IMessageBus {
-    const obs: Record<string, IMessageHandler[]> = {}
+
+export default function createMessageBus<T extends ICookConfig = ICookConfig>(cookConfig: T): IMessageBus<T> {
+    const obs: Record<string, Function[]> = {}
     return {
-        reciveMessage(tag, handler) {
-            const uTag = getUniqTag(tag)
-            obs[uTag] = obs[uTag] || []
-            obs[uTag].push(handler)
+        reciveMessage(type, handler) {
+            obs[type] = obs[type] || []
+            obs[type].push(handler)
         },
-        sendMessage(tag, message) {
-            const uTag = getUniqTag(tag)
-            const handlerList = obs[uTag]
-            handlerList.forEach(e => e(tag, message))
+        sendMessage(type, message) {
+            const handlerList = obs[type] || []
+            handlerList.forEach(e => e(type, message, cookConfig))
         }
     }
 }

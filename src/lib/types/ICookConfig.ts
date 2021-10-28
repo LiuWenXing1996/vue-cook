@@ -1,17 +1,8 @@
-import IPage from "./IPage";
+import { IMessageBus } from "../utils/createMessageBus";
 import IResourceMaker from "./IResourceMaker";
-import ISplitPaneConfig from "./ISplitPaneConfig";
-
-export default interface ICookConfig {
-    pages: IPage[],
+export default interface ICookConfig<T = any> {
     resourceMakerList: IResourceMaker[],
-    editor: {
-        splines: ISplitPaneConfig[],
-        pageEditingUidList: string[],
-        componentFousedUid: string | undefined,
-        componentSelectedUid: string | undefined,
-    },
-    palyer: {
-        pageUid: string
-    }
+    messageBus: IMessageBus,
+    findMaker: () => IResourceMaker,
+    installMaker: (cookConfig: T) => T
 }
