@@ -1,4 +1,4 @@
-import * as  makers from "$/built-in-resources";
+import * as  makers from "@/lib/built-in-resources";
 import useResourceMakerList from "../hooks/useResourceMakerList";
 
 let isAdd = false

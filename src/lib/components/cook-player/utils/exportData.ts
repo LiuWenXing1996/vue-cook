@@ -1,10 +1,10 @@
 import { ComponentInternalInstance, Ref } from 'vue';
-import IComponentConfig from '$/types/IComponentConfig';
-import { VueCookPlayerExportDataTag } from "$/utils/const"
-import ICookPlayerExportData from '$/types/ICookPlayerExportData';
+import IComponentConfig from '@/lib/types/IComponentConfig';
+import { VueCookPlayerExportDataTag } from "@/lib/utils/const"
+import ICookPlayerExportData from '@/lib/types/ICookPlayerExportData';
 import IComponentOverlay from '@/lib/types/IComponentOverlay';
 import getComponentRect from './getComponentRect';
-import IComponentOverlayMap from '$/types/IComponentOverlayMap';
+import IComponentOverlayMap from '@/lib/types/IComponentOverlayMap';
 
 export const componentInstanceMap = new Map<IComponentConfig, ComponentInternalInstance>();
 export const componentConfigMap = new Map<Element, IComponentConfig>();

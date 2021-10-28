@@ -1,26 +1,26 @@
 <template>
-    <ComponentRender :config="page.component"></ComponentRender>
+    <ComponentRender :config="config.page.component"></ComponentRender>
 </template>
 <script setup lang="ts">
-import IComponentConfig from "$/types/IComponentConfig";
+import IComponentConfig from "@/lib/types/IComponentConfig";
 import ComponentRender from "./ComponentRender.vue"
-import { toRefs } from "vue";
+import { toRefs, provide } from "vue";
 import exportData from "./utils/exportData";
 import { VueCookEditroTag } from "@/lib/utils/const";
-import IPage from "@/lib/types/IPage";
+import IPlayerConfig from "./IPlayerConfig";
 const props = defineProps(
     {
-        page: {
-            type: Object as () => IPage,
+        config: {
+            type: Object as () => IPlayerConfig,
             required: true
         }
     }
 )
-const { page } = toRefs(props)
-
+const { config } = toRefs(props)
+provide("playerConfig", config)
 // @ts-ignore
 if (window.parent[VueCookEditroTag]) {
-    exportData(page.value.component, page.value.path)
+    exportData(config.value.page.component, config.value.page.path)
 }
 </script>
 

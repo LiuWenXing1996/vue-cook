@@ -18,14 +18,14 @@
 </template>
 <script setup lang="ts">
 import { computed, nextTick, ref, toRefs, watch } from "vue";
-import IComponentOverlay from "$/types/IComponentOverlay";
+import IComponentOverlay from "@/lib/types/IComponentOverlay";
 import handleClick from "./handleClick";
 import useComponentSelected from "@/lib/hooks/useComponentSelected";
 import useComponentConfig from "@/lib/hooks/useComponentConfig";
 import IPageCookPanelSize from "@/lib/types/IPageCookPanelSize";
 import { NPopover } from "naive-ui"
 import useComponentMaker from "@/lib/hooks/useComponentMaker";
-import SlotDragger from "$/components/slot-dragger/SlotDragger.vue"
+import SlotDragger from "@/lib/components/slot-dragger/SlotDragger.vue"
 import ComponentOverlayTips from "./ComponentOverlayTips.vue"
 const props = defineProps(
     {

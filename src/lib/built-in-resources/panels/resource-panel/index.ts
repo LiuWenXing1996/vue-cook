@@ -1,10 +1,18 @@
 import { markRaw } from 'vue';
 import Component from "./ResourcePanel.vue";
-import pkg from "@/../package.json"
+import { name as pkgName } from "@/../package.json"
 import definePanelMaker from '@/lib/utils/definePanelMaker';
-export default definePanelMaker({
+
+const maker = definePanelMaker({
     name: "资源面板",
-    package: pkg.name,
-    splitPaneName: "bottom",
-    makePanel: () => markRaw(Component),
+    pkg: pkgName,
+    defaultSplitPaneName: "bottom",
+    make: () => {
+        return {
+            title: "资源面板",
+            content: markRaw(Component)
+        }
+    },
 })
+
+export default maker

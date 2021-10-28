@@ -1,5 +1,5 @@
-import IComponentConfig from '$/types/IComponentConfig';
-import useComponentSelected from '$/hooks/useComponentSelected';
+import IComponentConfig from '@/lib/types/IComponentConfig';
+import useComponentSelected from '@/lib/hooks/useComponentSelected';
 import useComponentConfig from '@/lib/hooks/useComponentConfig';
 const componentSelected = useComponentSelected();
 const handleClick = (config: IComponentConfig | undefined, selected: boolean, event: MouseEvent) => {

@@ -22,7 +22,7 @@ import ILogicConfig from '@/lib/types/ILogicConfig';
 import { h, ref, watch } from 'vue';
 import { NFormItem, NDataTable } from "naive-ui"
 import EmitLogicAction from "./EmitLogicAction.vue"
-import EmitDragger from "$/components/emit-dragger/EmitDragger.vue"
+import EmitDragger from "@/lib/components/emit-dragger/EmitDragger.vue"
 
 interface IEmitOption {
     label: string,

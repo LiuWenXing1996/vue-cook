@@ -1,4 +1,4 @@
-import ILogicMaker from "$/types/ILogicMaker";
+import ILogicMaker from "@/lib/types/ILogicMaker";
 
 type ILogicMakerOptions = Omit<ILogicMaker, "type">
 

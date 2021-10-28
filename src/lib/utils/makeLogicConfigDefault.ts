@@ -1,6 +1,6 @@
-import ILogicConfig from "$/types/ILogicConfig";
+import ILogicConfig from "@/lib/types/ILogicConfig";
 import { v4 as uuidv4 } from 'uuid';
-import ILogicMaker from "$/types/ILogicMaker";
+import ILogicMaker from "@/lib/types/ILogicMaker";
 
 export default function makeLogicConfigDefault(maker: ILogicMaker): ILogicConfig {
     const uid = uuidv4();

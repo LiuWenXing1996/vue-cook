@@ -41,20 +41,23 @@
     </div>
 </template>
 <script setup lang="ts">
-import useResourceMakerList from "$/hooks/useResourceMakerList";
 import ResuorceMaker from "./ResuorceMaker.vue";
-import { NSpace, NLayout, NInput, NIcon, NSelect, NForm, NFormItem, NScrollbar } from "naive-ui"
+import { NSpace, NInput, NIcon, NSelect, NScrollbar } from "naive-ui"
 import { Search as SearchIcon } from "@vicons/ionicons5"
-import { computed, ref } from "vue";
+import { computed, inject, Ref, ref } from "vue";
 import { uniq } from "lodash-es"
-const makerList = useResourceMakerList();
+import ICookEditorConfig from "@/lib/types/ICookEditorConfig";
+const cookEditorConfig = inject<Ref<ICookEditorConfig>>('cookEditorConfig') as Ref<ICookEditorConfig>
+const makerList = computed(() => {
+    return cookEditorConfig.value.makerList
+})
 const result = computed(() => {
     let _res = makerList.value
     if (types.value.length > 0) {
         _res = _res.filter(e => types.value.includes(e.type))
     }
     if (pkgs.value.length > 0) {
-        _res = _res.filter(e => pkgs.value.includes(e.package))
+        _res = _res.filter(e => pkgs.value.includes(e.pkg))
     }
     if (pattern.value) {
         _res = _res.filter(e => {
@@ -76,7 +79,7 @@ const typeOptions = computed(() => {
 })
 const pkgs = ref<string[]>([])
 const pkgOptions = computed(() => {
-    const _pkgs = makerList.value.map(e => e.package);
+    const _pkgs = makerList.value.map(e => e.pkg);
     return uniq(_pkgs).map(e => {
         return {
             label: e,

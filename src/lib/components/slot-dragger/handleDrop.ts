@@ -1,5 +1,5 @@
-import IComponentConfig from '$/types/IComponentConfig';
-import useComponentMaker from '$/hooks/useComponentMaker';
+import IComponentConfig from '@/lib/types/IComponentConfig';
+import useComponentMaker from '@/lib/hooks/useComponentMaker';
 import makeComponentConfigDefault from '@/lib/utils/makeComponentConfigDefault';
 import getMakerDataFromDragEvent from '@/lib/utils/getMakerDataFromDragEvent';
 const handleDrop = (slotName: string, componentConfig: IComponentConfig | undefined, e: DragEvent) => {

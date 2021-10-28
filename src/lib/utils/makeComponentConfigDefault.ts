@@ -1,6 +1,6 @@
-import IComponentConfig from "$/types/IComponentConfig";
+import IComponentConfig from "@/lib/types/IComponentConfig";
 import { v4 as uuidv4 } from 'uuid';
-import IComponentMaker from "$/types/IComponentMaker";
+import IComponentMaker from "@/lib/types/IComponentMaker";
 import ILogicConfig from "../types/ILogicConfig";
 
 export default function makeComponentConfigDefault(maker: IComponentMaker): IComponentConfig {

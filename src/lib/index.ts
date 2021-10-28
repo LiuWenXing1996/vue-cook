@@ -8,13 +8,11 @@ autoAddMakers();
 
 export { default as CookEditor } from "./components/cook-editor/CookEditor.vue"
 export { default as CookPlayer } from "./components/cook-player/CookPlayer.vue"
-export { default as useCookConfig } from "./hooks/useCookConfig"
-export { default as usePage } from "./hooks/usePage"
+// export { default as usePage } from "./hooks/usePage"
 export { default as makeComponentConfigDefault } from './utils/makeComponentConfigDefault';
 export { default as defineComponentMaker } from "./utils/defineComponentMaker"
 export { default as defineLogicMaker } from "./utils/defineLogicMaker"
 export { default as defineCookInstallFunc } from "./utils/defineCookInstallFunc"
 export { default as installPkg } from "./utils/installPkg"
-export { default as defineCookConfig } from "./utils/defineCookConfig"
-export { default as defineCookEditorConfig } from "./utils/defineCookEditorConfig"
+export { default as createCookEditorConfig } from "./utils/createCookEditorConfig"
 export { default as installResourceMaker } from "./utils/installResourceMaker"

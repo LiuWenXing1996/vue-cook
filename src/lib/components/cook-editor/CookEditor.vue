@@ -27,9 +27,9 @@
 <script setup lang="ts">
 import { Splitpanes, Pane } from 'splitpanes'
 import 'splitpanes/dist/splitpanes.css'
-import { onMounted, onUnmounted, ref, toRefs } from 'vue';
-import ICookEditorConfig from '$/types/ICookEditorConfig';
-import { VueCookEditroTag } from '$/utils/const';
+import { onMounted, onUnmounted, ref, toRefs, provide } from 'vue';
+import ICookEditorConfig from '@/lib/types/ICookEditorConfig';
+import { VueCookEditroTag } from '@/lib/utils/const';
 import TelportBox from './TelportBox.vue'
 import DraggableTabs from './DraggableTabs.vue'
 import { SplitPaneName } from '@/lib/types/ISplitPaneConfig';
@@ -43,6 +43,7 @@ const props = defineProps({
     }
 })
 const { config } = toRefs(props)
+provide('cookEditorConfig', config)
 const lockTelport = ref(true)
 onMounted(() => {
     lockTelport.value = false

@@ -39,7 +39,7 @@
     </n-scrollbar>
 </template>
 <script setup lang="ts">
-import useComponentSelected from "$/hooks/useComponentSelected";
+import useComponentSelected from "@/lib/hooks/useComponentSelected";
 import { NScrollbar, NForm, NFormItem, NInput, NDivider, NIcon, NTag } from "naive-ui"
 import { ref } from "vue";
 import { LocationOutline } from "@vicons/ionicons5";

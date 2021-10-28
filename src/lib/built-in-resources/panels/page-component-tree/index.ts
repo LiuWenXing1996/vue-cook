@@ -1,19 +1,16 @@
 import { markRaw } from 'vue';
 import Component from "./PageComponentTree.vue";
-import pkg from "@/../package.json"
 import definePanelMaker from '@/lib/utils/definePanelMaker';
-import * as OverloadEvents from './OverloadEvents'
-
-export {
-    OverloadEvents
-}
+import { name as pkgName } from "@/../package.json"
 
 export default definePanelMaker({
-    name: "vue-cook:页面组件树",
-    package: pkg.name,
-    splitPaneName: "left",
-    makeTitle: () => {
-        return "页面组件树"
-    },
-    makePanel: () => markRaw(Component),
+    name: "页面组件树",
+    pkg: pkgName,
+    defaultSplitPaneName: "left",
+    make: () => {
+        return {
+            title: "页面组件树",
+            content: markRaw(Component)
+        }
+    }
 })

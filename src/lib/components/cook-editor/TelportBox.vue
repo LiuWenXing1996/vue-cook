@@ -9,7 +9,7 @@
     </div>
 </template>
 <script setup lang="ts">
-import { VueCookTelportTempId } from "$/utils/const"
+import { VueCookTelportTempId } from "@/lib/utils/const"
 import IPanelConfig from "@/lib/types/IPanelConfig";
 import { computed } from "vue";
 import useListGroup from "./utils/useListGroup";

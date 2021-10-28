@@ -1,4 +1,4 @@
-import IComponentMaker from "$/types/IComponentMaker";
+import IComponentMaker from "@/lib/types/IComponentMaker";
 
 type IComponentMakerOptions = Omit<IComponentMaker, "type">
 

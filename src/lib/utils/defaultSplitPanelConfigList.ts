@@ -1,4 +1,4 @@
-import ISplitPaneConfig from '$/types/ISplitPaneConfig';
+import ISplitPaneConfig from '@/lib/types/ISplitPaneConfig';
 import { EditorPanelMaker, PageComponentTreeMaker, ResourcePanelMaker } from '../built-in-resources';
 import makePanelConfigDefault from './makePanelConfigDefault';
 const defaultSplitPanelConfigList: ISplitPaneConfig[] = [

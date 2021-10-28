@@ -1,5 +1,5 @@
-import IComponentConfig from '$/types/IComponentConfig';
-import useLogicMaker from '$/hooks/useLogicMaker';
+import IComponentConfig from '@/lib/types/IComponentConfig';
+import useLogicMaker from '@/lib/hooks/useLogicMaker';
 import makeLogicConfigDefault from '@/lib/utils/makeLogicConfigDefault';
 import getMakerDataFromDragEvent from '@/lib/utils/getMakerDataFromDragEvent';
 

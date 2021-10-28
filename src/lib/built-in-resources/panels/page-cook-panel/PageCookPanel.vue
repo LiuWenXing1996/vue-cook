@@ -133,27 +133,30 @@
     </div>
 </template>
 <script setup lang="ts">
-import { NTag, NEmpty, NIcon, NPopover, NSpace, NInputNumber, NLayout, NScrollbar, NInput } from "naive-ui"
+import { NEmpty, NIcon, NPopover, NSpace, NInputNumber, NInput } from "naive-ui"
 import { LocateOutline, ArrowUndoOutline, ArrowRedoOutline, TrashOutline, EyeOutline, InformationCircle, RefreshOutline } from "@vicons/ionicons5"
-import PageSizeIcon from "$/svgs/page-size.svg"
-import UrlIcon from "$/svgs/url.svg"
-import { computed, nextTick, onMounted, ref, toRefs, watch } from "vue";
+import PageSizeIcon from "@/lib/svgs/page-size.svg"
+import { computed, inject, Ref, ref, toRefs, watch } from "vue";
 import PageCook, { IPageCookExpose } from "./PageCook.vue"
 import useComponentPickerEnable from "@/lib/hooks/useComponentPickerEnable";
-import IPage from "@/lib/types/IPage";
-import { useCookConfig } from "@/lib";
 import IPageCookPanelSize from "@/lib/types/IPageCookPanelSize";
 import RulerBox from "./ruler-box/RulerBox.vue"
+import ICookEditorConfig from "@/lib/types/ICookEditorConfig";
+const cookEditorConfig = inject<Ref<ICookEditorConfig>>('cookEditorConfig') as Ref<ICookEditorConfig>
+
 const props = defineProps({
-    pageEditing: {
-        type: Object as () => IPage,
+    pageUid: {
+        type: String,
     }
 })
-const { pageEditing } = toRefs(props)
+const { pageUid } = toRefs(props)
+const pageEditing = computed(() => {
+    return cookEditorConfig.value.pages.find(e => e.uid === pageUid?.value)
+})
 const enablePicker = useComponentPickerEnable()
 const tempUrl = ref(pageEditing?.value?.path)
 const isUrlEdited = ref(false)
-const cookConfig = useCookConfig()
+
 const size = ref<IPageCookPanelSize>({
     width: 1920,
     height: 1080,
@@ -183,7 +186,7 @@ const refresh = () => {
 }
 
 const delPage = () => {
-    const pageList = cookConfig.value.pages
+    const pageList = cookEditorConfig.value.pages
     var index = pageList.findIndex(page => page.uid === pageEditing?.value?.uid)
     if (index > -1) {
         pageList.splice(index, 1);

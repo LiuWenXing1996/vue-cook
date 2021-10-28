@@ -1,13 +1,12 @@
-import { Component, Ref } from "vue";
 import IPanelConfig from "./IPanelConfig";
 import IResourceMaker from "./IResourceMaker";
 import { SplitPaneName } from "./ISplitPaneConfig";
-import ICookEditorConfig from './ICookEditorConfig';
-import { WildcardHandler } from "mitt";
+import IMakerMethods from './IMakerMethods';
+import IPanel from "./IPanel";
+import ICookEditorConfig from '@/lib/types/ICookEditorConfig';
 
-export default interface IPanelMaker<T extends IPanelConfig = IPanelConfig> extends IResourceMaker {
-    splitPaneName: SplitPaneName
-    makePanel: (config: T, cookEditorConfig: ICookEditorConfig) => Component,
-    makeTitle: (config: T, cookEditorConfig: ICookEditorConfig) => string,
-    on?: WildcardHandler<ICookEditorEventBusEvents>
+export default interface IPanelMaker<T extends IPanelConfig = IPanelConfig> extends IResourceMaker<T, IPanel> {
+    defaultSplitPaneName: SplitPaneName,
+    watchCookEditorConfig?: (config: ICookEditorConfig) => void,
+    make: (config: T, cookEditorConfig: ICookEditorConfig) => IPanel,
 }

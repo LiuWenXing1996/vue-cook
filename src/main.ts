@@ -1,7 +1,7 @@
 import { createApp } from 'vue'
 import App from './App.vue'
 import router from "./route"
-import { installPkg } from "$/index"
+import { installPkg } from "@/lib/index"
 import * as TestPkg from "@/test-pkg/index"
 installPkg(TestPkg)
 createApp(App)

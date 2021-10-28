@@ -1,5 +1,5 @@
 import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router'
-import { CookEditor, CookPlayer, useCookConfig, usePage } from "$/index"
+import { CookEditor, CookPlayer, useCookConfig, usePage } from "@/lib/index"
 
 const cookConfig = useCookConfig() //TODO:此地方开启一个可以穿入参数的选项，可以穿入自定义的cook config 数据
 

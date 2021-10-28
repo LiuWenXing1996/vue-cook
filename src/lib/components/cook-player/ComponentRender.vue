@@ -13,13 +13,13 @@
     <span v-else>{{ config.makerPackage }} - {{ config.makerName }}没有找到</span>
 </template>
 <script setup lang="ts">
-import { getCurrentInstance, toRefs, onMounted, onUnmounted, computed } from "vue";
-import useComponentMaker from "$/hooks/useComponentMaker";
-import type IComponentConfig from "$/types/IComponentConfig";
+import { getCurrentInstance, toRefs, onMounted, onUnmounted, computed, Ref, inject } from "vue";
+import type IComponentConfig from "@/lib/types/IComponentConfig";
 import { componentInstanceMap, componentConfigMap } from "./utils/exportData"
 import getComponentElements from "./utils/getComponentElements";
 import logicCompiler from "@/lib/utils/logic-compiler";
-
+import IPlayerConfig from "./IPlayerConfig";
+import IComponentMaker from "@/lib/types/IComponentMaker";
 const props = defineProps(
     {
         config: {
@@ -29,7 +29,13 @@ const props = defineProps(
     }
 )
 const { config } = toRefs(props)
-const maker = useComponentMaker(config.value.makerName, config.value.makerPackage)
+const playerConfig = inject<Ref<IPlayerConfig>>('playerConfig') as Ref<IPlayerConfig>
+const maker = computed(() => {
+    const makerList = playerConfig.value.makerList;
+    const { makerName, makerPackage } = config.value
+    const _maker = makerList.find(e => e.name === makerName && e.package === makerPackage)
+    return _maker as IComponentMaker | undefined;
+})
 const emits = computed(() => {
     const res: Record<string, Function> = {}
     const _emits = config.value.emits || {}

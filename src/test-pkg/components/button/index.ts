@@ -1,5 +1,5 @@
 import { markRaw } from 'vue';
-import { defineComponentMaker } from '$/index'
+import { defineComponentMaker } from '@/lib/index'
 import Component from "./Component.vue";
 import { pkgName } from '../../const-value';
 export default defineComponentMaker({

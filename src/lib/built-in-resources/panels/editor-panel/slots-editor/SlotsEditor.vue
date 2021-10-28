@@ -22,7 +22,7 @@ import IComponentConfig from '@/lib/types/IComponentConfig';
 import { h, ref, watch } from 'vue';
 import { NFormItem, NDataTable } from "naive-ui"
 import SlotComponentAction from "./SlotComponentAction.vue"
-import SlotDragger from "$/components/slot-dragger/SlotDragger.vue"
+import SlotDragger from "@/lib/components/slot-dragger/SlotDragger.vue"
 
 interface ISlotOption {
     label: string,
