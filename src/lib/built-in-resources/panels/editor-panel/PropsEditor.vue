@@ -9,9 +9,10 @@
 <script setup lang="ts">
 import useComponentMaker from '@/lib/hooks/useComponentMaker';
 import useComponentSelected from '@/lib/hooks/useComponentSelected';
-import { ref, watch } from 'vue';
+import { inject, ref, watch } from 'vue';
 import { NFormItem, NInput } from "naive-ui"
-
+import ICookEditorState from '@/lib/types/ICookEditorState';
+const cookEditorState = inject<ICookEditorState>('cookEditorState') as ICookEditorState
 
 interface IPropOption {
     label: string,
@@ -27,7 +28,7 @@ const updatePropOptions = () => {
         propOptions.value = [];
         return;
     };
-    const maker = useComponentMaker(config.value?.makerName, config.value?.makerPackage).value
+    const maker = useComponentMaker(cookEditorState, config.value?.makerName, config.value?.makerPkg).value
     if (!maker) {
         propOptions.value = [];
         return;

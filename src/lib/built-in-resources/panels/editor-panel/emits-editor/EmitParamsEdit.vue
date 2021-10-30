@@ -18,7 +18,7 @@
                 <n-form-item label="maker">
                     <div class="round-name-tag">{{ logicConfig.makerName }}</div>
                     <div style="padding: 0 2px;">-</div>
-                    <div class="round-pkg-tag">{{ logicConfig.makerPackage }}</div>
+                    <div class="round-pkg-tag">{{ logicConfig.makerPkg }}</div>
                 </n-form-item>
                 <n-divider title-placement="left">参数</n-divider>
                 <template v-if="paramsOptions.length > 0">
@@ -33,9 +33,11 @@
 </template>
 <script setup lang="ts">
 import useLogicMaker from '@/lib/hooks/useLogicMaker';
+import ICookEditorState from '@/lib/types/ICookEditorState';
 import ILogicConfig from '@/lib/types/ILogicConfig';
 import { NScrollbar, NForm, NFormItem, NInput, NDivider } from "naive-ui"
-import { ref, toRefs, watch } from 'vue';
+import { inject, ref, toRefs, watch } from 'vue';
+const cookEditorState = inject<ICookEditorState>('cookEditorState') as ICookEditorState
 
 const props = defineProps({
     logicConfig: {
@@ -58,7 +60,7 @@ const updateParamsOptions = () => {
         paramsOptions.value = [];
         return;
     };
-    const maker = useLogicMaker(logicConfig.value?.makerName, logicConfig.value?.makerPackage).value
+    const maker = useLogicMaker(cookEditorState, logicConfig.value?.makerName, logicConfig.value?.makerPkg).value
     if (!maker) {
         paramsOptions.value = [];
         return;

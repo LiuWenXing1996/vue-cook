@@ -36,13 +36,14 @@
     <template v-else>没有找打{{ overlay.configUid }}的组件信息</template>
 </template>
 <script setup lang="ts">
-import useComponentConfig from '@/lib/hooks/useComponentConfig';
+import findComponentConfig from '@/lib/utils/findComponentConfig';
 import useComponentMaker from '@/lib/hooks/useComponentMaker';
 import IComponentOverlay from '@/lib/types/IComponentOverlay';
 import IPageCookPanelSize from '@/lib/types/IPageCookPanelSize';
-import { computed, toRefs } from 'vue';
+import { computed, inject, toRefs } from 'vue';
 import { NTag } from "naive-ui"
-
+import ICookEditorState from '@/lib/types/ICookEditorState';
+const cookEditorState = inject<ICookEditorState>('cookEditorState') as ICookEditorState
 const props = defineProps(
     {
         overlay: {
@@ -60,10 +61,13 @@ const toPx = (n: number) => `${n}px`
 const width = computed(() => toPx(overlay.value.rect.width * size.value.scale / 100))
 const height = computed(() => toPx(overlay.value.rect.height * size.value.scale / 100))
 const componentConfig = computed(() => {
-    return useComponentConfig(overlay.value.configUid).value
+    const page = cookEditorState.pages.find(e => e.uid === overlay.value.pageUid)
+    if (page) {
+        return findComponentConfig(page.component, overlay.value.configUid)
+    }
 })
 const maker = computed(() => {
-    return useComponentMaker(componentConfig.value?.makerName, componentConfig.value?.makerPackage).value
+    return useComponentMaker(cookEditorState, componentConfig.value?.makerName, componentConfig.value?.makerPkg).value
 })
 const hasSlot = computed(() => {
     return Boolean(maker.value?.slots?.length && maker.value?.slots?.length > 0)

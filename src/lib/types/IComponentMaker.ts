@@ -1,13 +1,13 @@
 import { Component } from "vue";
 import IComponentConfig from "./IComponentConfig";
-
 import IResourceMaker from './IResourceMaker';
+import ICookPlayerState from './ICookPlayerState';
 
-export default interface IComponentMaker extends IResourceMaker {
-    makeComponent: (config: IComponentConfig) => Component,
+export default interface IComponentMaker<
+    T extends IComponentConfig = IComponentConfig>
+    extends IResourceMaker<T, ICookPlayerState, Component> {
     slots?: string[],
     props?: string[],
     emits?: string[],
-    // TODO:增加一个extra字段专门用来设置额外配置
     //TODO:每个key都加个tips?
 }

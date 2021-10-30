@@ -13,7 +13,7 @@
             <div class="info-tips-item-content">
                 <div class="round-name-tag">{{ componentConfig.makerName }}</div>
                 <div style="padding: 0 2px;">-</div>
-                <div class="round-pkg-tag">{{ componentConfig.makerPackage }}</div>
+                <div class="round-pkg-tag">{{ componentConfig.makerPkg }}</div>
             </div>
         </div>
         <div class="info-tips-item">
@@ -34,9 +34,11 @@
 </template>
 <script setup lang="ts">
 import useComponentMaker from '@/lib/hooks/useComponentMaker';
-import { computed, toRefs } from 'vue';
+import { computed, inject, toRefs } from 'vue';
 import { NTag } from "naive-ui"
 import IComponentConfig from '@/lib/types/IComponentConfig';
+import ICookEditorState from '@/lib/types/ICookEditorState';
+const cookEditorState = inject<ICookEditorState>('cookEditorState') as ICookEditorState
 
 const props = defineProps({
     componentConfig: {
@@ -47,7 +49,7 @@ const props = defineProps({
 const { componentConfig } = toRefs(props)
 
 const maker = computed(() => {
-    return useComponentMaker(componentConfig.value?.makerName, componentConfig.value?.makerPackage).value
+    return useComponentMaker(cookEditorState, componentConfig.value?.makerName, componentConfig.value?.makerPkg).value
 })
 const hasSlot = computed(() => {
     return Boolean(maker.value?.slots?.length && maker.value?.slots?.length > 0)

@@ -48,7 +48,7 @@
 <script setup lang="ts">
 import IPanelConfig from "@/lib/types/IPanelConfig";
 import { NTabs, NTabPane, NEmpty } from "naive-ui";
-import { nextTick, onMounted, ref, toRefs, watch } from "vue";
+import { inject, nextTick, onMounted, ref, toRefs, watch } from "vue";
 import useListGroup from "./utils/useListGroup";
 import { v4 as uuidv4 } from 'uuid';
 import useTempTelportList from "./utils/useTempTelportList";
@@ -57,6 +57,9 @@ import usePanelMaker from "@/lib/hooks/usePanelMaker";
 import handleDragEnter from "./utils/handleDragEnter";
 import handleDragLeave from "./utils/handleDragLeave";
 import handleDragStart from "./utils/handleDragStart";
+import ICookEditorState from "@/lib/types/ICookEditorState";
+const cookEditorState = inject<ICookEditorState>('cookEditorState') as ICookEditorState
+
 const props = defineProps({
     list: {
         type: Object as () => IPanelConfig[],
@@ -98,8 +101,8 @@ watch(list, () => {
 })
 
 const useTitle = (l: IPanelConfig) => {
-    const maker = usePanelMaker(l.makerName, l.makerPackage).value
-    return maker?.makeTitle?.(l) || l.title
+    const maker = usePanelMaker(cookEditorState, l.makerName, l.makerPkg).value
+    return maker?.make(l).title
 }
 
 

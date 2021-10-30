@@ -24,7 +24,7 @@
                     <n-form-item label="maker">
                         <div class="round-name-tag">{{ config.makerName }}</div>
                         <div style="padding: 0 2px;">-</div>
-                        <div class="round-pkg-tag">{{ config.makerPackage }}</div>
+                        <div class="round-pkg-tag">{{ config.makerPkg }}</div>
                     </n-form-item>
                     <n-divider title-placement="left">属性</n-divider>
                     <props-editor></props-editor>

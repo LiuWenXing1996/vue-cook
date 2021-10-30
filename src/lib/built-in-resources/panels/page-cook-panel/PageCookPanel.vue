@@ -141,8 +141,8 @@ import PageCook, { IPageCookExpose } from "./PageCook.vue"
 import useComponentPickerEnable from "@/lib/hooks/useComponentPickerEnable";
 import IPageCookPanelSize from "@/lib/types/IPageCookPanelSize";
 import RulerBox from "./ruler-box/RulerBox.vue"
-import ICookEditorConfig from "@/lib/types/ICookEditorConfig";
-const cookEditorConfig = inject<Ref<ICookEditorConfig>>('cookEditorConfig') as Ref<ICookEditorConfig>
+import ICookEditorState from "@/lib/types/ICookEditorState";
+const cookEditorState = inject<ICookEditorState>('cookEditorState') as ICookEditorState
 
 const props = defineProps({
     pageUid: {
@@ -151,7 +151,7 @@ const props = defineProps({
 })
 const { pageUid } = toRefs(props)
 const pageEditing = computed(() => {
-    return cookEditorConfig.value.pages.find(e => e.uid === pageUid?.value)
+    return cookEditorState.pages.find(e => e.uid === pageUid?.value)
 })
 const enablePicker = useComponentPickerEnable()
 const tempUrl = ref(pageEditing?.value?.path)
@@ -186,7 +186,7 @@ const refresh = () => {
 }
 
 const delPage = () => {
-    const pageList = cookEditorConfig.value.pages
+    const pageList = cookEditorState.pages
     var index = pageList.findIndex(page => page.uid === pageEditing?.value?.uid)
     if (index > -1) {
         pageList.splice(index, 1);

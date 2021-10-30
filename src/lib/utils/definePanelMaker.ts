@@ -1,15 +1,16 @@
 import IPanelMaker from "../types/IPanelMaker";
 import IPanelConfig from '@/lib/types/IPanelConfig';
-import IMakerMethods from "../types/IMakerMethods";
 
-type IPanelMakerOptions<T extends IPanelConfig = IPanelConfig> = Omit<IPanelMaker<T>, "type">
+type IPanelMakerOptions<
+    T extends Record<string, string> = Record<string, string>> = Omit<IPanelMaker<IPanelConfig<T>>, "type">
 
-export default function definePanelMaker<T extends IPanelConfig = IPanelConfig>(maker: IPanelMakerOptions<T>): IPanelMaker<T> {
-    const _maker: IPanelMaker<T> = {
+export default function definePanelMaker<
+    T extends Record<string, string> = Record<string, string>>
+    (maker: IPanelMakerOptions<T>): IPanelMaker<IPanelConfig<T>> {
+    const _maker: IPanelMaker<IPanelConfig<T>> = {
         type: "panel",
         ...maker
     }
     return _maker
 }
-
 

@@ -5,6 +5,7 @@ import ICookPlayerExportData from '@/lib/types/ICookPlayerExportData';
 import IComponentOverlay from '@/lib/types/IComponentOverlay';
 import getComponentRect from './getComponentRect';
 import IComponentOverlayMap from '@/lib/types/IComponentOverlayMap';
+import ICookPlayerState from '@/lib/types/ICookPlayerState';
 
 export const componentInstanceMap = new Map<IComponentConfig, ComponentInternalInstance>();
 export const componentConfigMap = new Map<Element, IComponentConfig>();
@@ -15,7 +16,7 @@ const getComponentInstanceFromElement = (element: Element) => {
         return componentInstanceMap.get(currentConfig)
     }
 }
-const getComponentOverlayFromElement = (element: Element) => {
+const getComponentOverlayFromElement = (element: Element, cookPlayerState: ICookPlayerState) => {
     const componentConfig = getComponentConfigFromElement(element);
     if (componentConfig) {
         const componentInstance = componentInstanceMap.get(componentConfig)
@@ -23,6 +24,7 @@ const getComponentOverlayFromElement = (element: Element) => {
             const rect = getComponentRect(componentInstance)
             const overlay: IComponentOverlay = {
                 configUid: componentConfig.uid,
+                pageUid: cookPlayerState.page.uid,
                 rect: rect
             }
             return overlay
@@ -47,7 +49,7 @@ const getComponentConfigFromElement = (element: Element) => {
     return currentConfig
 }
 
-const getComponetnOverlayFromComponentConfigUid = (uid: string) => {
+const getComponetnOverlayFromComponentConfigUid = (uid: string, cookPlayerState: ICookPlayerState) => {
     const componentConfig = getComponentConfigFromUid(uid)
     if (componentConfig) {
         const componentInstance = componentInstanceMap.get(componentConfig)
@@ -55,6 +57,7 @@ const getComponetnOverlayFromComponentConfigUid = (uid: string) => {
             const rect = getComponentRect(componentInstance)
             const overlay: IComponentOverlay = {
                 configUid: componentConfig.uid,
+                pageUid: cookPlayerState.page.uid,
                 rect: rect
             }
             return overlay
@@ -62,15 +65,13 @@ const getComponetnOverlayFromComponentConfigUid = (uid: string) => {
     }
 }
 
-export default function exportData(config: IComponentConfig, path: string) {
+export default function exportData(cookPlayerState: ICookPlayerState) {
     const data: ICookPlayerExportData = {
-        path,
-        componentConfig: config,
         getComponetnOverlayFromElement: (element) => {
-            return getComponentOverlayFromElement(element)
+            return getComponentOverlayFromElement(element, cookPlayerState)
         },
         getComponetnOverlayFromComponentConfigUid: (uid) => {
-            return getComponetnOverlayFromComponentConfigUid(uid)
+            return getComponetnOverlayFromComponentConfigUid(uid, cookPlayerState)
         }
     }
 

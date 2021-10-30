@@ -13,7 +13,7 @@
             <div class="info-tips-item-content">
                 <div class="round-name-tag">{{ logicConfig.makerName }}</div>
                 <div style="padding: 0 2px;">-</div>
-                <div class="round-pkg-tag">{{ logicConfig.makerPackage }}</div>
+                <div class="round-pkg-tag">{{ logicConfig.makerPkg }}</div>
             </div>
         </div>
     </div>

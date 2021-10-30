@@ -1,7 +1,7 @@
 <template>
     <component
         v-if="maker"
-        :is="maker.makeComponent(config)"
+        :is="maker.make(config)"
         v-bind="config?.props"
         v-on="emits"
         :uid="config.uid"
@@ -10,7 +10,7 @@
             <component-render :config="_config" v-for="_config in slot"></component-render>
         </template>
     </component>
-    <span v-else>{{ config.makerPackage }} - {{ config.makerName }}没有找到</span>
+    <span v-else>{{ config.makerPkg }} - {{ config.makerName }}没有找到</span>
 </template>
 <script setup lang="ts">
 import { getCurrentInstance, toRefs, onMounted, onUnmounted, computed, Ref, inject } from "vue";
@@ -18,8 +18,9 @@ import type IComponentConfig from "@/lib/types/IComponentConfig";
 import { componentInstanceMap, componentConfigMap } from "./utils/exportData"
 import getComponentElements from "./utils/getComponentElements";
 import logicCompiler from "@/lib/utils/logic-compiler";
-import IPlayerConfig from "./IPlayerConfig";
 import IComponentMaker from "@/lib/types/IComponentMaker";
+import ICookPlayerState from "@/lib/types/ICookPlayerState";
+const cookPlayerState = inject<ICookPlayerState>('cookPlayerState') as ICookPlayerState
 const props = defineProps(
     {
         config: {
@@ -29,11 +30,10 @@ const props = defineProps(
     }
 )
 const { config } = toRefs(props)
-const playerConfig = inject<Ref<IPlayerConfig>>('playerConfig') as Ref<IPlayerConfig>
 const maker = computed(() => {
-    const makerList = playerConfig.value.makerList;
-    const { makerName, makerPackage } = config.value
-    const _maker = makerList.find(e => e.name === makerName && e.package === makerPackage)
+    const makerList = cookPlayerState.getMakerList()
+    const { makerName, makerPkg } = config.value
+    const _maker = makerList.find(e => e.name === makerName && e.pkg === makerPkg)
     return _maker as IComponentMaker | undefined;
 })
 const emits = computed(() => {
@@ -45,7 +45,7 @@ const emits = computed(() => {
             res[key] = (payload: any) => {
                 logidConfigList.map((logicConfig) => {
                     try {
-                        logicCompiler(logicConfig, payload)
+                        logicCompiler(cookPlayerState, logicConfig, payload)
                     } catch (error) {
                         console.error(error)
                     }

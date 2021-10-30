@@ -3,9 +3,9 @@ import { pkgName } from '../../const-value';
 
 export default defineLogicMaker({
     name: "alert",
-    package: pkgName,
+    pkg: pkgName,
     params: ["msg"],
-    makeLogic: (config) => {
+    make: (config) => {
         return () => {
             alert(config.params["msg"])
         }

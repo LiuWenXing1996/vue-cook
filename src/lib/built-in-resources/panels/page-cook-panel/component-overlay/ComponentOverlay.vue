@@ -4,7 +4,7 @@
             <template #trigger>
                 <div
                     class="component-overlay"
-                    @click="handleClick(componentConfig, selected, $event)"
+                    @click="handleClick(cookEditorState, overlay, $event)"
                 >
                     <div class="slot-dragger-wrapper" v-for="slotName in maker?.slots">
                         <slot-dragger :slot-name="slotName" :component-config="componentConfig"></slot-dragger>
@@ -17,16 +17,18 @@
     <template v-else>id为{{ overlay.configUid }}的组件没有找到</template>
 </template>
 <script setup lang="ts">
-import { computed, nextTick, ref, toRefs, watch } from "vue";
+import { computed, inject, nextTick, ref, toRefs, watch } from "vue";
 import IComponentOverlay from "@/lib/types/IComponentOverlay";
 import handleClick from "./handleClick";
-import useComponentSelected from "@/lib/hooks/useComponentSelected";
-import useComponentConfig from "@/lib/hooks/useComponentConfig";
+import findComponentConfig from "@/lib/utils/findComponentConfig";
 import IPageCookPanelSize from "@/lib/types/IPageCookPanelSize";
 import { NPopover } from "naive-ui"
 import useComponentMaker from "@/lib/hooks/useComponentMaker";
 import SlotDragger from "@/lib/components/slot-dragger/SlotDragger.vue"
 import ComponentOverlayTips from "./ComponentOverlayTips.vue"
+import ICookEditorState from "@/lib/types/ICookEditorState";
+const cookEditorState = inject<ICookEditorState>('cookEditorState') as ICookEditorState
+
 const props = defineProps(
     {
         overlay: {
@@ -46,10 +48,13 @@ const height = computed(() => toPx(overlay.value.rect.height * size.value.scale 
 const left = computed(() => toPx(overlay.value.rect.left * size.value.scale / 100))
 const top = computed(() => toPx(overlay.value.rect.top * size.value.scale / 100))
 const componentConfig = computed(() => {
-    return useComponentConfig(overlay.value.configUid).value
+    const page = cookEditorState.pages.find(e => e.uid === overlay.value.pageUid)
+    if (page) {
+        return findComponentConfig(page.component, overlay.value.configUid)
+    }
 })
 const maker = computed(() => {
-    return useComponentMaker(componentConfig.value?.makerName, componentConfig.value?.makerPackage).value
+    return useComponentMaker(cookEditorState, componentConfig.value?.makerName, componentConfig.value?.makerPkg).value
 })
 watch(overlay, (newValue, oldValue) => {
     if (newValue.configUid !== oldValue.configUid) {
@@ -60,8 +65,6 @@ watch(overlay, (newValue, oldValue) => {
     }
 })
 const showPopover = ref(true)
-const componentSelected = useComponentSelected()
-const selected = computed(() => componentSelected.value?.uid === overlay.value.configUid) // WHY为什么必须要用UID来判断，直接判断对象相等不可以呢？
 
 </script>
 <style lang="less" scoped>

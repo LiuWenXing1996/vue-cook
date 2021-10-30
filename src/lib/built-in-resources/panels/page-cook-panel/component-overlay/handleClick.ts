@@ -1,16 +1,23 @@
 import IComponentConfig from '@/lib/types/IComponentConfig';
 import useComponentSelected from '@/lib/hooks/useComponentSelected';
-import useComponentConfig from '@/lib/hooks/useComponentConfig';
+
+import ICookEditorState from '@/lib/types/ICookEditorState';
+import IComponentOverlay from '@/lib/types/IComponentOverlay';
 const componentSelected = useComponentSelected();
-const handleClick = (config: IComponentConfig | undefined, selected: boolean, event: MouseEvent) => {
+const handleClick = (cookEditorState: ICookEditorState, overlay: IComponentOverlay, event: MouseEvent) => {
     event.stopPropagation()
-    if (!config) {
-        return
-    }
-    if (selected) {
-        componentSelected.value = undefined
+
+    if (
+        cookEditorState.extra.VueCook?.ComponentEditorPanel?.componetSelected &&
+        cookEditorState.extra.VueCook?.ComponentEditorPanel.componetSelected.pageUid === overlay.pageUid &&
+        cookEditorState.extra.VueCook?.ComponentEditorPanel.componetSelected.componentUid === overlay.configUid
+    ) {
+        cookEditorState.extra.VueCook!.ComponentEditorPanel.componetSelected = undefined
     } else {
-        componentSelected.value = useComponentConfig(config.uid).value
+        cookEditorState.extra.VueCook!.ComponentEditorPanel!.componetSelected = {
+            pageUid: overlay.pageUid,
+            componentUid: overlay.configUid
+        }
     }
 }
 

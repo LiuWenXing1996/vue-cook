@@ -1,29 +1,29 @@
 import ISplitPaneConfig from '@/lib/types/ISplitPaneConfig';
 import { EditorPanelMaker, PageComponentTreeMaker, ResourcePanelMaker } from '../built-in-resources';
-import makePanelConfigDefault from './makePanelConfigDefault';
+import makeDefaultPanelConfig from './makeDefaultPanelConfig';
 const defaultSplitPanelConfigList: ISplitPaneConfig[] = [
     {
         name: "left",
         list: [
-            makePanelConfigDefault(PageComponentTreeMaker),
+            makeDefaultPanelConfig(PageComponentTreeMaker)
         ]
     },
     {
         name: "center",
         list: [
-            // makePanelConfigDefault(PageCookPanelMaker)
+            // makeDefaultPanelConfig(PageCookPanelMaker)
         ]
     },
     {
         name: "right",
         list: [
-            makePanelConfigDefault(EditorPanelMaker),
+            makeDefaultPanelConfig(EditorPanelMaker),
         ]
     },
     {
         name: "bottom",
         list: [
-            makePanelConfigDefault(ResourcePanelMaker)
+            makeDefaultPanelConfig(ResourcePanelMaker)
         ]
     }
 ];

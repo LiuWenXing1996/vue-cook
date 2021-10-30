@@ -1,7 +1,7 @@
 <template>
     <div
         class="slot-dragger"
-        @drop="handleDrop(slotName, componentConfig, $event)"
+        @drop="handleDrop(cookEditorState, slotName, componentConfig, $event)"
         @dragover="handleDragOver($event)"
         @dragenter="handleDragEnter($event)"
         @dragleave="handleDragLeave($event)"
@@ -15,6 +15,10 @@ import handleDrop from "./handleDrop";
 import handleDragOver from "./handleDragOver";
 import handleDragEnter from "./handleDragEnter"
 import handleDragLeave from "./handleDragLeave"
+import { inject } from 'vue';
+import ICookEditorState from '@/lib/types/ICookEditorState';
+const cookEditorState = inject<ICookEditorState>('cookEditorState') as ICookEditorState
+
 defineProps({
     slotName: {
         type: String,

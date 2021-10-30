@@ -1,10 +1,12 @@
 <template>
-    <component :is="maker?.makePanel(config)"></component>
+    <component :is="maker?.make(config).content"></component>
 </template>
 <script setup lang="ts">
 import usePanelMaker from '@/lib/hooks/usePanelMaker';
+import ICookEditorState from '@/lib/types/ICookEditorState';
 import IPanelConfig from '@/lib/types/IPanelConfig';
-import { toRefs } from 'vue';
+import { inject, toRefs } from 'vue';
+const cookEditorState = inject<ICookEditorState>('cookEditorState') as ICookEditorState
 
 const props = defineProps({
     config: {
@@ -13,7 +15,7 @@ const props = defineProps({
     }
 })
 const { config } = toRefs(props)
-const maker = usePanelMaker(config.value.makerName, config.value.makerPackage)
+const maker = usePanelMaker(cookEditorState, config.value.makerName, config.value.makerPkg)
 </script>
 <style lang="less" scoped>
 </style>

@@ -1,11 +1,11 @@
 
 import { computed } from 'vue';
-import useResourceMakerList from './useResourceMakerList';
+import ICookState from '../types/ICookState';
 import IComponentMaker from './../types/IComponentMaker';
 
-export default function useComponentMakerList() {
+export default function useComponentMakerList(cookState: ICookState) {
     return computed(() => {
-        const allList = useResourceMakerList().value
+        const allList = cookState.getMakerList()
         return allList.filter(e => e.type === "component") as IComponentMaker[]
     })
 }

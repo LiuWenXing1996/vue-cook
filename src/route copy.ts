@@ -1,3 +1,4 @@
+//@ts-nocheck
 import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router'
 import { CookEditor, CookPlayer, useCookConfig, usePage } from "@/lib/index"
 

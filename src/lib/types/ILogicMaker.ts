@@ -1,8 +1,9 @@
+import ICookPlayerState from "./ICookPlayerState";
 import ILogicConfig from "./ILogicConfig";
 import IResourceMaker from './IResourceMaker';
 
-export default interface ILogicMaker extends IResourceMaker {
-    makeLogic: (config: ILogicConfig) => Function,
+export default interface ILogicMaker<
+    T extends ILogicConfig = ILogicConfig>
+    extends IResourceMaker<T, ICookPlayerState, Function> {
     params?: string[],
-   
 }

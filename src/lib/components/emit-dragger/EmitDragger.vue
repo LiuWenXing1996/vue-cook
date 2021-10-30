@@ -1,7 +1,7 @@
 <template>
     <div
         class="emit-dragger"
-        @drop="handleDrop(emitName, componentConfig, $event)"
+        @drop="handleDrop(cookEditorState, emitName, componentConfig, $event)"
         @dragover="handleDragOver($event)"
         @dragenter="handleDragEnter($event)"
         @dragleave="handleDragLeave($event)"
@@ -15,6 +15,10 @@ import handleDrop from "./handleDrop";
 import handleDragOver from "./handleDragOver";
 import handleDragEnter from "./handleDragEnter"
 import handleDragLeave from "./handleDragLeave"
+import ICookEditorState from '@/lib/types/ICookEditorState';
+import { inject } from 'vue';
+const cookEditorState = inject<ICookEditorState>('cookEditorState') as ICookEditorState
+
 // TODO改成logic dragger?
 defineProps({
     emitName: {

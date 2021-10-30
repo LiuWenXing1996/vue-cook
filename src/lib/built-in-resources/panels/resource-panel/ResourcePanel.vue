@@ -46,10 +46,10 @@ import { NSpace, NInput, NIcon, NSelect, NScrollbar } from "naive-ui"
 import { Search as SearchIcon } from "@vicons/ionicons5"
 import { computed, inject, Ref, ref } from "vue";
 import { uniq } from "lodash-es"
-import ICookEditorConfig from "@/lib/types/ICookEditorConfig";
-const cookEditorConfig = inject<Ref<ICookEditorConfig>>('cookEditorConfig') as Ref<ICookEditorConfig>
+import ICookEditorState from "@/lib/types/ICookEditorState";
+const cookEditorState = inject<ICookEditorState>('cookEditorState') as ICookEditorState
 const makerList = computed(() => {
-    return cookEditorConfig.value.makerList
+    return cookEditorState.getMakerList()
 })
 const result = computed(() => {
     let _res = makerList.value

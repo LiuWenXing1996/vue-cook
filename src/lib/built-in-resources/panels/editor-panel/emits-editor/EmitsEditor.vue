@@ -19,10 +19,12 @@
 import useComponentMaker from '@/lib/hooks/useComponentMaker';
 import useComponentSelected from '@/lib/hooks/useComponentSelected';
 import ILogicConfig from '@/lib/types/ILogicConfig';
-import { h, ref, watch } from 'vue';
+import { h, inject, ref, watch } from 'vue';
 import { NFormItem, NDataTable } from "naive-ui"
 import EmitLogicAction from "./EmitLogicAction.vue"
 import EmitDragger from "@/lib/components/emit-dragger/EmitDragger.vue"
+import ICookEditorState from '@/lib/types/ICookEditorState';
+const cookEditorState = inject<ICookEditorState>('cookEditorState') as ICookEditorState
 
 interface IEmitOption {
     label: string,
@@ -101,7 +103,7 @@ const updateEmitOptions = () => {
         emitOptions.value = [];
         return;
     };
-    const maker = useComponentMaker(config.value?.makerName, config.value?.makerPackage).value
+    const maker = useComponentMaker(cookEditorState, config.value?.makerName, config.value?.makerPkg).value
     if (!maker) {
         emitOptions.value = [];
         return;

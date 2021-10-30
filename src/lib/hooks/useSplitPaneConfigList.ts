@@ -1,7 +1,7 @@
 import { toRefs } from "@vueuse/shared";
 import { Ref } from "vue";
-import ICookEditorConfig from './../types/ICookEditorConfig';
+import ICookEditorState from './../types/ICookEditorState';
 
-export default function useSplitPaneConfigList(cookEditorConfig: Ref<ICookEditorConfig>) {
-    return toRefs(cookEditorConfig).splines
+export default function useSplitPaneConfigList(cookEditorState: ICookEditorState) {
+    return toRefs(cookEditorState).splines
 }

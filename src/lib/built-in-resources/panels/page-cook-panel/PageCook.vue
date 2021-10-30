@@ -5,9 +5,10 @@
     </div>
 </template>
 <script setup lang="ts">
+import { createCookPlayerState } from "@/lib";
 import IPage from "@/lib/types/IPage";
 import IPageCookPanelSize from "@/lib/types/IPageCookPanelSize";
-import { computed, ref, toRefs } from "vue";
+import { computed, onMounted, ref, toRefs, watch } from "vue";
 import ComponentPicker from "./ComponentPicker.vue";
 
 const props = defineProps({
@@ -27,7 +28,7 @@ const props = defineProps({
 
 const { pageEditing, size } = toRefs(props)
 const iframeRef = ref<HTMLIFrameElement>()
-const path = ref(pageEditing.value.path)
+const path = ref(`${location.href}?preview=${pageEditing.value.uid}`)
 const toPx = (n: number) => `${n}px`
 const widthPx = computed(() => toPx(size.value.width * size.value.scale / 100))
 const heightPx = computed(() => toPx(size.value.height * size.value.scale / 100))
@@ -35,6 +36,13 @@ const iframeWidthPx = computed(() => toPx(size.value.width))
 const iframeHeightPx = computed(() => toPx(size.value.height))
 const scaleString = computed(() => {
     return `scale(${size.value.scale / 100})`
+})
+
+onMounted(() => {
+    // debugger;
+    iframeRef.value!.contentWindow!.onload = () => {
+        // debugger
+    }
 })
 
 export interface IPageCookExpose {

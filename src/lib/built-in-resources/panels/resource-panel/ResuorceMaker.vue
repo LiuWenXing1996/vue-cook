@@ -30,12 +30,12 @@ import PanelIcon from "@/lib/svgs/panel.svg"
 import { NIcon } from "naive-ui"
 import useComponentPickerEnable from "@/lib/hooks/useComponentPickerEnable"
 import IResourceMaker from "@/lib/types/IResourceMaker"
-import makePanelConfigDefault from "@/lib/utils/makePanelConfigDefault"
+import makeDefaultPanelConfig from "@/lib/utils/makeDefaultPanelConfig"
 import IPanelMaker from "@/lib/types/IPanelMaker"
 import useSplitPaneConfigList from "@/lib/hooks/useSplitPaneConfigList"
 import { VueCookLogicMakerDraggerTag, VueCookComponentMakerDraggerTag } from "@/lib/utils/const"
-import ICookEditorConfig from "@/lib/types/ICookEditorConfig"
-const cookEditorConfig = inject<Ref<ICookEditorConfig>>('cookEditorConfig') as Ref<ICookEditorConfig>
+import ICookEditorState from "@/lib/types/ICookEditorState"
+const cookEditorState = inject<ICookEditorState>('cookEditorState') as ICookEditorState
 const props = defineProps({
     maker: {
         type: Object as () => IResourceMaker,
@@ -46,7 +46,7 @@ const props = defineProps({
 const { maker } = toRefs(props)
 const componentPickerEnable = useComponentPickerEnable()
 const splitPaneConfigList = computed(() => {
-    return cookEditorConfig.value.splines
+    return cookEditorState.splines
 })
 const draggable = computed(() => {
     return maker.value.type === "component" || maker.value.type === "logic"
@@ -69,7 +69,7 @@ const handleDragStart = (e: DragEvent) => {
 const handelClick = () => {
     if (maker.value.type === "panel") {
         const _maker = maker.value as IPanelMaker
-        const config = makePanelConfigDefault(_maker)
+        const config = makeDefaultPanelConfig(_maker)
         const splitPaneName = _maker.defaultSplitPaneName;
         const splitPane = splitPaneConfigList.value.find(e => e.name === splitPaneName)
         if (splitPane) {

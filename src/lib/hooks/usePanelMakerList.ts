@@ -1,11 +1,11 @@
 
 import { computed } from 'vue';
-import useResourceMakerList from './useResourceMakerList';
 import IPanelMaker from '../types/IPanelMaker';
+import ICookState from '../types/ICookState';
 
-export default function usePanelMakerList() {
+export default function usePanelMakerList(cookState: ICookState) {
     return computed(() => {
-        const allList = useResourceMakerList().value
+        const allList = cookState.getMakerList()
         return allList.filter(e => e.type === "panel") as IPanelMaker[]
     })
 }

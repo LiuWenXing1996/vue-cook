@@ -4,8 +4,8 @@ import Component from "./Component.vue";
 import { pkgName } from '../../const-value';
 export default defineComponentMaker({
     name: "按钮",
-    package: pkgName,
+    pkg: pkgName,
     props: ["text"],
     emits: ["click"],
-    makeComponent: () => markRaw(Component)
+    make: () => markRaw(Component)
 })

@@ -19,10 +19,12 @@
 import useComponentMaker from '@/lib/hooks/useComponentMaker';
 import useComponentSelected from '@/lib/hooks/useComponentSelected';
 import IComponentConfig from '@/lib/types/IComponentConfig';
-import { h, ref, watch } from 'vue';
+import { h, inject, ref, watch } from 'vue';
 import { NFormItem, NDataTable } from "naive-ui"
 import SlotComponentAction from "./SlotComponentAction.vue"
 import SlotDragger from "@/lib/components/slot-dragger/SlotDragger.vue"
+import ICookEditorState from '@/lib/types/ICookEditorState';
+const cookEditorState = inject<ICookEditorState>('cookEditorState') as ICookEditorState
 
 interface ISlotOption {
     label: string,
@@ -106,7 +108,7 @@ const updateSlotOptions = () => {
         slotOptions.value = [];
         return;
     };
-    const maker = useComponentMaker(config.value?.makerName, config.value?.makerPackage).value
+    const maker = useComponentMaker(cookEditorState, config.value?.makerName, config.value?.makerPkg).value
     if (!maker) {
         slotOptions.value = [];
         return;

@@ -1,11 +1,11 @@
 
 import { computed } from 'vue';
-import useResourceMakerList from './useResourceMakerList';
 import ILogicMaker from '../types/ILogicMaker';
+import ICookState from '../types/ICookState';
 
-export default function useLogicMakerList() {
+export default function useLogicMakerList(cookState: ICookState) {
     return computed(() => {
-        const allList = useResourceMakerList().value
+        const allList = cookState.getMakerList()
         return allList.filter(e => e.type === "logic") as ILogicMaker[]
     })
 }

@@ -1,5 +1,5 @@
 <template>
-    <ComponentRender :config="config.page.component"></ComponentRender>
+    <ComponentRender :config="state.page.component"></ComponentRender>
 </template>
 <script setup lang="ts">
 import IComponentConfig from "@/lib/types/IComponentConfig";
@@ -7,20 +7,22 @@ import ComponentRender from "./ComponentRender.vue"
 import { toRefs, provide } from "vue";
 import exportData from "./utils/exportData";
 import { VueCookEditroTag } from "@/lib/utils/const";
-import IPlayerConfig from "./IPlayerConfig";
+import ICookPlayerState from "@/lib/types/ICookPlayerState";
 const props = defineProps(
     {
-        config: {
-            type: Object as () => IPlayerConfig,
+        state: {
+            type: Object as () => ICookPlayerState,
             required: true
         }
     }
 )
-const { config } = toRefs(props)
-provide("playerConfig", config)
+
+
+const { state } = toRefs(props)
+provide("cookPlayerState", state.value)
 // @ts-ignore
 if (window.parent[VueCookEditroTag]) {
-    exportData(config.value.page.component, config.value.page.path)
+    exportData(state.value)
 }
 </script>
 

@@ -1,8 +1,9 @@
 import IComponentConfig from '@/lib/types/IComponentConfig';
 import useComponentMaker from '@/lib/hooks/useComponentMaker';
-import makeComponentConfigDefault from '@/lib/utils/makeComponentConfigDefault';
+import makeDefaultComponentConfig from '@/lib/utils/makeDefaultComponentConfig';
 import getMakerDataFromDragEvent from '@/lib/utils/getMakerDataFromDragEvent';
-const handleDrop = (slotName: string, componentConfig: IComponentConfig | undefined, e: DragEvent) => {
+import ICookEditorState from '@/lib/types/ICookEditorState';
+const handleDrop = (cookEditorState: ICookEditorState, slotName: string, componentConfig: IComponentConfig | undefined, e: DragEvent) => {
     if (!componentConfig) {
         return
     }
@@ -13,12 +14,12 @@ const handleDrop = (slotName: string, componentConfig: IComponentConfig | undefi
     e.preventDefault()
     e.stopPropagation()
     const makerName = data.name
-    const makerPackage = data.package
-    const maker = useComponentMaker(makerName, makerPackage)
+    const makerPkg = data.package
+    const maker = useComponentMaker(cookEditorState, makerName, makerPkg)
     if (!maker.value) {
         return;
     }
-    const childComponentConfig = makeComponentConfigDefault(maker.value);
+    const childComponentConfig = makeDefaultComponentConfig(maker.value);
     componentConfig.slots = componentConfig.slots || {}
     componentConfig.slots[slotName] = componentConfig.slots[slotName] || []
     componentConfig.slots[slotName].push(childComponentConfig)
