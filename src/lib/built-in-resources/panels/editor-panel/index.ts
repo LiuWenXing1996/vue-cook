@@ -22,4 +22,10 @@ export default definePanelMaker({
             content: markRaw(Component)
         }
     },
+    install: (state) => {
+        state.extra.VueCook = state.extra.VueCook || {}
+        state.extra.VueCook.ComponentEditorPanel = {
+            componetSelected: undefined
+        }
+    }
 })

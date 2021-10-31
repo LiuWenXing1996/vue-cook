@@ -26,6 +26,7 @@
                         <div style="padding: 0 2px;">-</div>
                         <div class="round-pkg-tag">{{ config.makerPkg }}</div>
                     </n-form-item>
+                    <!-- TODO:不同的editor修改 -->
                     <n-divider title-placement="left">属性</n-divider>
                     <props-editor></props-editor>
                     <n-divider title-placement="left">事件</n-divider>
@@ -39,17 +40,31 @@
     </n-scrollbar>
 </template>
 <script setup lang="ts">
-import useComponentSelected from "@/lib/hooks/useComponentSelected";
 import { NScrollbar, NForm, NFormItem, NInput, NDivider, NIcon, NTag } from "naive-ui"
-import { ref } from "vue";
+import { computed, inject, ref, watch } from "vue";
 import { LocationOutline } from "@vicons/ionicons5";
 import EmitsEditor from "./emits-editor/EmitsEditor.vue"
 import SlotsEditor from "./slots-editor/SlotsEditor.vue"
 import PropsEditor from "./PropsEditor.vue"
 import useComponentFocused from "@/lib/hooks/useComponentFocused";
+import ICookEditorState from "@/lib/types/ICookEditorState";
+import findComponentConfig from "@/lib/utils/findComponentConfig";
+import IComponentConfig from "@/lib/types/IComponentConfig";
+const cookEditorState = inject<ICookEditorState>('cookEditorState') as ICookEditorState
 
+const config = ref<IComponentConfig>()
 
-const config = useComponentSelected()
+watch(() => cookEditorState.extra.VueCook?.ComponentEditorPanel?.componetSelected, () => {
+    const configUid = cookEditorState.extra.VueCook?.ComponentEditorPanel?.componetSelected?.componentUid
+    const pageUid = cookEditorState.extra.VueCook?.ComponentEditorPanel?.componetSelected?.pageUid
+    const page = cookEditorState.pages.find(e => e.uid === pageUid)
+    if (page && configUid) {
+        config.value = findComponentConfig(page.component, configUid)
+    } else {
+        config.value = undefined
+    }
+})
+
 const formValue = ref()
 
 const handleMouseLeave = () => {

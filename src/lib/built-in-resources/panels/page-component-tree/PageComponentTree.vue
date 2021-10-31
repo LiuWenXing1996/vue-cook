@@ -58,7 +58,10 @@ const renderLabel = ({ option }: { option: TreeOption }) => {
                 if (option.type === "component") {
                     const uid = option.key as string
                     const pageUid = option.pageUid as string
-                    // TODO:select设置
+                    cookEditorState.extra.VueCook!.ComponentEditorPanel!.componetSelected = {
+                        pageUid: pageUid,
+                        componentUid: uid
+                    }
                 }
             },
             onMousemove: () => {
