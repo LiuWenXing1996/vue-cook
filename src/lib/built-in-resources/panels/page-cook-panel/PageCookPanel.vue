@@ -160,6 +160,7 @@ const isUrlEdited = ref(false)
 const size = ref<IPageCookPanelSize>({
     width: 1920,
     height: 1080,
+    //TODO：默认改成50？
     scale: 100
 })
 const pageCook = ref<IPageCookExpose>()
