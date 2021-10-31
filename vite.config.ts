@@ -18,7 +18,7 @@ export default defineConfig(({ command, mode }) => {
     return {
       ...commonConfig,
       server: {
-        open: true
+        open: "/vue-cook-dev",
       }
     }
   }

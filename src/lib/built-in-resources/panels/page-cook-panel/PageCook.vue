@@ -5,11 +5,15 @@
     </div>
 </template>
 <script setup lang="ts">
-import { createCookPlayerState } from "@/lib";
+
+import ICookEditorState from "@/lib/types/ICookEditorState";
 import IPage from "@/lib/types/IPage";
 import IPageCookPanelSize from "@/lib/types/IPageCookPanelSize";
-import { computed, onMounted, ref, toRefs, watch } from "vue";
+import exportCookEditorData from "@/lib/utils/exportCookEditorData";
+import getCookPlayerExportDataFromWindow from "@/lib/utils/getCookPlayerExportDataFromWindow";
+import { computed, inject, onMounted, ref, toRefs, watch } from "vue";
 import ComponentPicker from "./ComponentPicker.vue";
+const cookEditorState = inject<ICookEditorState>('cookEditorState') as ICookEditorState
 
 const props = defineProps({
     pageEditing: {
@@ -37,12 +41,15 @@ const iframeHeightPx = computed(() => toPx(size.value.height))
 const scaleString = computed(() => {
     return `scale(${size.value.scale / 100})`
 })
+exportCookEditorData(cookEditorState, pageEditing.value.uid)
 
-onMounted(() => {
-    // debugger;
-    iframeRef.value!.contentWindow!.onload = () => {
-        // debugger
+watch(pageEditing, () => {
+    const exportData = getCookPlayerExportDataFromWindow(iframeRef?.value?.contentWindow || undefined)
+    if (exportData) {
+        exportData.setPage(pageEditing.value)
     }
+}, {
+    deep: true
 })
 
 export interface IPageCookExpose {

@@ -27,7 +27,7 @@ const dynamicRoutes: RouteRecordRaw[] = cookEditorState.pages.map(page => {
 
 const routes: RouteRecordRaw[] = [
     {
-        path: '/s',
+        path: '/vue-cook-dev',
         component: CookEditor,
         props: route => ({
             state: cookEditorState,
