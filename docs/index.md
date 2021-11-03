@@ -4,8 +4,10 @@ heroImage: /logo.svg
 heroAlt: Logo image
 heroText: VueCook
 tagline: 基于vue的低代码平台辅助工具
-actionText: 开始使用
-actionLink: /guide/
+actions:
+  - text: 快速上手
+    link: /guide/
+    type: primary
 features:
   - title: 💎 组件渲染DOM一致
     details: 将组件渲染成对应的DOM结构时没有添加任何的包裹div层

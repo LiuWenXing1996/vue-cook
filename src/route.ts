@@ -1,48 +1,10 @@
-import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router'
-import { CookEditor, CookPlayer, createCookEditorState, createCookPlayerState, defaultMakerList } from "@/lib/index"
-import { ButtonMaker, AlertMaker } from "@/test-pkg/index"
-
-const cookEditorState = createCookEditorState({
-    // makerList: [
-    //     ...defaultMakerList,
-    //     ButtonMaker,
-    //     AlertMaker
-    // ]
-})
-
-const dynamicRoutes: RouteRecordRaw[] = cookEditorState.pages.map(page => {
-    const cookPlayerState = createCookPlayerState({
-        page,
-        makerList: [
-            ...defaultMakerList,
-            ButtonMaker,
-            AlertMaker
-        ]
-    })
-    return {
-        path: page.path,
-        component: CookPlayer,
-        props: {
-            state: cookPlayerState
-        }
-    }
-})
-
-const routes: RouteRecordRaw[] = [
-    {
-        path: '/vue-cook-dev',
-        component: CookEditor,
-        props: route => ({
-            state: cookEditorState,
-            preview: route.query.preview
-        })
-    },
-    ...dynamicRoutes
-]
-
+import { createRouter, createWebHistory } from 'vue-router'
+import routes from "virtual:generated-pages";
+console.log(routes)
 const router = createRouter({
     history: createWebHistory(),
     routes,
 })
+//TODO:不使用insider player ，使用路由定义的player，这样更好控制？？？？
 
 export default router
