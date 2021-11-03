@@ -17,9 +17,9 @@
 </template>
 <script setup lang="ts">
 import useComponentMaker from '@/lib/hooks/useComponentMaker';
-import useComponentSelected from '@/lib/hooks/useComponentSelected';
+import useComponentSelected from '../hooks/useComponentSelected';
 import ILogicConfig from '@/lib/types/ILogicConfig';
-import { h, inject, ref, watch } from 'vue';
+import { computed, h, inject, ref, watch } from 'vue';
 import { NFormItem, NDataTable } from "naive-ui"
 import EmitLogicAction from "./EmitLogicAction.vue"
 import EmitDragger from "@/lib/components/emit-dragger/EmitDragger.vue"
@@ -37,8 +37,10 @@ interface IRawData {
     value: ILogicConfig
 }
 const emitOptions = ref<IEmitOption[]>([])
-const config = useComponentSelected()
-
+const selectedComponent = useComponentSelected(cookEditorState).get()
+const config = computed(() => {
+    return selectedComponent.value?.component
+})
 const columns = ref([
     {
         title: '名称',

@@ -3,12 +3,11 @@ import Component from "./PageCookPanel.vue";
 import definePanelMaker from '@/lib/utils/definePanelMaker';
 import IPanelConfig from '@/lib/types/IPanelConfig';
 import { pkgName } from '@/lib/utils/const';
-import removeTab from '@/lib/utils/removeTab';
+import layoutRemoveTab from '@/lib/utils/layoutRemoveTab';
 import makeEmptyPanelConfig from '@/lib/utils/makeEmptyPanelConfig';
-import tabAdd from '@/lib/utils/tabAdd';
+import layoutAddTab from '@/lib/utils/layoutAddTab';
 import IPanelMaker from '@/lib/types/IPanelMaker';
 import makeDefaultPanelConfig from '@/lib/utils/makeDefaultPanelConfig';
-import IResourceMaker from '@/lib/types/IResourceMaker';
 
 interface IPageEditorConfigExtra extends Record<string, string> {
     pageName: string,
@@ -17,28 +16,21 @@ interface IPageEditorConfigExtra extends Record<string, string> {
 
 declare global {
     interface ICookEditorStateExtraVueCook {
-        PageEditorPanel: {
-            pageEditingUidList: string[],
-            componetFoused: {
+        PageEditorPanel?: {
+            pageEditingUidList?: string[],
+            pageUidMapToPanelUid?: Record<string, IPanelConfig>,
+            componetFoused?: {
                 pageUid: string,
                 componentUid: string
-            } | undefined
+            }
         }
     }
-}
-
-const isIPageEditorConfig = (config: any): config is IPanelConfig<IPageEditorConfigExtra> => {
-    if (!config) {
-        return false
-    }
-    const { makerName, makerPkg } = config
-    return makerName === maker.name && makerPkg === maker.pkg
 }
 
 const maker: IPanelMaker<IPanelConfig<IPageEditorConfigExtra>> = definePanelMaker<IPageEditorConfigExtra>({
     name: "page-editor-maker",
     pkg: pkgName,
-    defaultSplitPaneName: "center",
+    defaultSplitLayoutPaneName: "center",
     make: (config) => {
         return {
             title: config?.extra?.pageName || "没有正在编辑的页面",
@@ -64,11 +56,16 @@ const maker: IPanelMaker<IPanelConfig<IPageEditorConfigExtra>> = definePanelMake
             }
         }
     },
+    close: (cookEditorState, config) => {
+        cookEditorState.extra.VueCook!.PageEditorPanel!.pageEditingUidList =
+            cookEditorState.extra.VueCook!.PageEditorPanel!.pageEditingUidList!.filter(d => d !== config.extra?.pageUid)
+    },
     install: (cookEditorState) => {
         // 初始化状态
         cookEditorState.extra.VueCook = cookEditorState.extra.VueCook || {}
         cookEditorState.extra.VueCook.PageEditorPanel = {
             pageEditingUidList: [],
+            pageUidMapToPanelUid: {},
             componetFoused: undefined
         }
         // 监听页面编辑列表
@@ -85,20 +82,19 @@ const maker: IPanelMaker<IPanelConfig<IPageEditorConfigExtra>> = definePanelMake
                     return !prevState.find(d => e === d)
                 })
                 needClose.map(e => {
-                    removeTab(cookEditorState, (resourceConfig) => {
-                        if (isIPageEditorConfig(resourceConfig)) {
-                            return resourceConfig?.extra?.pageUid === e
-                        }
-                        return false
-                    })
+                    const panelConfig = cookEditorState.extra.VueCook?.PageEditorPanel?.pageUidMapToPanelUid?.[e]
+                    if (panelConfig) {
+                        layoutRemoveTab(cookEditorState, panelConfig)
+                    }
                 })
                 needOpen.map(e => {
                     let config = makeDefaultPanelConfig(maker)
                     const page = cookEditorState.pages.find(d => d.uid === e)
                     if (page) {
+                        cookEditorState.extra.VueCook!.PageEditorPanel!.pageUidMapToPanelUid![page.uid] = config
                         config.extra!.pageUid = page.uid
                         config.extra!.pageName = page.name
-                        tabAdd(cookEditorState, config, maker.defaultSplitPaneName)
+                        layoutAddTab(cookEditorState, config, maker.defaultSplitLayoutPaneName)
                     }
                 })
             }

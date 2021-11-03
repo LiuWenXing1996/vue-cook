@@ -49,7 +49,7 @@ import { uniq } from "lodash-es"
 import ICookEditorState from "@/lib/types/ICookEditorState";
 const cookEditorState = inject<ICookEditorState>('cookEditorState') as ICookEditorState
 const makerList = computed(() => {
-    return cookEditorState.getMakerList()
+    return cookEditorState.makerList
 })
 const result = computed(() => {
     let _res = makerList.value

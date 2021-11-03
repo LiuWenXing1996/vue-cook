@@ -1,9 +1,9 @@
 <template>
-    <ComponentRender :config="state.page.component"></ComponentRender>
+    <ComponentRender :config="state.page.component" :dev="dev"></ComponentRender>
 </template>
 <script setup lang="ts">
 import ComponentRender from "./ComponentRender.vue"
-import { toRefs, provide } from "vue";
+import { toRefs, provide, ref } from "vue";
 import exportData from "./utils/exportData";
 import ICookPlayerState from "@/lib/types/ICookPlayerState";
 const props = defineProps(
@@ -17,11 +17,13 @@ const props = defineProps(
         }
     }
 )
+let dev = ref(false)
 const { state, preview } = toRefs(props)
 provide("cookPlayerState", state.value)
 // @ts-ignore
 if (preview.value) {
     exportData(state.value)
+    dev.value = true
 }
 </script>
 

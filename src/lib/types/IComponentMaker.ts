@@ -9,5 +9,4 @@ export default interface IComponentMaker<
     slots?: string[],
     props?: string[],
     emits?: string[],
-    //TODO:每个key都加个tips?
 }

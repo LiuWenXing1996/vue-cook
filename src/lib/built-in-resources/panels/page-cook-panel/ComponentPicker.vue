@@ -14,10 +14,11 @@
 import IComponentOverlay from "@/lib/types/IComponentOverlay"
 import IPageCookPanelSize from "@/lib/types/IPageCookPanelSize"
 import getCookPlayerExportDataFromWindow from "@/lib/utils/getCookPlayerExportDataFromWindow"
-import { computed, ref, toRefs, watch } from "vue"
+import { computed, inject, ref, toRefs, watch } from "vue"
 import ComponentOverlay from "./component-overlay/ComponentOverlay.vue"
-import useComponentFocused from "@/lib/hooks/useComponentFocused"
-
+import useComponentFocused from "@/lib/built-in-resources/panels/page-cook-panel/hooks/useComponentFocused"
+import ICookEditorState from "@/lib/types/ICookEditorState"
+const cookEditorState = inject<ICookEditorState>('cookEditorState') as ICookEditorState
 const props = defineProps({
     iframeRef: {
         type: Object as () => HTMLIFrameElement,
@@ -32,14 +33,14 @@ const props = defineProps({
     }
 })
 const { iframeRef, enablePicker, size } = toRefs(props)
-const componentFocused = useComponentFocused();
+const componentFocused = useComponentFocused(cookEditorState).get();
 watch(componentFocused, () => {
     if (componentFocused.value) {
         const rect = iframeRef?.value?.getBoundingClientRect()
         if (rect) {
             const exportData = getCookPlayerExportDataFromWindow(iframeRef?.value?.contentWindow || undefined)
             if (exportData && rect) {
-                const componentOverlay = exportData.getComponetnOverlayFromComponentConfigUid(componentFocused.value.uid)
+                const componentOverlay = exportData.getComponetnOverlayFromComponentConfigUid(componentFocused.value.component.uid)
                 // if(!overlay.value)
                 overlay.value = componentOverlay
             }

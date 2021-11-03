@@ -1,8 +1,18 @@
 import IPanelConfig from "./IPanelConfig";
 
-export type SplitPaneName = "left" | "center" | "right" | "bottom"
 export default interface ISplitPaneConfig {
-    name: SplitPaneName,
-    list: IPanelConfig[]
+    list: IPanelConfig[],
+    split?: {
+        isH: Boolean,
+        config: ISplitPaneConfig
+    }
 }
-// TODO:改成含有四个值的对象
+
+// export interface ISplitPaneConfigA {
+//     list: IPanelConfig[],
+//     split?: {
+//         isH: Boolean,
+//         config: ISplitPaneConfigA
+//     }
+// }
+

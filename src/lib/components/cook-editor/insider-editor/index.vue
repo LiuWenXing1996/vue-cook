@@ -1,24 +1,22 @@
 <template>
     <n-config-provider :locale="zhCN" :date-locale="dateZhCN" style="height: 100%;">
         <div class="cook-editor">
-            <telport-box :lock="lockTelport"></telport-box>
             <splitpanes>
-                <!-- TODO：保持四个面板不变，然后开发分栏功能 -->
                 <pane min-size="15" size="20">
-                    <draggable-tabs :list="getPaneData('left')"></draggable-tabs>
+                    <panel-list :list="state.layout.left"></panel-list>
                 </pane>
                 <pane min-size="15" size="60">
                     <splitpanes :horizontal="true">
                         <pane min-size="15" size="80">
-                            <draggable-tabs :list="getPaneData('center')"></draggable-tabs>
+                            <panel-list :list="state.layout.center"></panel-list>
                         </pane>
                         <pane min-size="15" size="20">
-                            <draggable-tabs :list="getPaneData('bottom')"></draggable-tabs>
+                            <panel-list :list="state.layout.bottom"></panel-list>
                         </pane>
                     </splitpanes>
                 </pane>
                 <pane min-size="15" size="20">
-                    <draggable-tabs :list="getPaneData('right')"></draggable-tabs>
+                    <panel-list :list="state.layout.right"></panel-list>
                 </pane>
             </splitpanes>
         </div>
@@ -27,11 +25,9 @@
 <script setup lang="ts">
 import { Splitpanes, Pane } from 'splitpanes'
 import 'splitpanes/dist/splitpanes.css'
-import { onMounted, onUnmounted, ref, toRefs, provide, computed, toRaw, reactive } from 'vue';
+import { ref, toRefs, provide } from 'vue';
 import ICookEditorState from '@/lib/types/ICookEditorState';
-import TelportBox from './TelportBox.vue'
-import DraggableTabs from './DraggableTabs.vue'
-import { SplitPaneName } from '@/lib/types/ISplitPaneConfig';
+import PanelList from "./PanelList.vue"
 import { NConfigProvider, zhCN, dateZhCN } from "naive-ui"
 const props = defineProps({
     state: {
@@ -41,20 +37,7 @@ const props = defineProps({
 })
 
 const { state } = toRefs(props)
-
-//TODO:刷新page
 provide('cookEditorState', state.value)
-const lockTelport = ref(true)
-
-const splitPaneConfigList = computed(() => {
-    return state.value.splines
-})
-
-const getPaneData = (name: SplitPaneName) => {
-    const found = splitPaneConfigList.value.find(e => e.name === name);
-    return found?.list || []
-}
-
 </script>
 <style lang="less" scoped>
 .cook-editor {

@@ -1,23 +1,19 @@
-import IComponentConfig from '@/lib/types/IComponentConfig';
-import useComponentSelected from '@/lib/hooks/useComponentSelected';
+import useComponentSelected from '@/lib/built-in-resources/panels/editor-panel/hooks/useComponentSelected';
 
 import ICookEditorState from '@/lib/types/ICookEditorState';
 import IComponentOverlay from '@/lib/types/IComponentOverlay';
-const componentSelected = useComponentSelected();
 const handleClick = (cookEditorState: ICookEditorState, overlay: IComponentOverlay, event: MouseEvent) => {
     event.stopPropagation()
-
     if (
-        cookEditorState.extra.VueCook?.ComponentEditorPanel?.componetSelected &&
-        cookEditorState.extra.VueCook?.ComponentEditorPanel.componetSelected.pageUid === overlay.pageUid &&
-        cookEditorState.extra.VueCook?.ComponentEditorPanel.componetSelected.componentUid === overlay.configUid
+        useComponentSelected(cookEditorState).get().value?.page.uid === overlay.pageUid &&
+        useComponentSelected(cookEditorState).get().value?.component.uid === overlay.configUid
     ) {
-        cookEditorState.extra.VueCook!.ComponentEditorPanel.componetSelected = undefined
+        useComponentSelected(cookEditorState).set()
     } else {
-        cookEditorState.extra.VueCook!.ComponentEditorPanel!.componetSelected = {
+        useComponentSelected(cookEditorState).set({
             pageUid: overlay.pageUid,
             componentUid: overlay.configUid
-        }
+        })
     }
 }
 

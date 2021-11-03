@@ -1,6 +1,6 @@
 import ICookState from "./ICookState";
 import IPage from "./IPage";
-import ISplitPaneConfig from "./ISplitPaneConfig";
+import ISplitLayout from './ISplitLayout';
 
 declare global {
     interface ICookEditorStateExtraVueCook { }
@@ -11,6 +11,6 @@ declare global {
 
 export default interface ICookEditorState extends ICookState {
     pages: IPage[],
-    splines: ISplitPaneConfig[],
+    layout: ISplitLayout,
     extra: Partial<ICookEditorStateExtra>
 }

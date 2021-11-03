@@ -26,7 +26,6 @@
                         <div style="padding: 0 2px;">-</div>
                         <div class="round-pkg-tag">{{ config.makerPkg }}</div>
                     </n-form-item>
-                    <!-- TODO:不同的editor修改 -->
                     <n-divider title-placement="left">属性</n-divider>
                     <props-editor></props-editor>
                     <n-divider title-placement="left">事件</n-divider>
@@ -41,40 +40,35 @@
 </template>
 <script setup lang="ts">
 import { NScrollbar, NForm, NFormItem, NInput, NDivider, NIcon, NTag } from "naive-ui"
-import { computed, inject, ref, watch } from "vue";
+import { computed, inject, ref } from "vue";
 import { LocationOutline } from "@vicons/ionicons5";
 import EmitsEditor from "./emits-editor/EmitsEditor.vue"
 import SlotsEditor from "./slots-editor/SlotsEditor.vue"
 import PropsEditor from "./PropsEditor.vue"
-import useComponentFocused from "@/lib/hooks/useComponentFocused";
+import useComponentFocused from "@/lib/built-in-resources/panels/page-cook-panel/hooks/useComponentFocused";
 import ICookEditorState from "@/lib/types/ICookEditorState";
-import findComponentConfig from "@/lib/utils/findComponentConfig";
-import IComponentConfig from "@/lib/types/IComponentConfig";
+import useComponentSelected from "./hooks/useComponentSelected";
+
 const cookEditorState = inject<ICookEditorState>('cookEditorState') as ICookEditorState
 
-const config = ref<IComponentConfig>()
-
-watch(() => cookEditorState.extra.VueCook?.ComponentEditorPanel?.componetSelected, () => {
-    const configUid = cookEditorState.extra.VueCook?.ComponentEditorPanel?.componetSelected?.componentUid
-    const pageUid = cookEditorState.extra.VueCook?.ComponentEditorPanel?.componetSelected?.pageUid
-    const page = cookEditorState.pages.find(e => e.uid === pageUid)
-    if (page && configUid) {
-        config.value = findComponentConfig(page.component, configUid)
-    } else {
-        config.value = undefined
-    }
+const selectedComponent = useComponentSelected(cookEditorState).get()
+const config = computed(() => {
+    return selectedComponent.value?.component
 })
 
 const formValue = ref()
 
 const handleMouseLeave = () => {
-    const componentFocused = useComponentFocused();
-    componentFocused.value = undefined
+    useComponentFocused(cookEditorState).set()
 }
 
 const handleMouseMove = (e: MouseEvent) => {
-    const componentFocused = useComponentFocused();
-    componentFocused.value = config.value
+    if (selectedComponent.value?.page.uid && selectedComponent.value?.component.uid) {
+        useComponentFocused(cookEditorState).set({
+            pageUid: selectedComponent.value?.page.uid,
+            componentUid: selectedComponent.value?.component.uid
+        })
+    }
 }
 
 

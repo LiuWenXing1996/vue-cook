@@ -5,7 +5,7 @@ import { pkgName } from '../../const-value';
 export default defineComponentMaker({
     name: "按钮",
     pkg: pkgName,
-    props: ["text"],
+    props: ["text", "count"],
     emits: ["click"],
     make: () => markRaw(Component)
 })

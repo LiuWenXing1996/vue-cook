@@ -5,7 +5,7 @@ import IComponentMaker from './../types/IComponentMaker';
 
 export default function useComponentMakerList(cookState: ICookState) {
     return computed(() => {
-        const allList = cookState.getMakerList()
+        const allList = cookState.makerList
         return allList.filter(e => e.type === "component") as IComponentMaker[]
     })
 }

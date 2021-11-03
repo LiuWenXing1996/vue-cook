@@ -53,7 +53,7 @@ const renderLabel = ({ option }: { option: TreeOption }) => {
             onClick: () => {
                 if (option.type === "page") {
                     const uid = option.key as string;
-                    cookEditorState.extra.VueCook?.PageEditorPanel?.pageEditingUidList.push(uid)
+                    cookEditorState.extra.VueCook?.PageEditorPanel?.pageEditingUidList?.push(uid)
                 }
                 if (option.type === "component") {
                     const uid = option.key as string

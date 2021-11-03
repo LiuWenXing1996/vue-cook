@@ -17,9 +17,9 @@
 </template>
 <script setup lang="ts">
 import useComponentMaker from '@/lib/hooks/useComponentMaker';
-import useComponentSelected from '@/lib/hooks/useComponentSelected';
+import useComponentSelected from '../hooks/useComponentSelected';
 import IComponentConfig from '@/lib/types/IComponentConfig';
-import { h, inject, ref, watch } from 'vue';
+import { computed, h, inject, ref, watch } from 'vue';
 import { NFormItem, NDataTable } from "naive-ui"
 import SlotComponentAction from "./SlotComponentAction.vue"
 import SlotDragger from "@/lib/components/slot-dragger/SlotDragger.vue"
@@ -38,7 +38,10 @@ interface IRowData {
     value: IComponentConfig
 }
 const slotOptions = ref<ISlotOption[]>([])
-const config = useComponentSelected()
+const selectedComponent = useComponentSelected(cookEditorState).get()
+const config = computed(() => {
+    return selectedComponent.value?.component
+})
 
 const columns = ref([
     {
@@ -54,6 +57,7 @@ const columns = ref([
                 {
                     config: rowData.value,
                     slotName: rowData.slotName,
+                    pageUid: selectedComponent.value?.page.uid,
                     onDel: () => {
                         const slot = config.value?.slots?.[rowData.slotName];
                         if (slot) {
@@ -61,7 +65,13 @@ const columns = ref([
                         }
                     },
                     onSelect: () => {
-                        config.value = rowData.value
+                        if (selectedComponent.value?.page.uid) {
+                            useComponentSelected(cookEditorState).set({
+                                pageUid: selectedComponent.value?.page.uid,
+                                componentUid: rowData.value.uid
+                            })
+                        }
+                        // config.value = rowData.value
                     },
                     onUp: () => {
                         const slot = config.value?.slots?.[rowData.slotName];

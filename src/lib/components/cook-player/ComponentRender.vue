@@ -7,15 +7,15 @@
         :uid="config.uid"
     >
         <template v-for="(slot,name) in config?.slots" v-slot:[name]>
-            <component-render :config="_config" v-for="_config in slot"></component-render>
+            <component-render :config="_config" v-for="_config in slot" :dev="dev"></component-render>
         </template>
     </component>
     <span v-else>{{ config.makerPkg }} - {{ config.makerName }}没有找到</span>
 </template>
 <script setup lang="ts">
-import { getCurrentInstance, toRefs, onMounted, onUnmounted, computed, Ref, inject } from "vue";
+import { getCurrentInstance, toRefs, onMounted, onUnmounted, computed, Ref, watch, inject, onUpdated } from "vue";
 import type IComponentConfig from "@/lib/types/IComponentConfig";
-import { componentInstanceMap, componentConfigMap } from "./utils/exportData"
+import { ComponentUidToInstanceMap, ElementToComponentUidMap } from "./utils/exportData"
 import getComponentElements from "./utils/getComponentElements";
 import logicCompiler from "@/lib/utils/logic-compiler";
 import IComponentMaker from "@/lib/types/IComponentMaker";
@@ -26,12 +26,18 @@ const props = defineProps(
         config: {
             type: Object as () => IComponentConfig,
             required: true
+        },
+        dev: {
+            type: Boolean,
+            default: false
         }
     }
 )
-const { config } = toRefs(props)
+const { config, dev } = toRefs(props)
+
+
 const maker = computed(() => {
-    const makerList = cookPlayerState.getMakerList()
+    const makerList = cookPlayerState.makerList
     const { makerName, makerPkg } = config.value
     const _maker = makerList.find(e => e.name === makerName && e.pkg === makerPkg)
     return _maker as IComponentMaker | undefined;
@@ -55,18 +61,28 @@ const emits = computed(() => {
     }
     return res
 })
-onMounted(() => {
-    const internalInstance = getCurrentInstance()
-    if (internalInstance) {
-        const elements = getComponentElements(internalInstance)
-        elements.forEach(el => {
-            componentConfigMap.set(el, config.value)
-        })
-        componentInstanceMap.set(config.value, internalInstance)
-    }
-})
-onUnmounted(() => {
+if (dev.value) {
+    onMounted(() => {
+        const internalInstance = getCurrentInstance()
+        if (internalInstance) {
+            const elements = getComponentElements(internalInstance)
+            elements.forEach(el => {
+                ElementToComponentUidMap.set(el, config.value.uid)
+            })
+            ComponentUidToInstanceMap.set(config.value.uid, internalInstance)
+        }
+    })
+    onUpdated(() => {
+        const internalInstance = getCurrentInstance()
+        if (internalInstance) {
+            const elements = getComponentElements(internalInstance)
+            elements.forEach(el => {
+                ElementToComponentUidMap.set(el, config.value.uid)
+            })
+            ComponentUidToInstanceMap.set(config.value.uid, internalInstance)
+        }
+    })
+}
 
-})
 
 </script>

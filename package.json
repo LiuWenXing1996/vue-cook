@@ -12,12 +12,10 @@
     "lint": "vue-tsc --noEmit",
     "docs:dev": "vitepress dev docs",
     "docs:build": "vitepress build docs",
-    "docs:serve": "vitepress serve docs",
-    "tree": "node scripts/tree.js"
+    "docs:serve": "vitepress serve docs"
   },
   "dependencies": {
-    "vue": "^3.2.6",
-    "vue-router": "^4.0.11"
+    "vue": "^3.2.6"
   },
   "devDependencies": {
     "@daybrush/drag": "^0.19.3",
@@ -33,23 +31,16 @@
     "@vitejs/plugin-vue": "^1.6.1",
     "@vue/compiler-sfc": "^3.2.6",
     "@vueuse/core": "^6.5.3",
-    "camelcase": "^6.2.0",
-    "css-enums": "^1.0.4",
-    "kebab-case": "^1.0.1",
     "less": "^4.1.1",
     "lodash-es": "^4.17.21",
-    "mitt": "^3.0.0",
-    "monaco-editor": "^0.28.1",
     "naive-ui": "^2.19.7",
     "splitpanes": "^3.0.6",
-    "tree-cli": "^0.6.7",
-    "ts-transformer-keys": "^0.4.3",
     "typescript": "^4.3.2",
     "uuid": "^8.3.2",
     "vite": "^2.5.4",
     "vite-plugin-vue-svg-reactive-loader": "^0.0.3",
-    "vitepress": "^0.17.0",
-    "vue-tsc": "^0.2.2",
-    "vuedraggable": "^4.1.0"
+    "vitepress": "^0.20.0",
+    "vue-router": "^4.0.12",
+    "vue-tsc": "^0.2.2"
   }
 }

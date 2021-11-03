@@ -4,18 +4,17 @@
 
 VueCook 是一个基于vue的低代码平台辅助工具，让你的vue组件更容易低代码化。它主要有两个组件组成：
 
-- `CookEditor` 编辑器组件，它提供了一个支持自由布局的交互界面，可以将`标签页`自由的拖拽，也可以将其水平或自由的嵌套排列。
-- `CookPlayer` 组件配置渲染组件，它根据提供的组件配置，使用`Vue`的`动态组件`将其渲染成对应的组件树，为了保持DOM结构的一致性，在渲染过程中没有添加任何的包裹div
+- `CookEditor` 编辑器组件，它将多个面板融合在同一个页面中，我们可以通过自定义自己的交互面板来扩充这个编辑器的搭建能力
+- `CookPlayer` 配置渲染组件，通过编辑器组件，我们会生成一套配置，将其放入到此组件中，它根据提供的配置，使用`Vue`的`动态组件`将其渲染成对应的组件树，并且为了保持DOM结构的一致性，在渲染过程中没有添加任何的包裹div
 
 VueCook 将`组件`、`逻辑`和`交互面板`统称为资源，通过对应的`define***Maker`函数可以添加自定义的资源。VueCook内置了一些开箱即用的资源：
 - 内置组件
-  - `RootAppMaker`
-- 内置逻辑
+  - `RootAppMaker`：根应用组件
 - 内置交互面板
   - 资源面板
   - 页面组件树
   - 组件基础编辑器
-  - 页面编辑面板
+  - 页面编辑器
  
 ## 安装
 
@@ -40,41 +39,31 @@ $ yarn add vue-cook
 在路由配置文件中添加相关路由
 
 ```js
-import { createRouter, createWebHistory } from 'vue-router'
-import { CookEditor, CookPlayer, useCookConfig } from "vue-cook"
+import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router'
+import { CookEditor, createCookEditorState} from "@/lib/index"
 
-const cookConfig = useCookConfig() // 获取到配置文件
-
-// 动态生成需要编辑的页面路由
-const dynamicRoutes = cookConfig.value.pages.map(page => {
-    return {
-        path: page.path,
-        component: CookPlayer,
-        props: {
-            config: page.component
-        }
-    }
-})
+const cookEditorState = createCookEditorState() // 创建编辑器全局状态
 const routes = [
     {
-        path: '/cook', // 可以是其他名称
+        path: '/vue-cook', // 自定义地址
         component: CookEditor,
-        props: {
-            config: cookConfig
-        }
-    },
-    ...dynamicRoutes
+        props: route => ({
+            state: cookEditorState,  // 传入状态
+            preview: route.query.preview // 是否预览
+        })
+    }
 ]
 const router = createRouter({
     history: createWebHistory(), // 也可以使用hash模式
-    routes, 
+    routes,
 })
 
 export default router
-```
-## 模板
 
-- 资源包开发模板
-- 应用开发模板
+```
+此时开启开发服务器，进入`/vue-cook`，你会看到如下页面
+
+
+![默认页面](/默认界面.png)
 
 

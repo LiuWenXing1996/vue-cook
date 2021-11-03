@@ -5,12 +5,11 @@
     <template v-else>没有找到id为{{ preview }}的页面</template>
 </template>
 <script setup lang="ts">
-import CookPlayer from "@/lib/components/cook-player/CookPlayer.vue"
 import ICookEditorState from "@/lib/types/ICookEditorState";
 import ICookPlayerState from "@/lib/types/ICookPlayerState";
 import createCookPlayerState from "@/lib/utils/createCookPlayerState";
 import getCookEditorExportDataFromWindow from "@/lib/utils/getCookEditorExportDataFromWindow";
-import { toRefs, watch } from "vue";
+import { toRefs } from "vue";
 import CookPlayerWrapper from "./CookPlayerWrapper.vue"
 
 const props = defineProps({
@@ -30,7 +29,7 @@ let playerState: ICookPlayerState | undefined
 if (page) {
     playerState = createCookPlayerState({
         page: page,
-        preInstallMakerList: state.value.getMakerList()
+        makerList: state.value.makerList
     })
 }
 </script>

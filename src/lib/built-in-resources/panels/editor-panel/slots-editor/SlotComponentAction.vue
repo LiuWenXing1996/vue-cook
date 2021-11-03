@@ -57,9 +57,10 @@ import { ArrowUp48Regular, ArrowDown48Regular } from "@vicons/fluent"
 import { SelectOutlined } from "@vicons/antd"
 import { NIcon, NPopover, NSpace, } from "naive-ui"
 import ComponentInfoTips from "./ComponentInfoTips.vue"
-import useComponentFocused from "@/lib/hooks/useComponentFocused";
-import { toRefs } from "vue";
-
+import useComponentFocused from "@/lib/built-in-resources/panels/page-cook-panel/hooks/useComponentFocused";
+import { inject, toRefs } from "vue";
+import ICookEditorState from "@/lib/types/ICookEditorState";
+const cookEditorState = inject<ICookEditorState>('cookEditorState') as ICookEditorState
 const props = defineProps({
     config: {
         type: Object as () => IComponentConfig,
@@ -68,17 +69,23 @@ const props = defineProps({
     slotName: {
         type: String,
         required: true
+    },
+    pageUid: {
+        type: String,
     }
 })
-const { config } = toRefs(props)
+const { config, pageUid } = toRefs(props)
 const handleMouseLeave = () => {
-    const componentFocused = useComponentFocused();
-    componentFocused.value = undefined
+    useComponentFocused(cookEditorState).set()
 }
 
 const handleMouseMove = (e: MouseEvent) => {
-    const componentFocused = useComponentFocused();
-    componentFocused.value = config.value
+    if (pageUid?.value) {
+        useComponentFocused(cookEditorState).set({
+            pageUid: pageUid.value,
+            componentUid: config.value.uid
+        })
+    }
 }
 const emits = defineEmits(["del", "location", "up", "down", "select"])
 </script>

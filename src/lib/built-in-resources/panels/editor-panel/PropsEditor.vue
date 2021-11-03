@@ -8,8 +8,8 @@
 </template>
 <script setup lang="ts">
 import useComponentMaker from '@/lib/hooks/useComponentMaker';
-import useComponentSelected from '@/lib/hooks/useComponentSelected';
-import { inject, ref, watch } from 'vue';
+import useComponentSelected from './hooks/useComponentSelected';
+import { computed, inject, ref, watch } from 'vue';
 import { NFormItem, NInput } from "naive-ui"
 import ICookEditorState from '@/lib/types/ICookEditorState';
 const cookEditorState = inject<ICookEditorState>('cookEditorState') as ICookEditorState
@@ -20,7 +20,10 @@ interface IPropOption {
 }
 
 const propOptions = ref<IPropOption[]>([])
-const config = useComponentSelected()
+const selectedComponent = useComponentSelected(cookEditorState).get()
+const config = computed(() => {
+    return selectedComponent.value?.component
+})
 
 const updatePropOptions = () => {
     const configValue = config.value;

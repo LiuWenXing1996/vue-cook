@@ -52,16 +52,6 @@ watch(pageEditing, () => {
     deep: true
 })
 
-export interface IPageCookExpose {
-    refresh: (url: string) => void
-}
-
-defineExpose({
-    refresh: (url: string) => {
-        path.value = url
-        iframeRef.value?.contentWindow?.location.reload()
-    }
-})
 </script>
 <style lang="less" scoped>
 .page-cook {

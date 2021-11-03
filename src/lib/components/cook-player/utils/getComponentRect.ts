@@ -1,4 +1,4 @@
-import { ComponentInternalInstance, VNode, isVNode, VNodeArrayChildren } from "vue";
+import { ComponentInternalInstance, VNode, isVNode, VNodeArrayChildren, Fragment } from "vue";
 import isFragment from "./isFragment";
 
 export interface IComponentRect {
@@ -34,7 +34,9 @@ export default function getComponentRect(instance: ComponentInternalInstance) {
 
 function getVNodeRect(vnode: VNode) {
     let rect = createEmptyRect();
-    if (vnode.component) {
+    if (vnode.type === Fragment) {
+        rect = getFragmentRect(vnode)
+    } else if (vnode.component) {
         rect = getComponentRect(vnode.component)
     } else if (vnode.el) {
         const el = vnode.el

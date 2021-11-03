@@ -1,20 +1,23 @@
 import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router'
-import { CookEditor, CookPlayer, createCookEditorState, createCookPlayerState, defaultPreInstallMakerList } from "@/lib/index"
-import { ButtonMaker } from "@/test-pkg/index"
+import { CookEditor, CookPlayer, createCookEditorState, createCookPlayerState, defaultMakerList } from "@/lib/index"
+import { ButtonMaker, AlertMaker } from "@/test-pkg/index"
 
 const cookEditorState = createCookEditorState({
-    preInstallMakerList: [
-        ...defaultPreInstallMakerList,
-        ButtonMaker
-    ]
+    // makerList: [
+    //     ...defaultMakerList,
+    //     ButtonMaker,
+    //     AlertMaker
+    // ]
 })
 
-// TODO:所有的数据让player和editor直接读取storerage里的，而不是通过props传参？
-// TODO:尝试数据不从storeage里取？
-// TODO:player和editor的相互传参还是有问题
 const dynamicRoutes: RouteRecordRaw[] = cookEditorState.pages.map(page => {
     const cookPlayerState = createCookPlayerState({
-        page
+        page,
+        makerList: [
+            ...defaultMakerList,
+            ButtonMaker,
+            AlertMaker
+        ]
     })
     return {
         path: page.path,
@@ -33,10 +36,6 @@ const routes: RouteRecordRaw[] = [
             state: cookEditorState,
             preview: route.query.preview
         })
-        // props: {
-        //     state: cookEditorState
-        // },
-        // props: route => ({ query: route.query.q })
     },
     ...dynamicRoutes
 ]

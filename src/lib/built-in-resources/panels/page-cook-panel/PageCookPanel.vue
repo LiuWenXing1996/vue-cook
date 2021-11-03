@@ -40,14 +40,6 @@
                     </n-popover>
                     <n-popover trigger="hover" placement="bottom">
                         <template #trigger>
-                            <n-icon @click="preview">
-                                <eye-outline></eye-outline>
-                            </n-icon>
-                        </template>
-                        打开一个新窗口预览当前页面
-                    </n-popover>
-                    <n-popover trigger="hover" placement="bottom">
-                        <template #trigger>
                             <n-icon>
                                 <page-size-icon></page-size-icon>
                             </n-icon>
@@ -93,26 +85,16 @@
                                 </div>
                             </n-space>
                             <n-space align="center" justify="space-around" style="width: 200px;">
-                                <label style="display: flex;flex-direction: column;">
-                                    地址：
-                                    <n-icon @click="refresh" v-show="isUrlEdited">
-                                        <refresh-outline></refresh-outline>
-                                    </n-icon>
-                                </label>
-                                <!-- TODO:地址修改后重新刷新页面,有问题 -->
+                                <label>地址：</label>
                                 <div style="width: 130px;">
-                                    <n-input v-model:value="tempUrl" size="small" type="textarea"></n-input>
+                                    <n-input
+                                        v-model:value="pageEditing.path"
+                                        size="small"
+                                        type="textarea"
+                                    ></n-input>
                                 </div>
                             </n-space>
                         </n-space>
-                    </n-popover>
-                    <n-popover trigger="hover" placement="bottom">
-                        <template #trigger>
-                            <n-icon @click="refresh">
-                                <refresh-outline></refresh-outline>
-                            </n-icon>
-                        </template>
-                        刷新当前页面
                     </n-popover>
                 </n-space>
             </div>
@@ -122,7 +104,6 @@
                         :page-editing="pageEditing"
                         :enable-picker="enablePicker"
                         :size="size"
-                        ref="pageCook"
                     ></page-cook>
                 </ruler-box>
             </div>
@@ -137,7 +118,7 @@ import { NEmpty, NIcon, NPopover, NSpace, NInputNumber, NInput } from "naive-ui"
 import { LocateOutline, ArrowUndoOutline, ArrowRedoOutline, TrashOutline, EyeOutline, InformationCircle, RefreshOutline } from "@vicons/ionicons5"
 import PageSizeIcon from "@/lib/svgs/page-size.svg"
 import { computed, inject, Ref, ref, toRefs, watch } from "vue";
-import PageCook, { IPageCookExpose } from "./PageCook.vue"
+import PageCook from "./PageCook.vue"
 import useComponentPickerEnable from "@/lib/hooks/useComponentPickerEnable";
 import IPageCookPanelSize from "@/lib/types/IPageCookPanelSize";
 import RulerBox from "./ruler-box/RulerBox.vue"
@@ -154,37 +135,11 @@ const pageEditing = computed(() => {
     return cookEditorState.pages.find(e => e.uid === pageUid?.value)
 })
 const enablePicker = useComponentPickerEnable()
-const tempUrl = ref(pageEditing?.value?.path)
-const isUrlEdited = ref(false)
-
 const size = ref<IPageCookPanelSize>({
     width: 1920,
     height: 1080,
-    //TODO：默认改成50？
-    scale: 100
+    scale: 50
 })
-const pageCook = ref<IPageCookExpose>()
-
-const preview = () => {
-    const path = pageEditing?.value?.path
-    if (path) {
-        window.open(path)
-    }
-}
-watch(tempUrl, () => {
-    if (tempUrl.value !== pageEditing?.value?.path) {
-        isUrlEdited.value = true
-        if (pageEditing?.value?.path && tempUrl.value) {
-            pageEditing.value.path = tempUrl.value
-        }
-    }
-})
-
-const refresh = () => {
-    if (pageEditing?.value?.path) {
-        pageCook.value?.refresh(pageEditing?.value?.path)
-    }
-}
 
 const delPage = () => {
     const pageList = cookEditorState.pages

@@ -12,14 +12,6 @@
                 <n-form-item label="名字">
                     <n-input v-model:value="logicConfig.name" />
                 </n-form-item>
-                <n-form-item label="唯一ID">
-                    <div>{{ logicConfig.uid }}</div>
-                </n-form-item>
-                <n-form-item label="maker">
-                    <div class="round-name-tag">{{ logicConfig.makerName }}</div>
-                    <div style="padding: 0 2px;">-</div>
-                    <div class="round-pkg-tag">{{ logicConfig.makerPkg }}</div>
-                </n-form-item>
                 <n-divider title-placement="left">参数</n-divider>
                 <template v-if="paramsOptions.length > 0">
                     <n-form-item :label="paramOption.label" v-for="paramOption in paramsOptions">
@@ -106,7 +98,6 @@ watch(paramsOptions, () => {
         margin-bottom: 12px;
     }
 
-    // TODO:将maker的展示抽象成一个组件
     .round-name-tag,
     .round-pkg-tag {
         background-color: rgba(24, 160, 88, 0.1);

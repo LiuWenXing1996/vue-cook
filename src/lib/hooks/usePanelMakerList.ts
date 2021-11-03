@@ -5,7 +5,7 @@ import ICookState from '../types/ICookState';
 
 export default function usePanelMakerList(cookState: ICookState) {
     return computed(() => {
-        const allList = cookState.getMakerList()
+        const allList = cookState.makerList
         return allList.filter(e => e.type === "panel") as IPanelMaker[]
     })
 }

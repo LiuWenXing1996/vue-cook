@@ -5,17 +5,17 @@ import { pkgName } from '@/lib/utils/const';
 declare global {
     interface ICookEditorStateExtraVueCook {
         ComponentEditorPanel: {
-            componetSelected: {
+            componetSelected?: {
                 pageUid: string,
                 componentUid: string
-            } | undefined
+            }
         }
     }
 }
 export default definePanelMaker({
     name: "基础编辑器",
     pkg: pkgName,
-    defaultSplitPaneName: "right",
+    defaultSplitLayoutPaneName: "right",
     make: () => {
         return {
             title: "基础编辑器",
