@@ -1,9 +1,8 @@
 import { defineUserConfig } from "@vuepress/cli"
-import { defineConfig } from 'vite'
+import { mergeConfig } from 'vite'
 import Pages from "vite-plugin-pages"
-import svgReactiveLoader from "vite-plugin-vue-svg-reactive-loader"
 import path from "path"
-
+import commonConfig from "../../vite.common.config"
 
 export default defineUserConfig({
     title: 'VueCook',
@@ -29,8 +28,8 @@ export default defineUserConfig({
         navbar: [
             { text: '指引', link: '/guide/' },
             { text: 'Api 参考', link: '/api/component' },
+            { text: '示例目录', link: '/demos' },
         ],
-
         sidebar: {
             // catch-all fallback
             '/': [
@@ -43,8 +42,13 @@ export default defineUserConfig({
                         },
                         {
                             text: '开始',
-                            link: '/guide/'
-                        }
+                            link: '/guide/index.md'
+                        },
+                        {
+                            text: '自定义组件',
+                            link: '/guide/custom-component/',
+                            children: [],
+                        },
                     ]
                 },
                 {
@@ -73,34 +77,14 @@ export default defineUserConfig({
     },
     bundler: '@vuepress/bundler-vite',
     bundlerConfig: {
-        viteOptions: defineConfig({
+        viteOptions: mergeConfig({
             plugins: [
                 Pages({
-                    pagesDir: path.resolve(__dirname, '../../demos')
+                    pagesDir: [
+                        { dir: path.resolve(__dirname, '../../demos/pages'), baseRoute: "demos" },
+                    ]
                 }),
-                svgReactiveLoader()
             ],
-            resolve: {
-                alias: {
-                    "@": path.resolve(__dirname, '../../src'),
-                }
-            },
-            optimizeDeps: {
-                include: [
-                    "@daybrush/drag",
-                    "@scena/ruler",
-                    "@vicons/antd",
-                    "@vicons/fluent",
-                    "@vicons/ionicons5",
-                    "@vicons/material",
-                    "@vueuse/core",
-                    "@vicons/tabler",
-                    "lodash-es",
-                    "naive-ui",
-                    "splitpanes",
-                    "uuid"
-                ]
-            }
-        }),
+        }, commonConfig),
     }
 })

@@ -1,5 +1,5 @@
 import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router'
-import { CookEditor, CookPlayer, createCookEditorState, createCookPlayerState, defaultMakerList } from "@/index"
+import { CookEditor, CookPlayer, createCookEditorState, createCookPlayerState, defaultMakerList } from "vue-cook"
 import { ButtonMaker, AlertMaker } from "@/test-pkg/index"
 import autoPages from "virtual:generated-pages";
 

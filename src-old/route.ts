@@ -14,6 +14,5 @@ const router = createRouter({
         ...routes
     ]
 })
-//TODO:不使用insider player ，使用路由定义的player，这样更好控制？？？？
 
 export default router

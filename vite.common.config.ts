@@ -9,6 +9,7 @@ export default defineConfig({
     resolve: {
         alias: {
             "@": path.resolve(__dirname, 'src'),
+            "vue-cook": path.resolve(__dirname, 'src/index.ts'),
         }
     },
     optimizeDeps: {

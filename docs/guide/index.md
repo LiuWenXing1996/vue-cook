@@ -67,7 +67,7 @@ export default router
 示例页面在文档里面显示的效果可能不太理想，你可以点击示例的右上角的按钮，在新的窗口打开示例页面查看
 :::
 
-<iframe-demo src='/guide/getstarted'></iframe-demo>
+<iframe-demo src='/demos/get-started'></iframe-demo>
 
 
 

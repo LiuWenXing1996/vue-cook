@@ -1,7 +1,6 @@
 import { defineUserConfig } from "@vuepress/cli"
-import { defineConfig, mergeConfig } from 'vite'
+import { mergeConfig } from 'vite'
 import Pages from "vite-plugin-pages"
-import svgReactiveLoader from "vite-plugin-vue-svg-reactive-loader"
 import path from "path"
 import commonConfig from "../../vite.common.config"
 
@@ -29,54 +28,58 @@ export default defineUserConfig({
         navbar: [
             { text: '指引', link: '/guide/' },
             { text: 'Api 参考', link: '/api/component' },
+            { text: '示例目录', link: '/demos' },
         ],
-
-        sidebar: {
-            // catch-all fallback
-            '/': [
-                {
-                    text: '指引',
-                    children: [
-                        {
-                            text: '为什么选VueCook',
-                            link: '/guide/why'
-                        },
-                        {
-                            text: '开始',
-                            link: '/guide/'
-                        }
-                    ]
-                },
-                {
-                    text: 'APIs',
-                    children: [
-                        {
-                            text: '组件',
-                            link: '/api/component'
-                        },
-                        {
-                            text: '内置资源',
-                            link: '/api/built-in'
-                        },
-                        {
-                            text: '钩子',
-                            link: '/api/hooks'
-                        },
-                        {
-                            text: '工具',
-                            link: '/api/utils'
-                        }
-                    ]
-                }
-            ]
-        }
+        sidebar: [
+            {
+                text: '指引',
+                children: [
+                    {
+                        text: '为什么选VueCook',
+                        link: '/guide/why'
+                    },
+                    {
+                        text: '开始',
+                        link: '/guide/'
+                    },
+                    // TODO:为啥必须要index.md才可以自动生成二级目录
+                    {
+                        text: '自定义组件',
+                        link: '/guide/custom-component',
+                    },
+                ]
+            },
+            {
+                text: 'APIs',
+                children: [
+                    {
+                        text: '组件',
+                        link: '/api/component'
+                    },
+                    {
+                        text: '内置资源',
+                        link: '/api/built-in'
+                    },
+                    {
+                        text: '钩子',
+                        link: '/api/hooks'
+                    },
+                    {
+                        text: '工具',
+                        link: '/api/utils'
+                    }
+                ]
+            }
+        ]
     },
     bundler: '@vuepress/bundler-vite',
     bundlerConfig: {
         viteOptions: mergeConfig({
             plugins: [
                 Pages({
-                    pagesDir: path.resolve(__dirname, '../../demos')
+                    pagesDir: [
+                        { dir: path.resolve(__dirname, '../../demos/pages'), baseRoute: "demos" },
+                    ]
                 }),
             ],
         }, commonConfig),

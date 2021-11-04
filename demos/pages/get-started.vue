@@ -2,7 +2,7 @@
     <cook-editor :state="cookEditorState" :preview="preview"></cook-editor>
 </template>
 <script setup lang="ts">
-import { CookEditor, createCookEditorState } from "@/index"
+import { CookEditor, createCookEditorState } from "vue-cook"
 import { useRoute } from "vue-router";
 const cookEditorState = createCookEditorState()
 const route = useRoute()

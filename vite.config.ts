@@ -25,5 +25,4 @@ const config = defineConfig({
   }
 })
 
-// TODO:打包
 export default mergeConfig(config, commonConfig)

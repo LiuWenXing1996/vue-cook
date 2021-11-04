@@ -4,6 +4,9 @@
     "paths": {
       "@/*": [
         "src/*"
+      ],
+      "vue-cook": [
+        "src/index.ts"
       ]
     },
     "target": "esnext",
