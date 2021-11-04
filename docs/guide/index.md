@@ -63,7 +63,13 @@ export default router
 ```
 此时开启开发服务器，进入`/vue-cook`，你会看到如下页面
 
+::: tip 在新窗口查看示例
+示例页面在文档里面显示的效果可能不太理想，你可以点击示例的右上角的按钮，在新的窗口打开示例页面查看
+:::
 
-![默认页面](/默认界面.png)
+<iframe-demo src='/guide/getstarted'></iframe-demo>
+
+
+
 
 

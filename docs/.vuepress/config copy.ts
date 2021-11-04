@@ -1,9 +1,9 @@
 import { defineUserConfig } from "@vuepress/cli"
-import { defineConfig, mergeConfig } from 'vite'
+import { defineConfig } from 'vite'
 import Pages from "vite-plugin-pages"
 import svgReactiveLoader from "vite-plugin-vue-svg-reactive-loader"
 import path from "path"
-import commonConfig from "../../vite.common.config"
+
 
 export default defineUserConfig({
     title: 'VueCook',
@@ -73,12 +73,34 @@ export default defineUserConfig({
     },
     bundler: '@vuepress/bundler-vite',
     bundlerConfig: {
-        viteOptions: mergeConfig({
+        viteOptions: defineConfig({
             plugins: [
                 Pages({
                     pagesDir: path.resolve(__dirname, '../../demos')
                 }),
+                svgReactiveLoader()
             ],
-        }, commonConfig),
+            resolve: {
+                alias: {
+                    "@": path.resolve(__dirname, '../../src'),
+                }
+            },
+            optimizeDeps: {
+                include: [
+                    "@daybrush/drag",
+                    "@scena/ruler",
+                    "@vicons/antd",
+                    "@vicons/fluent",
+                    "@vicons/ionicons5",
+                    "@vicons/material",
+                    "@vueuse/core",
+                    "@vicons/tabler",
+                    "lodash-es",
+                    "naive-ui",
+                    "splitpanes",
+                    "uuid"
+                ]
+            }
+        }),
     }
 })

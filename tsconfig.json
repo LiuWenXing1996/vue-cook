@@ -21,6 +21,15 @@
     ]
   },
   "include": [
+    "env.d.ts",
+    "demos/**/*.ts",
+    "demos/**/*.d.ts",
+    "demos/**/*.tsx",
+    "demos/**/*.vue",
+    "docs/.vuepress/**/*.ts",
+    "docs/.vuepress/**/*.d.ts",
+    "docs/.vuepress/**/*.tsx",
+    "docs/.vuepress/**/*.vue",
     "src/**/*.ts",
     "src/**/*.d.ts",
     "src/**/*.tsx",
