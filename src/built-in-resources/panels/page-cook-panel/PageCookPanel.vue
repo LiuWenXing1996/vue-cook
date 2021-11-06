@@ -10,6 +10,7 @@
                             </n-icon>
                         </template>
                         撤销
+                        <!-- TODO：撤销逻辑实现 -->
                     </n-popover>
                     <n-popover trigger="hover" placement="bottom">
                         <template #trigger>
@@ -18,6 +19,7 @@
                             </n-icon>
                         </template>
                         恢复
+                        <!-- TODO：恢复逻辑实现 -->
                     </n-popover>
                     <n-popover trigger="hover" placement="bottom">
                         <template #trigger>

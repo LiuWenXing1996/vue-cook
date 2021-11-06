@@ -4,3 +4,6 @@
 ## `<cook-editor>`
 
 ## `<cook-player>`
+
+## `<emit-dragger>`
+## `<slot-dragger>`

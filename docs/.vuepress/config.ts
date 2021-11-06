@@ -34,40 +34,58 @@ export default defineUserConfig({
             {
                 text: '指引',
                 children: [
+                    '/guide/why',
+                    '/guide/',
                     {
-                        text: '为什么选VueCook',
-                        link: '/guide/why'
+                        text: "自定义组件",
+                        link: "/guide/custom-component/define-a-simple-component-maker",
+                        children: [
+                            '/guide/custom-component/define-a-simple-component-maker',
+                            '/guide/custom-component/add-props-config',
+                            '/guide/custom-component/add-emits-config',
+                            '/guide/custom-component/add-slots-config',
+                            '/guide/custom-component/define-a-container-component',
+                            '/guide/custom-component/share-state-with-other-component'
+                        ]
                     },
                     {
-                        text: '开始',
-                        link: '/guide/'
+                        text: "自定义逻辑",
+                        link: "/guide/custom-logic/define-a-simple-logic",
+                        children: [
+                            '/guide/custom-logic/define-a-simple-logic',
+                            '/guide/custom-logic/add-props-config',
+                            '/guide/custom-logic/share-state-with-other-logic-and-component'
+                        ]
                     },
-                    // TODO:为啥必须要index.md才可以自动生成二级目录
                     {
-                        text: '自定义组件',
-                        link: '/guide/custom-component',
-                    },
+                        text: "自定义面板",
+                        link: "/guide/custom-panel/define-a-simple-panel",
+                        children: [
+                            '/guide/custom-panel/define-a-simple-panel',
+                            '/guide/custom-panel/toggle-panel-by-code',
+                            '/guide/custom-panel/share-state-with-other-panel',
+                            '/guide/custom-panel/define-a-base-edtior-panel'
+                        ]
+                    }
+                ]
+            },
+            {
+                text: '深入',
+                children: [
+                    '/advanced/component-render-principle',
+                    '/advanced/component-picker-principle',
+                    '/advanced/logic-compiler-principle',
+                    '/advanced/panel-load-principle',
+                    '/advanced/global-state-types',
                 ]
             },
             {
                 text: 'APIs',
                 children: [
-                    {
-                        text: '组件',
-                        link: '/api/component'
-                    },
-                    {
-                        text: '内置资源',
-                        link: '/api/built-in'
-                    },
-                    {
-                        text: '钩子',
-                        link: '/api/hooks'
-                    },
-                    {
-                        text: '工具',
-                        link: '/api/utils'
-                    }
+                    '/api/component',
+                    '/api/built-in',
+                    '/api/hooks',
+                    '/api/utils'
                 ]
             }
         ]

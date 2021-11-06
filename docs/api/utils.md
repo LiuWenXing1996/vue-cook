@@ -1,15 +1,27 @@
 # 工具
 
-## defineComponentMaker
+## const 常量
 
+## createCookEditorState
+## createCookPlayerState
+## defaultMakerList
+## defaultSplitLayout
+## defaineComponentMaker
 ## defineLogicMaker
 
 ## definePanelMaker
-
-## makeComponentConfigDefault
-
-## defineCookInstallFunc
-
-## installPkg
-
-## defineCookConfig
+## exportCookEditorData
+## findComponentConfig
+## getCookEditorExportDataFromWindow
+## getCookEditorExportDataUniqTag
+## getCookPlayerExportDataFromWindow
+## getMakerDataFromDataEvent
+## layoutAddTab
+## layputRemoveTab
+## logic-compiler
+## makerDefaultComponentConfig
+## makerDefaultLogicConfig
+## makerDefaultPanelConfig
+## makerEmptyComponentConfig
+## makerEmptyLogicConfig
+## makerEmptyPanelConfig
