@@ -39,6 +39,7 @@ const openNew = () => {
     border-top-right-radius: 5px;
     display: flex;
     flex-direction: column;
+    margin-bottom: 1em;
     .title {
         height: 40px;
         border-bottom: 1px solid #eaecef;

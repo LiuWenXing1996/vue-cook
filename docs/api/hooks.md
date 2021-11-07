@@ -6,3 +6,6 @@
 ## useLogicMakerList
 ## usePanelMaker
 ## usePanelMakerList
+
+## useComponentFocused
+## useComponentPickerEnable

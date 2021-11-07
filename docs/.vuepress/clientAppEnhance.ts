@@ -8,7 +8,6 @@ export default defineClientAppEnhance(({ app, router, siteData }) => {
     app.component("IframeDemo", IframeDemo)
     app.component("DemoToc", DemoToc)
     useRoutes().value = routes
-    console.log(routes)
     routes.forEach(e => {
         router.addRoute(e)
     })

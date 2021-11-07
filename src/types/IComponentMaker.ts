@@ -6,7 +6,7 @@ import ICookPlayerState from './ICookPlayerState';
 export default interface IComponentMaker<
     T extends IComponentConfig = IComponentConfig>
     extends IResourceMaker<T, ICookPlayerState, Component> {
-    slots?: string[],
-    props?: string[],
-    emits?: string[],
+    makePropOptions?: (componentConfig: T) => string[]
+    makeEventOptions?: (componentConfig: T) => string[]
+    makeSlotOptions?: (componentConfig: T) => string[]
 }

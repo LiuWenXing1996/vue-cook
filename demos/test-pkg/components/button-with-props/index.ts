@@ -4,6 +4,6 @@ import Button from "./Button.vue";
 export default defineComponentMaker({
     name: "按钮",
     pkg: "test-pkg",
-    props: ["text"],
+    makePropOptions: () => ["text"],
     make: () => Button
 })

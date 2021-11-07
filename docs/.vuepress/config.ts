@@ -36,27 +36,8 @@ export default defineUserConfig({
                 children: [
                     '/guide/why',
                     '/guide/',
-                    {
-                        text: "自定义组件",
-                        link: "/guide/custom-component/define-a-simple-component-maker",
-                        children: [
-                            '/guide/custom-component/define-a-simple-component-maker',
-                            '/guide/custom-component/add-props-config',
-                            '/guide/custom-component/add-emits-config',
-                            '/guide/custom-component/add-slots-config',
-                            '/guide/custom-component/define-a-container-component',
-                            '/guide/custom-component/share-state-with-other-component'
-                        ]
-                    },
-                    {
-                        text: "自定义逻辑",
-                        link: "/guide/custom-logic/define-a-simple-logic",
-                        children: [
-                            '/guide/custom-logic/define-a-simple-logic',
-                            '/guide/custom-logic/add-props-config',
-                            '/guide/custom-logic/share-state-with-other-logic-and-component'
-                        ]
-                    },
+                    '/guide/custom-component',
+                    '/guide/custom-logic',
                     {
                         text: "自定义面板",
                         link: "/guide/custom-panel/define-a-simple-panel",

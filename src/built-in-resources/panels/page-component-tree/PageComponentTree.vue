@@ -35,7 +35,7 @@ import type IComponentConfig from "@/types/IComponentConfig";
 import { h } from "vue";
 import IPage from "@/types/IPage";
 import { v4 as uuidv4 } from 'uuid';
-import { RootAppMaker } from "@/built-in-resources";
+import { RootAppMaker } from "@/index";
 import ICookEditorState from "@/types/ICookEditorState";
 import makeDefaultComponentConfig from "@/utils/makeDefaultComponentConfig";
 

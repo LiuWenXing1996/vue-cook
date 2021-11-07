@@ -1,4 +1,4 @@
-import { VueCookComponentMakerDraggerTag } from "@/utils/const";
+import { VueCookComponentMakerDraggerTag } from "@/utils/const-value";
 
 export default function handleDragEnter(e: DragEvent) {
     if (e.dataTransfer) {

@@ -1,4 +1,4 @@
-import { VueCookComponentMakerDraggerTag } from '@/utils/const';
+import { VueCookComponentMakerDraggerTag } from '@/utils/const-value';
 const handleDragOver = (e: DragEvent) => {
     e.preventDefault();
     if (e.dataTransfer) {

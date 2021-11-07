@@ -87,6 +87,7 @@ const handleClose = (name: string) => {
         display: flex;
         align-items: center;
         justify-content: left;
+        font-size: 14px;
         padding: 6px 10px;
         justify-content: space-between;
         border-bottom: 1px solid rgb(239, 239, 245);

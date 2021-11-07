@@ -1,5 +1,5 @@
 import { ComponentInternalInstance, Ref, watch } from 'vue';
-import { VueCookPlayerExportDataTag } from "@/utils/const"
+import { VueCookPlayerExportDataTag } from "@/utils/const-value"
 import ICookPlayerExportData from '@/types/ICookPlayerExportData';
 import IComponentOverlay from '@/types/IComponentOverlay';
 import getComponentRect from './getComponentRect';

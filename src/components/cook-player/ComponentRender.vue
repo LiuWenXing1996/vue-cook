@@ -17,7 +17,7 @@ import { getCurrentInstance, toRefs, onMounted, onUnmounted, computed, Ref, watc
 import type IComponentConfig from "@/types/IComponentConfig";
 import { ComponentUidToInstanceMap, ElementToComponentUidMap } from "./utils/exportData"
 import getComponentElements from "./utils/getComponentElements";
-import logicCompiler from "@/utils/logic-compiler";
+import logicRun from "@/utils/logic-run";
 import IComponentMaker from "@/types/IComponentMaker";
 import ICookPlayerState from "@/types/ICookPlayerState";
 const cookPlayerState = inject<ICookPlayerState>('cookPlayerState') as ICookPlayerState
@@ -44,14 +44,14 @@ const maker = computed(() => {
 })
 const emits = computed(() => {
     const res: Record<string, Function> = {}
-    const _emits = config.value.emits || {}
+    const _emits = config.value.events || {}
     for (const key in _emits) {
         if (Object.prototype.hasOwnProperty.call(_emits, key)) {
             const logidConfigList = _emits[key];
-            res[key] = (payload: any) => {
+            res[key] = (...payload: []) => {
                 logidConfigList.map((logicConfig) => {
                     try {
-                        logicCompiler(cookPlayerState, logicConfig, payload)
+                        logicRun(cookPlayerState, logicConfig, ...payload)
                     } catch (error) {
                         console.error(error)
                     }

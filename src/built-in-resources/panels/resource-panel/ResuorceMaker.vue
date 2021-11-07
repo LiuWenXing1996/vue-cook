@@ -28,11 +28,10 @@ import ComponentIcon from "@/svgs/component.svg"
 import LogicIcon from "@/svgs/logic.svg"
 import PanelIcon from "@/svgs/panel.svg"
 import { NIcon } from "naive-ui"
-import useComponentPickerEnable from "@/hooks/useComponentPickerEnable"
 import IResourceMaker from "@/types/IResourceMaker"
 import makeDefaultPanelConfig from "@/utils/makeDefaultPanelConfig"
 import IPanelMaker from "@/types/IPanelMaker"
-import { VueCookLogicMakerDraggerTag, VueCookComponentMakerDraggerTag } from "@/utils/const"
+import { VueCookLogicMakerDraggerTag, VueCookComponentMakerDraggerTag } from "@/utils/const-value"
 import ICookEditorState from "@/types/ICookEditorState"
 import layoutAddTab from "@/utils/layoutAddTab"
 const cookEditorState = inject<ICookEditorState>('cookEditorState') as ICookEditorState
@@ -44,7 +43,6 @@ const props = defineProps({
 })
 
 const { maker } = toRefs(props)
-const componentPickerEnable = useComponentPickerEnable()
 
 const draggable = computed(() => {
     return maker.value.type === "component" || maker.value.type === "logic"
@@ -62,7 +60,6 @@ const handleDragStart = (e: DragEvent) => {
     if (maker.value.type === "component") {
         e?.dataTransfer?.setData(VueCookComponentMakerDraggerTag, VueCookComponentMakerDraggerTag)
     }
-    componentPickerEnable.value = true
 }
 const handelClick = () => {
     if (maker.value.type === "panel") {

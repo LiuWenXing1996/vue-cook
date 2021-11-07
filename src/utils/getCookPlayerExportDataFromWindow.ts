@@ -1,4 +1,4 @@
-import { VueCookPlayerExportDataTag } from "./const"
+import { VueCookPlayerExportDataTag } from "./const-value"
 import ICookPlayerExportData from '@/types/ICookPlayerExportData';
 
 export default function getCookPlayerExportDataFromWindow(window?: Window) {
