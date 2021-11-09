@@ -27,8 +27,7 @@ export default defineUserConfig({
 
         navbar: [
             { text: '指引', link: '/guide/' },
-            { text: 'Api 参考', link: '/api/component' },
-            { text: '示例目录', link: '/demos' },
+            { text: 'Api 参考', link: '/api/component' }
         ],
         sidebar: [
             {
@@ -38,16 +37,7 @@ export default defineUserConfig({
                     '/guide/',
                     '/guide/custom-component',
                     '/guide/custom-logic',
-                    {
-                        text: "自定义面板",
-                        link: "/guide/custom-panel/define-a-simple-panel",
-                        children: [
-                            '/guide/custom-panel/define-a-simple-panel',
-                            '/guide/custom-panel/toggle-panel-by-code',
-                            '/guide/custom-panel/share-state-with-other-panel',
-                            '/guide/custom-panel/define-a-base-edtior-panel'
-                        ]
-                    }
+                    '/guide/custom-panel',
                 ]
             },
             {
@@ -63,7 +53,7 @@ export default defineUserConfig({
             {
                 text: 'APIs',
                 children: [
-                    '/api/component',
+                    '/api/components',
                     '/api/built-in',
                     '/api/hooks',
                     '/api/utils'

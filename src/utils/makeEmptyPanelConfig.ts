@@ -8,6 +8,7 @@ export default function makeEmptyPanelConfig<
     let config: IPanelConfig<T> = {
         uid,
         name: maker.name,
+        makerType: "panel",
         makerName: maker.name,
         makerPkg: maker.pkg,
     };

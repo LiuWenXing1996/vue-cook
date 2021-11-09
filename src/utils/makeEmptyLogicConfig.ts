@@ -8,9 +8,9 @@ export default function makeEmptyLogicConfig<
     let config: ILogicConfig<T> = {
         uid,
         name: maker.name,
+        makerType: "logic",
         makerName: maker.name,
         makerPkg: maker.pkg,
-        params: {}
     };
     return config
 }

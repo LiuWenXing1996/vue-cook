@@ -57,9 +57,9 @@ const updateParamsOptions = () => {
         paramsOptions.value = [];
         return;
     }
-    const _paramsOptions = maker?.params || []
+    const _paramsOptions = maker?.makePropOptions?.(configValue) || []
     const _optionsWithValue = _paramsOptions.map(e => {
-        let value = logicConfig.value?.params?.[e] || ""
+        let value = logicConfig.value?.props?.[e] || ""
         return {
             label: e,
             value: value
@@ -80,8 +80,8 @@ watch(paramsOptions, () => {
         return;
     };
     paramsOptions.value.map(e => {
-        configValue.params = configValue?.params || {}
-        configValue.params[e.label] = e.value
+        configValue.props = configValue?.props || {}
+        configValue.props[e.label] = e.value
     })
 }, {
     deep: true

@@ -19,6 +19,7 @@ import { inject } from 'vue';
 import ICookEditorState from '@/types/ICookEditorState';
 const cookEditorState = inject<ICookEditorState>('cookEditorState') as ICookEditorState
 
+
 defineProps({
     slotName: {
         type: String,
@@ -28,6 +29,8 @@ defineProps({
         type: Object as () => IComponentConfig
     }
 })
+// TODO:按照logic-dragger修改
+// TODO:改成component-dragger???
 </script>
 <style lang="less" scoped>
 .slot-dragger {

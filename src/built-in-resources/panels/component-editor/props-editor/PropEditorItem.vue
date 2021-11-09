@@ -8,8 +8,10 @@
                         <LogicIcon></LogicIcon>
                     </n-icon>
                 </template>
-                拖拽逻辑到此处添加
-                <!-- TODO:实现逻辑的编辑 -->
+                <template v-if="logicConfig">
+                    <logic-editor :logic-config="logicConfig" @change="handleLogicChange($event)"></logic-editor>
+                </template>
+                <template v-else>拖拽逻辑到此处添加</template>
             </n-popover>
         </logic-dragger>
     </n-form-item>
@@ -23,6 +25,8 @@ import ICookEditorState from '@/types/ICookEditorState';
 import LogicDragger from "@/components/logic-dragger/index.vue"
 import ILogicConfig from '@/types/ILogicConfig';
 import IPropOption from '@/types/IPropOption';
+import LogicEditor from "../logic-editor/index.vue"
+import parseLogicConfig from '@/utils/parseLogicConfig';
 const cookEditorState = inject<ICookEditorState>('cookEditorState') as ICookEditorState
 const props = defineProps({
     propOption: {
@@ -53,6 +57,13 @@ const config = computed(() => {
 const handleLogicDrop = (logicConfig: ILogicConfig) => {
     editableValue.value = JSON.stringify(logicConfig)
 }
+const handleLogicChange = (logicConfig: ILogicConfig) => {
+    editableValue.value = JSON.stringify(logicConfig)
+}
+
+const logicConfig = computed(() => {
+    return parseLogicConfig(propOption.value.value)
+})
 
 </script>
 <style lang="less" scoped>

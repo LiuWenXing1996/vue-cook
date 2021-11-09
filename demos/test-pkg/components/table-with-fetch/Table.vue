@@ -15,7 +15,7 @@
     </div>
 </template>
 <script setup lang="ts">
-import { logicRun, ILogicConfig, ICookPlayerState } from 'vue-cook';
+import { logicRun, ICookPlayerState, parseLogicConfig } from 'vue-cook';
 import { inject, ref, toRefs } from 'vue';
 const cookPlayerState = inject<ICookPlayerState>('cookPlayerState') as ICookPlayerState
 const props = defineProps({
@@ -29,8 +29,8 @@ interface IDataItem {
 const data = ref<IDataItem[]>([])
 const fetchData = async () => {
     data.value = []
-    if (fetch?.value) {
-        const logicConfig = JSON.parse(fetch.value) as ILogicConfig
+    const logicConfig = parseLogicConfig(fetch?.value)
+    if (logicConfig) {
         data.value = await logicRun<IDataItem[]>(cookPlayerState, logicConfig)
     }
 }

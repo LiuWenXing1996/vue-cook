@@ -33,6 +33,7 @@ const maker: IPanelMaker<IPanelConfig<IPageEditorConfigExtra>> = definePanelMake
     pkg: pkgName,
     defaultSplitLayoutPaneName: "center",
     make: (config) => {
+        // TODO:使用自身的全局状态而不是额外配置
         return {
             title: config?.extra?.pageName || "没有正在编辑的页面",
             content: defineComponent({
@@ -48,6 +49,7 @@ const maker: IPanelMaker<IPanelConfig<IPageEditorConfigExtra>> = definePanelMake
         }
     },
     makeDefaultConfig: () => {
+        // TODO:这个makeDefaultCOnfig应该可以去掉
         const _config = makeEmptyPanelConfig(maker)
         return {
             ..._config,

@@ -1,7 +1,7 @@
 <template>
     <ul>
         <li v-for="l in routes">
-            <a :href="l.path" target="_blank">{{ l.path }}</a>
+            <a :href="l.path" target="_blank">{{ l.name }}</a>
         </li>
     </ul>
 </template>

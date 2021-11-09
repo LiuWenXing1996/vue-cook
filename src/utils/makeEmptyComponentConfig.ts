@@ -8,6 +8,7 @@ export default function makeEmptyComponentConfig<
     let config: IComponentConfig<T> = {
         uid,
         name: maker.name,
+        makerType: "component",
         makerName: maker.name,
         makerPkg: maker.pkg
     };
