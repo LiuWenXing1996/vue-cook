@@ -5,14 +5,17 @@
 import { CookEditor } from "vue-cook"
 import { useRoute } from "vue-router";
 import ResourcePanelMaker from "@/../demos/test-pkg/panels/resource-panel"
+import TableMaker from "@/../demos/test-pkg/components/table-with-fetch"
+import FetchMaker from "@/../demos/test-pkg/logic/fetch"
 import { createCookEditorState, defaultMakerList } from "vue-cook"
 const cookEditorState = createCookEditorState({
     makerList: [
+        TableMaker,
+        FetchMaker,
         ResourcePanelMaker,
         ...defaultMakerList
     ]
 })
-// TODO:测试下。。。。。
 const route = useRoute()
 const preview = route.query.preview as string
 </script>

@@ -11,7 +11,7 @@ import PagePanelLinker from './utils/PagePanelLinker';
 import findPanelConfig from '@/utils/findPanelConfig';
 
 const maker: IPanelMaker = definePanelMaker({
-    name: "page-editor-maker",
+    name: "页面编辑器",
     pkg: pkgName,
     defaultSplitLayoutPaneName: "center",
     make: (cookEditorState, config) => {

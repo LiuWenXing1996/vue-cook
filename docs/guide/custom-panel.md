@@ -64,8 +64,15 @@ VueCook提供了`<logic-dragger>`，可以很方便的实现`逻辑拖拽添加`
 
 VueCook提供了`<resource-maker>`，可以很方便的实现一个`资源面板`的同时，具有`组件拖拽`、`逻辑拖拽`以及`面板点击打开`功能
 
+@[code vue](../../demos/test-pkg/panels/resource-panel/ResourcePanel.vue)
 
-TODO：自定义资源面板
+打开<a href='/demos/custom-panel-with-resource-panel' target="_blank">示例页面-自定义自定义资源面板</a>，按照以下步骤，使用此面板
+
+- 创建一个新页面，选中新页面
+- 从资源面板中打开`自定义资源面板`，可以看到它将所有的资源都列了出来
+- 从`自定义资源面板`拖拽表格组件到新页面的`default`插槽里，可以看到表格被正常添加
+- 选中页面中的表格组件，从`自定义资源面板`拖拽Fetch逻辑到它的`fetch`属性中，可以看到页面中的表格组件的按钮文字变成`点我获取数据`
+- 关闭选中模式，点击按钮，稍等片刻，可以看到数据加载成功
 
 ## 编程控制面板开关
 

@@ -1,6 +1,8 @@
-// ColorPanel.vue
+// ResourcePanel.vue
 <template>
-    <resuorce-maker v-for="maker in makerList" :maker="maker"></resuorce-maker>
+    <div style="overflow: auto;height: 100%;">
+        <resource-maker v-for="maker in makerList" :maker="maker"></resource-maker>
+    </div>
 </template>
 <script setup lang="ts">
 import { ResourceMaker, ICookEditorState } from 'vue-cook';

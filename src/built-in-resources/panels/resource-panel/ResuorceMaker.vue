@@ -38,9 +38,6 @@ defineProps({
     &:hover {
         border-color: #18a058;
     }
-    &.panel:hover {
-        cursor: pointer;
-    }
 
     .maker-detail {
         display: flex;

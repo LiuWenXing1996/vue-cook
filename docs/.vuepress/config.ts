@@ -40,6 +40,7 @@ export default defineUserConfig({
                     '/guide/custom-component',
                     '/guide/custom-logic',
                     '/guide/custom-panel',
+                    '/guide/data-save-and-use',
                 ]
             },
             {
