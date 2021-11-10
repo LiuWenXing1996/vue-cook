@@ -5,7 +5,7 @@ export default definePanelMaker({
     name: "开关面板",
     pkg: "test-pkg",
     defaultSplitLayoutPaneName: "right",
-    make: (panelConfig) => {
+    make: (cookEditorState, panelConfig) => {
         return {
             title: "开关面板",
             content: defineComponent({

@@ -5,7 +5,7 @@
 编辑器组件，它将多个交互面板融合在同一个页面中。
 
 - **props**
-  - `state` - `ICookEditorState` 编辑器的状态，里面包括了所有可以编辑的页面`pages`,布局状态`layout`,其他资源挂载的全局状态`extra`。通常使用`createEditorState`来创建
+  - `state` - `ICookEditorState` 编辑器的状态，里面包括了所有可以编辑的页面`pages`,布局状态`layout`。通常使用`createEditorState`来创建
   - `preview` - `string | undefined` 需要预览页面的`uid`，需要从页面url的参数传入。
 
 - **基础用法**

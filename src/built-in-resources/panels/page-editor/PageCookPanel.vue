@@ -121,7 +121,7 @@ import { LocateOutline, ArrowUndoOutline, ArrowRedoOutline, TrashOutline, EyeOut
 import PageSizeIcon from "@/svgs/page-size.svg"
 import { computed, inject, Ref, ref, toRefs, watch } from "vue";
 import PageCook from "./PageCook.vue"
-import useComponentPickerEnable from "./hooks/useComponentPickerEnable";
+import useComponentPickerEnable from "@/hooks/useComponentPickerEnable";
 import IPageCookPanelSize from "@/types/IPageCookPanelSize";
 import RulerBox from "./ruler-box/RulerBox.vue"
 import ICookEditorState from "@/types/ICookEditorState";

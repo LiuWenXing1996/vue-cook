@@ -35,9 +35,10 @@ import type IComponentConfig from "@/types/IComponentConfig";
 import { h } from "vue";
 import IPage from "@/types/IPage";
 import { v4 as uuidv4 } from 'uuid';
-import { RootAppMaker } from "@/index";
+import { RootAppMaker, useComponentFocused, useComponentSelected } from "@/index";
 import ICookEditorState from "@/types/ICookEditorState";
 import makeDefaultComponentConfig from "@/utils/makeDefaultComponentConfig";
+import usePageEditingUidList from "@/hooks/usePageEditingUidList";
 
 const cookEditorState = inject<ICookEditorState>('cookEditorState') as ICookEditorState
 
@@ -53,15 +54,15 @@ const renderLabel = ({ option }: { option: TreeOption }) => {
             onClick: () => {
                 if (option.type === "page") {
                     const uid = option.key as string;
-                    cookEditorState.extra.VueCook?.PageEditorPanel?.pageEditingUidList?.push(uid)
+                    usePageEditingUidList(cookEditorState).add(uid)
                 }
                 if (option.type === "component") {
                     const uid = option.key as string
                     const pageUid = option.pageUid as string
-                    cookEditorState.extra.VueCook!.ComponentEditorPanel!.componetSelected = {
+                    useComponentSelected(cookEditorState).set({
                         pageUid: pageUid,
                         componentUid: uid
-                    }
+                    })
                 }
             },
             onMousemove: () => {
@@ -69,15 +70,15 @@ const renderLabel = ({ option }: { option: TreeOption }) => {
                     const uid = option.key as string
                     const pageUid = option.pageUid as string
                     if (uid && pageUid) {
-                        cookEditorState.extra.VueCook!.PageEditorPanel!.componetFoused = {
+                        useComponentFocused(cookEditorState).set({
                             pageUid,
                             componentUid: uid
-                        }
+                        })
                     }
                 }
             },
             onMouseleave: () => {
-                cookEditorState.extra.VueCook!.PageEditorPanel!.componetFoused = undefined
+                useComponentFocused(cookEditorState).set()
             }
         },
         option.label

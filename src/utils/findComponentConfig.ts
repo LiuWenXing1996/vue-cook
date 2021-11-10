@@ -1,8 +1,8 @@
 import IComponentConfig from "@/types/IComponentConfig";
 
-const findComponentConfig = (parent: IComponentConfig, id: string): IComponentConfig | undefined => {
+const findComponentConfig = (parent: IComponentConfig, componentUid: string): IComponentConfig | undefined => {
     let configFound: IComponentConfig | undefined;
-    if (parent.uid === id) {
+    if (parent.uid === componentUid) {
         configFound = parent
     } else {
         const slots = parent?.slots;
@@ -13,7 +13,7 @@ const findComponentConfig = (parent: IComponentConfig, id: string): IComponentCo
                 const configList = slots[key];
                 for (let j = 0; j < configList.length; j++) {
                     const config = configList[j];
-                    configFound = findComponentConfig(config, id)
+                    configFound = findComponentConfig(config, componentUid)
                     if (configFound) {
                         return configFound;
                     }

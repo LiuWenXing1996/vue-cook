@@ -1,7 +1,7 @@
 <template>
     <component
         v-if="maker"
-        :is="maker.make(config, cookPlayerState)"
+        :is="maker.make(cookPlayerState, config)"
         v-bind="config?.props"
         v-on="emits"
         :uid="config.uid"

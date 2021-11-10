@@ -2,7 +2,6 @@ import { markRaw } from 'vue';
 import Component from "./PageComponentTree.vue";
 import definePanelMaker from '@/utils/definePanelMaker';
 import { name as pkgName } from "@/../package.json"
-import makeEmptyPanelConfig from '@/utils/makeEmptyPanelConfig';
 import IPanelMaker from '@/types/IPanelMaker';
 
 const maker: IPanelMaker = definePanelMaker({

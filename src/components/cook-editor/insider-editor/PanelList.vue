@@ -67,7 +67,7 @@ watch(list, () => {
 
 const useMakerMakeValue = (panelConfig: IPanelConfig) => {
     const maker = usePanelMaker(cookEditorState, panelConfig.makerName, panelConfig.makerPkg).value
-    return maker?.make(panelConfig, cookEditorState)
+    return maker?.make(cookEditorState, panelConfig)
 }
 
 const handleClose = (name: string) => {

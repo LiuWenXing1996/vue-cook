@@ -16,7 +16,7 @@
 
 @[code vue](../../demos/test-pkg/components/table-with-fetch/Table.vue)
 
-打开<a href='/demos/custom-logic'>示例页面-定义逻辑</a>，可以在最下方的`资源面板`中找到新增加的获取数据逻辑，按照下面的步骤，使用它。
+打开<a href='/demos/custom-logic' target='_blank'>示例页面-定义逻辑</a>，可以在最下方的`资源面板`中找到新增加的获取数据逻辑，按照下面的步骤，使用它。
 
 - 创建一个带Table组件的页面，选中Table
 - 在组件编辑面板的`属性`一栏中，出现了一个名称为`fetch`的输入框，它的右边有一个图标，鼠标移上去，会提示`拖拽逻辑到此处添加`
@@ -34,7 +34,7 @@
 
 @[code vue{23-24,36-38}](../../demos/test-pkg/components/table-with-fetch-params/Table.vue)
 
-打开<a href='/demos/custom-logic-with-params'>示例页面-逻辑传参</a>，执行按照下面的步骤
+打开<a href='/demos/custom-logic-with-params' target='_blank'>示例页面-逻辑传参</a>，执行按照下面的步骤
 
 - 创建一个带Table组件的页面，选中Table
 - 在组件编辑面板的`属性`一栏中，可以看到它有三个属性配置项，`fetch`,`maxAge`,`minAge`
@@ -49,7 +49,7 @@
 
 @[code ts](../../demos/test-pkg/logic/fetch-with-props/index.ts)
 
-打开<a href='/demos/custom-logic-with-props'>示例页面-为逻辑添加属性配置</a>，执行按照下面的步骤
+打开<a href='/demos/custom-logic-with-props' target='_blank'>示例页面-为逻辑添加属性配置</a>，执行按照下面的步骤
 
 - 创建一个带Table组件的页面，选中Table
 - 配置`fetch`项，鼠标移动到`fetch`输入框最右边的图标上，可以看到一个编辑弹框
@@ -62,7 +62,7 @@
 
 @[code ts](../../demos/test-pkg/logic/alert-with-props/index.ts)
 
-打开<a href='/demos/custom-logic-with-events-props'>示例页面-事件绑定的逻辑添加属性配置</a>，执行按照下面的步骤
+打开<a href='/demos/custom-logic-with-events-props' target='_blank'>示例页面-事件绑定的逻辑添加属性配置</a>，执行按照下面的步骤
 
 - 创建一个带按钮的页面，选中按钮
 - 为它的点击事件绑定`AlertMaker`
@@ -70,26 +70,5 @@
 - 滚动下，可以看到属性编辑栏有一个配置项`msg`，输入一些内容
 - 关闭选中模式，点击按钮，稍等片刻，可以看到输入的内容被显示出来
 
-## 共享全局状态
 
-自定义逻辑也是在`CookPlayer`中运行的，它也会被注入`CookPlayerState`。在`make`函数中获取注入的全局状态
-
-@[code ts](../../demos/test-pkg/logic/fetch-with-state/index.ts)
-
-创建一个使用此状态的`hooks`
-
-@[code ts](../../demos/test-pkg/logic/fetch-with-state/useAgeRange.ts)
-
-在Table组件中，使用`hooks`
-
-@[code{28-35} ts](../../demos/test-pkg/components/table-with-fetch-state/Table.vue)
-
-打开<a href='/demos/custom-logic-with-state' target='_blank'>示例页面-事件绑定的逻辑添加属性配置</a>，执行按照下面的步骤
-
-- 创建一个带Table组件的页面，选中Table
-- 配置`fetch`项
-- 关闭选中模式，点击按钮，稍等片刻，可以看到人员数据全部加载
-- 配置`maxAge`和`minAge`
-- 点击按钮，稍等片刻，可以看到人员数据按照相应的年龄范围加载成功
-
-更多`defineLogicMaker`的参数，参照api????
+更多`defineLogicMaker`的参数，参考[`defineLogicMaker`](../api/utils.md#definelogicmaker)

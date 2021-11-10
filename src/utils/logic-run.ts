@@ -6,7 +6,7 @@ export default async function logicRun<T = unknown>(cookState: ICookPlayerState,
     let returns;
     const maker = useLogicMaker(cookState, config.makerName, config.makerPkg).value
     if (maker) {
-        let func = maker.make(config, cookState)
+        let func = maker.make(cookState, config)
         returns = await func(...payload)
     }
     return returns as T

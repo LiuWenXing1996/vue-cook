@@ -1,3 +1,4 @@
+import useComponentPickerEnable from '@/hooks/useComponentPickerEnable';
 import ICookEditorState from '@/types/ICookEditorState';
 import { reactive } from 'vue';
 import defaultMakerList from './defaultMakerList';
@@ -9,7 +10,6 @@ export default function createCookEditorState(state?: Partial<ICookEditorState>)
         makerList: defaultMakerList,
         pages: [],
         layout: defaultSplitLayout,
-        extra: {},
         ...state
     })
     // 安装maker
@@ -17,5 +17,7 @@ export default function createCookEditorState(state?: Partial<ICookEditorState>)
     makerList.map(maker => {
         maker.install?.(_state)
     })
+    // 默认的一些状态
+    useComponentPickerEnable(_state).set(true)
     return _state
 }

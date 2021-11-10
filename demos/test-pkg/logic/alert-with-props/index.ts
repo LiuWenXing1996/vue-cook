@@ -4,7 +4,7 @@ export default defineLogicMaker({
     name: "alert",
     pkg: "test-pkg",
     makePropOptions: () => ["msg"],
-    make: (logicConfig) => {
+    make: (cookPlayerState, logicConfig) => {
         return () => {
             alert(`${logicConfig.props?.["msg"] || '你好，世界！'}`)
         }

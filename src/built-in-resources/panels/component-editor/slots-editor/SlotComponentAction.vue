@@ -38,7 +38,7 @@
                     <arrow-down48-regular></arrow-down48-regular>
                 </n-icon>
             </template>
-            上移
+            下移
         </n-popover>
         <n-popover trigger="hover" placement="left">
             <template #trigger>

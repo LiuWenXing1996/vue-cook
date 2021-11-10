@@ -16,7 +16,7 @@ import IPageCookPanelSize from "@/types/IPageCookPanelSize"
 import getCookPlayerExportDataFromWindow from "@/utils/getCookPlayerExportDataFromWindow"
 import { computed, inject, ref, toRefs, watch } from "vue"
 import ComponentOverlay from "./component-overlay/ComponentOverlay.vue"
-import useComponentFocused from "@/built-in-resources/panels/page-editor/hooks/useComponentFocused"
+import useComponentFocused from "@/hooks/useComponentFocused"
 import ICookEditorState from "@/types/ICookEditorState"
 const cookEditorState = inject<ICookEditorState>('cookEditorState') as ICookEditorState
 const props = defineProps({

@@ -5,39 +5,18 @@
     <template v-else>无</template>
 </template>
 <script setup lang="ts">
-import useComponentMaker from '@/hooks/useComponentMaker';
-import useComponentSelected from '../hooks/useComponentSelected';
+import useComponentSelected from '@/hooks/useComponentSelected';
 import { computed, inject, } from 'vue';
 import SlotsEditorItem from './SlotsEditorItem.vue';
 import ICookEditorState from '@/types/ICookEditorState';
-import ISlotOption from '@/types/ISlotOption';
+import useSlotOptions from '@/hooks/useSlotOptions';
 
 const cookEditorState = inject<ICookEditorState>('cookEditorState') as ICookEditorState
 const selectedComponent = useComponentSelected(cookEditorState).get()
 const config = computed(() => {
     return selectedComponent.value?.component
 })
-const slotOptions = computed<ISlotOption[]>(() => {
-    const configValue = config.value;
-    if (!configValue) {
-        return []
-    };
-    const maker = useComponentMaker(cookEditorState, config.value?.makerName, config.value?.makerPkg).value
-    if (!maker) {
-        return [];
-    }
-    const _slotOptions = maker?.makeSlotOptions?.(configValue) || []
-    const _optionsWithValue = _slotOptions.map(e => {
-        let value = config.value?.slots?.[e] || []
-        return {
-            name: e,
-            value: value
-        }
-    })
-    return _optionsWithValue
-})
-
-
+const slotOptions = useSlotOptions(cookEditorState, config)
 </script>
 <style lang="less" scoped>
 .slot-editor {

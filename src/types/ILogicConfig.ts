@@ -1,7 +1,6 @@
 import IResourceConfig from "./IResourceConfig";
 
-export default interface ILogicConfig<
-    T extends Record<string, string> = Record<string, string>> extends IResourceConfig<T> {
+export default interface ILogicConfig extends IResourceConfig {
     props?: Record<string, string>
 }
 

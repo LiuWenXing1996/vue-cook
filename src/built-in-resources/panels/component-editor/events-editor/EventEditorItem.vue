@@ -13,7 +13,7 @@
     </n-form-item>
 </template>
 <script setup lang="ts">
-import useComponentSelected from '../hooks/useComponentSelected';
+import useComponentSelected from '@/hooks/useComponentSelected';
 import ILogicConfig from '@/types/ILogicConfig';
 import { computed, h, inject, ref } from 'vue';
 import { NFormItem, NDataTable } from "naive-ui"

@@ -6,7 +6,7 @@
 </template>
 <script setup lang="ts">
 import useComponentMaker from '@/hooks/useComponentMaker';
-import useComponentSelected from '../hooks/useComponentSelected';
+import useComponentSelected from '@/hooks/useComponentSelected';
 import { computed, inject } from 'vue';
 import ICookEditorState from '@/types/ICookEditorState';
 import IEventOption from '@/types/IEventOption';

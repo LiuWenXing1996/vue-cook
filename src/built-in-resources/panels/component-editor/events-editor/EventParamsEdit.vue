@@ -12,7 +12,7 @@
                 <n-form-item label="名字">
                     <n-input v-model:value="logicConfig.name" />
                 </n-form-item>
-                <n-divider title-placement="left">参数</n-divider>
+                <n-divider title-placement="left">属性</n-divider>
                 <template v-if="paramsOptions.length > 0">
                     <n-form-item :label="paramOption.label" v-for="paramOption in paramsOptions">
                         <n-input v-model:value="paramOption.value" />

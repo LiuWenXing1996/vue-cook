@@ -27,8 +27,10 @@ export default defineUserConfig({
 
         navbar: [
             { text: '指引', link: '/guide/' },
-            { text: 'Api 参考', link: '/api/component' }
+            { text: 'Api 参考', link: '/api/component' },
+            { text: '示例目录', link: '/demos' }
         ],
+        sidebarDepth: 3,
         sidebar: [
             {
                 text: '指引',
@@ -47,7 +49,6 @@ export default defineUserConfig({
                     '/advanced/component-picker-principle',
                     '/advanced/logic-compiler-principle',
                     '/advanced/panel-load-principle',
-                    '/advanced/global-state-types',
                 ]
             },
             {

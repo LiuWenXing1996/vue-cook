@@ -45,9 +45,9 @@ import { LocationOutline } from "@vicons/ionicons5";
 import EventsEditor from "./events-editor/index.vue"
 import SlotsEditor from "./slots-editor/index.vue"
 import PropsEditor from "./props-editor/index.vue"
-import useComponentFocused from "@/built-in-resources/panels/page-editor/hooks/useComponentFocused";
+import useComponentFocused from "@/hooks/useComponentFocused";
 import ICookEditorState from "@/types/ICookEditorState";
-import useComponentSelected from "./hooks/useComponentSelected";
+import useComponentSelected from "@/hooks/useComponentSelected";
 
 const cookEditorState = inject<ICookEditorState>('cookEditorState') as ICookEditorState
 

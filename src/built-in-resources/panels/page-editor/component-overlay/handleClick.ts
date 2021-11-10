@@ -1,6 +1,6 @@
 import ICookEditorState from '@/types/ICookEditorState';
 import IComponentOverlay from '@/types/IComponentOverlay';
-import useComponentSelected from '../../component-editor/hooks/useComponentSelected';
+import useComponentSelected from '@/hooks/useComponentSelected';
 const handleClick = (cookEditorState: ICookEditorState, overlay: IComponentOverlay, event: MouseEvent) => {
     event.stopPropagation()
     if (

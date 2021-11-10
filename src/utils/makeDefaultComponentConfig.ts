@@ -1,11 +1,15 @@
 import IComponentConfig from "@/types/IComponentConfig";
 import IComponentMaker from "@/types/IComponentMaker";
-import makeEmptyComponentConfig from "./makeEmptyComponentConfig";
+import { v4 as uuidv4 } from 'uuid';
 
-export default function makeDefaultComponentConfig<
-    T extends Record<string, string> = Record<string, string>>(maker: IComponentMaker<IComponentConfig<T>>): IComponentConfig<T> {
-    if (maker.makeDefaultConfig) {
-        return maker.makeDefaultConfig()
-    }
-    return makeEmptyComponentConfig<T>(maker)
+export default function makeDefaultComponentConfig(maker: IComponentMaker): IComponentConfig {
+    const uid = uuidv4();
+    let config: IComponentConfig = {
+        uid,
+        name: maker.name,
+        makerType: "component",
+        makerName: maker.name,
+        makerPkg: maker.pkg
+    };
+    return config
 }

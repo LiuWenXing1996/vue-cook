@@ -1,13 +1,9 @@
 import IComponentMaker from "@/types/IComponentMaker";
-import IComponentConfig from '@/types/IComponentConfig';
 
-type IComponentMakerOptions<
-    T extends Record<string, string> = Record<string, string>> = Omit<IComponentMaker<IComponentConfig<T>>, "type">
+type IComponentMakerOptions = Omit<IComponentMaker, "type">
 
-export default function defineComponentMaker<
-    T extends Record<string, string> = Record<string, string>>
-    (maker: IComponentMakerOptions<T>): IComponentMaker<IComponentConfig<T>> {
-    const _maker: IComponentMaker<IComponentConfig<T>> = {
+export default function defineComponentMaker(maker: IComponentMakerOptions): IComponentMaker {
+    const _maker: IComponentMaker = {
         type: "component",
         ...maker
     }

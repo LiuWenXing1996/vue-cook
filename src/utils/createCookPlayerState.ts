@@ -9,7 +9,6 @@ type ICookPlayerStateOptions = Partial<Omit<ICookPlayerState, "page">> & {
 export default function createCookPlayerState(state: ICookPlayerStateOptions) {
     const _state: ICookPlayerState = reactive({
         makerList: defaultMakerList,
-        extra: {},
         ...state
     })
     // 安装maker

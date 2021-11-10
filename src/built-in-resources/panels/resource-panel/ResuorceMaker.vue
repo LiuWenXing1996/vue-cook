@@ -1,14 +1,5 @@
 <template>
-    <div
-        class="component-maker"
-        :class="[maker.type]"
-        :draggable="draggable"
-        @dragstart="handleDragStart"
-        @click="handelClick"
-        :data-type="maker.type"
-        :data-name="maker.name"
-        :data-package="maker.pkg"
-    >
+    <resource-maker :maker="maker">
         <div class="icon-wrapper">
             <n-icon size="25" :depth="3">
                 <ComponentIcon v-if="maker.type === 'component'"></ComponentIcon>
@@ -20,59 +11,24 @@
             <div class="maker-name">{{ maker.name }}</div>
             <div class="maker-pkg">{{ maker.pkg }}</div>
         </div>
-    </div>
+    </resource-maker>
 </template>
 <script lang="ts" setup>
-import { computed, inject, Ref, toRefs } from "vue"
+import { ResourceMaker } from "@/index"
 import ComponentIcon from "@/svgs/component.svg"
 import LogicIcon from "@/svgs/logic.svg"
 import PanelIcon from "@/svgs/panel.svg"
 import { NIcon } from "naive-ui"
 import IResourceMaker from "@/types/IResourceMaker"
-import makeDefaultPanelConfig from "@/utils/makeDefaultPanelConfig"
-import IPanelMaker from "@/types/IPanelMaker"
-import { VueCookLogicMakerDraggerTag, VueCookComponentMakerDraggerTag } from "@/utils/const-value"
-import ICookEditorState from "@/types/ICookEditorState"
-import layoutAddTab from "@/utils/layoutAddTab"
-const cookEditorState = inject<ICookEditorState>('cookEditorState') as ICookEditorState
-const props = defineProps({
+defineProps({
     maker: {
         type: Object as () => IResourceMaker,
         required: true
     }
 })
-
-const { maker } = toRefs(props)
-
-const draggable = computed(() => {
-    return maker.value.type === "component" || maker.value.type === "logic"
-})
-const handleDragStart = (e: DragEvent) => {
-    if (!(e.target instanceof HTMLDivElement)) {
-        return;
-    }
-    e?.dataTransfer?.setData('name', maker.value.name)
-    e?.dataTransfer?.setData('package', maker.value.pkg)
-    e?.dataTransfer?.setData('type', maker.value.type)
-    if (maker.value.type === "logic") {
-        e?.dataTransfer?.setData(VueCookLogicMakerDraggerTag, VueCookLogicMakerDraggerTag)
-    }
-    if (maker.value.type === "component") {
-        e?.dataTransfer?.setData(VueCookComponentMakerDraggerTag, VueCookComponentMakerDraggerTag)
-    }
-}
-const handelClick = () => {
-    if (maker.value.type === "panel") {
-        const _maker = maker.value as IPanelMaker
-        const config = makeDefaultPanelConfig(_maker)
-        const defaultSplitLayoutPaneName = _maker.defaultSplitLayoutPaneName;
-        layoutAddTab(cookEditorState, config, defaultSplitLayoutPaneName)
-    }
-}
-
 </script>
 <style lang="less" scoped>
-.component-maker {
+.resource-maker {
     width: 200px;
     display: flex;
     align-items: center;
@@ -81,7 +37,6 @@ const handelClick = () => {
     padding: 5px;
     &:hover {
         border-color: #18a058;
-        cursor: move;
     }
     &.panel:hover {
         cursor: pointer;

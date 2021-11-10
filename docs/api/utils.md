@@ -19,7 +19,8 @@
 - **返回** `ICookPlayerState`
 ## defaultMakerList
 ## defaultSplitLayout
-## defaineComponentMaker
+## defineComponentMaker
+fsfsf
 ## defineLogicMaker
 ## definePanelMaker
 ## exportCookEditorData

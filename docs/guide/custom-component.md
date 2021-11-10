@@ -16,7 +16,7 @@
 
 @[code{8-14} ts{4}](../../demos/pages/custom-component.vue)
 
-打开<a href='/demos/custom-component'>示例页面-定义组件</a>，可以在最下方的`资源面板`中找到新增加的按钮组件，按照下面的步骤，创建一个拥有按钮的页面。
+打开<a href='/demos/custom-component' target='_blank'>示例页面-定义组件</a>，可以在最下方的`资源面板`中找到新增加的按钮组件，按照下面的步骤，创建一个拥有按钮的页面。
 
 - 在右侧的`页面组件树`中点击`+`
 - 点击新增的页面，中间会打开一个`页面编辑`面板
@@ -37,7 +37,7 @@
 
 @[code ts{7}](../../demos/test-pkg/components/button-with-props/index.ts)
 
-打开<a href='/demos/custom-component-with-props'>示例页面-组件添加属性配置</a>，按照下面的步骤，配置组件的属性
+打开<a href='/demos/custom-component-with-props' target='_blank'>示例页面-组件添加属性配置</a>，按照下面的步骤，配置组件的属性
 
 - 创建一个拥有按钮的页面
 - 选中添加的按钮
@@ -66,7 +66,7 @@
 
 @[code{9-16} ts{5}](../../demos/pages/custom-component-with-dom-events.vue)
 
-打开<a href='/demos/custom-component-with-dom-events'>示例页面-组件添加DOM事件配置</a>，按照下面的步骤，配置组件的DOM事件
+打开<a href='/demos/custom-component-with-dom-events' target='_blank'>示例页面-组件添加DOM事件配置</a>，按照下面的步骤，配置组件的DOM事件
 
 - 创建一个拥有按钮的页面
 - 选中添加的按钮
@@ -81,7 +81,7 @@
 
 @[code vue](../../demos/test-pkg/components/button-fragment-with-dom-events/Button.vue)
 
-打开<a href='/demos/custom-fragment-component-with-dom-event'>示例页面-多个根节点组件DOM事件配置</a>，按照下面的步骤，配置多个根节点组件的DOM事件
+打开<a href='/demos/custom-fragment-component-with-dom-event' target='_blank'>示例页面-多个根节点组件DOM事件配置</a>，按照下面的步骤，配置多个根节点组件的DOM事件
 
 - 创建一个拥有按钮的页面
 - 选中添加的按钮，配置事件的逻辑行为
@@ -98,7 +98,7 @@
 
 @[code ts{7}](../../demos/test-pkg/components/button-with-custom-events/index.ts)
 
-打开<a href='/demos/custom-component-with-custom-events'>示例页面-Vue中自定义事件配置</a>，按照下面的步骤，配置Vue中自定义的事件
+打开<a href='/demos/custom-component-with-custom-events' target='_blank'>示例页面-Vue中自定义事件配置</a>，按照下面的步骤，配置Vue中自定义的事件
 
 - 创建一个拥有按钮的页面
 - 选中添加的按钮，配置事件的逻辑行为
@@ -107,16 +107,20 @@
 
 ### 事件传参
 
+#### 默认参数传递
+
 可以在自定义逻辑的里面直接接收事件传递的默认参数
 
 @[code ts{7-8}](../../demos/test-pkg/logic/alert-with-receive-params/index.ts)
 
-打开<a href='/demos/custom-component-with-event-receive-param'>示例页面-事件传参</a>，按照下面的步骤，可以看到事件参数的传递
+打开<a href='/demos/custom-component-with-event-receive-param' target='_blank'>示例页面-事件传参</a>，按照下面的步骤，可以看到事件参数的传递
 
 - 创建一个拥有按钮的页面
 - 选中添加的按钮，配置事件的逻辑行为
 - 关闭`页面编辑器`的组件选中模式
 - 点击按钮，可以看到事件的默认参数被正常传递
+
+#### 额外参数传递
 
 也可以传递一些额外的参数
 
@@ -126,7 +130,7 @@
 
 @[code ts{7-8}](../../demos/test-pkg/logic/alert-with-receive-extra-params/index.ts)
 
-打开<a href='/demos/custom-component-with-send-extra-param-to-event'>示例页面-向事件传递额外参数</a>，按照下面的步骤，可以看到事件参数的传递
+打开<a href='/demos/custom-component-with-send-extra-param-to-event' target='_blank'>示例页面-向事件传递额外参数</a>，按照下面的步骤，可以看到事件参数的传递
 
 - 创建一个拥有按钮的页面
 - 选中添加的按钮，配置事件的逻辑行为
@@ -149,7 +153,7 @@
 
 @[code ts](../../demos/test-pkg/components/emoji/index.ts)
 
-打开<a href='/demos/custom-component-with-slots'>示例页面-组件添加插槽配置</a>，按照下面的步骤，配置组件的插槽
+打开<a href='/demos/custom-component-with-slots' target='_blank'>示例页面-组件添加插槽配置</a>，按照下面的步骤，配置组件的插槽
 
 - 创建一个带按钮的页面
 - 选中添加的按钮
@@ -166,7 +170,7 @@
 
 @[code ts{7}](../../demos/test-pkg/components/button-with-multi-slots/index.ts)
 
-打开<a href='/demos/custom-component-with-slots'>示例页面-组件添加多个插槽配置</a>，按照下面的步骤，配置组件的插槽
+打开<a href='/demos/custom-component-with-multi-slots' target='_blank'>示例页面-组件添加多个插槽配置</a>，按照下面的步骤，配置组件的插槽
 
 - 创建一个带按钮的页面
 - 选中添加的按钮
@@ -183,42 +187,11 @@
 
 @[code ts](../../demos/test-pkg/components/layout/index.ts)
 
-打开<a href='/demos/custom-component-with-slots'>示例页面-创建一个布局组件</a>，按照下面的步骤，配置布局组件
+打开<a href='/demos/custom-layout-component' target='_blank'>示例页面-创建一个布局组件</a>，按照下面的步骤，配置布局组件
 
 - 创建一个带布局组件的页面
 - 选中布局组件
 - 可以看到它的属性栏有两个配置，分别是行和列的数量
 - 修改它的行列数，可以看到它的`插槽`数量会不断的更改
 
-## 共享全局状态
-
-自定义组件的渲染是由`CookPlayer`驱动的，它拥有一个全局状态`CookPlayerState`，这个状态通过`Vue`中的`Provide`注入到了所有的组件中。`CookPlayerState`提供了一个`extra`字段，组件想要共享的全局状态都可以挂载这个字段上。
-
-假设，现在有一个挂载了自身状态的组件，此处，使用了`install`参数，来初始化组件共享的状态,此处，使用了ts中`define global`来扩充全局状态的类型
-
-@[code ts](../../demos/test-pkg/components/button-with-state/index.ts)
-
-在组件中操作`inject`获取到全局状态
-
-@[code vue](../../demos/test-pkg/components/button-with-state/Button.vue)
-
-打开<a href='/demos/demos-custom-componen-with-state'>示例页面-组件共享全局状态</a>，执行下面的步骤
-
-- 创建一个带多个按钮的页面
-- 点击任意一个按钮，可以看到，所有按钮的圆角状态都会切换
-
-更进一步的话，将这个状态抽象成`hooks`，方便其他资源使用
-
-@[code ts](../../demos/test-pkg/components/button-with-state-hooks/useButtonRound.ts)
-
-使用这个`hooks`
-
-@[code vue](../../demos/test-pkg/components/button-with-state-hooks/Button.vue)
-
-打开<a href='/demos/custom-componen-with-state-hooks' target='_balank'>示例页面-组件全局状态钩子</a>，执行下面的步骤
-
-- 创建一个带多个按钮的页面
-- 点击任意一个按钮，可以看到，所有按钮的圆角状态都会切换
-
-
-更多`defineComponentMaker`的参数，参照api????
+更多`defineComponentMaker`的参数，参考[`defineComponentMaker`](../api/utils.md#definecomponentmaker)

@@ -61,4 +61,4 @@ const router = createRouter({
 export default router
 
 ```
-此时开启开发服务器，进入`/vue-cook`，你会看到<a href='/demos/get-started'>示例页面-起步页</a>
+此时开启开发服务器，进入`/vue-cook`，你会看到<a href='/demos/get-started' target='_blank'>示例页面-起步页</a>

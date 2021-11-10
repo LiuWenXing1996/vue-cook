@@ -5,7 +5,7 @@ export default defineLogicMaker({
     name: "fetch",
     pkg: "test-pkg",
     makePropOptions: () => ["maxAge", "minAge"],
-    make: (logicConfig) => {
+    make: (cookPlayerState, logicConfig) => {
         const maxAgeNumber = Number(logicConfig?.props?.["maxAge"]) || undefined
         const minAgeNumber = Number(logicConfig?.props?.["minAge"]) || undefined
         return () => {

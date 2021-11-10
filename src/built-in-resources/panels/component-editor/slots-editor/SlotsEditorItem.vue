@@ -1,34 +1,38 @@
 <template>
-    <n-form-item :label="slotOption.name">
+    <n-form-item :label="slotOption">
         <div class="slot-editor">
             <div class="slot-add-bar">
-                <slot-dragger :component-config="config" :slot-name="slotOption.name">拖拽组件到此处添加</slot-dragger>
+                <component-dragger @drop="handleComponentDrop($event)">拖拽组件到此处添加</component-dragger>
             </div>
-            <n-data-table
-                :columns="columns"
-                :data="getData(slotOption.value, slotOption.name)"
-                size="small"
-            />
+            <n-data-table :columns="columns" :data="tableData" size="small" />
         </div>
     </n-form-item>
 </template>
 <script setup lang="ts">
-import useComponentSelected from '../hooks/useComponentSelected';
+import useComponentSelected from '@/hooks/useComponentSelected';
 import IComponentConfig from '@/types/IComponentConfig';
-import { computed, h, inject, ref } from 'vue';
+import { computed, h, inject, ref, toRefs } from 'vue';
 import { NFormItem, NDataTable } from "naive-ui"
 import SlotComponentAction from "./SlotComponentAction.vue"
-import { SlotDragger } from "@/index"
+import { ComponentDragger } from "@/index"
 import ICookEditorState from '@/types/ICookEditorState';
-import ISlotOption from '@/types/ISlotOption';
+import addComponentConfig from '@/utils/addComponentConfig';
+import removeComponentConfig from '@/utils/removeComponentConfig';
 const cookEditorState = inject<ICookEditorState>('cookEditorState') as ICookEditorState
 
-defineProps({
+const props = defineProps({
     slotOption: {
-        type: Object as () => ISlotOption,
+        type: String,
         required: true
     }
 })
+const { slotOption } = toRefs(props)
+
+const handleComponentDrop = (componentConfig: IComponentConfig) => {
+    if (config.value) {
+        addComponentConfig(config.value, componentConfig, slotOption.value)
+    }
+}
 
 interface IRowData {
     key: string,
@@ -39,6 +43,17 @@ interface IRowData {
 const selectedComponent = useComponentSelected(cookEditorState).get()
 const config = computed(() => {
     return selectedComponent.value?.component
+})
+const tableData = computed(() => {
+    const slotData = config.value?.slots?.[slotOption.value] || []
+    return slotData.map(e => {
+        return {
+            key: e.uid,
+            name: e.name,
+            slotName: slotOption.value,
+            value: e
+        }
+    })
 })
 
 const columns = ref([
@@ -57,9 +72,8 @@ const columns = ref([
                     slotName: rowData.slotName,
                     pageUid: selectedComponent.value?.page.uid,
                     onDel: () => {
-                        const slot = config.value?.slots?.[rowData.slotName];
-                        if (slot) {
-                            slot.splice(rowIndex, 1)
+                        if (config.value) {
+                            removeComponentConfig(config.value, rowData.value.uid, rowData.slotName)
                         }
                     },
                     onSelect: () => {
@@ -69,7 +83,6 @@ const columns = ref([
                                 componentUid: rowData.value.uid
                             })
                         }
-                        // config.value = rowData.value
                     },
                     onUp: () => {
                         const slot = config.value?.slots?.[rowData.slotName];
@@ -98,18 +111,6 @@ const columns = ref([
         }
     }
 ])
-
-const getData = (slotValue: IComponentConfig[], slotName: string): IRowData[] => {
-    return slotValue.map(e => {
-        return {
-            key: e.uid,
-            name: e.name,
-            slotName: slotName,
-            value: e
-        }
-    })
-}
-
 </script>
 <style lang="less" scoped>
 .slot-editor {
