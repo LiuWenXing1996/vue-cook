@@ -1,21 +1,20 @@
 <template>
-    <template v-if="cookEditorState">
-        <cook-editor :state="cookEditorState" :preview="preview"></cook-editor>
+    <template v-if="cookPlayerState">
+        <cook-player :state="cookPlayerState"></cook-player>
     </template>
 </template>
 <script setup lang="ts">
-import { CookEditor, ICookEditorState, IPage } from "vue-cook"
-import { useRoute } from "vue-router";
+import { CookPlayer, ICookPlayerState, IPage } from "vue-cook"
 import TableMaker from "@/../demos/test-pkg/components/table-with-fetch"
 import FetchMaker from "@/../demos/test-pkg/logic/fetch-with-props"
-import fecthPages from "@/../demos/utils/fecthPages"
-import { createCookEditorState, defaultMakerList } from "vue-cook"
+import fecthPage from "@/../demos/utils/fecthPage"
+import { defaultMakerList, createCookPlayerState } from "vue-cook"
 import { ref } from "vue";
-let cookEditorState = ref<ICookEditorState>();
-fecthPages().then(pagesString => {
-    const pages = JSON.parse(pagesString) as IPage[]
-    cookEditorState.value = createCookEditorState({
-        pages: pages,
+let cookPlayerState = ref<ICookPlayerState>();
+fecthPage().then(pageString => {
+    const page = JSON.parse(pageString) as IPage
+    cookPlayerState.value = createCookPlayerState({
+        page: page,
         makerList: [
             TableMaker, // import TableMaker from "./TableMaker.ts"
             FetchMaker, // import FetchMaker from "./FetchMaker.ts"
@@ -23,11 +22,9 @@ fecthPages().then(pagesString => {
         ]
     })
 })
-const route = useRoute()
-const preview = route.query.preview as string
 </script>
 <style lang="less">
-@import "@/../demos/reset.less";
+
 body,
 html,
 #app {

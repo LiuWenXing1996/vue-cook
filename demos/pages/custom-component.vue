@@ -16,7 +16,7 @@ const route = useRoute()
 const preview = route.query.preview as string
 </script>
 <style lang="less">
-@import "@/../demos/reset.less";
+
 body,
 html,
 #app {

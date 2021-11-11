@@ -76,5 +76,15 @@ provide('cookEditorState', state.value)
             height: 5px;
         }
     }
+
+    :deep(table) {
+        margin: unset;
+        display: table;
+    }
+
+    :deep(th),
+    :deep(td) {
+        border: unset;
+    }
 }
 </style>

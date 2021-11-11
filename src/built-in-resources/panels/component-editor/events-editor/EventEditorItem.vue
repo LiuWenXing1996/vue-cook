@@ -18,7 +18,7 @@ import ILogicConfig from '@/types/ILogicConfig';
 import { computed, h, inject, ref } from 'vue';
 import { NFormItem, NDataTable } from "naive-ui"
 import EventLogicAction from "./EventLogicAction.vue"
-import { EventDragger } from "@/index"
+import EventDragger from "@/components/event-dragger/index.vue"
 import ICookEditorState from '@/types/ICookEditorState';
 import IEventOption from '@/types/IEventOption';
 const cookEditorState = inject<ICookEditorState>('cookEditorState') as ICookEditorState

@@ -69,18 +69,46 @@
   - `preview` - `string | undefined` 预览页面的`uid`，当其有值是，`<cook-player>`会在的`window`对象上，暴露出一些可供调用的方法，方便`<cook-editor>`和其通信
 
 - **用法**
-TODO:使用cook-player的代码
 
-## `<slot-dragger>`
-插槽拖拽组件
-- **props**
-  - `slotName` - `string` 
-  - `componentConfig` - `IComponentConfig`
+参照 [在`<cook-player>`中使用](../guide/data-save-and-use.md#在-cook-player-中使用)以及 [结合动态路由使用`<cook-player>`](../guide/data-save-and-use.md#结合动态路由使用-cook-player)
+
+## `<component-dragger>`
+
+插槽拖拽组件，当某一个组件资源被拖拽上去后，会触发一个`drop`事件,它的回调参数包含一个新创建的对应拖拽组件的组件配置
+- **events**
+  - `drop` - `(componentConfig: IComponentConfig) => void` 
+- **slots**
+  - `default` - 默认会显示`拖拽组件到此处添加`，可以自定义想要显示内容
+  ```vue
+  <component-dragger>自定义内容</component-dragger>
+  ```
 - **用法**
-  TODO:插槽拖拽组件用法代码
+  
+  参照 [自定义交互面板-组件拖拽添加面板](../guide/custom-panel.md#组件拖拽添加面板)
+
 ## `<logic-dragger>`
-拖拽
+拖拽拖拽组件，当某一个逻辑资源被拖拽上去后，会触发一个`drop`事件,它的回调参数包含一个新创建的对应拖拽逻辑的逻辑配置
+- **events**
+  - `drop` - `(logicConfig: ILogicConfig) => void` 
+- **slots**
+  - `default` - 默认会显示`拖拽逻辑到此处添加`，可以自定义想要显示内容
+  ```vue
+  <logic-dragger>自定义内容</logic-dragger>
+  ```
+- **用法**
+  
+  参照 [自定义交互面板-逻辑拖拽添加面板](../guide/custom-panel.md#逻辑拖拽添加面板)
+  
+## `<resource-maker>`
+资源展示组件，实现了组件资源和逻辑资源的拖拽事件，以及面板资源的点击开启面板功能。
 
-TODO:然后，对应的有component-dragger ----- component-dragger-container,对应的有logic-dragger ----- logic-dragger-container，这样就不用暴漏那几个全局变量了，是否还要有一个panel-maker
-
-TODO:直接一个resource-maker组件代表一切？？？？
+- **props**
+  - `maker` - `IResourceMaker`
+- **slots**
+  - `default` - 默认会显示`maker.name - maker.pkg`，可以自定义想要显示内容
+  ```vue
+  <resource-maker>自定义内容</resource-maker>
+  ```
+- **用法**
+  
+  参照 [自定义交互面板-自定义资源面板](../guide/custom-panel.md#自定义资源面板)

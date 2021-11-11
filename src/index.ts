@@ -5,7 +5,6 @@
 export { default as CookEditor } from "./components/cook-editor/index.vue"
 export { default as CookPlayer } from "./components/cook-player/index.vue"
 export { default as ComponentDragger } from "./components/component-dragger/index.vue"
-export { default as EventDragger } from "./components/event-dragger/index.vue"
 export { default as LogicDragger } from "./components/logic-dragger/index.vue"
 export { default as ResourceMaker } from "./components/resource-maker/index.vue"
 // panel makers

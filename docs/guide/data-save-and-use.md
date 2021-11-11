@@ -2,7 +2,7 @@
 
 ## 编辑数据保存
 
-使用`<cook-editor></cook-editor>`编辑的数据会实时存在它的`CookEditorState`中的`pages`，这个对象的类型描述如下：
+使用`<cook-editor>`编辑的数据会实时存在它的`CookEditorState`的`pages`中，这个对象的类型描述如下：
 
 ```ts
 // pages =====> Array<IPage>
@@ -44,9 +44,14 @@ type IMakerType = "component" | "logic" | "panel"
 
 @[code ts](../../demos/utils/fecthPages.ts)
 
-在`<cook-editor>`中使用它
+创建`createEditorState`
 
 @[code{14-25} ts](../../demos/pages/use-data-in-cook-editor.vue)
+
+在`<cook-editor>`中使用它
+
+@[code{1-5} vue](../../demos/pages/use-data-in-cook-editor.vue)
+
 
 打开<a href='/demos/use-data-in-cook-editor' target="_blank">示例页面-在`<cook-editor>`使用编辑数据</a>，可以看到左侧面板中已经有了一个新建页面，执行一下步骤
 
@@ -56,4 +61,26 @@ type IMakerType = "component" | "logic" | "panel"
 
 ### 在`<cook-player>`中使用
 
-TODO:在`<cook-player>`使用
+在使用`createPlayerState`创建状态的时候，可以传入已经存在的页面数据。
+
+假设存在有一个页面
+
+@[code ts](../../demos/utils/fecthPage.ts)
+
+创建`createPlayerState`
+
+@[code{13-24} ts](../../demos/pages/use-data-in-cook-player.vue)
+
+在`<cook-player>`中使用它
+
+@[code{1-5} vue](../../demos/pages/use-data-in-cook-player.vue)
+
+打开<a href='/demos/use-data-in-cook-player' target="_blank">示例页面-在`<cook-player>`使用编辑数据</a>，可以看到一个带表格的页面显示了出来，点击按钮，可以看到表格数据正常加载。
+
+### 结合动态路由使用`<cook-player>`
+
+可以使用`vue-router`的动态路由，动态添加`<cook-player>`
+
+@[code{19-45} ts](../.vuepress/clientAppEnhance.ts)
+
+打开<a href='/8630b4fc-7e22-4bc8-993a-0c1d36e1c2a5' target="_blank">示例页面-结合动态路由使用`<cook-player>`</a>，可以看到一个带表格的页面显示了出来，点击按钮，可以看到表格数据正常加载。

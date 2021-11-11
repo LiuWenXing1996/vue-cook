@@ -1,6 +1,6 @@
 import { IPage } from "vue-cook"
 
-const pages: IPage[] = [{
+const pages: IPage = {
     "name": "新增页面",
     "uid": "8630b4fc-7e22-4bc8-993a-0c1d36e1c2a5",
     "path": "/8630b4fc-7e22-4bc8-993a-0c1d36e1c2a5",
@@ -23,9 +23,9 @@ const pages: IPage[] = [{
             }]
         }
     }
-}]
+}
 
-export default async function fetchPages(): Promise<string> {
+export default async function fetchPage(): Promise<string> {
     return new Promise((resolve, reject) => {
         setTimeout(() => {
             resolve(JSON.stringify(pages))
