@@ -1,4 +1,4 @@
-import IMakerType from "../types/IMakerType"
+import IMakerType from "@/types/IMakerType"
 
 
 export default function getMakerDataFromDragEvent(e: DragEvent) {

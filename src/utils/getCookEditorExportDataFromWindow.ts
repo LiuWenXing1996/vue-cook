@@ -1,5 +1,5 @@
 import getCookEditorExportDataUniqTag from "./getCookEditorExportDataUniqTag";
-import ICookEditorExportData from "../types/ICookEditorExportData";
+import ICookEditorExportData from "@/types/ICookEditorExportData";
 
 export default function getCookEditorExportDataFromWindow(window: Window, pageUid: string) {
     const uniqTag = getCookEditorExportDataUniqTag(pageUid)

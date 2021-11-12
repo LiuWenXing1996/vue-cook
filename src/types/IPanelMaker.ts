@@ -6,6 +6,6 @@ import ICookEditorState from '@/types/ICookEditorState';
 
 export default interface IPanelMaker extends IResourceMaker<IPanelConfig, ICookEditorState, IPanel> {
     defaultSplitLayoutPaneName: ISplitLayoutPaneName,
-    close?: (cookEditorState: ICookEditorState, panelConfig: IPanelConfig) => void
-    open?: (cookEditorState: ICookEditorState, panelConfig: IPanelConfig) => void
+    onClose?: (cookEditorState: ICookEditorState, panelConfig: IPanelConfig) => void
+    onOpen?: (cookEditorState: ICookEditorState, panelConfig: IPanelConfig) => void
 }

@@ -27,7 +27,7 @@ export default defineUserConfig({
 
         navbar: [
             { text: '指引', link: '/guide/' },
-            { text: 'Api 参考', link: '/api/component' },
+            { text: 'Apis', link: '/api/components' },
             { text: '示例目录', link: '/demos' }
         ],
         sidebarDepth: 3,
@@ -53,14 +53,14 @@ export default defineUserConfig({
                 ]
             },
             {
-                text: 'APIs',
+                text: 'Apis',
                 children: [
                     '/api/components',
                     '/api/built-in',
                     '/api/hooks',
                     '/api/utils'
                 ]
-            }
+            },
         ]
     },
     bundler: '@vuepress/bundler-vite',

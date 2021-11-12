@@ -9,6 +9,7 @@ import makeDefaultPanelConfig from '@/utils/makeDefaultPanelConfig';
 import usePageEditingUidList from '@/hooks/usePageEditingUidList';
 import PagePanelLinker from './utils/PagePanelLinker';
 import findPanelConfig from '@/utils/findPanelConfig';
+import useComponentPickerEnable from '@/hooks/useComponentPickerEnable';
 
 const maker: IPanelMaker = definePanelMaker({
     name: "页面编辑器",
@@ -31,11 +32,12 @@ const maker: IPanelMaker = definePanelMaker({
             })
         }
     },
-    close: (cookEditorState, config) => {
+    onClose: (cookEditorState, config) => {
         const pageUid = PagePanelLinker.getPageUid(cookEditorState, config.uid)
         usePageEditingUidList(cookEditorState).remove(pageUid)
     },
     install: (cookEditorState) => {
+        useComponentPickerEnable(cookEditorState).set(true) // 默认组件选取模式开启
         const pageEditingUidList = usePageEditingUidList(cookEditorState).list
         // 监听页面编辑列表
         watch(pageEditingUidList, (state, prevState) => {

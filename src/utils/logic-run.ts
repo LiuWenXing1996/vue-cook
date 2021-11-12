@@ -1,6 +1,6 @@
-import useLogicMaker from "../hooks/useLogicMaker";
-import ICookPlayerState from "../types/ICookPlayerState";
-import ILogicConfig from "../types/ILogicConfig";
+import useLogicMaker from "@/hooks/useLogicMaker";
+import ICookPlayerState from "@/types/ICookPlayerState";
+import ILogicConfig from "@/types/ILogicConfig";
 
 export default async function logicRun<T = unknown>(cookState: ICookPlayerState, config: ILogicConfig, ...payload: any[]): Promise<T> {
     let returns;

@@ -7,12 +7,3 @@ export default interface ISplitPaneConfig {
         config: ISplitPaneConfig
     }
 }
-
-// export interface ISplitPaneConfigA {
-//     list: IPanelConfig[],
-//     split?: {
-//         isH: Boolean,
-//         config: ISplitPaneConfigA
-//     }
-// }
-

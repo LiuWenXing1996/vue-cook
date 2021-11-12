@@ -1,6 +1,6 @@
 import IPage from '@/types/IPage';
-import ICookEditorExportData from '../types/ICookEditorExportData';
-import ICookEditorState from '../types/ICookEditorState';
+import ICookEditorExportData from '@/types/ICookEditorExportData';
+import ICookEditorState from '@/types/ICookEditorState';
 import getCookEditorExportDataUniqTag from './getCookEditorExportDataUniqTag';
 
 export default function exportCookEditorData(state: ICookEditorState, pageUid: string) {

@@ -1,6 +1,6 @@
 import { v4 as uuidv4 } from 'uuid';
-import IPanelConfig from "../types/IPanelConfig";
-import IPanelMaker from '../types/IPanelMaker';
+import IPanelConfig from "@/types/IPanelConfig";
+import IPanelMaker from '@/types/IPanelMaker';
 
 export default function makeDefaultPanelConfig(maker: IPanelMaker): IPanelConfig {
     const uid = uuidv4();

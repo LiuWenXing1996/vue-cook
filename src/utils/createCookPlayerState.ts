@@ -11,10 +11,15 @@ export default function createCookPlayerState(state: ICookPlayerStateOptions) {
         makerList: defaultMakerList,
         ...state
     })
-    // 安装maker
+    // 触发maker install
     const makerList = state.makerList || defaultMakerList
     makerList.map(maker => {
-        maker.install?.(_state)
+        if (
+            maker.type === "logic" ||
+            maker.type === "component"
+        ) {
+            maker.install?.(_state)
+        }
     })
     return reactive(_state);
 }

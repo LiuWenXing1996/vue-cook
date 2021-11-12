@@ -1,8 +1,7 @@
 import ICookEditorState from '@/types/ICookEditorState';
-import ISplitPaneConfig from '../types/ISplitPaneConfig';
 import IPanelConfig from '@/types/IPanelConfig';
-import usePanelMaker from './../hooks/usePanelMaker';
-import ISplitLayoutPaneName from '../types/ISplitLayoutPaneName';
+import usePanelMaker from '@/hooks/usePanelMaker';
+import ISplitLayoutPaneName from '@/types/ISplitLayoutPaneName';
 
 function remove(cookEditorState: ICookEditorState, splitLayoutPaneName: ISplitLayoutPaneName, panelConfig?: IPanelConfig,) {
     if (panelConfig) {
@@ -11,7 +10,7 @@ function remove(cookEditorState: ICookEditorState, splitLayoutPaneName: ISplitLa
         if (index > -1) {
             list.splice(index, 1)
             const maker = usePanelMaker(cookEditorState, panelConfig.makerName, panelConfig.makerPkg)
-            maker?.value?.close?.(cookEditorState, panelConfig)
+            maker?.value?.onClose?.(cookEditorState, panelConfig)
         }
     }
 }

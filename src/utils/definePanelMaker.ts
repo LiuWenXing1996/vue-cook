@@ -1,4 +1,4 @@
-import IPanelMaker from "../types/IPanelMaker";
+import IPanelMaker from "@/types/IPanelMaker";
 
 type IPanelMakerOptions = Omit<IPanelMaker, "type">
 

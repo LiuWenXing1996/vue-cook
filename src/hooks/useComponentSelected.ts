@@ -1,11 +1,7 @@
 import ICookEditorState from "@/types/ICookEditorState";
 import { computed, reactive } from "vue";
 import findComponentConfig from "@/utils/findComponentConfig";
-
-interface IComponentSelected {
-    componentUid: string,
-    pageUid: string
-}
+import IComponentSelected from "@/types/IComponentSelected";
 
 const stateMap = reactive(new Map<ICookEditorState, IComponentSelected | undefined>())
 

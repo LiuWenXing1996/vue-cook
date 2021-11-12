@@ -13,7 +13,6 @@ export default function useSlotOptions(cookEditorState: ICookEditorState, compon
         if (!maker) {
             return [];
         }
-        return maker?.makeSlotOptions?.(configValue) || []
+        return maker?.makeSlotOptions?.( configValue) || []
     })
-
 }

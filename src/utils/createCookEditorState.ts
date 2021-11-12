@@ -12,12 +12,12 @@ export default function createCookEditorState(state?: Partial<ICookEditorState>)
         layout: defaultSplitLayout,
         ...state
     })
-    // 安装maker
+    // 触发maker install
     const makerList = state.makerList || defaultMakerList
     makerList.map(maker => {
-        maker.install?.(_state)
+        if (maker.type === "panel") {
+            maker.install?.(_state)
+        }
     })
-    // 默认的一些状态
-    useComponentPickerEnable(_state).set(true)
     return _state
 }
