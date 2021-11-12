@@ -1,9 +1,6 @@
 import ICookEditorState from "@/types/ICookEditorState";
 
-export default function findPanelConfig(cookEditorState: ICookEditorState, panelUid?: string) {
-    if (panelUid) {
-        return undefined
-    }
+export default function findPanelConfig(cookEditorState: ICookEditorState, panelUid: string) {
     const layout = cookEditorState.layout
     let found = undefined
     found = layout.left.find(e => e.uid === panelUid)

@@ -15,7 +15,7 @@
                 <n-form-item label="唯一ID">
                     <div>{{ editableValue.uid }}</div>
                 </n-form-item>
-                <n-form-item label="maker">
+                <n-form-item label="资源类型">
                     <div class="round-name-tag">{{ editableValue.makerName }}</div>
                     <div style="padding: 0 2px;">-</div>
                     <div class="round-pkg-tag">{{ editableValue.makerPkg }}</div>
@@ -70,7 +70,7 @@ const propOptions = computed<IPropOption[]>(() => {
     if (!maker) {
         return [];
     }
-    const _paramsOptions = maker?.makePropOptions?.(configValue) || []
+    const _paramsOptions = maker?.makePropOptions?.(cookEditorState, configValue) || []
     const _optionsWithValue = _paramsOptions.map(e => {
         let value = logicConfig.value?.props?.[e] || ""
         return {

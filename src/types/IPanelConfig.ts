@@ -1,5 +1,5 @@
-import IResourceConfig from "./IResourceConfig";
+import IResourceConfigBase from "./IResourceConfigBase";
 
-export default interface IPanelConfig extends IResourceConfig {
+export default interface IPanelConfig extends IResourceConfigBase {
     alwaysOpen?: boolean
 }

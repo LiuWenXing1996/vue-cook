@@ -1,4 +1,4 @@
-import IMakerType from "@/types/IMakerType"
+import IResourceMakerType from "@/types/IResourceMakerType"
 
 
 export default function getMakerDataFromDragEvent(e: DragEvent) {
@@ -7,7 +7,7 @@ export default function getMakerDataFromDragEvent(e: DragEvent) {
     }
     const makerName = e.dataTransfer.getData('name')
     const makerPkg = e.dataTransfer.getData('package')
-    const makerType = e.dataTransfer.getData('type') as IMakerType
+    const makerType = e.dataTransfer.getData('type') as IResourceMakerType
     if (!makerName || !makerPkg || !makerType) {
         return
     }

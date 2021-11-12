@@ -1,10 +1,9 @@
-import IMakerType from "./IMakerType";
+import IComponentConfig from "./IComponentConfig"
+import ILogicConfig from "./ILogicConfig"
+import IPanelConfig from "./IPanelConfig"
 
-export default interface IResourceConfig {
-    uid: string,
-    name: string,
-    makerType: IMakerType,
-    makerName: string,
-    makerPkg: string
-}
+type IResourceConfig = IComponentConfig | ILogicConfig | IPanelConfig
+
+export default IResourceConfig
+
 

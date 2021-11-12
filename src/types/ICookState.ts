@@ -1,4 +1,6 @@
-import IResourceMaker from "./IResourceMaker";
-export default interface ICookState {
-    makerList: IResourceMaker[]
-}
+import ICookEditorState from "./ICookEditorState"
+import ICookPlayerState from "./ICookPlayerState"
+
+type ICookState = ICookEditorState | ICookPlayerState
+
+export default ICookState

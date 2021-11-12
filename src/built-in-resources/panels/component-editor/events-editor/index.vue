@@ -21,7 +21,7 @@ const eventOptions = computed<IEventOption[]>(() => {
     if (!maker) {
         return [];
     }
-    const _eventOptions = maker?.makeEventOptions?.(configValue) || []
+    const _eventOptions = maker?.makeEventOptions?.(cookEditorState, configValue) || []
     const _optionsWithValue = _eventOptions.map(e => {
         let value = config.value?.events?.[e] || []
         return {

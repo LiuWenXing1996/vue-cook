@@ -5,11 +5,11 @@
             <div class="info-tips-item-content">{{ componentConfig.name }}</div>
         </div>
         <div class="info-tips-item">
-            <div class="info-tips-item-label">uid</div>
+            <div class="info-tips-item-label">唯一ID</div>
             <div class="info-tips-item-content">{{ componentConfig.uid }}</div>
         </div>
         <div class="info-tips-item">
-            <div class="info-tips-item-label">maker</div>
+            <div class="info-tips-item-label">资源类型</div>
             <div class="info-tips-item-content">
                 <div class="round-name-tag">{{ componentConfig.makerName }}</div>
                 <div style="padding: 0 2px;">-</div>
@@ -47,7 +47,7 @@ const maker = computed(() => {
 })
 const slotOptions = computed(() => {
     if (componentConfig.value) {
-        const _slotOptions = maker.value?.makeSlotOptions?.(componentConfig.value)
+        const _slotOptions = maker.value?.makeSlotOptions?.(cookEditorState, componentConfig.value)
         if (_slotOptions && _slotOptions.length > 0) {
             return _slotOptions
         }
@@ -67,7 +67,7 @@ const slotOptions = computed(() => {
             margin-bottom: 0;
         }
         .info-tips-item-label {
-            max-width: 50px;
+            max-width: 70px;
             margin-right: 10px;
         }
         .info-tips-item-content {

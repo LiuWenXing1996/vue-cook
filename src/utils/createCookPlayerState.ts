@@ -1,25 +1,21 @@
 import ICookPlayerState from '@/types/ICookPlayerState';
-import { reactive, toRefs } from 'vue';
+import { reactive } from 'vue';
 import defaultMakerList from './defaultMakerList';
 
-type ICookPlayerStateOptions = Partial<Omit<ICookPlayerState, "page">> & {
+type ICookPlayerStateOptions = Partial<Omit<ICookPlayerState, "page" | "type">> & {
     page: ICookPlayerState["page"]
 }
 
 export default function createCookPlayerState(state: ICookPlayerStateOptions) {
-    const _state: ICookPlayerState = reactive({
+    const _state: ICookPlayerState = reactive<ICookPlayerState>({
+        type: "player",
         makerList: defaultMakerList,
         ...state
     })
     // 触发maker install
     const makerList = state.makerList || defaultMakerList
     makerList.map(maker => {
-        if (
-            maker.type === "logic" ||
-            maker.type === "component"
-        ) {
-            maker.install?.(_state)
-        }
+        maker.install?.(_state)
     })
     return reactive(_state);
 }

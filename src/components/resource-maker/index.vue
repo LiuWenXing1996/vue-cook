@@ -14,7 +14,7 @@
 </template>
 <script lang="ts" setup>
 import { computed, inject, toRefs } from "vue"
-import IResourceMaker from "@/types/IResourceMaker"
+import IResourceMakerBase from "@/types/IResourceMakerBase"
 import makeDefaultPanelConfig from "@/utils/makeDefaultPanelConfig"
 import IPanelMaker from "@/types/IPanelMaker"
 import { VueCookLogicMakerDraggerTag, VueCookComponentMakerDraggerTag } from "@/utils/const-value"
@@ -23,7 +23,7 @@ import layoutAddTab from "@/utils/layoutAddTab"
 const cookEditorState = inject<ICookEditorState>('cookEditorState') as ICookEditorState
 const props = defineProps({
     maker: {
-        type: Object as () => IResourceMaker,
+        type: Object as () => IResourceMakerBase,
         required: true
     }
 })

@@ -6,7 +6,7 @@
                 <div class="overlay-tips-item-content">{{ componentConfig.name }}</div>
             </div>
             <div class="overlay-tips-item">
-                <div class="overlay-tips-item-label">uid</div>
+                <div class="overlay-tips-item-label">唯一ID</div>
                 <div class="overlay-tips-item-content">{{ componentConfig.uid }}</div>
             </div>
             <div class="overlay-tips-item">
@@ -65,7 +65,7 @@ const maker = computed(() => {
 })
 const slotOptions = computed(() => {
     if (componentConfig.value) {
-        const _slotOptions = maker.value?.makeSlotOptions?.(componentConfig.value)
+        const _slotOptions = maker.value?.makeSlotOptions?.(cookEditorState,componentConfig.value)
         if (_slotOptions && _slotOptions.length > 0) {
             return _slotOptions
         }

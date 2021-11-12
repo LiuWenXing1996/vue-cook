@@ -1,4 +1,4 @@
-import IComponentConfig from '@/types/IComponentConfig';
+import IComponentConfig from './IComponentConfig';
 export default interface IPage {
     path: string,
     name: string,

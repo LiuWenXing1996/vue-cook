@@ -7,7 +7,7 @@
 <script setup lang="ts">
 import useComponentMaker from '@/hooks/useComponentMaker';
 import { useComponentSelected } from '@/index';
-import { computed, inject} from 'vue';
+import { computed, inject } from 'vue';
 import PropEditorItem from "./PropEditorItem.vue"
 import ICookEditorState from '@/types/ICookEditorState';
 import IPropOption from '@/types/IPropOption';
@@ -21,7 +21,7 @@ const propOptions = computed<IPropOption[]>(() => {
     if (!maker) {
         return [];;
     }
-    const _propOptions = maker?.makePropOptions?.(configValue) || []
+    const _propOptions = maker?.makePropOptions?.(cookEditorState, configValue) || []
     const _optionsWithValue = _propOptions.map(e => {
         let value = config.value?.props?.[e] || ""
         return {

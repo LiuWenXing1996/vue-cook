@@ -1,9 +1,9 @@
 
 import { computed } from 'vue';
-import ICookState from '../types/ICookState';
+import ICookStateBase from '../types/ICookStateBase';
 import IComponentMaker from './../types/IComponentMaker';
 
-export default function useComponentMakerList(cookState: ICookState) {
+export default function useComponentMakerList(cookState: ICookStateBase) {
     return computed(() => {
         const allList = cookState.makerList
         return allList.filter(e => e.type === "component") as IComponentMaker[]

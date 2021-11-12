@@ -21,7 +21,7 @@
                             </n-icon>
                         </div>
                     </n-form-item>
-                    <n-form-item label="maker">
+                    <n-form-item label="资源类型">
                         <div class="round-name-tag">{{ config.makerName }}</div>
                         <div style="padding: 0 2px;">-</div>
                         <div class="round-pkg-tag">{{ config.makerPkg }}</div>

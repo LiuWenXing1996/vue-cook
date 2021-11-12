@@ -1,8 +1,6 @@
 
 //TODO:增加黑色主题和主题色定义功能？
 //TODO:所有图标转成svg存在本地，而不是@vicons？
-//TODO:maker的展示前面的中尉改成资源类型？？？，然后uid改成唯一ID
-//TODO:makePropOptions等没有传入cooksatte????
 
 // components
 export { default as CookEditor } from "./components/cook-editor/index.vue"
@@ -56,4 +54,5 @@ export type { default as ILogicConfig } from "./types/ILogicConfig"
 export type { default as IPanelConfig } from "./types/IPanelConfig"
 export type { default as IComponentConfig } from "./types/IComponentConfig"
 export type { default as IPage } from "./types/IPage"
+// TODO:类型导出？？？
 

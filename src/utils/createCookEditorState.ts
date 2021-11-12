@@ -1,12 +1,14 @@
-import useComponentPickerEnable from '@/hooks/useComponentPickerEnable';
 import ICookEditorState from '@/types/ICookEditorState';
 import { reactive } from 'vue';
 import defaultMakerList from './defaultMakerList';
 import defaultSplitLayout from './defaultSplitLayout';
 
-export default function createCookEditorState(state?: Partial<ICookEditorState>) {
+type ICookEditorStateOptions = Partial<Omit<ICookEditorState, "type">>
+
+export default function createCookEditorState(state?: Partial<ICookEditorStateOptions>) {
     state = state || {}
-    const _state: ICookEditorState = reactive({
+    const _state: ICookEditorState = reactive<ICookEditorState>({
+        type: "editor",
         makerList: defaultMakerList,
         pages: [],
         layout: defaultSplitLayout,
@@ -15,9 +17,7 @@ export default function createCookEditorState(state?: Partial<ICookEditorState>)
     // 触发maker install
     const makerList = state.makerList || defaultMakerList
     makerList.map(maker => {
-        if (maker.type === "panel") {
-            maker.install?.(_state)
-        }
+        maker.install?.(_state)
     })
     return _state
 }

@@ -57,7 +57,7 @@ const updateParamsOptions = () => {
         paramsOptions.value = [];
         return;
     }
-    const _paramsOptions = maker?.makePropOptions?.(configValue) || []
+    const _paramsOptions = maker?.makePropOptions?.(cookEditorState, configValue) || []
     const _optionsWithValue = _paramsOptions.map(e => {
         let value = logicConfig.value?.props?.[e] || ""
         return {

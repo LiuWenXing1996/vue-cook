@@ -1,12 +1,11 @@
 import { Component } from "vue";
 import IComponentConfig from "./IComponentConfig";
-import IResourceMaker from './IResourceMaker';
-import ICookPlayerState from './ICookPlayerState';
-import ICookEditorState from './ICookEditorState';
+import IResourceMakerBase from './IResourceMakerBase';
+import ICookState from "./ICookState";
 
-export default interface IComponentMaker extends IResourceMaker<IComponentConfig, ICookPlayerState, Component> {
-    makePropOptions?: (componentConfig: IComponentConfig) => string[]
-    makeEventOptions?: (componentConfig: IComponentConfig) => string[]
-    makeSlotOptions?: (componentConfig: IComponentConfig) => string[]
-    //TODO:makePropOptions等没有传入cooksatte????
+export default interface IComponentMaker extends IResourceMakerBase<IComponentConfig, Component> {
+    type: "component",
+    makePropOptions?: (cookState: ICookState, componentConfig: IComponentConfig) => string[]
+    makeEventOptions?: (cookState: ICookState, componentConfig: IComponentConfig) => string[]
+    makeSlotOptions?: (cookState: ICookState, componentConfig: IComponentConfig) => string[]
 }

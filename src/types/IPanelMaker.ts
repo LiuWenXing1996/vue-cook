@@ -1,11 +1,12 @@
 import IPanelConfig from "./IPanelConfig";
-import IResourceMaker from "./IResourceMaker";
+import IResourceMakerBase from "./IResourceMakerBase";
 import ISplitLayoutPaneName from "./ISplitLayoutPaneName";
 import IPanel from "./IPanel";
-import ICookEditorState from '@/types/ICookEditorState';
+import ICookState from "./ICookState";
 
-export default interface IPanelMaker extends IResourceMaker<IPanelConfig, ICookEditorState, IPanel> {
+export default interface IPanelMaker extends IResourceMakerBase<IPanelConfig, IPanel> {
+    type: "panel",
     defaultSplitLayoutPaneName: ISplitLayoutPaneName,
-    onClose?: (cookEditorState: ICookEditorState, panelConfig: IPanelConfig) => void
-    onOpen?: (cookEditorState: ICookEditorState, panelConfig: IPanelConfig) => void
+    onClose?: (cookState: ICookState, panelConfig: IPanelConfig) => void
+    onOpen?: (cookState: ICookState, panelConfig: IPanelConfig) => void
 }

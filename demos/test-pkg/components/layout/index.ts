@@ -5,7 +5,7 @@ export default defineComponentMaker({
     name: "布局",
     pkg: "test-pkg",
     makePropOptions: () => ["row", "col"],
-    makeSlotOptions: (componentConfig) => {
+    makeSlotOptions: (cookState, componentConfig) => {
         const getSlotName = (m: number, n: number) => `${m}-${n}`
         const rowNumber = Number(componentConfig?.props?.row) || 1
         const colNumber = Number(componentConfig?.props?.col) || 1
