@@ -6,17 +6,10 @@ import ComponentRender from "./ComponentRender.vue"
 import { toRefs, provide, ref } from "vue";
 import exportData from "./utils/exportData";
 import ICookPlayerState from "@/types/ICookPlayerState";
-const props = defineProps(
-    {
-        state: {
-            type: Object as () => ICookPlayerState,
-            required: true
-        },
-        preview: {
-            type: String
-        }
-    }
-)
+const props = defineProps<{
+    state: ICookPlayerState,
+    preview?: string
+}>()
 let dev = ref(false)
 const { state, preview } = toRefs(props)
 provide("cookPlayerState", state.value)

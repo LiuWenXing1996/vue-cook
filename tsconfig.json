@@ -1,28 +1,5 @@
 {
-  "compilerOptions": {
-    "baseUrl": "./",
-    "paths": {
-      "@/*": [
-        "src/*"
-      ],
-      "vue-cook": [
-        "src/index.ts"
-      ]
-    },
-    "target": "esnext",
-    "module": "esnext",
-    "moduleResolution": "node",
-    "strict": true,
-    "jsx": "preserve",
-    "sourceMap": true,
-    "resolveJsonModule": true,
-    "esModuleInterop": true,
-    "skipLibCheck": true,
-    "lib": [
-      "esnext",
-      "dom"
-    ]
-  },
+  "extends": "./tsconfig.base.json",
   "include": [
     "env.d.ts",
     "demos/**/*.ts",

@@ -6,7 +6,7 @@ type ICookPlayerStateOptions = Partial<Omit<ICookPlayerState, "page" | "type">> 
     page: ICookPlayerState["page"]
 }
 
-export default function createCookPlayerState(state: ICookPlayerStateOptions) {
+export default function createCookPlayerState(state: ICookPlayerStateOptions): ICookPlayerState {
     const _state: ICookPlayerState = reactive<ICookPlayerState>({
         type: "player",
         makerList: defaultMakerList,

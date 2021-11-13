@@ -5,7 +5,7 @@ import path from "path"
 
 const config = defineConfig({
   plugins: [
-    vue()
+    vue(),
   ],
   publicDir: false,
   build: {

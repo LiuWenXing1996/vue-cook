@@ -1,6 +1,9 @@
 import makeDefaultPanelConfig from './makeDefaultPanelConfig';
 import ISplitLayout from '@/types/ISplitLayout';
-import { ComponentEditorMaker, PageComponentTreeMaker, ResourcePanelMaker } from '..';
+import PageComponentTreeMaker from "@/built-in-resources/panels/page-component-tree"
+import ComponentEditorMaker from "@/built-in-resources/panels/component-editor"
+import ResourcePanelMaker from "@/built-in-resources/panels/resource-panel"
+
 const defaultSplitLayout: ISplitLayout = {
     "left": [
         makeDefaultPanelConfig(PageComponentTreeMaker)
