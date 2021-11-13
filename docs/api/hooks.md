@@ -80,7 +80,7 @@
   - `cookState` - `ICookState`
 - **返回** `ComputedRef<IPanelMaker[]>`
 ## useSlotOptions
-获取组件资源的插槽可选项
+获取组件资源的插槽可配置项
 - **参数**
   - `cookEditorState` - `ICookEditorState`
   - `componentConfig` - `Ref<IComponentConfig | undefined>`

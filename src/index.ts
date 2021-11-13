@@ -1,6 +1,6 @@
 
-//TODO:增加黑色主题和主题色定义功能？
-//TODO:所有图标转成svg存在本地，而不是@vicons？
+//TODO:增加黑色主题和主题色定义功能
+//TODO:所有图标转成svg存在本地，而不是@vicons
 
 // components
 export { default as CookEditor } from "./components/cook-editor/index.vue"
@@ -48,11 +48,26 @@ export { default as makeDefaultPanelConfig } from "./utils/makeDefaultPanelConfi
 export { default as parseLogicConfig } from "./utils/parseLogicConfig"
 export { default as removeComponentConfig } from "./utils/removeComponentConfig"
 // types
-export type { default as ICookPlayerState } from "./types/ICookPlayerState"
-export type { default as ICookEditorState } from "./types/ICookEditorState"
-export type { default as ILogicConfig } from "./types/ILogicConfig"
-export type { default as IPanelConfig } from "./types/IPanelConfig"
 export type { default as IComponentConfig } from "./types/IComponentConfig"
+export type { default as IComponentMaker } from "./types/IComponentMaker"
+export type { default as IComponentOverlay } from "./types/IComponentOverlay"
+export type { default as IComponentSelected } from "./types/IComponentSelected"
+export type { default as ICookEditorState } from "./types/ICookEditorState"
+export type { default as ICookPlayerState } from "./types/ICookPlayerState"
+export type { default as ICookState } from "./types/ICookState"
+export type { default as ICookStateBase } from "./types/ICookStateBase"
+export type { default as ICookStateType } from "./types/ICookStateType"
+export type { default as ILogicConfig } from "./types/ILogicConfig"
+export type { default as ILogicMaker } from "./types/ILogicMaker"
 export type { default as IPage } from "./types/IPage"
-// TODO:类型导出？？？
-
+export type { default as IPageCookPanelSize } from "./types/IPageCookPanelSize"
+export type { default as IPanelConfig } from "./types/IPanelConfig"
+export type { default as IPanelMaker } from "./types/IPanelMaker"
+export type { default as IResourceConfig } from "./types/IResourceConfig"
+export type { default as IResourceConfigBase } from "./types/IResourceConfigBase"
+export type { default as IResourceMaker } from "./types/IResourceMaker"
+export type { default as IResourceMakerBase } from "./types/IResourceMakerBase"
+export type { default as IResourceMakerType } from "./types/IResourceMakerType"
+export type { default as ISplitLayout } from "./types/ISplitLayout"
+export type { default as ISplitLayoutPaneName } from "./types/ISplitLayoutPaneName"
+export type { default as ISplitPaneConfig } from "./types/ISplitPaneConfig"

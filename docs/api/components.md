@@ -5,7 +5,7 @@
 编辑器组件，它将多个交互面板融合在同一个页面中。
 
 - **props**
-  - `state` - `ICookEditorState` 编辑器的状态，里面包括了所有可以编辑的页面`pages`,布局状态`layout`。通常使用`createEditorState`来创建
+  - `state` - `ICookEditorState` 编辑器的状态，里面包括了所有可以编辑的页面`pages`,布局状态`layout`,已经加载的资源列表`makerList`。它会通过Vue的`provide`注入到所有的子组件中。通常使用`createEditorState`来创建
   - `preview` - `string | undefined` 需要预览页面的`uid`，需要从页面url的参数传入。
 
 - **基础用法**
@@ -62,15 +62,15 @@
     </script>
     ```
 ## `<cook-player>`
-组件渲染器。通过编辑器组件生成的配置，将其放入到此组件中，它根据提供的配置，使用`Vue`的`动态组件`将其渲染出来
+渲染器组件。通过编辑器组件生成的配置，将其放入到此组件中，它根据提供的配置，使用`Vue`的`动态组件`将其渲染出来
 
 - **props**
-  - `state` - `ICookPlayerState` 渲染器的状态，里面包括了当前页面的配置`page`,其他资源挂载的全局状态`extra`。通常使用`createPlayerState`来创。
-  - `preview` - `string | undefined` 预览页面的`uid`，当其有值是，`<cook-player>`会在的`window`对象上，暴露出一些可供调用的方法，方便`<cook-editor>`和其通信
+  - `state` - `ICookPlayerState` 渲染器的状态，里面包括了当前页面的配置`page`,已经加载的资源列表`makerList`。它会通过Vue的`provide`注入到所有的子组件中。通常使用`createPlayerState`来创建。
+  - `preview` - `string | undefined` 预览页面的`uid`，当其有值是，`<cook-player>`会在它所在页面的`window`对象上，暴露出一些可供调用的方法，方便`<cook-editor>`和其通信
 
 - **用法**
 
-参照 [在`<cook-player>`中使用](../guide/data-save-and-use.md#在-cook-player-中使用)以及 [结合动态路由使用`<cook-player>`](../guide/data-save-and-use.md#结合动态路由使用-cook-player)
+参照 [在`<cook-player>`中使用数据](../guide/data-save-and-use.md#在-cook-player-中使用)以及 [结合动态路由使用`<cook-player>`](../guide/data-save-and-use.md#结合动态路由使用-cook-player)
 
 ## `<component-dragger>`
 
@@ -100,7 +100,7 @@
   参照 [自定义交互面板-逻辑拖拽添加面板](../guide/custom-panel.md#逻辑拖拽添加面板)
   
 ## `<resource-maker>`
-资源展示组件，实现了组件资源和逻辑资源的拖拽事件，以及面板资源的点击开启面板功能。
+资源展示组件，实现了组件资源和逻辑资源的拖拽事件，以及面板资源的点击打开面板功能。
 
 - **props**
   - `maker` - `IResourceMaker`

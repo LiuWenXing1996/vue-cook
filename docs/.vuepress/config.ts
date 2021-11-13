@@ -48,7 +48,7 @@ export default defineUserConfig({
                 children: [
                     '/advanced/component-render-principle',
                     '/advanced/component-picker-principle',
-                    '/advanced/logic-compiler-principle',
+                    '/advanced/logic-run-principle',
                     '/advanced/panel-load-principle',
                 ]
             },

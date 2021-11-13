@@ -1,4 +1,4 @@
-# 编辑数据保存和使用
+# 编辑数据的保存和使用
 
 ## 编辑数据保存
 
@@ -15,7 +15,7 @@ interface IPage {
 interface IComponentConfig {
     uid: string,
     name: string,
-    makerType: IMakerType,
+    makerType: "component",
     makerName: string,
     makerPkg: string,
     props?: Record<string, string>,
@@ -25,14 +25,13 @@ interface IComponentConfig {
 interface ILogicConfig {
     uid: string,
     name: string,
-    makerType: IMakerType,
+    makerType: "logic",
     makerName: string,
     makerPkg: string,
     props?: Record<string, string>
 }
-type IMakerType = "component" | "logic" | "panel"
 ```
-我们可以将`pages`通过`JSON.stringify`这个方法转成字符串，存储到数据库中，等到使用的时候再通过接口取出来，使用`JSON.parse`转成对象。
+我们可以通过`JSON.stringify`这个方法将`pages`转成字符串，存储到数据库中，等到使用的时候再通过接口取出来，使用`JSON.parse`转成对象。
 
 ## 编辑数据使用
 

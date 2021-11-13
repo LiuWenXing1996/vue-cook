@@ -1,6 +1,6 @@
 # 自定义交互面板
 
-可以通过`definePanelMaker`这个工具函数自定义交互面板。
+可以通过`definePanelMaker`这个工具函数自定义交互面板资源。
 
 ## 定义面板
 
@@ -38,13 +38,13 @@ VueCook提供了`<component-dragger>`，可以很方便的实现`组件拖拽添
 
 @[code vue](../../demos/test-pkg/panels/component-dragger-panel/ComponentDraggerPanel.vue)
 
-打开<a href='/demos/custom-panel-with-color-input' target="_blank">示例页面-自定义组件拖拽添加面板</a>，按照以下步骤，使用此面板
+打开<a href='/demos/custom-panel-with-component-dragger' target="_blank">示例页面-自定义组件拖拽添加面板</a>，按照以下步骤，使用此面板
 
 - 创建一个带按钮的页面,选中按钮
 - 从资源面板中打开`组件拖拽添加面板`
 - 可以看到它识别到了按钮组件拥有的插槽配置，并且每个插槽配置后面都带了一个框，上面写着`拖拽组件到此处添加`
-- 将资源面板中的图标组件拖入，可以看到图标正常显示在按钮组件上
-- 点击删除按钮可以将添加的按钮组件删除
+- 将资源面板中的emoji图标组件拖入，可以看到图标正常显示在按钮组件上
+- 点击删除按钮可以将添加的图标组件删除
 
 ### 逻辑拖拽添加面板
 
@@ -57,12 +57,12 @@ VueCook提供了`<logic-dragger>`，可以很方便的实现`逻辑拖拽添加`
 - 创建一个带表格的页面，选中表格组件
 - 从资源面板中打开`逻辑拖拽添加面板`
 - 可以看到它显示了一个框，上面写着`fetch:拖拽逻辑到此处添加`
-- 将资源面板中的fetch逻辑拖入，页面中的表格组件的按钮文字也变成`点我获取数据`
+- 将资源面板中的fetch逻辑拖入，页面中的表格组件的按钮文字变成了`点我获取数据`
 - 关闭选中模式，点击按钮，稍等片刻，可以看到数据加载成功
 
 ### 自定义资源面板
 
-VueCook提供了`<resource-maker>`，可以很方便的实现一个`资源面板`的同时，具有`组件拖拽`、`逻辑拖拽`以及`面板点击打开`功能
+VueCook提供了`<resource-maker>`，可以很方便的在实现一个`资源面板`的同时，具有`组件拖拽`、`逻辑拖拽`以及`面板点击打开`功能
 
 @[code vue](../../demos/test-pkg/panels/resource-panel/ResourcePanel.vue)
 

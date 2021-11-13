@@ -19,10 +19,10 @@ import ComponentIcon from "@/svgs/component.svg"
 import LogicIcon from "@/svgs/logic.svg"
 import PanelIcon from "@/svgs/panel.svg"
 import { NIcon } from "naive-ui"
-import IResourceMakerBase from "@/types/IResourceMakerBase"
+import IResourceMaker from "@/types/IResourceMaker"
 defineProps({
     maker: {
-        type: Object as () => IResourceMakerBase,
+        type: Object as () => IResourceMaker,
         required: true
     }
 })

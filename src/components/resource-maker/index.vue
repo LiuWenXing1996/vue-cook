@@ -13,22 +13,19 @@
     </div>
 </template>
 <script lang="ts" setup>
-import { computed, inject, toRefs } from "vue"
-import IResourceMakerBase from "@/types/IResourceMakerBase"
+import { computed, inject, Ref, toRefs } from "vue"
+import IResourceMaker from "@/types/IResourceMaker"
 import makeDefaultPanelConfig from "@/utils/makeDefaultPanelConfig"
-import IPanelMaker from "@/types/IPanelMaker"
 import { VueCookLogicMakerDraggerTag, VueCookComponentMakerDraggerTag } from "@/utils/const-value"
 import ICookEditorState from "@/types/ICookEditorState"
 import layoutAddTab from "@/utils/layoutAddTab"
 const cookEditorState = inject<ICookEditorState>('cookEditorState') as ICookEditorState
-const props = defineProps({
-    maker: {
-        type: Object as () => IResourceMakerBase,
-        required: true
-    }
-})
+const props = defineProps<{
+    maker: IResourceMaker
+}>()
 
-const { maker } = toRefs(props)
+const { maker: _maker } = toRefs(props)
+const maker = _maker as Ref<IResourceMaker>
 
 const draggable = computed(() => {
     return maker.value.type === "component" || maker.value.type === "logic"
@@ -49,7 +46,7 @@ const handleDragStart = (e: DragEvent) => {
 }
 const handelClick = () => {
     if (maker.value.type === "panel") {
-        const _maker = maker.value as IPanelMaker
+        const _maker = maker.value
         const config = makeDefaultPanelConfig(_maker)
         const defaultSplitLayoutPaneName = _maker.defaultSplitLayoutPaneName;
         layoutAddTab(cookEditorState, config, defaultSplitLayoutPaneName)

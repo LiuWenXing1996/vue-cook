@@ -1,13 +1,13 @@
 # 工具
 
 ## addComponentConfig
-移除父组件中的某一个子组件配置
+为父组件中的某一个插槽添加一个子组件配置
 - **参数**
   - `parentComponent` - `IComponentConfig`
   - `childComponent` - `IComponentConfig`
   - `slotName` - `string`
 ## createCookEditorState
-创建一个组件编辑器的状态，用于`<cook-editor>`,它返回的是一个响应式对象
+创建一个编辑器组件的状态，用于`<cook-editor>`,它返回的是一个响应式对象
 - **参数**
   - `state` - `ICookEditorStateOptions | undefined` 
     ```ts
@@ -27,7 +27,7 @@
     ```
 - **返回** `ICookEditorState`
 ## createCookPlayerState
-创建一个组件渲染器的状态，用于`<cook-player>`,它返回的是一个响应式对象
+创建一个渲染器组件的状态，用于`<cook-player>`,它返回的是一个响应式对象
 - **参数**
   - `state` - `ICookPlayerStateOptions` 其中，`makerList`的默认值是`defaultMakerList`
     ```ts
@@ -53,13 +53,15 @@
 默认的布局
 - **类型** `ISplitLayout`
   ```ts
+  const resourcePanelConfig = makeDefaultPanelConfig(ResourcePanelMaker)
+  resourcePanelConfig.alwaysOpen = true
   const defaultSplitLayout: ISplitLayout = {
     "left": [
         makeDefaultPanelConfig(PageComponentTreeMaker)
     ],
     "center": [],
     "bottom": [
-        makeDefaultPanelConfig(ResourcePanelMaker)
+        resourcePanelConfig
     ],
     "right": [
         makeDefaultPanelConfig(ComponentEditorMaker)
@@ -73,7 +75,7 @@
   ```ts
   type IComponentMakerOptions = Omit<IComponentMaker, "type">
   ```
-  - `maker.name` - `string` 资源名称，同一个资源包下同一个类型的资源，它的名称之间不能重复
+  - `maker.name` - `string` 资源名称，同一个资源包下同一个类型的资源，名称之间不能重复
   - `maker.pkg` - `string` 资源包名称，不能重复。通过`pkg`,`type`以及`name`保证一个资源的唯一性
   - `maker.make` - `(cookState: ICookState, componentConfig: IComponentConfig) => Component` 生成函数，它是将组件配置转换成组件的桥梁。
   - `maker.install` - `undefined | (cookState: ICookState) => void` 安装函数，资源在被放入`cookState`的时候触发，可以用来初始化一些默认操作
@@ -91,7 +93,7 @@
   ```ts
   type ILogicMakerOptions = Omit<ILogicMaker, "type">
   ```
-  - `maker.name` - `string` 资源名称，同一个资源包下同一个类型的资源，它的名称之间不能重复
+  - `maker.name` - `string` 资源名称，同一个资源包下同一个类型的资源，名称之间不能重复
   - `maker.pkg` - `string` 资源包名称，不能重复。通过`pkg`,`type`以及`name`保证一个资源的唯一性
   - `maker.make` - `(cookState: ICookState, logicConfig: ILogicConfig) => Function` 生成函数，它是将逻辑配置转换成`Function`的桥梁。
   - `maker.install` - `undefined | (cookState: ICookState) => void` 安装函数，资源在被放入`cookState`的时候触发，可以用来初始化一些默认操作
@@ -107,10 +109,10 @@
   ```ts
   type IPanelMakerOptions = Omit<IPanelMaker, "type">
   ```
-  - `maker.name` - `string` 资源名称，同一个资源包下同一个类型的资源，它的名称之间不能重复
+  - `maker.name` - `string` 资源名称，同一个资源包下同一个类型的资源，名称之间不能重复
   - `maker.pkg` - `string` 资源包名称，不能重复。通过`pkg`,`type`以及`name`保证一个资源的唯一性
-  - `maker.make` - `(cookState: ICookState, panelConfig: IPanelConfig) => Function` 生成函数，它是将交互面板配置转换成`Function`的桥梁。
-  - `maker.install` - `undefined | (cookState: ICookState) => void` 安装函数，资源在被放入`cookEditorState`的时候触发，可以用来初始化一些默认操作
+  - `maker.make` - `(cookState: ICookState, panelConfig: IPanelConfig) => Component` 生成函数，它是将交互面板配置转换成面板的桥梁。
+  - `maker.install` - `undefined | (cookState: ICookState) => void` 安装函数，资源在被放入`cookState`的时候触发，可以用来初始化一些默认操作
   - `makeTitle` - `undefined | (cookState: ICookState, panelConfig: IPanelConfig) => string` 生成一个面板的标题
   - `maker.onClose` - `undefined | (cookState: ICookState, panelConfig: IPanelConfig) => void` 面板关闭时触发的回调函数
   - `maker.onOpen` - `undefined | (cookState: ICookState, panelConfig: IPanelConfig) => void` 面板打开时触发的回调函数
@@ -119,13 +121,13 @@
   
   参照 [自定义交互面板](../guide/custom-panel.md)
 ## findComponentConfig
-寻找子组件配置
+查找一个组件配置
 - **参数**
   - `parent` - `IComponentConfig`
   - `componentUid` - `string`
 - **返回** `IComponentConfig | undefined`
 ## findPanelConfig
-从当前编辑器状态中找到面板配置
+从当前编辑器状态中找到一个面板配置
 - **参数**
   - `cookEditorState` - `ICookEditorState`
   - `panelUid` - `string`
@@ -165,17 +167,17 @@
   
   参照 [自定义逻辑](../guide/custom-logic.md)
 
-## makerDefaultComponentConfig
+## makeDefaultComponentConfig
 生成一个默认的组件配置
 - **参数**
   - `maker` - `IComponentMaker`
 - **返回** `IComponentConfig`
-## makerDefaultLogicConfig
+## makeDefaultLogicConfig
 生成一个默认的逻辑配置
 - **参数**
   - `maker` - `ILogicMaker`
 - **返回** `ILogicConfig`
-## makerDefaultPanelConfig
+## makeDefaultPanelConfig
 生成一个默认的面板配置
 - **参数**
   - `maker` - `IPanelMaker`
@@ -186,7 +188,7 @@
   - `jsonString` - `string | undefined`
 - **返回** `ILogicConfig | undefined`
 ## removeComponentConfig
-为父组件中的某一个插槽添加一个子组件配置
+移除父组件中的某一个子组件配置
 - **参数**
   - `parentComponent` - `IComponentConfig`
   - `childComponent` - `IComponentConfig`

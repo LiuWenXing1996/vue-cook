@@ -32,23 +32,24 @@ const PagePanelLinker = {
     },
     getPanelUid: (cookEditorState: ICookEditorState, pageUid: string) => {
         const link = getPageLink(cookEditorState, pageUid)
-        return link?.pageUid
+        return link?.panelUid
     },
     link: (cookEditorState: ICookEditorState, pageUid: string, panelUid: string,) => {
         const pageLink = getPageLink(cookEditorState, pageUid)
+        const panelLink = getPanelLink(cookEditorState, panelUid)
+        // TODO:这个link有点毛病。。。
         if (pageLink) {
             pageLink.panelUid == panelUid
+            return
         }
-        const panelLink = getPanelLink(cookEditorState, panelUid)
         if (panelLink) {
             panelLink.pageUid == pageUid
+            return
         }
-        else {
-            setLink(cookEditorState, {
-                pageUid,
-                panelUid
-            })
-        }
+        setLink(cookEditorState, {
+            pageUid,
+            panelUid
+        })
     },
 }
 
