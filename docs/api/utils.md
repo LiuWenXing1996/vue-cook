@@ -111,6 +111,7 @@
   - `maker.pkg` - `string` 资源包名称，不能重复。通过`pkg`,`type`以及`name`保证一个资源的唯一性
   - `maker.make` - `(cookState: ICookState, panelConfig: IPanelConfig) => Function` 生成函数，它是将交互面板配置转换成`Function`的桥梁。
   - `maker.install` - `undefined | (cookState: ICookState) => void` 安装函数，资源在被放入`cookEditorState`的时候触发，可以用来初始化一些默认操作
+  - `makeTitle` - `undefined | (cookState: ICookState, panelConfig: IPanelConfig) => string` 生成一个面板的标题
   - `maker.onClose` - `undefined | (cookState: ICookState, panelConfig: IPanelConfig) => void` 面板关闭时触发的回调函数
   - `maker.onOpen` - `undefined | (cookState: ICookState, panelConfig: IPanelConfig) => void` 面板打开时触发的回调函数
 - **返回** `IPanelMaker`

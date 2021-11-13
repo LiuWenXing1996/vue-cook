@@ -1,5 +1,5 @@
 import { defineComponent, h, watch } from 'vue';
-import Component from "./PageCookPanel.vue";
+import PageCookPanel from "./PageCookPanel.vue";
 import definePanelMaker from '@/utils/definePanelMaker';
 import { pkgName } from '@/utils/const-value';
 import layoutRemoveTab from '@/utils/layoutRemoveTab';
@@ -24,19 +24,26 @@ const maker: IPanelMaker = definePanelMaker({
             pageUid = PagePanelLinker.getPageUid(cookEditorState, config.uid)
             page = cookEditorState.pages.find(d => d.uid === pageUid)
         }
-        return {
-            title: page?.name || "没有正在编辑的页面",
-            content: defineComponent({
-                setup() {
-                    return () => h(
-                        Component,
-                        {
-                            pageUid: pageUid
-                        }
-                    )
-                }
-            })
+        return defineComponent({
+            setup() {
+                return () => h(
+                    PageCookPanel,
+                    {
+                        pageUid: pageUid
+                    }
+                )
+            }
+        })
+    },
+    makeTitle: (cookState, config) => {
+        let pageUid: string | undefined
+        let page: IPage | undefined
+        if (cookState.type === "editor") {
+            const cookEditorState = cookState
+            pageUid = PagePanelLinker.getPageUid(cookEditorState, config.uid)
+            page = cookEditorState.pages.find(d => d.uid === pageUid)
         }
+        return page?.name || "没有正在编辑的页面"
     },
     onClose: (cookState, config) => {
         if (cookState.type === "editor") {

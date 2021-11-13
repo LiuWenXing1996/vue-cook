@@ -5,17 +5,12 @@ export default definePanelMaker({
     name: "开关面板",
     pkg: "test-pkg",
     defaultSplitLayoutPaneName: "right",
-    make: (cookEditorState, panelConfig) => {
-        return {
-            title: "开关面板",
-            content: defineComponent({
-                render: () => h(
-                    TogglePanel,
-                    {
-                        panelConfig
-                    }
-                )
-            })
-        }
-    }
+    make: (cookEditorState, panelConfig) => defineComponent({
+        render: () => h(
+            TogglePanel,
+            {
+                panelConfig
+            }
+        )
+    })
 })

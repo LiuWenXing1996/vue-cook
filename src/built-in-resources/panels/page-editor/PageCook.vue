@@ -1,5 +1,6 @@
 <template>
     <div class="page-cook">
+        <!-- <input /> -->
         <iframe :src="path" ref="iframeRef"></iframe>
         <component-picker :iframe-ref="iframeRef" :enable-picker="enablePicker" :size="size"></component-picker>
     </div>

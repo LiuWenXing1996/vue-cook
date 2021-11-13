@@ -5,10 +5,5 @@ export default definePanelMaker({
     name: "逻辑拖拽添加面板",
     pkg: "test-pkg",
     defaultSplitLayoutPaneName: "right",
-    make: () => {
-        return {
-            title: "逻辑拖拽添加面板",
-            content: LogicDraggerPanel
-        }
-    }
+    make: () => LogicDraggerPanel
 })

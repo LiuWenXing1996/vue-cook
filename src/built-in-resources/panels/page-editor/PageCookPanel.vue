@@ -5,28 +5,23 @@
                 <n-space align="center">
                     <n-popover trigger="hover" placement="bottom">
                         <template #trigger>
-                            <n-icon>
+                            <n-icon @click="undo()">
                                 <arrow-undo-outline></arrow-undo-outline>
                             </n-icon>
                         </template>
                         撤销
-                        <!-- TODO：撤销逻辑实现 -->
                     </n-popover>
                     <n-popover trigger="hover" placement="bottom">
                         <template #trigger>
-                            <n-icon>
+                            <n-icon @click="redo()">
                                 <arrow-redo-outline></arrow-redo-outline>
                             </n-icon>
                         </template>
                         恢复
-                        <!-- TODO：恢复逻辑实现 -->
                     </n-popover>
                     <n-popover trigger="hover" placement="bottom">
                         <template #trigger>
-                            <n-icon
-                                @click="togglePicker"
-                                :class="{ actived: enablePicker }"
-                            >
+                            <n-icon @click="togglePicker" :class="{ actived: enablePicker }">
                                 <locate-outline></locate-outline>
                             </n-icon>
                         </template>
@@ -120,6 +115,7 @@ import { NEmpty, NIcon, NPopover, NSpace, NInputNumber, NInput } from "naive-ui"
 import { LocateOutline, ArrowUndoOutline, ArrowRedoOutline, TrashOutline, EyeOutline, InformationCircle, RefreshOutline } from "@vicons/ionicons5"
 import PageSizeIcon from "@/svgs/page-size.svg"
 import { computed, inject, Ref, ref, toRefs, watch } from "vue";
+import { useRefHistory } from '@vueuse/core'
 import PageCook from "./PageCook.vue"
 import useComponentPickerEnable from "@/hooks/useComponentPickerEnable";
 import IPageCookPanelSize from "@/types/IPageCookPanelSize";
@@ -133,8 +129,22 @@ const props = defineProps({
     }
 })
 const { pageUid } = toRefs(props)
-const pageEditing = computed(() => {
-    return cookEditorState.pages.find(e => e.uid === pageUid?.value)
+// const pageEditing = computed(() => {
+//     return cookEditorState.pages.find(e => e.uid === pageUid?.value)
+// })
+const pageEditing = computed({
+    get: () => {
+        return cookEditorState.pages.find(e => e.uid === pageUid?.value)
+    },
+    set: (value) => {
+        const oldPage = cookEditorState.pages.find(e => e.uid === pageUid?.value)
+        if (value && oldPage) {
+            Object.assign(oldPage, value)
+        }
+    }
+})
+const { undo, redo } = useRefHistory(pageEditing, {
+    deep: true
 })
 const enablePicker = useComponentPickerEnable(cookEditorState).get()
 

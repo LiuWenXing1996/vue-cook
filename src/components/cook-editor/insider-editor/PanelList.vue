@@ -20,13 +20,19 @@
                 <n-tab-pane
                     :name="l.uid"
                     v-for="l in list"
-                    display-directive="show"
                     :closable="!l.alwaysOpen"
+                    display-directive="show"
                 >
                     <template #tab>
-                        <div>{{ useMakerMakeValue(l)?.title }}</div>
+                        <div>{{ useTitle(l) }}</div>
                     </template>
-                    <component :is="useMakerMakeValue(l)?.content"></component>
+                    <panel-render :config="l"></panel-render>
+                    <!-- <div style="height: 100%;">
+                        <input />
+                        <keep-alive>
+                            <component :is="Test"></component>
+                        </keep-alive>
+                    </div>-->
                 </n-tab-pane>
             </n-tabs>
         </template>
@@ -39,6 +45,7 @@ import { inject, ref, toRefs, watch } from "vue";
 import usePanelMaker from "@/hooks/usePanelMaker";
 import ICookEditorState from "@/types/ICookEditorState";
 import layoutRemoveTab from "@/utils/layoutRemoveTab";
+import PanelRender from "./PanelRender.vue";
 const cookEditorState = inject<ICookEditorState>('cookEditorState') as ICookEditorState
 
 const props = defineProps({
@@ -65,9 +72,9 @@ watch(list, () => {
     immediate: true
 })
 
-const useMakerMakeValue = (panelConfig: IPanelConfig) => {
+const useTitle = (panelConfig: IPanelConfig) => {
     const maker = usePanelMaker(cookEditorState, panelConfig.makerName, panelConfig.makerPkg).value
-    return maker?.make(cookEditorState, panelConfig)
+    return maker?.makeTitle?.(cookEditorState, panelConfig) || maker?.name || "未识别的面板"
 }
 
 const handleClose = (name: string) => {
