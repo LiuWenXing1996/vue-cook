@@ -1,7 +1,5 @@
 <template>
-    <ClientOnly>
-        <cook-editor :state="cookEditorState" :preview="preview"></cook-editor>
-    </ClientOnly>
+    <cook-editor :state="cookEditorState" :preview="preview"></cook-editor>
 </template>
 <script setup lang="ts">
 import { CookEditor, createCookEditorState } from "vue-cook"
