@@ -1,6 +1,6 @@
 <template>
     <ClientOnly>
-        <Page404 v-show="show"></Page404>
+        <Page404 ></Page404>
     </ClientOnly>
 </template>
 
