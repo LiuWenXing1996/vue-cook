@@ -37,13 +37,12 @@ const PagePanelLinker = {
     link: (cookEditorState: ICookEditorState, pageUid: string, panelUid: string,) => {
         const pageLink = getPageLink(cookEditorState, pageUid)
         const panelLink = getPanelLink(cookEditorState, panelUid)
-        // TODO:这个link有点毛病。。。
         if (pageLink) {
-            pageLink.panelUid == panelUid
+            pageLink.panelUid = panelUid
             return
         }
         if (panelLink) {
-            panelLink.pageUid == pageUid
+            panelLink.pageUid = pageUid
             return
         }
         setLink(cookEditorState, {
