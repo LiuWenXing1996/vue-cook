@@ -1,5 +1,7 @@
 <template>
-    <Page404 v-show="show"></Page404>
+    <ClientOnly>
+        <Page404 v-show="show"></Page404>
+    </ClientOnly>
 </template>
 
 <script setup lang="ts">
