@@ -24,7 +24,6 @@ export default defineConfig({
             "@vueuse/core",
             "lodash-es",
             "naive-ui",
-            "splitpanes",
             "uuid",
         ]
     }
