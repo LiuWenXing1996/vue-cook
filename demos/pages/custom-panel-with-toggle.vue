@@ -1,5 +1,7 @@
 <template>
-    <cook-editor :state="cookEditorState" :preview="preview"></cook-editor>
+    <ClientOnly>
+        <cook-editor :state="cookEditorState" :preview="preview"></cook-editor>
+    </ClientOnly>
 </template>
 <script setup lang="ts">
 import { CookEditor } from "vue-cook"
@@ -16,7 +18,6 @@ const route = useRoute()
 const preview = route.query.preview as string
 </script>
 <style lang="less">
-
 body,
 html,
 #app {
