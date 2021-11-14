@@ -80,6 +80,6 @@ interface ILogicConfig {
 
 可以使用`vue-router`的动态路由，动态添加`<cook-player>`
 
-@[code{19-45} ts](../.vuepress/clientAppEnhance.ts)
+@[code{8-34} ts](../.vuepress/utils/addDemosRouteToApp.ts)
 
 打开<demo-link path='/8630b4fc-7e22-4bc8-993a-0c1d36e1c2a5'>示例页面-结合动态路由使用`<cook-player>`</demo-link>，可以看到一个带表格的页面显示了出来，点击按钮，可以看到表格数据正常加载。

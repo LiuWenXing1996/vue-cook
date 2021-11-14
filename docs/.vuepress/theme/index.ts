@@ -7,7 +7,6 @@ module.exports = {
     extends: '@vuepress/theme-default',
     // 覆盖父主题的布局
     layouts: {
-        // Layout: path.resolve(__dirname, 'layouts/Layout.vue'),
         404: path.resolve(__dirname, 'layouts/404.vue'),
     },
 }
