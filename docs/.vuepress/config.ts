@@ -29,6 +29,7 @@ export default defineUserConfig({
             { text: '指引', link: '/guide/' },
             { text: 'Apis', link: '/api/components' },
             { text: '示例目录', link: '/demos' }
+            // TODO:致谢列表。。。
         ],
         sidebarDepth: 3,
         sidebar: [
