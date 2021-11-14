@@ -9,6 +9,7 @@ export default defineUserConfig({
     title: 'VueCook',
     description: '基于vue的低代码平台辅助工具',
     head: [['link', { rel: 'icon', type: 'image/svg+xml', href: '/logo.svg' }]],
+    // theme: path.resolve(__dirname, './theme'),
     themeConfig: {
         repo: 'LiuWenXing1996/vue-cook',
         logo: '/logo.svg',
