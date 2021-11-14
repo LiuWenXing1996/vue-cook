@@ -11,36 +11,39 @@ import { CookPlayer, createCookPlayerState, defaultMakerList, IPage } from "vue-
 export default defineClientAppEnhance(({ app, router, siteData }) => {
     app.component("DemoLink", DemoLink)
     app.component("DemoToc", DemoToc)
-    console.log(routes)
-    useRoutes().value = routes
-    routes.forEach(e => {
-        router.addRoute(e)
-    })
-    let redirectTag = false;
-    router.beforeEach(async (to, from) => {
-        if (!redirectTag) {
-            const pagesString = await fetchPages()
-            const pages = JSON.parse(pagesString) as IPage[]
-            pages.forEach(page => {
-                const cookPlayerState = createCookPlayerState({
-                    page,
-                    makerList: [
-                        ...defaultMakerList,
-                        TableMaker, // import TableMaker from "./TableMaker.ts"
-                        FetchMaker, // import FetchMaker from "./FetchMaker.ts"
-                    ]
+    if (!__VUEPRESS_SSR__) {
+        console.log(routes)
+        useRoutes().value = routes
+        routes.forEach(e => {
+            router.addRoute(e)
+        })
+        let redirectTag = false;
+        router.beforeEach(async (to, from) => {
+            if (!redirectTag) {
+                const pagesString = await fetchPages()
+                const pages = JSON.parse(pagesString) as IPage[]
+                pages.forEach(page => {
+                    const cookPlayerState = createCookPlayerState({
+                        page,
+                        makerList: [
+                            ...defaultMakerList,
+                            TableMaker, // import TableMaker from "./TableMaker.ts"
+                            FetchMaker, // import FetchMaker from "./FetchMaker.ts"
+                        ]
+                    })
+                    router.addRoute({
+                        path: page.path,
+                        component: CookPlayer,
+                        props: {
+                            state: cookPlayerState
+                        }
+                    })
                 })
-                router.addRoute({
-                    path: page.path,
-                    component: CookPlayer,
-                    props: {
-                        state: cookPlayerState
-                    }
-                })
-            })
-            redirectTag = true
-            return to.fullPath
-        }
-        redirectTag = false
-    })
+                redirectTag = true
+                return to.fullPath
+            }
+            redirectTag = false
+        })
+    }
+
 })
