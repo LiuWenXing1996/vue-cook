@@ -28,6 +28,7 @@ yarn add vue-cook
 ```js
 import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router'
 import { CookEditor, createCookEditorState} from "vue-cook"
+import "vue-cook/dist/style.css"
 
 const cookEditorState = createCookEditorState() // 创建编辑器全局状态
 const routes = [
