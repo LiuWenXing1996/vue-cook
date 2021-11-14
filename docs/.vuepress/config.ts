@@ -5,6 +5,7 @@ import path from "path"
 import commonConfig from "../../vite.common.config"
 
 export default defineUserConfig({
+    base: "/vue-cook/",
     title: 'VueCook',
     description: '基于vue的低代码平台辅助工具',
     head: [['link', { rel: 'icon', type: 'image/svg+xml', href: '/logo.svg' }]],
@@ -70,7 +71,7 @@ export default defineUserConfig({
             plugins: [
                 Pages({
                     pagesDir: [
-                        { dir: path.resolve(__dirname, '../../demos/pages'), baseRoute: "demos" },
+                        { dir: path.resolve(__dirname, '../../demos/pages'), baseRoute: "./demos" },
                     ]
                 }),
             ],

@@ -52,7 +52,7 @@ interface ILogicConfig {
 @[code{1-5} vue](../../demos/pages/use-data-in-cook-editor.vue)
 
 
-打开<a href='/demos/use-data-in-cook-editor' target="_blank">示例页面-在`<cook-editor>`使用编辑数据</a>，可以看到左侧面板中已经有了一个新建页面，执行一下步骤
+打开<demo-link path='/demos/use-data-in-cook-editor'>示例页面-在`<cook-editor>`使用编辑数据</demo-link>，可以看到左侧面板中已经有了一个新建页面，执行一下步骤
 
 - 点击已经存在的新建页面，可以看到页面编辑器中出现了一个带表格的页面
 - 取消选中模式，点击表格上面的按钮
@@ -74,7 +74,7 @@ interface ILogicConfig {
 
 @[code{1-5} vue](../../demos/pages/use-data-in-cook-player.vue)
 
-打开<a href='/demos/use-data-in-cook-player' target="_blank">示例页面-在`<cook-player>`使用编辑数据</a>，可以看到一个带表格的页面显示了出来，点击按钮，可以看到表格数据正常加载。
+打开<demo-link path='/demos/use-data-in-cook-player'>示例页面-在`<cook-player>`使用编辑数据</demo-link >，可以看到一个带表格的页面显示了出来，点击按钮，可以看到表格数据正常加载。
 
 ### 结合动态路由使用`<cook-player>`
 
@@ -82,4 +82,4 @@ interface ILogicConfig {
 
 @[code{19-45} ts](../.vuepress/clientAppEnhance.ts)
 
-打开<a href='/8630b4fc-7e22-4bc8-993a-0c1d36e1c2a5' target="_blank">示例页面-结合动态路由使用`<cook-player>`</a>，可以看到一个带表格的页面显示了出来，点击按钮，可以看到表格数据正常加载。
+打开<demo-link path='/8630b4fc-7e22-4bc8-993a-0c1d36e1c2a5'>示例页面-结合动态路由使用`<cook-player>`</demo-link>，可以看到一个带表格的页面显示了出来，点击按钮，可以看到表格数据正常加载。

@@ -8,7 +8,7 @@
 
 @[code ts](../../demos/test-pkg/panels/simple-panel/index.ts)
 
-打开<a href='/demos/custom-panel' target='_blank'>示例页面-自定义交互面板</a>，可以在最下方的`资源面板`中找到新增加`简单面板`，点击`简单面板`，会看到面板在右侧被打开。可以通过`defaultSplitLayoutPaneName`来控制面板被打开的位置，有`left`、`center`、`right`、`bottom`
+打开<demo-link path='/demos/custom-panel'>示例页面-自定义交互面板</demo-link>，可以在最下方的`资源面板`中找到新增加`简单面板`，点击`简单面板`，会看到面板在右侧被打开。可以通过`defaultSplitLayoutPaneName`来控制面板被打开的位置，有`left`、`center`、`right`、`bottom`
 
 ## 自定义编辑器
 
@@ -26,7 +26,7 @@
 
 @[code ts](../../demos/test-pkg/components/button-with-color-props/index.ts)
 
-打开<a href='/demos/custom-panel-with-color-input' target="_blank">示例页面-自定义颜色编辑器</a>，按照以下步骤，使用此面板
+打开<demo-link path='/demos/custom-panel-with-color-input'>示例页面-自定义颜色编辑器</demo-link>，按照以下步骤，使用此面板
 
 - 创建一个带按钮的页面
 - 从资源面板中打开`颜色选择器面板`
@@ -38,7 +38,7 @@ VueCook提供了`<component-dragger>`，可以很方便的实现`组件拖拽添
 
 @[code vue](../../demos/test-pkg/panels/component-dragger-panel/ComponentDraggerPanel.vue)
 
-打开<a href='/demos/custom-panel-with-component-dragger' target="_blank">示例页面-自定义组件拖拽添加面板</a>，按照以下步骤，使用此面板
+打开<demo-link path='/demos/custom-panel-with-component-dragger'>示例页面-自定义组件拖拽添加面板</demo-link>，按照以下步骤，使用此面板
 
 - 创建一个带按钮的页面,选中按钮
 - 从资源面板中打开`组件拖拽添加面板`
@@ -52,7 +52,7 @@ VueCook提供了`<logic-dragger>`，可以很方便的实现`逻辑拖拽添加`
 
 @[code vue](../../demos/test-pkg/panels/logic-dragger-panel/LogicDraggerPanel.vue)
 
-打开<a href='/demos/custom-panel-with-logic-dragger' target="_blank">示例页面-自定义组件拖拽添加面板</a>，按照以下步骤，使用此面板
+打开<demo-link path='/demos/custom-panel-with-logic-dragger'>示例页面-自定义逻辑拖拽添加面板</demo-link>，按照以下步骤，使用此面板
 
 - 创建一个带表格的页面，选中表格组件
 - 从资源面板中打开`逻辑拖拽添加面板`
@@ -66,7 +66,7 @@ VueCook提供了`<resource-maker>`，可以很方便的在实现一个`资源面
 
 @[code vue](../../demos/test-pkg/panels/resource-panel/ResourcePanel.vue)
 
-打开<a href='/demos/custom-panel-with-resource-panel' target="_blank">示例页面-自定义自定义资源面板</a>，按照以下步骤，使用此面板
+打开<demo-link path='/demos/custom-panel-with-resource-panel'>示例页面-自定义自定义资源面板</demo-link>，按照以下步骤，使用此面板
 
 - 创建一个新页面，选中新页面
 - 从资源面板中打开`自定义资源面板`，可以看到它将所有的资源都列了出来
@@ -84,7 +84,7 @@ VueCook提供了`<resource-maker>`，可以很方便的在实现一个`资源面
 
 @[code ts](../../demos/test-pkg/panels/toggle-panel/index.ts)
 
-打开<a href='/demos/custom-panel-with-toggle' target="_blank">示例页面-编程控制面板开关</a>，执行以下步骤，
+打开<demo-link path='/demos/custom-panel-with-toggle'>示例页面-编程控制面板开关</demo-link>，执行以下步骤，
 
 - 从资源面板中打开`开关面板`
 - 点击`开关面板`中的`打开面板`按钮，打开另一个面板

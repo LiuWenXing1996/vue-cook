@@ -16,7 +16,7 @@
 
 @[code{8-14} ts{4}](../../demos/pages/custom-component.vue)
 
-打开<a href='/demos/custom-component' target='_blank'>示例页面-定义组件</a>，可以在最下方的`资源面板`中找到新增加的按钮组件，按照下面的步骤，创建一个拥有按钮的页面。
+打开<demo-link path='/demos/custom-component'>示例页面-定义组件</demo-link>，可以在最下方的`资源面板`中找到新增加的按钮组件，按照下面的步骤，创建一个拥有按钮的页面。
 
 - 在左侧的`页面组件树`中点击`+`
 - 点击新增的页面，中间会打开一个`页面编辑`面板
@@ -37,7 +37,7 @@
 
 @[code ts{7}](../../demos/test-pkg/components/button-with-props/index.ts)
 
-打开<a href='/demos/custom-component-with-props' target='_blank'>示例页面-组件添加属性配置</a>，按照下面的步骤，配置组件的属性
+打开<demo-link path='/demos/custom-component-with-props'>示例页面-组件添加属性配置</demo-link>，按照下面的步骤，配置组件的属性
 
 - 创建一个拥有按钮的页面
 - 选中添加的按钮
@@ -66,7 +66,7 @@
 
 @[code{9-16} ts{5}](../../demos/pages/custom-component-with-dom-events.vue)
 
-打开<a href='/demos/custom-component-with-dom-events' target='_blank'>示例页面-组件添加DOM事件配置</a>，按照下面的步骤，配置组件的DOM事件
+打开<demo-link path='/demos/custom-component-with-dom-events'>示例页面-组件添加DOM事件配置</demo-link>，按照下面的步骤，配置组件的DOM事件
 
 - 创建一个拥有按钮的页面
 - 选中添加的按钮
@@ -81,7 +81,7 @@
 
 @[code vue](../../demos/test-pkg/components/button-fragment-with-dom-events/Button.vue)
 
-打开<a href='/demos/custom-fragment-component-with-dom-event' target='_blank'>示例页面-多个根节点组件DOM事件配置</a>，按照下面的步骤，配置多个根节点组件的DOM事件
+打开<demo-link path='/demos/custom-fragment-component-with-dom-event'>示例页面-多个根节点组件DOM事件配置</demo-link>，按照下面的步骤，配置多个根节点组件的DOM事件
 
 - 创建一个拥有按钮的页面
 - 选中添加的按钮，配置事件的逻辑行为
@@ -98,7 +98,7 @@
 
 @[code ts{7}](../../demos/test-pkg/components/button-with-custom-events/index.ts)
 
-打开<a href='/demos/custom-component-with-custom-events' target='_blank'>示例页面-Vue中自定义事件配置</a>，按照下面的步骤，配置Vue中自定义的事件
+打开<demo-link path='/demos/custom-component-with-custom-events'>示例页面-Vue中自定义事件配置</demo-link>，按照下面的步骤，配置Vue中自定义的事件
 
 - 创建一个拥有按钮的页面
 - 选中添加的按钮，配置事件的逻辑行为
@@ -113,7 +113,7 @@
 
 @[code ts{7-8}](../../demos/test-pkg/logic/alert-with-receive-params/index.ts)
 
-打开<a href='/demos/custom-component-with-event-receive-param' target='_blank'>示例页面-事件传参</a>，按照下面的步骤，可以看到事件参数的传递
+打开<demo-link path='/demos/custom-component-with-event-receive-param'>示例页面-事件传参</demo-link>，按照下面的步骤，可以看到事件参数的传递
 
 - 创建一个拥有按钮的页面
 - 选中添加的按钮，配置事件的逻辑行为
@@ -130,7 +130,7 @@
 
 @[code ts{7-8}](../../demos/test-pkg/logic/alert-with-receive-extra-params/index.ts)
 
-打开<a href='/demos/custom-component-with-send-extra-param-to-event' target='_blank'>示例页面-向事件传递额外参数</a>，按照下面的步骤，可以看到事件参数的传递
+打开<demo-link path='/demos/custom-component-with-send-extra-param-to-event'>示例页面-向事件传递额外参数</demo-link>，按照下面的步骤，可以看到事件参数的传递
 
 - 创建一个拥有按钮的页面
 - 选中添加的按钮，配置事件的逻辑行为
@@ -153,7 +153,7 @@
 
 @[code ts](../../demos/test-pkg/components/emoji/index.ts)
 
-打开<a href='/demos/custom-component-with-slots' target='_blank'>示例页面-组件添加插槽配置</a>，按照下面的步骤，配置组件的插槽
+打开<demo-link path='/demos/custom-component-with-slots'>示例页面-组件添加插槽配置</demo-link>，按照下面的步骤，配置组件的插槽
 
 - 创建一个带按钮的页面
 - 选中添加的按钮
@@ -170,7 +170,7 @@
 
 @[code ts{7}](../../demos/test-pkg/components/button-with-multi-slots/index.ts)
 
-打开<a href='/demos/custom-component-with-multi-slots' target='_blank'>示例页面-组件添加多个插槽配置</a>，按照下面的步骤，配置组件的插槽
+打开<demo-link path='/demos/custom-component-with-multi-slots'>示例页面-组件添加多个插槽配置</demo-link>，按照下面的步骤，配置组件的插槽
 
 - 创建一个带按钮的页面
 - 选中添加的按钮
@@ -187,7 +187,7 @@
 
 @[code ts](../../demos/test-pkg/components/layout/index.ts)
 
-打开<a href='/demos/custom-layout-component' target='_blank'>示例页面-创建一个布局组件</a>，按照下面的步骤，配置布局组件
+打开<demo-link path='/demos/custom-layout-component'>示例页面-创建一个布局组件</demo-link>，按照下面的步骤，配置布局组件
 
 - 创建一个带布局组件的页面
 - 选中布局组件
