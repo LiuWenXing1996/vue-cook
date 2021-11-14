@@ -14,6 +14,8 @@ export default defineClientAppEnhance(async ({ app, router, siteData }) => {
     routes.forEach(e => {
         router.addRoute(e)
     })
-    await addDemosRouteToRoutes()
+    if (!__VUEPRESS_SSR__) {
+        await addDemosRouteToRoutes()
+    }
     addDemosRouteToApp(router)
 })

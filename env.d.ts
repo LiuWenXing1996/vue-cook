@@ -8,3 +8,5 @@ declare module '*.vue' {
   const component: DefineComponent<{}, {}, any>
   export default component
 }
+
+const __VUEPRESS_SSR__: Boolean
