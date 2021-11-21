@@ -17,16 +17,6 @@ export default defineUserConfig({
         docsBranch: 'main',
         editLinks: true,
         editLinkText: '为此页提供修改建议',
-
-        // TODO:这个地方的配置改一改
-        // algolia: {
-        //   apiKey: 'b573aa848fd57fb47d693b531297403c',
-        //   indexName: 'vitejs',
-        //   searchParameters: {
-        //     facetFilters: ['tags:en']
-        //   }
-        // },
-
         navbar: [
             { text: '指引', link: '/guide/' },
             { text: 'Apis', link: '/api/components' },
@@ -66,6 +56,16 @@ export default defineUserConfig({
             },
         ]
     },
+    plugins: [
+        [
+            '@vuepress/docsearch',
+            {
+                apiKey: 'b4f749f6f7bac435d2b08338dfd223ee',
+                indexName: 'vue-cook',
+                placeholder: '搜索文档'
+            },
+        ],
+    ],
     bundler: '@vuepress/bundler-vite',
     bundlerConfig: {
         viteOptions: mergeConfig({
