@@ -4,6 +4,21 @@
   "files": [
     "dist"
   ],
+  "description": "一个基于vue的低代码平台辅助工具，让你的vue组件更容易低代码化。",
+  "license": "MIT",
+  "author": "LiuWenXing1996 lwx_redstone@163.com",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/LiuWenXing1996/vue-cook"
+  },
+  "bugs": {
+    "url": "https://github.com/LiuWenXing1996/vue-cook/issues"
+  },
+  "keywords": [
+    "low-code",
+    "vue3"
+  ],
+  "homepage": "https://liuwenxing1996.github.io/vue-cook/",
   "main": "./dist/vue-cook.umd.js",
   "module": "./dist/vue-cook.es.js",
   "types": "./dist/index.d.ts",
