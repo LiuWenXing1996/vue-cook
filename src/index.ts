@@ -4,7 +4,7 @@
 //TODO:分支改成dev,后面保持主分支的信息清爽
 //TODO：使用ci自动发布到npm
 //TODO：致谢列表
-//TODO：测试
+
 
 // components
 export { default as CookEditor } from "./components/cook-editor/index.vue"
