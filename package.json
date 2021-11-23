@@ -18,7 +18,6 @@
     "cz": "cz"
   },
   "dependencies": {
-    "@vuepress/plugin-docsearch": "^2.0.0-beta.27",
     "vue": "^3.2.6"
   },
   "devDependencies": {
@@ -38,6 +37,7 @@
     "@vitejs/plugin-vue": "^1.6.1",
     "@vue/compiler-sfc": "^3.2.6",
     "@vuepress/bundler-vite": "^2.0.0-beta.27",
+    "@vuepress/plugin-docsearch": "^2.0.0-beta.27",
     "@vueuse/core": "^6.5.3",
     "commitizen": "^4.2.4",
     "cz-conventional-changelog": "3.3.0",
