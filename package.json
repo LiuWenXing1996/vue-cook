@@ -38,6 +38,7 @@
     "@vueuse/core": "^6.5.3",
     "commitizen": "^4.2.4",
     "cz-conventional-changelog": "3.3.0",
+    "husky": "^7.0.4",
     "less": "^4.1.1",
     "lodash-es": "^4.17.21",
     "naive-ui": "^2.19.7",
