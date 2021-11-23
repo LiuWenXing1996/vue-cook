@@ -2,7 +2,7 @@ on:
   push:
     tags:
     - 'v*'
-name: Publish
+name: publish
 jobs:
   publish:
     runs-on: ubuntu-latest
