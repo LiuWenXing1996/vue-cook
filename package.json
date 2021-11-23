@@ -1,6 +1,6 @@
 {
   "name": "vue-cook",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "files": [
     "dist"
   ],
@@ -12,7 +12,10 @@
     "build": "vue-tsc --noEmit && vite build",
     "build:dts": "vue-tsc --declaration --emitDeclarationOnly --outDir .local/dts-temp -p ./tsconfig.dts.json && rollup -c rollup.dts.config.js",
     "lint": "vue-tsc --noEmit",
-    "docs:build": "vuepress build docs"
+    "docs:build": "vuepress build docs",
+    "prepare": "husky install",
+    "release": "standard-version",
+    "cz": "cz"
   },
   "dependencies": {
     "@vuepress/plugin-docsearch": "^2.0.0-beta.27",
@@ -43,6 +46,7 @@
     "lodash-es": "^4.17.21",
     "naive-ui": "^2.19.7",
     "rollup-plugin-dts": "^4.0.1",
+    "standard-version": "^9.3.2",
     "typescript": "^4.3.2",
     "uuid": "^8.3.2",
     "vite": "^2.6.13",
