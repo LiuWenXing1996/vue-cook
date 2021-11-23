@@ -1,9 +1,10 @@
 name: docs
 
 on:
-  # 每当 push 到 main 分支时触发部署
+  # 每当创建tag时触发部署
   push:
-    branches: [main]
+    tags:
+      - "v*"
   # 手动触发部署
   workflow_dispatch:
 
@@ -21,7 +22,7 @@ jobs:
         uses: actions/setup-node@v1
         with:
           # 选择要使用的 node 版本
-          node-version: '14'
+          node-version: "14"
 
       # 缓存 node_modules
       - name: Cache dependencies
