@@ -23,7 +23,7 @@ async function version() {
 }
 
 async function pushToGit() {
-  let isSuccess = false
+  let isSuccess = true
   try {
     await execa.command('git push --follow-tags origin main');
   } catch (err) {
@@ -31,6 +31,11 @@ async function pushToGit() {
     throw err
   }
   return isSuccess
+}
+
+async function branchStatus() {
+  const { stdout } = await execa.command('git status -s');
+  return stdout;
 }
 
 async function main() {
@@ -42,6 +47,17 @@ async function main() {
     return
   }
   console.log(chalk.blue(`你现在在主分支main`))
+
+  // 检查分支是否干净
+  console.log(chalk.cyan(`正在检查当前分支是否干净...`))
+  const branchStatusInfo = await branchStatus()
+  if (branchStatusInfo) {
+    console.log(chalk.red(`检测到有未提交的更改：`))
+    console.log(branchStatusInfo)
+    console.log(chalk.red(`请提交以上更改，保持git工作区的干净`))
+    return
+  }
+  console.log(chalk.blue(`当前分支是干净的`))
 
   // 类型检查
   console.log(chalk.cyan(`正在进行类型检查...`))
