@@ -4,18 +4,7 @@ All notable changes to this project will be documented in this file. See [standa
 
 ## [1.0.0](https://github.com/LiuWenXing1996/vue-cook/compare/v0.1.5...v1.0.0) (2021-11-27)
 
-### [0.1.5](https://github.com/LiuWenXing1996/vue-cook/compare/v0.1.4...v0.1.5) (2021-11-27)
-
-### [0.1.4](https://github.com/LiuWenXing1996/vue-cook/compare/v0.1.3...v0.1.4) (2021-11-27)
-
-
-### Documentation
-
-* 手动修改更新日志 ([d04571f](https://github.com/LiuWenXing1996/vue-cook/commit/d04571f9f75bb60b061c8dc066c3472b94474d2f))
-
-## [0.1.0](https://github.com/LiuWenXing1996/vue-cook/compare/v0.0.18...v0.1.0) (2021-11-27)
-
-Features:
+### Features:
 
   - 💎 组件渲染DOM一致: 将组件渲染成对应的DOM结构时没有添加任何的包裹div层
   - 📝 多页面同时编辑: 支持同时编辑多个页面
