@@ -61,6 +61,7 @@
     "husky": "^7.0.4",
     "less": "^4.1.1",
     "lodash-es": "^4.17.21",
+    "minimist": "^1.2.5",
     "naive-ui": "^2.19.7",
     "rollup-plugin-dts": "^4.0.1",
     "standard-version": "^9.3.2",

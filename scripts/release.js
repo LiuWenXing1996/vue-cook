@@ -1,6 +1,7 @@
 // @ts-check
 const chalk = require('chalk')
 const execa = require('execa')
+const args = require('minimist')(process.argv.slice(2))
 
 async function getGitBranch() {
   const { stdout } = await execa.command('git rev-parse --abbrev-ref HEAD');
@@ -18,7 +19,11 @@ async function lint() {
 }
 
 async function version() {
-  const { stdout } = await execa.command('standard-version');
+  let cmdStr = `standard-version`
+  if (args.r) {
+    cmdStr = `standard-version -r ${args.r}`
+  }
+  const { stdout } = await execa.command(cmdStr);
   return stdout;
 }
 
@@ -39,6 +44,7 @@ async function branchStatus() {
 }
 
 async function main() {
+  // console.log(args)
   // 检查分支名
   console.log(chalk.cyan(`正在检查分支名...`))
   const branch = await getGitBranch()
