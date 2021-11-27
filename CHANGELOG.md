@@ -4,34 +4,11 @@ All notable changes to this project will be documented in this file. See [standa
 
 ## [0.1.0](https://github.com/LiuWenXing1996/vue-cook/compare/v0.0.18...v0.1.0) (2021-11-27)
 
-### [0.0.18](https://github.com/LiuWenXing1996/vue-cook/compare/v0.0.17...v0.0.18) (2021-11-27)
+Features:
 
-### [0.0.17](https://github.com/LiuWenXing1996/vue-cook/compare/v0.0.16...v0.0.17) (2021-11-27)
-
-### [0.0.16](https://github.com/LiuWenXing1996/vue-cook/compare/v0.0.15...v0.0.16) (2021-11-27)
-
-### [0.0.15](https://github.com/LiuWenXing1996/vue-cook/compare/v0.0.14...v0.0.15) (2021-11-27)
-
-### [0.0.14](https://github.com/LiuWenXing1996/vue-cook/compare/v0.0.13...v0.0.14) (2021-11-27)
-
-### [0.0.13](https://github.com/LiuWenXing1996/vue-cook/compare/v0.0.12...v0.0.13) (2021-11-27)
-
-### [0.0.12](https://github.com/LiuWenXing1996/vue-cook/compare/v0.0.11...v0.0.12) (2021-11-27)
-
-### [0.0.11](https://github.com/LiuWenXing1996/vue-cook/compare/v0.0.10...v0.0.11) (2021-11-27)
-
-### [0.0.10](https://github.com/LiuWenXing1996/vue-cook/compare/v0.0.8...v0.0.10) (2021-11-27)
-
-### [0.0.9](https://github.com/LiuWenXing1996/vue-cook/compare/v0.0.8...v0.0.9) (2021-11-27)
-
-### [0.0.9](https://github.com/LiuWenXing1996/vue-cook/compare/v0.0.8...v0.0.9) (2021-11-27)
-
-### [0.0.8](https://github.com/LiuWenXing1996/vue-cook/compare/v0.0.7...v0.0.8) (2021-11-23)
-
-### [0.0.7](https://github.com/LiuWenXing1996/vue-cook/compare/v0.0.6...v0.0.7) (2021-11-23)
-
-### [0.0.6](https://github.com/LiuWenXing1996/vue-cook/compare/v0.0.5...v0.0.6) (2021-11-23)
-
-### [0.0.5](https://github.com/LiuWenXing1996/vue-cook/compare/v0.0.4...v0.0.5) (2021-11-23)
-
-TODO:整理更新日志 
+  - 💎 组件渲染DOM一致: 将组件渲染成对应的DOM结构时没有添加任何的包裹div层
+  - 📝 多页面同时编辑: 支持同时编辑多个页面
+  - 🧱 自定义组件: 支持自定义低代码组件，或者将现有的组件低代码化
+  - 🔗 自定义逻辑: 支持自定义低代码逻辑，或者将现有的业务逻辑低代码化
+  - ⚙️ 自定义交互面板: 支持自定义的交互面板，如自定义编辑器
+  - 😊 内置多个交互面板: 内置了多个开箱即用的交互面板，如基础组件编辑器、页面编辑器等等
