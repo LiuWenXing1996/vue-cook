@@ -1,6 +1,6 @@
 {
   "name": "vue-cook",
-  "version": "0.0.8",
+  "version": "0.0.10",
   "files": [
     "dist"
   ],
@@ -29,8 +29,8 @@
     "lint": "vue-tsc --noEmit",
     "docs:build": "vuepress build docs",
     "prepare": "husky install",
-    "release": "standard-version",
-    "cz": "cz"
+    "release": "node ./scripts/release.js",
+    "cz": "git add . && cz"
   },
   "dependencies": {
     "vue": "^3.2.6"
@@ -54,8 +54,10 @@
     "@vuepress/bundler-vite": "^2.0.0-beta.27",
     "@vuepress/plugin-docsearch": "^2.0.0-beta.27",
     "@vueuse/core": "^6.5.3",
+    "chalk": "^5.0.0",
     "commitizen": "^4.2.4",
     "cz-conventional-changelog": "3.3.0",
+    "execa": "^6.0.0",
     "husky": "^7.0.4",
     "less": "^4.1.1",
     "lodash-es": "^4.17.21",
