@@ -1,9 +1,8 @@
 
 //TODO:增加黑色主题和主题色定义功能
 //TODO:所有图标转成svg存在本地，而不是@vicons
-//TODO:分支改成dev,后面保持主分支的信息清爽
-//TODO：使用ci自动发布到npm
 //TODO：致谢列表
+//TODO：单元测试
 
 
 // components
