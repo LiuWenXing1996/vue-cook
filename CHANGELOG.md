@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.1.4](https://github.com/LiuWenXing1996/vue-cook/compare/v0.1.3...v0.1.4) (2021-11-27)
+
+
+### Documentation
+
+* 手动修改更新日志 ([d04571f](https://github.com/LiuWenXing1996/vue-cook/commit/d04571f9f75bb60b061c8dc066c3472b94474d2f))
+
 ## [0.1.0](https://github.com/LiuWenXing1996/vue-cook/compare/v0.0.18...v0.1.0) (2021-11-27)
 
 Features:
