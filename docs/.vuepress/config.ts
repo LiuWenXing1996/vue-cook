@@ -20,8 +20,8 @@ export default defineUserConfig({
         navbar: [
             { text: '指引', link: '/guide/' },
             { text: 'Apis', link: '/api/components' },
-            { text: '示例目录', link: '/demos' }
-            // TODO:致谢列表。。。
+            { text: '示例目录', link: '/demos' },
+            { text: '致谢', link: '/thanks-list' }
         ],
         sidebarDepth: 3,
         sidebar: [
