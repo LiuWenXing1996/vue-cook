@@ -20,9 +20,9 @@ export default defineUserConfig({
         navbar: [
             { text: '指引', link: '/guide/' },
             { text: 'Apis', link: '/api/components' },
-            { text: '示例目录', link: '/demos' },
-            { text: '致谢', link: '/thanks-list' }
-            // TODO:更新日志链接
+            { text: '示例', link: '/demos' },
+            { text: '致谢', link: '/thanks-list' },
+            { text: '更新日志', link: 'https://github.com/LiuWenXing1996/vue-cook/blob/main/CHANGELOG.md' }
         ],
         sidebarDepth: 3,
         sidebar: [
