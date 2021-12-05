@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.0.2](https://github.com/LiuWenXing1996/vue-cook/compare/v1.0.1...v1.0.2) (2021-12-05)
+
+
+### Documentation
+
+* 入门页面添加动态图 ([5ec3c06](https://github.com/LiuWenXing1996/vue-cook/commit/5ec3c06ab17c09f565a39a1071c276bd7efc0e95))
+* 添加致谢列表 ([1d14fe5](https://github.com/LiuWenXing1996/vue-cook/commit/1d14fe5a155d678cad5f0b1ee3e6f53cf26d5d20))
+* 组件渲染机制 ([b6b0374](https://github.com/LiuWenXing1996/vue-cook/commit/b6b03741440d35d578029e8adc1a0571a6cecbe9))
+
 ### [1.0.1](https://github.com/LiuWenXing1996/vue-cook/compare/v1.0.0...v1.0.1) (2021-11-27)
 
 
