@@ -8,6 +8,7 @@
                 ></div>
             </template>
             <component-overlay-tips :size="size" :overlay="overlay"></component-overlay-tips>
+            <!-- TODO：添加插槽拖拽功能 -->
         </n-popover>
     </template>
     <template v-else>id为{{ overlay.configUid }}的组件没有找到</template>
