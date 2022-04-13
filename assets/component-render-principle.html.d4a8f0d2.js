@@ -1,0 +1,1 @@
+const e={key:"v-d2b82da0",path:"/advanced/component-render-principle.html",title:"\u7EC4\u4EF6\u6E32\u67D3\u673A\u5236",lang:"en-US",frontmatter:{},excerpt:"",headers:[],filePathRelative:"advanced/component-render-principle.md",git:{updatedTime:163896045e4,contributors:[{name:"\u67F3\u95EE\u661F",email:"lwx_redstone@163.com",commits:4}]}};export{e as data};

@@ -1,0 +1,1 @@
+import{_ as e,o as t,c as n,P as a}from"./app.8fafd536.js";const o={};function r(s,p){return t(),n("button",null,"\u70B9\u6211")}var c=e(o,[["render",r]]),_=a({name:"\u6309\u94AE",pkg:"test-pkg",makeEventOptions:()=>["click"],make:()=>c});export{_ as B};

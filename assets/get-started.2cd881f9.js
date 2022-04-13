@@ -1,0 +1,1 @@
+import{f as o,p as r,q as s,o as n,k as p,u as e,s as _}from"./app.8fafd536.js";const l=o({setup(c){const t=r(),a=s().query.preview;return(i,f)=>(n(),p(e(_),{state:e(t),preview:e(a)},null,8,["state","preview"]))}});export{l as default};

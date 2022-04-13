@@ -1,0 +1,1 @@
+import{f as o,p as s,j as r,q as n,o as i,k as p,u as e,s as c}from"./app.8fafd536.js";import{B as u}from"./index.a130085d.js";import{A as _}from"./index.c34a75ca.js";const j=o({setup(m){const t=s({makerList:[u,_,...r]}),a=n().query.preview;return(d,k)=>(i(),p(e(c),{state:e(t),preview:e(a)},null,8,["state","preview"]))}});export{j as default};

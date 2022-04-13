@@ -1,0 +1,1 @@
+const e={key:"v-b4b75990",path:"/advanced/component-picker-principle.html",title:"\u7EC4\u4EF6\u62FE\u53D6\u673A\u5236",lang:"en-US",frontmatter:{},excerpt:"",headers:[],filePathRelative:"advanced/component-picker-principle.md",git:{updatedTime:1638680575e3,contributors:[{name:"\u67F3\u95EE\u661F",email:"lwx_redstone@163.com",commits:3}]}};export{e as data};

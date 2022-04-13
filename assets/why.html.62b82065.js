@@ -1,0 +1,1 @@
+const e={key:"v-c46fc206",path:"/guide/why.html",title:"\u4E3A\u4EC0\u4E48\u9009VueCook",lang:"en-US",frontmatter:{},excerpt:"",headers:[],filePathRelative:"guide/why.md",git:{updatedTime:1637523238e3,contributors:[{name:"\u67F3\u95EE\u661F",email:"lwx_redstone@163.com",commits:7}]}};export{e as data};

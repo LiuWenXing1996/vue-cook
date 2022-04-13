@@ -1,0 +1,1 @@
+import{f as s,p as o,T as r,i as c,j as i,q as n,o as p,k as u,u as e,s as _}from"./app.8fafd536.js";const v=s({setup(f){const t=o({makerList:[r,c,...i]}),a=n().query.preview;return(l,d)=>(p(),u(e(_),{state:e(t),preview:e(a)},null,8,["state","preview"]))}});export{v as default};

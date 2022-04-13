@@ -1,0 +1,1 @@
+import{f as o,g as n,n as u,p as c,T as p,i,j as _,q as f,u as e,o as k,k as l,s as d,m}from"./app.8fafd536.js";const w=o({setup(v){let a=n();u().then(t=>{const s=JSON.parse(t);a.value=c({pages:s,makerList:[p,i,..._]})});const r=f().query.preview;return(t,s)=>e(a)?(k(),l(e(d),{key:0,state:e(a),preview:e(r)},null,8,["state","preview"])):m("",!0)}});export{w as default};

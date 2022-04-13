@@ -1,0 +1,1 @@
+const e={key:"v-e7b6f732",path:"/advanced/panel-load-principle.html",title:"\u9762\u677F\u52A0\u8F7D\u673A\u5236",lang:"en-US",frontmatter:{},excerpt:"",headers:[],filePathRelative:"advanced/panel-load-principle.md",git:{updatedTime:1638680575e3,contributors:[{name:"\u67F3\u95EE\u661F",email:"lwx_redstone@163.com",commits:3}]}};export{e as data};
