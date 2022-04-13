@@ -52,4 +52,4 @@ Vue中有一个内置组件`<component>`，我们使用它就可以达到动态�
 
 <DemosUseComponentRenderRenderFooWithRecursion />
 
-组件的渲染机制就是这样，后面再通过一定的方式将`IRenderConfig`拆分为`IComponentMaker`和`IComponentConfig`，将无法转成字符串的部分放入`IComponentMaker`,如`component`这样类型的字段，将其他可以持久化存储的字段放入`IComponentConfig`,如`props`等。这样，就可以通过动态的配置，然后动态的渲染组件了。
+组件的渲染机制就是这样，后面再通过一定的方式将`IRenderConfig`拆分为`IComponentMaker`和`IComponentConfig`，将无法转成字符串存储的部分放入`IComponentMaker`,如`component`这样类型的字段，将其他可以持久化存储的字段放入`IComponentConfig`,如`props`等。这样，就可以通过动态的配置，然后动态的渲染组件了。

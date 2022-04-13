@@ -61,6 +61,8 @@ const emits = computed(() => {
     }
     return res
 })
+
+// TODO:use preview tag to replace dev tag
 if (dev.value) {
     onMounted(() => {
         const internalInstance = getCurrentInstance()

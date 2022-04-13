@@ -19,7 +19,7 @@
     </n-config-provider>
 </template>
 <script setup lang="ts">
-import { toRefs, provide } from 'vue';
+import { toRefs, provide, ref } from 'vue';
 import ICookEditorState from '@/types/ICookEditorState';
 import PanelList from "./PanelList.vue"
 import { NConfigProvider, zhCN, dateZhCN } from "naive-ui"
@@ -30,7 +30,6 @@ const props = defineProps({
         required: true
     }
 })
-
 const { state } = toRefs(props)
 provide('cookEditorState', state.value)
 </script>

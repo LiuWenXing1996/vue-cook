@@ -15,6 +15,7 @@ export default defineUserConfig({
         logo: '/logo.svg',
         docsDir: 'docs',
         docsBranch: 'main',
+        darkMode: false,
         editLinks: true,
         editLinkText: '为此页提供修改建议',
         navbar: [
