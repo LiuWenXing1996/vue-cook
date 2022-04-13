@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.0.3](https://github.com/LiuWenXing1996/vue-cook/compare/v1.0.2...v1.0.3) (2022-04-13)
+
+
+### Documentation
+
+* 添加WIP警告 ([ae610f8](https://github.com/LiuWenXing1996/vue-cook/commit/ae610f8947639e0098c4527122c8e0731ad4cc57))
+* 移除黑暗模式,它会对示例页面的展示造成影响 ([95cf23b](https://github.com/LiuWenXing1996/vue-cook/commit/95cf23b2fb9ce0f36585e87e7a950977f5708a4e))
+
 ### [1.0.2](https://github.com/LiuWenXing1996/vue-cook/compare/v1.0.1...v1.0.2) (2021-12-05)
 
 
